@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Test App VayGo</title>
+
+  <base href="/" />
+
+  <meta name="color-scheme" content="light dark" />
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+
+  <!-- add to homescreen for ios -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+  <p> test</p> <!--commento di test-->
+
+  <ion-list>
+  <ion-item *ngFor="let volo of voli">
+    <ion-label>
+      <h2>{{ volo.Partenza }} → {{ volo.Arrivo }}</h2>
+      <p>Partenza: {{ volo.OraPartenza | date:'short' }}</p>
+      <p>Prezzo: €{{ volo.Prezzo }}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+</html>

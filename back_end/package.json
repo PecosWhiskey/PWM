@@ -1,14 +1,22 @@
 {
   "name": "back_end",
   "version": "1.0.0",
+<<<<<<< HEAD
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+=======
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> e2f84b69b3bbb42a7954fa85259cbd4bb4ed5ee9
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+<<<<<<< HEAD
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
@@ -16,5 +24,12 @@
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
     "sqlite3": "^5.1.7"
+=======
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
+>>>>>>> e2f84b69b3bbb42a7954fa85259cbd4bb4ed5ee9
   }
 }

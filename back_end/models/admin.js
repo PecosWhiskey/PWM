@@ -1,4 +1,4 @@
-const db = require('C:/Users/sarag/Documents/UNIPA/PROGRAMMAZIONE WEB E MOBILE/prog_prova_server/database/dbAdmin.js');
+const db = require('../database/dbAdmin.js');
 const bcrypt = require('bcryptjs'); //per il confronto delle password
 
 class Admin {

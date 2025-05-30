@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const authRoutes = require('./auth/authRoutes/authRoutes');
+const authRoutes = require('./auth/authRoutes/authRoutes.js');
 const db = require('./database/dbAdmin');
 
 app.use(express.json());

@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose(); //per creare il database
 const bcrypt = require('bcryptjs'); //per eseguire l'hashing della password prima di essere salvata nel database
 
-const db = new sqlite3.Database("C:\\Users\\sarag\\Documents\\UNIPA\\PROGRAMMAZIONE WEB E MOBILE\\prog_prova_server\\database\\dbAdmin.sqlite", (err) => {
+const db = new sqlite3.Database("database\\dbAdmin.sqlite", (err) => {
     if (err) {
       console.error('Errore connessione al database ADMIN:', err.message);
     } else {
@@ -15,4 +15,4 @@ const db = new sqlite3.Database("C:\\Users\\sarag\\Documents\\UNIPA\\PROGRAMMAZI
     }
 });
 
-module.exports = db;
+module.exports = db; 

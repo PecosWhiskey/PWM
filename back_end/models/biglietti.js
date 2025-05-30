@@ -1,4 +1,4 @@
-const db = require('C:\\Users\\sarag\\Documents\\UNIPA\\PROGRAMMAZIONE WEB E MOBILE\\prog_prova_server\\database\\dbBiglietti.js');
+const db = require('../database/dbBiglietti.js');
 const bcrypt = require('bcryptjs');
 
 class Biglietti {

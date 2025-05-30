@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-const db = new sqlite3.Database("C:\\Users\\sarag\\Documents\\UNIPA\\PROGRAMMAZIONE WEB E MOBILE\\prog_prova_server\\database\\dbBiglietti.sqlite", (err) => {
+const db = new sqlite3.Database("database\\dbBiglietti.sqlite", (err) => {
     if (err) {
       console.error('Errore connessione al database BIGLIETTI:', err.message);
     } else {

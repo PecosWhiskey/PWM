@@ -1,0 +1,39 @@
+<ion-button type="button" [disabled]="!userForm.valid" (click)="CreaVolo()">Crea Volo</ion-button>
+<ion-button type="button" [disabled]="!userForm.valid" (click)="ModificaVolo()">Modifica Volo</ion-button><ion-content>
+  <form #userForm="ngForm">
+
+    <ion-item>
+      <ion-input type="text" name="idVolo" [(ngModel)]="idVolo" placeholder="ID volo" ngDefaultControl  required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" name="partenza" [(ngModel)]="partenza" placeholder="Aeroporto di partenza" ngDefaultControl required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" name="destinazione" [(ngModel)]="destinazione" placeholder="Aeroporto di destinazione" ngDefaultControl required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-datetime presentation="date" name="data" [(ngModel)]="data" ngDefaultControl></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" name="oraPartenza" [(ngModel)]="oraPartenza" placeholder="Orario di partenza" ngDefaultControl required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" name="oraArrivo" [(ngModel)]="oraArrivo" placeholder="Orario di arrivo" ngDefaultControl required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="number" name="prezzo" [(ngModel)]="prezzo" placeholder="Prezzo" ngDefaultControl required></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" [disabled]="!userForm.valid" (click)="CreaVolo()">Crea Volo</ion-button>
+    <ion-button type="submit" [disabled]="!userForm.valid" (click)="ModificaVolo()">Modifica Volo</ion-button>
+
+  </form>
+</ion-content>
+
+

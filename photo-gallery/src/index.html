@@ -22,5 +22,21 @@
 <body>
   <app-root></app-root>
 </body>
-  <p> test</p> <!--commento di test-->
+  <p> test, ora infatti se cambio, spunta questo</p> <!--commento di test-->
 </html>
+
+<script>
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        if (warning.code === 'DYNAMIC_IMPORT_VARS') return;
+        warn(warning);
+      }
+    }
+  }
+});
+</script>
+

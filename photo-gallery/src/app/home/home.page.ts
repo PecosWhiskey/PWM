@@ -33,6 +33,7 @@ export class HomePage {
 
   form= ''; //variabile che viene settata su 'Login' o 'Registrazione' per stabilire quale form mostrare
 
+
   Cerca(){
     this.dataPartenza = this.dataInseritaP.split('T')[0];
     this.dataRitorno = this.dataInseritaR.split('T')[0];

@@ -87,13 +87,12 @@
             </ion-segment>
           </div>
         </div>
-
         <div class="search-form">
           <div class="location-inputs">
             <div class="input-group">
               <ion-item class="custom-item">
                 <ion-icon name="location-outline" slot="start"></ion-icon>
-                <ion-input placeholder="Da dove parti?" label="Partenza" label-placement="stacked"></ion-input>
+                <ion-input placeholder="Da dove parti?" label="Partenza" label-placement="stacked" [(ngModel)]="partenza" required></ion-input>
               </ion-item>
             </div>
 
@@ -106,7 +105,7 @@
             <div class="input-group">
               <ion-item class="custom-item">
                 <ion-icon name="location" slot="start"></ion-icon>
-                <ion-input placeholder="Dove vuoi andare?" label="Destinazione" label-placement="stacked"></ion-input>
+                <ion-input placeholder="Dove vuoi andare?" label="Destinazione" label-placement="stacked" [(ngModel)]="destinazione" required></ion-input>
               </ion-item>
             </div>
           </div>
@@ -115,13 +114,27 @@
             <div class="input-group">
               <ion-item class="custom-item">
                 <ion-icon name="calendar-outline" slot="start"></ion-icon>
-                <ion-input placeholder="Seleziona data" label="Partenza" label-placement="stacked"></ion-input>
+                <ion-item id="click-trigger-partenza">
+                  <ion-input [value]="dataInseritaP.split('T')[0]" readonly placeholder="Seleziona data" label="Andata" label-placement="stacked"></ion-input>
+                </ion-item>
+                <ion-popover trigger="click-trigger-partenza" triggerAction="click" showBackdrop="false">
+                  <ng-template>
+                    <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataPartenza" [(ngModel)]="dataInseritaP" ngDefaultControl></ion-datetime>
+                  </ng-template> <!--presentation=date fa si che non compaia l'orario nel calendario-->
+                </ion-popover>
               </ion-item>
             </div>
             <div class="input-group">
               <ion-item class="custom-item">
                 <ion-icon name="calendar" slot="start"></ion-icon>
-                <ion-input placeholder="Seleziona data" label="Ritorno" label-placement="stacked"></ion-input>
+                <ion-item id="click-trigger-ritorno">
+                  <ion-input [value]="dataInseritaR.split('T')[0]" readonly placeholder="Seleziona data" label="Ritorno" label-placement="stacked"></ion-input>
+               </ion-item>
+               <ion-popover trigger="click-trigger-ritorno" triggerAction="click">
+                <ng-template>
+                  <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataRitorno" [(ngModel)]="dataInseritaR" ngDefaultControl></ion-datetime>
+                </ng-template>
+              </ion-popover>
               </ion-item>
             </div>
           </div>
@@ -133,14 +146,41 @@
             </ion-item>
           </div>
 
-          <ion-button expand="block" class="search-button">
+          <ion-button expand="block" class="search-button" [disabled]="!CampiValidi()" (click)="Cerca()">
             <ion-icon name="search" slot="start"></ion-icon>
             Cerca Voli
           </ion-button>
-        </div>
+        </div> 
       </ion-card-content>
     </ion-card>
   </section>
+
+   @if(trovati && (bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
+    @for(biglietto of bigliettiAndata; track $index; let i=$index){
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{partenza}}    {{destinazione}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+          <p>{{biglietto.prezzo}}</p>
+          <ion-button [routerLink]="'/dati-biglietto'">Seleziona</ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+    @for(biglietto of bigliettiRitorno; track $index; let i=$index){
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{destinazione}}    {{partenza}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+          <p>{{biglietto.prezzo}}</p>
+          <ion-button [routerLink]="'/dati-biglietto'">Seleziona</ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+  }
 
   <!-- Quick Actions -->
   <section class="quick-actions">

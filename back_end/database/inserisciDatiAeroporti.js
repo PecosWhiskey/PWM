@@ -107,11 +107,11 @@ async function visualizzaAeroporto(){
     }
 }
 
-// inserisciPosizione("Roma", "Italia", 41.789830174, 12.250665664);
-// inserisciPosizione("Milano", "Italia", 45.633333, 8.733333 );
+//inserisciPosizione("Roma", "Italia", 41.789830174, 12.250665664);
+//inserisciPosizione("Milano", "Italia", 45.633333, 8.733333 );
 
-// inserisciAeroporto("FCO", "Fiumicino", 2);
-// inserisciAeroporto("MXP", "Malpensa", 1);
+//inserisciAeroporto("FCO", "Fiumicino", 1);
+//inserisciAeroporto("MXP", "Malpensa", 2);
 
-// visualizzaPosizione();
-// visualizzaAeroporto();
+visualizzaPosizione();
+visualizzaAeroporto();

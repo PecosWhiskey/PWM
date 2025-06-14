@@ -1,5 +1,5 @@
-<ion-button type="button" [disabled]="!userForm.valid" (click)="CreaVolo()">Crea Volo</ion-button>
-<ion-button type="button" [disabled]="!userForm.valid" (click)="ModificaVolo()">Modifica Volo</ion-button><ion-content>
+<ion-content>
+
   <form #userForm="ngForm">
 
     <ion-item>
@@ -7,11 +7,11 @@
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" name="partenza" [(ngModel)]="partenza" placeholder="Aeroporto di partenza" ngDefaultControl required></ion-input>
+      <ion-input type="text" name="partenza" [(ngModel)]="partenza" placeholder="Aeroporto di partenza (MXP ad esempio)" ngDefaultControl required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" name="destinazione" [(ngModel)]="destinazione" placeholder="Aeroporto di destinazione" ngDefaultControl required></ion-input>
+      <ion-input type="text" name="destinazione" [(ngModel)]="destinazione" placeholder="Aeroporto di destinazione (FCA ad esempio)" ngDefaultControl required></ion-input>
     </ion-item>
 
     <ion-item>

@@ -1,36 +1,74 @@
-<!DOCTYPE html>
-<html lang="it">
+<!--
+  <ion-header>
+      <a routerLink="login">Amministratore</a>
+      <p>|</p>
+      <a routerLink="account-cliente" (click)="cambiaForm('Login')">Accedi</a>
+      <p>|</p>
+      <a routerLink="account-cliente" (click)="cambiaForm('Registrazione')">Registrazione</a>
+  </ion-header>
 
-<head>
-  <meta charset="utf-8" />
-  <title>Test App VayGo</title>
+  <ion-content>
+    <router-outlet></router-outlet>
+  </ion-content>
+-->
+<ion-content>
+  <form #cercaBigliettiForm="ngForm">
+    <ion-item>
+      <ion-input type="text" name="partenza" [(ngModel)]="partenza" placeholder="Partenza" required></ion-input>
+    </ion-item>
+      
+    <ion-item>
+      <ion-input type="text" name="destinazione" [(ngModel)]="destinazione" placeholder="Destinazione" required></ion-input>
+    </ion-item>
+    
+    <ion-item id="click-trigger-partenza">
+      <ion-input [value]="dataInseritaP.split('T')[0]" readonly placeholder="Data di partenza"></ion-input>
+    </ion-item>
 
-  <base href="/" />
+    <ion-popover trigger="click-trigger-partenza" triggerAction="click">
+      <ng-template>
+        <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataPartenza" [(ngModel)]="dataInseritaP" ngDefaultControl></ion-datetime>
+      </ng-template> <!--presentation=date fa si che non compaia l'orario nel calendario-->
+    </ion-popover>
 
-  <meta name="color-scheme" content="light dark" />
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="msapplication-tap-highlight" content="no" />
+    <ion-item id="click-trigger-ritorno">
+      <ion-input [value]="dataInseritaR.split('T')[0]" readonly placeholder="Data di ritorno"></ion-input>
+    </ion-item>
 
-  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+    <ion-popover trigger="click-trigger-ritorno" triggerAction="click">
+      <ng-template>
+        <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataRitorno" [(ngModel)]="dataInseritaR" ngDefaultControl></ion-datetime>
+      </ng-template>
+    </ion-popover>
 
-  <!-- add to homescreen for ios -->
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-</head>
+    <ion-button type="submit" [disabled]="!cercaBigliettiForm.valid" (click)="Cerca()">Cerca</ion-button>
 
-<body>
-  <app-root></app-root>
-</body>
-  <p> test</p> <!--commento di test-->
+  </form>
 
-  <ion-list>
-  <ion-item *ngFor="let volo of voli">
-    <ion-label>
-      <h2>{{ volo.Partenza }} → {{ volo.Arrivo }}</h2>
-      <p>Partenza: {{ volo.OraPartenza | date:'short' }}</p>
-      <p>Prezzo: €{{ volo.Prezzo }}</p>
-    </ion-label>
-  </ion-item>
-</ion-list>
-</html>
+  @if(trovati && (bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
+    @for(biglietto of bigliettiAndata; track $index; let i=$index){
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{partenza}}    {{destinazione}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+          <p>{{biglietto.prezzo}}</p>
+          <ion-button [routerLink]="'/dati-biglietto'">Seleziona</ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+    @for(biglietto of bigliettiRitorno; track $index; let i=$index){
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{destinazione}}    {{partenza}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+          <p>{{biglietto.prezzo}}</p>
+          <ion-button [routerLink]="'/dati-biglietto'">Seleziona</ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+  }
+</ion-content>

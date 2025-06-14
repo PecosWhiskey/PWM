@@ -16,8 +16,8 @@ const registerValidatorClient = [
 ]
 
 const datiVoloValidator = [
-  body('partenza').notEmpty().withMessage('città di partenza obbligatorio'),
-  body('destinazione').notEmpty().withMessage('città di destinazione obbligatoria'),
+  body('partenza').notEmpty().withMessage('città di partenza obbligatorio').isLength({max: 3}).withMessage("Il codice dell'aeroporto può essere dilunghezza massima 3"),
+  body('destinazione').notEmpty().withMessage('città di destinazione obbligatoria').isLength({max: 3}).withMessage("Il codice dell'aeroporto può essere dilunghezza massima 3"),
   body('oraPartenza').notEmpty().withMessage('orario di partenza obbligatorio'),
   body('oraArrivo').notEmpty().withMessage('orario di arrivo obbligatorio'),
   body('prezzo').notEmpty().withMessage('prezzo obbligatorio'),

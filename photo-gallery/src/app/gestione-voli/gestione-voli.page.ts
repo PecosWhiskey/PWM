@@ -47,11 +47,11 @@ export class GestioneVoliPage{
     }
     this.gestioneVoliService.Crea(datiVolo).subscribe({
         next: (response) => {
-        console.log('Login success:', response);
+        console.log('Creation success:', response);
         this.creaVoloEsito= response.message;
        },
        error: (err) => {
-        console.log('Login error:', err);
+        console.log('Creation error:', err);
         this.creaVoloEsito = err.error.message;
        },
       });
@@ -70,11 +70,11 @@ export class GestioneVoliPage{
     }
     this.gestioneVoliService.Modifica(datiVolo).subscribe({
         next: (response) => {
-        console.log('Login success:', response);
+        console.log('Creation success:', response);
         this.creaVoloEsito= response.message;
        },
        error: (err) => {
-        console.log('Login error:', err);
+        console.log('Creation error:', err);
         console.log('Impossibile modificare il volo, perché assente nel database!');
         this.creaVoloEsito = err.error.message;
        },

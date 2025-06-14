@@ -6,6 +6,10 @@ export const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
   },
   {
+    path: 'home',
+    loadComponent: () => import('./home/home.page').then( m => m.HomePage)
+  },
+  {
     path: 'gestione-voli',
     loadComponent: () => import('./gestione-voli/gestione-voli.page').then( m => m.GestioneVoliPage)
   },

@@ -109,8 +109,8 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
-            "scripts": []
+            "styles": ["src/global.scss", "src/theme/variables.scss", "node_modules/ionicons/dist/scss/ionicons.scss"],
+            "scripts": ["node_modules/ionicons/dist/ionicons.js"]
           },
           "configurations": {
             "ci": {

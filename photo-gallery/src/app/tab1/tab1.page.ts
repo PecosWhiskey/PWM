@@ -17,7 +17,7 @@ import { RouterModule, RouterOutlet, RouterLink} from '@angular/router';
 })
 export class Tab1Page {
   constructor(private tab1Service: Tab1Service){}
-  
+
     partenza = ''; //città di partenza
     destinazione = ''; //città di destinazione
     dataInseritaP = ''; //recupera la data di partenza inserita dall'utente con fuso e ora
@@ -25,17 +25,17 @@ export class Tab1Page {
     dataPartenza = ''; //data di partenza senza fuso e ora
     dataRitorno = ''; //data di ritorno senza fuso e ora
     cercaVoloEsito = ''; //esito della ricerca sei voli
-  
+
     trovati = false;//serve per visualizzare i biglietti trovati
     bigliettiAndata: Volo[] = []; //array dei biglietti di partenza trovati
     bigliettiRitorno: Volo[] = []; //array dei biglietti di ritorno trovati
-  
+
     form= ''; //variabile che viene settata su 'Login' o 'Registrazione' per stabilire quale form mostrare
 
     CampiValidi(){
       return this.partenza && this.destinazione && this.dataInseritaP && this.dataInseritaR;
     }
-  
+
     Cerca(){
       this.dataPartenza = this.dataInseritaP.split('T')[0];
       this.dataRitorno = this.dataInseritaR.split('T')[0];
@@ -45,7 +45,7 @@ export class Tab1Page {
         oraPartenza : this.dataPartenza
       }
       //Ricerca dei voli per la data di partenza
-      this.tab1Service.CercaVolo(datiVoloPartenza).subscribe({ 
+      this.tab1Service.CercaVolo(datiVoloPartenza).subscribe({
           next: (response) => {
           console.log('Search success:', response);
           this.cercaVoloEsito= response.message;
@@ -56,14 +56,14 @@ export class Tab1Page {
           console.log('Search error:', err);
           this.cercaVoloEsito = err.error.message;
          },
-        }); 
+        });
         //Ricerca dei voli per la data di ritorno
         const datiVoloRitorno = {
         partenza: this.destinazione,
         destinazione : this.partenza,
         oraPartenza : this.dataRitorno
       }
-        this.tab1Service.CercaVolo(datiVoloRitorno).subscribe({ 
+        this.tab1Service.CercaVolo(datiVoloRitorno).subscribe({
           next: (response) => {
           console.log('Search success:', response);
           this.cercaVoloEsito= response.message;
@@ -74,6 +74,6 @@ export class Tab1Page {
           console.log('Search error:', err);
           this.cercaVoloEsito = err.error.message;
          },
-        }); 
+        });
     }
 }

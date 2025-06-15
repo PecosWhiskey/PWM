@@ -382,10 +382,13 @@
       height: 200px;
       background-size: cover;
       background-position: center;
-      &.paris {background-image: url('../assets/Paris.jpg'), linear-gradient(45deg, var(--vaygo-secondary), var(--vaygo-primary));}
-      &.london {background-image: url('../assets/London.jpg'), linear-gradient(45deg, var(--vaygo-primary), var(--vaygo-accent));}
-      &.barcelona {background-image: url('../assets/Barcellona.jpg'), linear-gradient(45deg, var(--vaygo-accent), var(--vaygo-secondary));}
-      &.amsterdam {background-image: url('../assets/Amsterdam.jpg'), linear-gradient(45deg, var(--vaygo-secondary), var(--vaygo-primary));}
+      &.paris {background-image: url('../assets/Paris.png');}
+      &.london {background-image: url('../assets/London.png');}
+      &.barcelona {background-image: url('../assets/Barcellona.png');}
+      &.amsterdam {background-image: url('../assets/Amsterdam.png');}
+      &.rome {background-image: url('../assets/Rome.png');}
+      &.palermo {background-image: url('../assets/Palermo.png');}
+      &.milan {background-image: url('../assets/Milan.png');}
     }
 
     .destination-info {

@@ -1,24 +1,497 @@
+// Importa le variabili dal file principale
+:root {
+  --vaygo-primary: #2E8B57;
+  --vaygo-secondary: #4A90E2;
+  --vaygo-accent: #34D399;
+  --vaygo-blue-light: #E0F2FE;
+  --vaygo-green-light: #ECFDF5;
+  --vaygo-text-primary: #1F2937;
+  --vaygo-text-secondary: #6B7280;
+  --vaygo-background: #FAFAFA;
+  --vaygo-white: #FFFFFF;
+  --vaygo-shadow: rgba(0, 0, 0, 0.04);
+  --vaygo-shadow-medium: rgba(0, 0, 0, 0.08);
+  --vaygo-border: rgba(0, 0, 0, 0.06);
+  --vaygo-success: #10B981;
+  --vaygo-warning: #F59E0B;
+}
+
+// Reset e configurazione base
+ion-content {
+  --background: var(--vaygo-background);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+// Header personalizzato
+ion-header {
+  &.custom-header {
+    --background: var(--vaygo-white);
+    box-shadow: 0 2px 8px var(--vaygo-shadow);
+    border-bottom: 1px solid var(--vaygo-border);
+
+    ion-toolbar {
+      --background: transparent;
+      --color: var(--vaygo-text-primary);
+      padding: 0 20px;
+
+      ion-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--vaygo-primary);
+      }
+    }
+  }
+}
+
+// Contenuto principale
+.results-content {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+// Card informazioni ricerca
+.search-info-card {
+  --background: var(--vaygo-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  border: 1px solid var(--vaygo-border);
+  margin-bottom: 24px;
+  overflow: hidden;
+
+  ion-card-header {
+    background: linear-gradient(135deg, var(--vaygo-blue-light), var(--vaygo-green-light));
+    padding: 20px 24px 16px;
+
+    ion-card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--vaygo-text-primary);
+      margin: 0;
+    }
+  }
+
+  ion-card-content {
+    padding: 24px;
+
+    p {
+      margin: 0 0 12px 0;
+      color: var(--vaygo-text-secondary);
+      font-size: 15px;
+      line-height: 1.5;
+
+      strong {
+        color: var(--vaygo-text-primary);
+        font-weight: 600;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Card filtri avanzati
+.filters-card {
+  --background: var(--vaygo-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  border: 1px solid var(--vaygo-border);
+  margin-bottom: 24px;
+
+  ion-card-header {
+    background: var(--vaygo-green-light);
+    padding: 20px 24px 16px;
+
+    ion-card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--vaygo-primary);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &:before {
+        content: "🔍";
+        font-size: 16px;
+      }
+    }
+  }
+
+  ion-card-content {
+    padding: 0;
+
+    ion-item {
+      --background: transparent;
+      --border-color: var(--vaygo-border);
+      --padding-start: 24px;
+      --padding-end: 24px;
+      --min-height: 60px;
+
+      ion-label {
+        font-weight: 500;
+        color: var(--vaygo-text-primary);
+      }
+
+      ion-select {
+        --color: var(--vaygo-text-secondary);
+        font-weight: 500;
+
+        &::part(text) {
+          color: var(--vaygo-secondary);
+        }
+      }
+    }
+  }
+}
+
+// Card risultati
+.results-card {
+  --background: var(--vaygo-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  border: 1px solid var(--vaygo-border);
+  margin-bottom: 24px;
+
+  ion-card-header {
+    background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+    padding: 20px 24px 16px;
+
+    ion-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--vaygo-white);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &:before {
+        content: "✨";
+        font-size: 18px;
+      }
+    }
+  }
+
+  ion-card-content {
+    padding: 24px;
+
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--vaygo-text-secondary);
+      font-style: italic;
+    }
+  }
+}
+
+// Singola combinazione di volo
 .combo-card {
-  width: 100%;
-  margin: 10px 0;
+  --background: var(--vaygo-white);
+  border-radius: 16px;
+  border: 2px solid var(--vaygo-border);
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--vaygo-shadow);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--vaygo-shadow-medium);
+    border-color: var(--vaygo-secondary);
+  }
+
+  ion-card-header {
+    background: linear-gradient(135deg, var(--vaygo-green-light), var(--vaygo-blue-light));
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    ion-badge {
+      --background: var(--vaygo-success);
+      --color: var(--vaygo-white);
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--vaygo-primary);
+
+      strong {
+        background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+
+  ion-card-content {
+    padding: 24px;
+  }
 }
 
+// Informazioni volo
 .flight-info {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+  background: var(--vaygo-background);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 4px solid var(--vaygo-secondary);
+  position: relative;
+
+  &:last-of-type {
+    border-left-color: var(--vaygo-primary);
+  }
+
+  h3 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--vaygo-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:before {
+      content: "✈️";
+      font-size: 16px;
+    }
+  }
+
+  p {
+    margin: 0 0 8px 0;
+    color: var(--vaygo-text-primary);
+    font-size: 15px;
+    line-height: 1.4;
+
+    &:last-child {
+      margin-bottom: 0;
+      font-weight: 600;
+      color: var(--vaygo-primary);
+      font-size: 16px;
+    }
+  }
+
+  // Icona decorativa per andata/ritorno
+  &:first-of-type:after {
+    content: "🛫";
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 20px;
+    opacity: 0.7;
+  }
+
+  &:last-of-type:after {
+    content: "🛬";
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 20px;
+    opacity: 0.7;
+  }
 }
 
-.flight-info h3 {
-  font-weight: bold;
-  color: #3880ff;
+// Pulsante selezione offerta
+.select-offer-btn {
+  --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+  --color: var(--vaygo-white);
+  --border-radius: 12px;
+  height: 48px;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 16px;
+  box-shadow: 0 4px 16px rgba(46, 139, 87, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
+// State vuoto
 .empty-state {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 70vh;
-  text-align: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 40px 20px;
+
+  ion-card {
+    --background: var(--vaygo-white);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px var(--vaygo-shadow-medium);
+    border: 1px solid var(--vaygo-border);
+    max-width: 400px;
+    width: 100%;
+
+    ion-card-header {
+      text-align: center;
+      padding: 32px 24px 16px;
+
+      ion-card-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--vaygo-text-primary);
+        margin: 0;
+      }
+    }
+
+    ion-card-content {
+      text-align: center;
+      padding: 0 24px 32px;
+
+      p {
+        color: var(--vaygo-text-secondary);
+        margin: 0 0 24px 0;
+        line-height: 1.5;
+      }
+
+      ion-button {
+        --background: linear-gradient(135deg, var(--vaygo-secondary), var(--vaygo-primary));
+        --color: var(--vaygo-white);
+        --border-radius: 12px;
+        height: 48px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Lista risultati
+ion-list {
+  background: transparent;
+  padding: 0;
+
+  ion-item {
+    --background: transparent;
+    --padding-start: 0;
+    --padding-end: 0;
+    --border-color: transparent;
+    margin-bottom: 0;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .results-content {
+    padding: 16px;
+  }
+
+  .combo-card {
+    ion-card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+
+    ion-card-content {
+      padding: 20px;
+    }
+  }
+
+  .flight-info {
+    padding: 16px;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .search-info-card,
+  .filters-card,
+  .results-card {
+    ion-card-content {
+      padding: 20px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .combo-card {
+    ion-card-header {
+      padding: 16px 20px;
+
+      h2 {
+        font-size: 18px;
+      }
+    }
+
+    ion-card-content {
+      padding: 16px;
+    }
+  }
+
+  .flight-info {
+    padding: 12px;
+
+    h3 {
+      font-size: 12px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
+// Animazioni
+@media (prefers-reduced-motion: no-preference) {
+  .combo-card {
+    animation: slideIn 0.5s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Animazione staggered per le cards
+  .combo-card:nth-child(1) { animation-delay: 0.1s; }
+  .combo-card:nth-child(2) { animation-delay: 0.2s; }
+  .combo-card:nth-child(3) { animation-delay: 0.3s; }
+  .combo-card:nth-child(4) { animation-delay: 0.4s; }
+  .combo-card:nth-child(5) { animation-delay: 0.5s; }
+}
+
+// Utilità per il loading state
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.5) 50%, var(--vaygo-background) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 }

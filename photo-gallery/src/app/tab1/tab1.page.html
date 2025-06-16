@@ -146,7 +146,7 @@
             </ion-item>
           </div>
 
-          <ion-button expand="block" class="search-button" [disabled]="!CampiValidi()" (click)="Cerca()">
+          <ion-button expand="block" class="search-button" [disabled]="!CampiValidi()" (click)="Cerca()" [routerLink]="'/tabs/tab2'">
             <ion-icon name="search" slot="start"></ion-icon>
             Cerca Voli
           </ion-button>

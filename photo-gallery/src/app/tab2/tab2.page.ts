@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -12,12 +12,20 @@ import {
   IonButton,
   IonCard,
   IonCardContent,
-  IonSegment,
-  IonSegmentButton,
+  IonCardHeader,
+  IonCardTitle,
+  IonList,
   IonItem,
-  IonInput
+  IonSelect,
+  IonSelectOption,
+  IonChip,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { SearchService } from '../services/redirect.service';
+import { Volo } from '../models/volo.models';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tab2',
@@ -25,6 +33,8 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
   styleUrls: ['tab2.page.scss'],
   standalone: true,
   imports: [
+    CommonModule,
+    FormsModule,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -37,13 +47,148 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
     IonLabel,
     IonButton,
     IonCard,
+    IonCardHeader,
+    IonCardTitle,
     IonCardContent,
-    IonSegment,
-    IonSegmentButton,
+    IonList,
     IonItem,
-    IonInput
+    IonSelect,
+    IonSelectOption,
+    IonChip,
+    IonBadge,
   ],
 })
-export class Tab2Page {
-  constructor() {}
+export class Tab2Page implements OnInit {
+  bigliettiAndata: Volo[] = [];
+  bigliettiRitorno: Volo[] = [];
+  ricercaInfo = { partenza: '', destinazione: '', dataPartenza: '', dataRitorno: '' };
+
+  // Filtri per la ricerca avanzata
+  filtroPrezzo = 'tutti'; // tutti, economici, medi, premium
+  filtroCompagnia = 'tutte'; // tutte, o specifiche compagnie
+  compagnieDisponibili: string[] = [];
+
+  // Biglietti filtrati da mostrare
+  bigliettiAndataFiltrati: Volo[] = [];
+  bigliettiRitornoFiltrati: Volo[] = [];
+
+  // Combinazioni migliori
+  combinazioniMigliori: { andata: Volo, ritorno: Volo, prezzoTotale: number }[] = [];
+
+  constructor(private searchService: SearchService) {}
+
+  ngOnInit() {
+    this.searchService.bigliettiAndata$.subscribe(voli => {
+      this.bigliettiAndata = voli;
+      this.bigliettiAndataFiltrati = voli;
+      this.estraiCompagnie();
+      this.calcolaCombinazioniMigliori();
+    });
+
+    this.searchService.bigliettiRitorno$.subscribe(voli => {
+      this.bigliettiRitorno = voli;
+      this.bigliettiRitornoFiltrati = voli;
+      this.estraiCompagnie();
+      this.calcolaCombinazioniMigliori();
+    });
+
+    this.searchService.cercaInfo$.subscribe(info => {
+      this.ricercaInfo = info;
+    });
+  }
+
+  // Estrae le compagnie disponibili per il filtro
+  estraiCompagnie() {
+    const compagnie = new Set<string>();
+    // Supponiamo che la proprietà corretta sia 'partenza' invece di 'compagniaAerea'
+    this.bigliettiAndata.forEach(volo => {
+      if (volo.partenza) compagnie.add(volo.partenza);
+    });
+    this.bigliettiRitorno.forEach(volo => {
+      if (volo.partenza) compagnie.add(volo.partenza);
+    });
+    this.compagnieDisponibili = Array.from(compagnie);
+  }
+
+  // Applica i filtri ai biglietti
+  applicaFiltri() {
+    // Filtra per prezzo
+    this.bigliettiAndataFiltrati = this.bigliettiAndata.filter(volo => {
+      // Filtro per compagnia/aeroporto (usando partenza invece di compagniaAerea)
+      if (this.filtroCompagnia !== 'tutte' && volo.partenza !== this.filtroCompagnia) {
+        return false;
+      }
+
+      // Filtro per range di prezzo
+      if (this.filtroPrezzo === 'economici') {
+        return volo.prezzo <= 100;
+      } else if (this.filtroPrezzo === 'medi') {
+        return volo.prezzo > 100 && volo.prezzo <= 300;
+      } else if (this.filtroPrezzo === 'premium') {
+        return volo.prezzo > 300;
+      }
+
+      return true; // Se filtroPrezzo è "tutti"
+    });
+
+    this.bigliettiRitornoFiltrati = this.bigliettiRitorno.filter(volo => {
+      // Filtro per compagnia/aeroporto
+      if (this.filtroCompagnia !== 'tutte' && volo.partenza !== this.filtroCompagnia) {
+        return false;
+      }
+
+      // Filtro per range di prezzo
+      if (this.filtroPrezzo === 'economici') {
+        return volo.prezzo <= 100;
+      } else if (this.filtroPrezzo === 'medi') {
+        return volo.prezzo > 100 && volo.prezzo <= 300;
+      } else if (this.filtroPrezzo === 'premium') {
+        return volo.prezzo > 300;
+      }
+
+      return true; // Se filtroPrezzo è "tutti"
+    });
+
+    this.calcolaCombinazioniMigliori();
+  }
+
+  // Calcola le combinazioni migliori andata/ritorno
+  calcolaCombinazioniMigliori() {
+    if (this.bigliettiAndataFiltrati.length === 0 || this.bigliettiRitornoFiltrati.length === 0) {
+      this.combinazioniMigliori = [];
+      return;
+    }
+
+    const combinazioni = [];
+
+    // Crea tutte le combinazioni possibili
+    for (const andata of this.bigliettiAndataFiltrati) {
+      for (const ritorno of this.bigliettiRitornoFiltrati) {
+        combinazioni.push({
+          andata: andata,
+          ritorno: ritorno,
+          prezzoTotale: andata.prezzo + ritorno.prezzo
+        });
+      }
+    }
+
+    // Ordina per prezzo crescente
+    combinazioni.sort((a, b) => a.prezzoTotale - b.prezzoTotale);
+
+    // Prendi le 5 combinazioni migliori (o meno se non disponibili)
+    this.combinazioniMigliori = combinazioni.slice(0, 5);
+  }
+
+  // Formatta data e ora per la visualizzazione
+  formattaOra(dataOra: string): string {
+    if (!dataOra) return '';
+    const data = new Date(dataOra);
+    return data.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  formattaData(dataOra: string): string {
+    if (!dataOra) return '';
+    const data = new Date(dataOra);
+    return data.toLocaleDateString();
+  }
 }

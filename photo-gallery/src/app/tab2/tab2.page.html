@@ -1,17 +1,100 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Risultati della ricerca
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngIf="ricercaInfo.partenza">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Dettagli ricerca</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Partenza:</strong> {{ ricercaInfo.partenza }}</p>
+        <p><strong>Destinazione:</strong> {{ ricercaInfo.destinazione }}</p>
+        <p><strong>Data andata:</strong> {{ ricercaInfo.dataPartenza }}</p>
+        <p><strong>Data ritorno:</strong> {{ ricercaInfo.dataRitorno }}</p>
+      </ion-card-content>
+    </ion-card>
 
-  <app-explore-container name="PROVA TAB2"></app-explore-container>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Filtri avanzati</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Fascia di prezzo</ion-label>
+          <ion-select [(ngModel)]="filtroPrezzo" (ionChange)="applicaFiltri()">
+            <ion-select-option value="tutti">Tutti i prezzi</ion-select-option>
+            <ion-select-option value="economici">Economici (≤ 100€)</ion-select-option>
+            <ion-select-option value="medi">Medi (101€-300€)</ion-select-option>
+            <ion-select-option value="premium">Premium (> 300€)</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Città di partenza</ion-label>
+          <ion-select [(ngModel)]="filtroCompagnia" (ionChange)="applicaFiltri()">
+            <ion-select-option value="tutte">Tutte le città</ion-select-option>
+            <ion-select-option *ngFor="let compagnia of compagnieDisponibili" [value]="compagnia">
+              {{ compagnia }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Combinazioni migliori -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Le migliori combinazioni</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngIf="combinazioniMigliori.length === 0">
+          Nessuna combinazione disponibile con i filtri attuali.
+        </div>
+
+        <ion-list>
+          <ion-item *ngFor="let combo of combinazioniMigliori; let i = index">
+            <ion-card class="combo-card">
+              <ion-card-header>
+                <ion-badge color="success">Opzione {{ i + 1 }}</ion-badge>
+                <h2><strong>Prezzo totale: {{ combo.prezzoTotale }}€</strong></h2>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="flight-info">
+                  <h3>ANDATA:</h3>
+                  <p>Da {{ combo.andata.partenza }} a {{ combo.andata.destinazione }}</p>
+                  <p>Partenza: {{ formattaData(combo.andata.oraPartenza) }} - {{ formattaOra(combo.andata.oraPartenza) }}</p>
+                  <p>Prezzo: {{ combo.andata.prezzo }}€</p>
+                </div>
+                <div class="flight-info">
+                  <h3>RITORNO:</h3>
+                  <p>Da {{ combo.ritorno.partenza }} a {{ combo.ritorno.destinazione }}</p>
+                  <p>Partenza: {{ formattaData(combo.ritorno.oraPartenza) }} - {{ formattaOra(combo.ritorno.oraPartenza) }}</p>
+                  <p>Prezzo: {{ combo.ritorno.prezzo }}€</p>
+                </div>
+                <ion-button expand="full" color="primary">Seleziona questa offerta</ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="!ricercaInfo.partenza" class="empty-state">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nessuna ricerca effettuata</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Utilizza il tab "Ricerca" per trovare voli disponibili</p>
+        <ion-button expand="block" routerLink="/tabs/tab1">Vai alla ricerca</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

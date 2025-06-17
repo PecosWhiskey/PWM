@@ -78,11 +78,14 @@ export class Tab2Page implements OnInit {
     this.tab1Service.getBigliettiRitorno().subscribe(biglietti=> {
       this.bigliettiRitorno = biglietti;
     })
-
-    if(this.bigliettiAndata.length == 0 && this.bigliettiRitorno.length == 0){
-      console.log('Biglietti non trovati');
-    }
   };
+
+  aggiornaStato(){
+    if(this.bigliettiAndata.length == 0 && this.bigliettiRitorno.length == 0){
+      console.log('Nessun biglietto trovato')
+    }
+  }
+
 
 
 

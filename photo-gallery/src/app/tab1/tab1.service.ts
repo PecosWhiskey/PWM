@@ -14,6 +14,8 @@ export class Tab1Service {
   private ricercaInfo = new BehaviorSubject<RicercaInfo>({partenza:'', destinazione: '', dataPartenza: '', dataRitorno: ''}) // private voliTrovatiAndata = false; //indica se sono stati trovati i voli cercati dall'utente
   private bigliettiAndata = new BehaviorSubject<Volo[]>([]);
   private bigliettiRitorno = new BehaviorSubject<Volo[]>([]);
+  private voliTrovatiAndata = new BehaviorSubject<boolean>(false);
+  private voliTrovatiRitorno = new BehaviorSubject<boolean>(false);
   
   // private voliTrovatiRitorno = false; //indica se sono stati trovati i voli cercati dall'utente
   // private bigliettiAndata : Volo[] = [];
@@ -49,6 +51,22 @@ export class Tab1Service {
 
   getBigliettiRitorno(): Observable<Volo[]>{
     return this.bigliettiRitorno.asObservable();
+  }
+
+  setVoliTrovatiAndata(founded: boolean) {
+    this.voliTrovatiAndata.next(founded);;
+  }
+
+  getVoliTrovatiAndata(): Observable<boolean>{
+    return this.voliTrovatiAndata.asObservable();
+  }
+
+  setVoliTrovatiRitorno(founded: boolean) {
+    this.voliTrovatiRitorno.next(founded);;
+  }
+
+  getVoliTrovatiRitorno(): Observable<boolean>{
+    return this.voliTrovatiRitorno.asObservable();
   }
 
   // setRicercaInfo(datiRicerca : {partenza: string, destinazione: string, dataPartenza: string, dataRitorno: string}){

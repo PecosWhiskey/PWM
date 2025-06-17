@@ -5,95 +5,90 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { Tab1Service } from './tab1.service';
 import { Volo } from '../models/volo.models';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, RouterOutlet, RouterLink, Router} from '@angular/router';
-import { SearchService } from '../services/redirect.service';
-import { forkJoin } from 'rxjs';
+import { RouterModule, RouterLink } from '@angular/router';
+// import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [RouterLink, RouterModule, IonPopover, IonHeader,IonToolbar,IonTitle,IonContent,ExploreContainerComponent,IonTabs,IonTabBar,IonTabButton,
+  imports: [RouterLink, RouterModule, IonHeader,IonToolbar,IonTitle,IonContent,ExploreContainerComponent,IonTabs,IonTabBar,IonTabButton,
     IonIcon,IonLabel,IonButton,IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, FormsModule, IonDatetime, IonPopover, IonCardHeader, IonCardTitle],
 })
 export class Tab1Page {
-  constructor(
-    private tab1Service: Tab1Service,
-    private router: Router,
-    private searchService: SearchService
-  ){}
+  constructor(private tab1Service: Tab1Service){}
 
-    partenza = ''; //città di partenza
-    destinazione = ''; //città di destinazione
-    dataInseritaP = ''; //recupera la data di partenza inserita dall'utente con fuso e ora
-    dataInseritaR = ''; //recupera la data di destinazione inserita dall'utente con fuso e ora
-    dataPartenza = ''; //data di partenza senza fuso e ora
-    dataRitorno = ''; //data di ritorno senza fuso e ora
-    cercaVoloEsito = ''; //esito della ricerca sei voli
+  partenza = ''; //città di partenza
+  destinazione = ''; //città di destinazione
+  dataInseritaP = ''; //recupera la data di partenza inserita dall'utente con fuso e ora
+  dataInseritaR = ''; //recupera la data di destinazione inserita dall'utente con fuso e ora
+  dataPartenza = ''; //data di partenza senza fuso e ora
+  dataRitorno = ''; //data di ritorno senza fuso e ora
+  cercaVoloEsito = ''; //esito della ricerca sei voli
 
-    trovati = false;//serve per visualizzare i biglietti trovati
-    bigliettiAndata: Volo[] = []; //array dei biglietti di partenza trovati
-    bigliettiRitorno: Volo[] = []; //array dei biglietti di ritorno trovati
-    isSearching = false; // indica se è in corso la ricerca
+  trovati = false;//serve per visualizzare i biglietti trovati
+  bigliettiAndata: Volo[] = []; //array dei biglietti di partenza trovati
+  bigliettiRitorno: Volo[] = []; //array dei biglietti di ritorno trovati
 
-    form= ''; //variabile che viene settata su 'Login' o 'Registrazione' per stabilire quale form mostrare
+  form= ''; //variabile che viene settata su 'Login' o 'Registrazione' per stabilire quale form mostrare
 
-    CampiValidi(){
-      return this.partenza && this.destinazione && this.dataInseritaP && this.dataInseritaR;
+
+  CampiValidi(){
+    return this.partenza && this.destinazione && this.dataInseritaP && this.dataInseritaR;
+  }
+
+  Cerca(){
+    this.dataPartenza = this.dataInseritaP.split('T')[0];
+    this.dataRitorno = this.dataInseritaR.split('T')[0];
+    //Oggetto con i dati che devono essere invaiti al server per la ricerca dei voli
+    const datiVoloPartenza = {
+      partenza: this.partenza,                 
+      destinazione : this.destinazione,
+      oraPartenza : this.dataPartenza
     }
-
-    Cerca(){
-      if (!this.CampiValidi()) {
-        this.cercaVoloEsito = "Inserisci tutti i campi richiesti";
-        return;
-      }
-
-      this.isSearching = true;
-      this.dataPartenza = this.dataInseritaP.split('T')[0];
-      this.dataRitorno = this.dataInseritaR.split('T')[0];
-
-      // Salva i dati di ricerca nel servizio condiviso
-      this.searchService.setSearchInfo({
-        partenza: this.partenza,
-        destinazione: this.destinazione,
-        dataPartenza: this.dataPartenza,
-        dataRitorno: this.dataRitorno
-      });
-
-      const datiVoloPartenza = {
-        partenza: this.partenza,
-        destinazione: this.destinazione,
-        oraPartenza: this.dataPartenza
-      }
-
+    //Oggetto con le informazioni sulla ricerca da mostrare nel tab2
+    const ricercaInfo = {
+      partenza : this.partenza,
+      destinazione : this.destinazione,
+      dataPartenza : this.dataPartenza,
+      dataRitorno : this.dataRitorno
+    }
+    this.tab1Service.setRicercaInfo(ricercaInfo);
+    //Ricerca dei voli per la data di partenza
+    this.tab1Service.CercaVolo(datiVoloPartenza).subscribe({ 
+        next: (response) => {
+        console.log('Search success:', response);
+        this.cercaVoloEsito= response.message;
+        this.trovati = true;
+        // this.tab1Service.setFoundedAndata(this.trovati);
+        this.bigliettiAndata = response.data;
+        this.tab1Service.setBigliettiAndata(this.bigliettiAndata);
+       },
+       error: (err) => {
+        console.log('Search error:', err);
+        this.cercaVoloEsito = err.error.message;
+       },
+      }); 
+      //Ricerca dei voli per la data di ritorno
       const datiVoloRitorno = {
-        partenza: this.destinazione,
-        destinazione: this.partenza,
-        oraPartenza: this.dataRitorno
-      }
-
-      // Esegui entrambe le richieste in parallelo
-      forkJoin({
-        andata: this.tab1Service.CercaVolo(datiVoloPartenza),
-        ritorno: this.tab1Service.CercaVolo(datiVoloRitorno)
-      }).subscribe({
-        next: (results) => {
-          this.bigliettiAndata = results.andata.data;
-          this.bigliettiRitorno = results.ritorno.data;
-
-          // Salva i risultati nel servizio condiviso
-          this.searchService.setSearchResults(this.bigliettiAndata, this.bigliettiRitorno);
-
-          // Naviga al tab2 per visualizzare i risultati
-          this.router.navigate(['/tabs/tab2']);
-          this.isSearching = false;
-        },
-        error: (err) => {
-          console.log('Search error:', err);
-          this.cercaVoloEsito = err.error?.message || 'Errore durante la ricerca';
-          this.isSearching = false;
-        }
-      });
+      partenza: this.destinazione,
+      destinazione : this.partenza,
+      oraPartenza : this.dataRitorno
     }
+      this.tab1Service.CercaVolo(datiVoloRitorno).subscribe({ 
+        next: (response) => {
+        console.log('Search success:', response);
+        this.cercaVoloEsito= response.message;
+        this.trovati = true;
+        // this.tab1Service.setFoundedRitorno(this.trovati);
+        this.bigliettiRitorno = response.data;
+        this.tab1Service.setBigliettiRitorno(this.bigliettiRitorno);
+       },
+       error: (err) => {
+        console.log('Search error:', err);
+        this.cercaVoloEsito = err.error.message;
+       },
+      }); 
+  }
 }

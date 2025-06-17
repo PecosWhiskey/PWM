@@ -22,6 +22,33 @@
       </ion-card-content>
     </ion-card>
 
+  @if((bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
+    @for(biglietto of bigliettiAndata; track $index; let i=$index){
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ricercaInfo.partenza}}    {{ricercaInfo.destinazione}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+          <p>{{biglietto.prezzo}}</p>
+          <ion-button>Seleziona</ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+    @for(biglietto of bigliettiRitorno; track $index; let i=$index){
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ricercaInfo.destinazione}}    {{ricercaInfo.partenza}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+          <p>{{biglietto.prezzo}}</p>
+          <ion-button>Seleziona</ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+  }
+<!--
     <ion-card>
       <ion-card-header>
         <ion-card-title>Filtri avanzati</ion-card-title>
@@ -36,7 +63,8 @@
             <ion-select-option value="premium">Premium (> 300€)</ion-select-option>
           </ion-select>
         </ion-item>
-
+-->        
+<!--
         <ion-item>
           <ion-label>Città di partenza</ion-label>
           <ion-select [(ngModel)]="filtroCompagnia" (ionChange)="applicaFiltri()">
@@ -48,8 +76,8 @@
         </ion-item>
       </ion-card-content>
     </ion-card>
-
-    <!-- Combinazioni migliori -->
+-->
+    <!-- Combinazioni migliori 
     <ion-card>
       <ion-card-header>
         <ion-card-title>Le migliori combinazioni</ion-card-title>
@@ -86,8 +114,9 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
+    -->    
   </div>
-
+<!--
   <div *ngIf="!ricercaInfo.partenza" class="empty-state">
     <ion-card>
       <ion-card-header>
@@ -97,6 +126,7 @@
         <p>Utilizza il tab "Ricerca" per trovare voli disponibili</p>
         <ion-button expand="block" routerLink="/tabs/tab1">Vai alla ricerca</ion-button>
       </ion-card-content>
-    </ion-card>
+    </ion-card>    
   </div>
+-->  
 </ion-content>

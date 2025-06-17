@@ -1,31 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonTabs,
-  IonTabBar,
-  IonTabButton,
-  IonIcon,
-  IonLabel,
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonList,
-  IonItem,
-  IonSelect,
-  IonSelectOption,
-  IonChip,
-  IonBadge,
-} from '@ionic/angular/standalone';
+import {IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,IonIcon,IonLabel,IonButton,IonCard,IonCardContent,
+  IonCardHeader,IonCardTitle,IonList,IonItem,IonSelect,IonSelectOption,IonChip,IonBadge,} from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { SearchService } from '../services/redirect.service';
 import { Volo } from '../models/volo.models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Tab1Service } from '../tab1/tab1.service';
 
 @Component({
   selector: 'app-tab2',
@@ -59,8 +39,16 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 export class Tab2Page implements OnInit {
+
+  constructor(private tab1Service: Tab1Service) {}
+
+  voliTrovatiAndata = false; //Il valore cambia in base ai risultati della ricerca effettuata nel tab1
+  voliTrovatiRitorno = false;
+
+  //Biglietti trovati dalla ricerca nel tab1
   bigliettiAndata: Volo[] = [];
   bigliettiRitorno: Volo[] = [];
+
   ricercaInfo = { partenza: '', destinazione: '', dataPartenza: '', dataRitorno: '' };
 
   // Filtri per la ricerca avanzata
@@ -68,34 +56,80 @@ export class Tab2Page implements OnInit {
   filtroCompagnia = 'tutte'; // tutte, o specifiche compagnie
   compagnieDisponibili: string[] = [];
 
-  // Biglietti filtrati da mostrare
+  //Biglietti filtrati
   bigliettiAndataFiltrati: Volo[] = [];
   bigliettiRitornoFiltrati: Volo[] = [];
 
   // Combinazioni migliori
   combinazioniMigliori: { andata: Volo, ritorno: Volo, prezzoTotale: number }[] = [];
 
-  constructor(private searchService: SearchService) {}
 
   ngOnInit() {
-    this.searchService.bigliettiAndata$.subscribe(voli => {
-      this.bigliettiAndata = voli;
-      this.bigliettiAndataFiltrati = voli;
-      this.estraiCompagnie();
-      this.calcolaCombinazioniMigliori();
-    });
-
-    this.searchService.bigliettiRitorno$.subscribe(voli => {
-      this.bigliettiRitorno = voli;
-      this.bigliettiRitornoFiltrati = voli;
-      this.estraiCompagnie();
-      this.calcolaCombinazioniMigliori();
-    });
-
-    this.searchService.cercaInfo$.subscribe(info => {
+    this.tab1Service.getRicercaInfo().subscribe(info => {
       this.ricercaInfo = info;
     });
-  }
+    // this.ricercaInfo = this.tab1Service.getRicercaInfo();
+    // this.voliTrovatiAndata = this.tab1Service.getFoundedAndata();
+    // this.voliTrovatiRitorno = this.tab1Service.getFoundedRitorno();
+    this.tab1Service.getBigliettiAndata().subscribe(biglietti=> {
+      this.bigliettiAndata = biglietti;
+    })
+
+    this.tab1Service.getBigliettiRitorno().subscribe(biglietti=> {
+      this.bigliettiRitorno = biglietti;
+    })
+
+    if(this.bigliettiAndata.length == 0 && this.bigliettiRitorno.length == 0){
+      console.log('Biglietti non trovati');
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //   this.searchService.bigliettiRitorno$.subscribe(voli => {
+  //     this.bigliettiRitorno = voli;
+  //     this.bigliettiRitornoFiltrati = voli;
+  //     this.estraiCompagnie();
+  //     this.calcolaCombinazioniMigliori();
+  //   });
+
+  //   this.searchService.cercaInfo$.subscribe(info => {
+  //     this.ricercaInfo = info;
+  //   });
+  // }
 
   // Estrae le compagnie disponibili per il filtro
   estraiCompagnie() {

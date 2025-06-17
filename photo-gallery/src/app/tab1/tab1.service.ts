@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Volo } from '../models/volo.models';
+import { RicercaInfo } from '../models/ricercaInfo.models';
+import { BehaviorSubject } from 'rxjs'; //permette di memorizzare lo stato corrente e aggiornare gli altri tab quando i dati cambiano
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +11,14 @@ import { Observable } from 'rxjs';
 export class Tab1Service {
 
   private baseUrl = 'http://localhost:3000';
+  private ricercaInfo = new BehaviorSubject<RicercaInfo>({partenza:'', destinazione: '', dataPartenza: '', dataRitorno: ''}) // private voliTrovatiAndata = false; //indica se sono stati trovati i voli cercati dall'utente
+  private bigliettiAndata = new BehaviorSubject<Volo[]>([]);
+  private bigliettiRitorno = new BehaviorSubject<Volo[]>([]);
+  
+  // private voliTrovatiRitorno = false; //indica se sono stati trovati i voli cercati dall'utente
+  // private bigliettiAndata : Volo[] = [];
+  // private bigliettiRitorno : Volo[] = [];
+  // private ricercaInfo = {partenza: '', destinazione: '', dataPartenza: '', dataRitorno: ''}
 
   constructor(private http: HttpClient) {}
 
@@ -15,4 +26,68 @@ export class Tab1Service {
     return this.http.post(`${this.baseUrl}/api/auth/ricerca-volo`, credentials);
 
   }
+
+  setRicercaInfo(info: RicercaInfo) {
+    this.ricercaInfo.next(info);
+  }
+
+  getRicercaInfo(): Observable<RicercaInfo>{
+    return this.ricercaInfo.asObservable();
+  }
+
+  setBigliettiAndata(biglietti: Volo[]){
+    this.bigliettiAndata.next(biglietti);
+  }
+
+  getBigliettiAndata(): Observable<Volo[]>{
+    return this.bigliettiAndata.asObservable();
+  }
+
+  setBigliettiRitorno(biglietti: Volo[]){
+    this.bigliettiRitorno.next(biglietti);
+  }
+
+  getBigliettiRitorno(): Observable<Volo[]>{
+    return this.bigliettiRitorno.asObservable();
+  }
+
+  // setRicercaInfo(datiRicerca : {partenza: string, destinazione: string, dataPartenza: string, dataRitorno: string}){
+  //   this.ricercaInfo = datiRicerca;
+  // }
+
+  // getRicercaInfo(){
+  //   return this.ricercaInfo;
+  // }
+
+  // setFoundedAndata(founded: boolean){
+  //   this.voliTrovatiAndata = founded;
+  // }
+
+  // getFoundedAndata(): boolean{
+  //   return this.voliTrovatiAndata;
+  // }
+
+  // setFoundedRitorno(founded: boolean){
+  //   this.voliTrovatiRitorno = founded;
+  // }
+
+  // getFoundedRitorno(): boolean{
+  //   return this.voliTrovatiRitorno;
+  // }
+
+  // setBigliettiAndata(biglietti: Volo[]){
+  //   this.bigliettiAndata = biglietti;
+  // }
+
+  // getBigliettiAndata(): Volo[]{
+  //   return this.bigliettiAndata;
+  // }
+
+  // setBigliettiRitorno(biglietti: Volo[]){
+  //   this.bigliettiRitorno = biglietti;
+  // }
+
+  // getBigliettiRitorno(): Volo[]{
+  //   return this.bigliettiRitorno;
+  // }
 }

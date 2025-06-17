@@ -26,18 +26,18 @@
 </html>
 
 <script>
-import { defineConfig } from 'vite';
+// import { defineConfig } from 'vite';
 
-export default defineConfig({
-  build: {
-    rollupOptions: {
-      onwarn(warning, warn) {
-        if (warning.code === 'DYNAMIC_IMPORT_VARS') return;
-        warn(warning);
-      }
-    }
-  }
-});
+// export default defineConfig({
+//   build: {
+//     rollupOptions: {
+//       onwarn(warning, warn) {
+//         if (warning.code === 'DYNAMIC_IMPORT_VARS') return;
+//         warn(warning);
+//       }
+//     }
+//   }
+// });
 </script>
 
 

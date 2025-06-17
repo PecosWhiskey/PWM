@@ -157,33 +157,6 @@
     </ion-card>
   </section>
 
-   @if(trovati && (bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
-    @for(biglietto of bigliettiAndata; track $index; let i=$index){
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{partenza}}    {{destinazione}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
-          <p>{{biglietto.prezzo}}</p>
-          <ion-button [routerLink]="'/dati-biglietto'">Seleziona</ion-button>
-        </ion-card-content>
-      </ion-card>
-    }
-    @for(biglietto of bigliettiRitorno; track $index; let i=$index){
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{destinazione}}    {{partenza}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
-          <p>{{biglietto.prezzo}}</p>
-          <ion-button [routerLink]="'/dati-biglietto'">Seleziona</ion-button>
-        </ion-card-content>
-      </ion-card>
-    }
-  }
-
   <!-- Quick Actions -->
   <section class="quick-actions">
     <div class="actions-grid">

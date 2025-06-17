@@ -71,20 +71,34 @@ export class Tab2Page implements OnInit {
     // this.ricercaInfo = this.tab1Service.getRicercaInfo();
     // this.voliTrovatiAndata = this.tab1Service.getFoundedAndata();
     // this.voliTrovatiRitorno = this.tab1Service.getFoundedRitorno();
+
+    this.tab1Service.getVoliTrovatiAndata().subscribe(founded => {
+      this.voliTrovatiAndata = founded;
+    })
+
+    this.tab1Service.getVoliTrovatiRitorno().subscribe(founded => {
+      this.voliTrovatiRitorno = founded;
+    })
+
     this.tab1Service.getBigliettiAndata().subscribe(biglietti=> {
       this.bigliettiAndata = biglietti;
     })
 
     this.tab1Service.getBigliettiRitorno().subscribe(biglietti=> {
       this.bigliettiRitorno = biglietti;
-    })
+ //     this.aggiornaStato(); //richiamo la funzione solo qui così che venga aggiornato lo stato
+    })                      //solo quando tutti i dati sono stati aggiornati
   };
 
-  aggiornaStato(){
-    if(this.bigliettiAndata.length == 0 && this.bigliettiRitorno.length == 0){
-      console.log('Nessun biglietto trovato')
-    }
-  }
+  // aggiornaStato(){
+  //   if(this.bigliettiAndata.length == 0 && this.bigliettiRitorno.length == 0){
+  //     console.log('Nessun biglietto trovato');
+  //   }
+
+  //   if(!this.voliTrovatiAndata || !this.voliTrovatiRitorno){
+  //     console.log('Errore interno al server');
+  //   }
+  // }
 
 
 

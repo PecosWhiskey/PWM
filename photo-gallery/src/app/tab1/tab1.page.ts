@@ -61,7 +61,7 @@ export class Tab1Page {
         console.log('Search success:', response);
         this.cercaVoloEsito= response.message;
         this.trovati = true;
-        // this.tab1Service.setFoundedAndata(this.trovati);
+        this.tab1Service.setVoliTrovatiAndata(this.trovati);
         this.bigliettiAndata = response.data;
         this.tab1Service.setBigliettiAndata(this.bigliettiAndata);
        },
@@ -81,7 +81,7 @@ export class Tab1Page {
         console.log('Search success:', response);
         this.cercaVoloEsito= response.message;
         this.trovati = true;
-        // this.tab1Service.setFoundedRitorno(this.trovati);
+        this.tab1Service.setVoliTrovatiRitorno(this.trovati);
         this.bigliettiRitorno = response.data;
         this.tab1Service.setBigliettiRitorno(this.bigliettiRitorno);
        },

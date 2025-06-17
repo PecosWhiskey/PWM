@@ -21,33 +21,79 @@
         <p><strong>Data ritorno:</strong> {{ ricercaInfo.dataRitorno }}</p>
       </ion-card-content>
     </ion-card>
-
-  @if((bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
-    @for(biglietto of bigliettiAndata; track $index; let i=$index){
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ricercaInfo.partenza}}    {{ricercaInfo.destinazione}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
-          <p>{{biglietto.prezzo}}</p>
-          <ion-button>Seleziona</ion-button>
-        </ion-card-content>
-      </ion-card>
+  @if(voliTrovatiAndata && voliTrovatiRitorno){
+    @if(bigliettiAndata.length==0 && bigliettiRitorno.length==0){
+      <p>Non sono disponibili voli per queste città</p>
     }
-    @for(biglietto of bigliettiRitorno; track $index; let i=$index){
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ricercaInfo.destinazione}}    {{ricercaInfo.partenza}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
-          <p>{{biglietto.prezzo}}</p>
-          <ion-button>Seleziona</ion-button>
-        </ion-card-content>
-      </ion-card>
+    @if((bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
+      @if(bigliettiAndata.length>0){
+        @for(biglietto of bigliettiAndata; track $index; let i=$index){
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ricercaInfo.partenza}}    {{ricercaInfo.destinazione}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+              <p>{{biglietto.prezzo}}</p>
+              <ion-button>Seleziona</ion-button>
+            </ion-card-content>
+          </ion-card>
+        }
+      }@else {
+        <p>Non sono disponibili voli di andata per queste città!</p>
+      }
+      @if(bigliettiRitorno.length>0){
+        @for(biglietto of bigliettiRitorno; track $index; let i=$index){
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ricercaInfo.destinazione}}    {{ricercaInfo.partenza}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+              <p>{{biglietto.prezzo}}</p>
+              <ion-button>Seleziona</ion-button>
+            </ion-card-content>
+          </ion-card>
+        }
+      } 
     }
+  }@else{
+    <p>Errore interno del server!</p>
   }
+  <!-- @if((bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
+    @if(bigliettiAndata.length>0){
+      @for(biglietto of bigliettiAndata; track $index; let i=$index){
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ricercaInfo.partenza}}    {{ricercaInfo.destinazione}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+            <p>{{biglietto.prezzo}}</p>
+            <ion-button>Seleziona</ion-button>
+          </ion-card-content>
+        </ion-card>
+      }
+    }@else {
+      <p>Non sono disponibili voli di andata per queste città</p>
+    }
+    @if(bigliettiRitorno.length>0){
+      @for(biglietto of bigliettiRitorno; track $index; let i=$index){
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ricercaInfo.destinazione}}    {{ricercaInfo.partenza}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
+            <p>{{biglietto.prezzo}}</p>
+            <ion-button>Seleziona</ion-button>
+          </ion-card-content>
+        </ion-card>
+      }
+    }@else {
+      <p>Non sono disponibili voli di ritorno per queste città</p>
+    }  
+  } -->
 <!--
     <ion-card>
       <ion-card-header>

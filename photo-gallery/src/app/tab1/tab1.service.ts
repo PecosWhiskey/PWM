@@ -16,11 +16,8 @@ export class Tab1Service {
   private bigliettiRitorno = new BehaviorSubject<Volo[]>([]);
   private voliTrovatiAndata = new BehaviorSubject<boolean>(false);
   private voliTrovatiRitorno = new BehaviorSubject<boolean>(false);
-  
-  // private voliTrovatiRitorno = false; //indica se sono stati trovati i voli cercati dall'utente
-  // private bigliettiAndata : Volo[] = [];
-  // private bigliettiRitorno : Volo[] = [];
-  // private ricercaInfo = {partenza: '', destinazione: '', dataPartenza: '', dataRitorno: ''}
+  private sceltaUtente = new BehaviorSubject<string>('nessun selezionato'); //cambia valore in base all'opzione scelta dall'utente
+  //tra andate e ritorno, solo andata o nessun selezionato (in questo caso assume il valore di default)
 
   constructor(private http: HttpClient) {}
 
@@ -67,6 +64,14 @@ export class Tab1Service {
 
   getVoliTrovatiRitorno(): Observable<boolean>{
     return this.voliTrovatiRitorno.asObservable();
+  }
+
+  setSceltaUtente(scelta: string){
+    this.sceltaUtente.next(scelta);
+  }
+
+  getSceltaUtente(): Observable<string>{
+    return this.sceltaUtente.asObservable();
   }
 
   // setRicercaInfo(datiRicerca : {partenza: string, destinazione: string, dataPartenza: string, dataRitorno: string}){

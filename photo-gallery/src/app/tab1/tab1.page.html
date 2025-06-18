@@ -6,7 +6,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <script type="module" src="tab1.js"></script>
+<!-- <script type="module" src="tab1.js"></script>  --> 
 
   <ion-content [fullscreen]="true">
     <ion-header collapse="condense">
@@ -15,7 +15,6 @@
       </ion-toolbar>
     </ion-header>
 
-   <!---- <app-explore-container name="Tab 1 page"></app-explore-container>-->
   </ion-content>
 
   <ion-tabs>
@@ -79,11 +78,11 @@
         <div class="search-header">
           <h3>Trova il tuo volo</h3>
           <div class="trip-type">
-            <ion-segment value="roundtrip" class="trip-segment">
-              <ion-segment-button value="roundtrip">
+            <ion-segment value="roundtrip" class="trip-segment" [(ngModel)]="scelta">
+              <ion-segment-button value="roundtrip" (click)="onClick()">
                 <ion-label>A/R</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="oneway">
+              <ion-segment-button value="oneway" (click)="onClick()">
                 <ion-label>Solo Andata</ion-label>
               </ion-segment-button>
             </ion-segment>
@@ -126,19 +125,21 @@
                 </ion-popover>
               </ion-item>
             </div>
-            <div class="input-group">
-              <ion-item class="custom-item">
-                <ion-icon name="calendar" slot="start"></ion-icon>
-                <ion-item id="click-trigger-ritorno">
-                  <ion-input [value]="dataInseritaR.split('T')[0]" readonly placeholder="Seleziona data" label="Ritorno" label-placement="stacked"></ion-input>
-               </ion-item>
-               <ion-popover trigger="click-trigger-ritorno" triggerAction="click">
-                <ng-template>
-                  <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataRitorno" [(ngModel)]="dataInseritaR" ngDefaultControl></ion-datetime>
-                </ng-template>
-              </ion-popover>
-              </ion-item>
-            </div>
+            @if(scelta == 'roundtrip' || scelta == 'nessun selezionato'){
+              <div class="input-group">
+                <ion-item class="custom-item">
+                  <ion-icon name="calendar" slot="start"></ion-icon>
+                  <ion-item id="click-trigger-ritorno">
+                    <ion-input [value]="dataInseritaR.split('T')[0]" readonly placeholder="Seleziona data" label="Ritorno" label-placement="stacked"></ion-input>
+                  </ion-item>
+                  <ion-popover trigger="click-trigger-ritorno" triggerAction="click">
+                    <ng-template>
+                      <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataRitorno" [(ngModel)]="dataInseritaR" ngDefaultControl></ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                  </ion-item>
+                </div>
+            }
           </div>
 
           <div class="passenger-input">

@@ -12,49 +12,37 @@ import { Tab1Service } from '../tab1/tab1.service';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    ExploreContainerComponent,
-    IonTabs,
-    IonTabBar,
-    IonTabButton,
-    IonIcon,
-    IonLabel,
-    IonButton,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonList,
-    IonItem,
-    IonSelect,
-    IonSelectOption,
-    IonChip,
-    IonBadge,
-  ],
+  imports: [CommonModule,FormsModule,IonHeader,IonToolbar,IonTitle,IonContent,ExploreContainerComponent,IonTabs,IonTabBar,IonTabButton,
+    IonIcon,IonLabel,IonButton,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonList,IonItem,IonSelect,IonSelectOption,IonChip,IonBadge,],
 })
 export class Tab2Page implements OnInit {
 
   constructor(private tab1Service: Tab1Service) {}
 
-  voliTrovatiAndata = false; //Il valore cambia in base ai risultati della ricerca effettuata nel tab1
+  //Valori che cambiano in base ai risultati della ricerca effettuata nel tab1
+  voliTrovatiAndata = false; 
   voliTrovatiRitorno = false;
 
   //Biglietti trovati dalla ricerca nel tab1
   bigliettiAndata: Volo[] = [];
   bigliettiRitorno: Volo[] = [];
 
+  //Informazioni sulla ricerca dell'utente   
   ricercaInfo = { partenza: '', destinazione: '', dataPartenza: '', dataRitorno: '' };
+
+  //Scelta dell'utente sui tipi di volo da cercare: andata e ritorno, solo andata, nessun selzionato
+  sceltaUtente = 'nessun selezionato';
 
   // Filtri per la ricerca avanzata
   filtroPrezzo = 'tutti'; // tutti, economici, medi, premium
+
+
   filtroCompagnia = 'tutte'; // tutte, o specifiche compagnie
   compagnieDisponibili: string[] = [];
+
+  //Copia dei biglietti di andata e ritorno trovati per usare questi per filtrare i biglietti e mostrarli all'utente
+  bigliettiAndataOriginari: Volo[] = this.bigliettiAndata; 
+  bigliettiRitornoOriginari: Volo[] = this.bigliettiRitorno;
 
   //Biglietti filtrati
   bigliettiAndataFiltrati: Volo[] = [];
@@ -68,9 +56,6 @@ export class Tab2Page implements OnInit {
     this.tab1Service.getRicercaInfo().subscribe(info => {
       this.ricercaInfo = info;
     });
-    // this.ricercaInfo = this.tab1Service.getRicercaInfo();
-    // this.voliTrovatiAndata = this.tab1Service.getFoundedAndata();
-    // this.voliTrovatiRitorno = this.tab1Service.getFoundedRitorno();
 
     this.tab1Service.getVoliTrovatiAndata().subscribe(founded => {
       this.voliTrovatiAndata = founded;
@@ -82,23 +67,51 @@ export class Tab2Page implements OnInit {
 
     this.tab1Service.getBigliettiAndata().subscribe(biglietti=> {
       this.bigliettiAndata = biglietti;
+      this.bigliettiAndataOriginari = biglietti;
     })
 
     this.tab1Service.getBigliettiRitorno().subscribe(biglietti=> {
       this.bigliettiRitorno = biglietti;
- //     this.aggiornaStato(); //richiamo la funzione solo qui così che venga aggiornato lo stato
-    })                      //solo quando tutti i dati sono stati aggiornati
+      this.bigliettiRitornoOriginari = biglietti;
+    })                      
+
+    this.tab1Service.getSceltaUtente().subscribe(scelta => {
+      this.sceltaUtente = scelta;
+    })
   };
 
-  // aggiornaStato(){
-  //   if(this.bigliettiAndata.length == 0 && this.bigliettiRitorno.length == 0){
-  //     console.log('Nessun biglietto trovato');
-  //   }
+  applicaFiltri(){
+    switch(this.filtroPrezzo){
+      case 'tutti':
+        this.bigliettiAndata = this.bigliettiAndataOriginari;
+        this.bigliettiRitorno = this.bigliettiRitornoOriginari;
+        break;
 
-  //   if(!this.voliTrovatiAndata || !this.voliTrovatiRitorno){
-  //     console.log('Errore interno al server');
-  //   }
-  // }
+      case 'economici':
+        this.bigliettiAndata = this.bigliettiAndataOriginari.filter(volo=> volo.prezzo <= 100);
+        this.bigliettiRitorno = this.bigliettiRitornoOriginari.filter(volo=> volo.prezzo <= 100);
+        break;
+
+      case 'medi':
+        this.bigliettiAndata = this.bigliettiAndataOriginari.filter(volo=> volo.prezzo>100 && volo.prezzo<=300);
+        this.bigliettiRitorno = this.bigliettiRitornoOriginari.filter(volo=> volo.prezzo>100 && volo.prezzo<=300);
+        break;
+
+      case 'premium':
+        this.bigliettiAndata = this.bigliettiAndataOriginari.filter(volo=> volo.prezzo > 300);
+        this.bigliettiRitorno = this.bigliettiRitornoOriginari.filter(volo=> volo.prezzo > 300);
+        break;
+      
+      default:
+        this.bigliettiAndata = this.bigliettiAndataOriginari;
+        this.bigliettiRitorno = this.bigliettiRitornoOriginari;
+        break;
+    }
+
+    console.log('Biglietti di andata filtrati: ', this.bigliettiAndata);
+    console.log('Biglietti di ritorno filtrati:', this.bigliettiRitorno);
+  }
+  
 
 
 
@@ -162,46 +175,46 @@ export class Tab2Page implements OnInit {
   }
 
   // Applica i filtri ai biglietti
-  applicaFiltri() {
-    // Filtra per prezzo
-    this.bigliettiAndataFiltrati = this.bigliettiAndata.filter(volo => {
-      // Filtro per compagnia/aeroporto (usando partenza invece di compagniaAerea)
-      if (this.filtroCompagnia !== 'tutte' && volo.partenza !== this.filtroCompagnia) {
-        return false;
-      }
+  // applicaFiltri() {
+  //   // Filtra per prezzo
+  //   this.bigliettiAndataFiltrati = this.bigliettiAndata.filter(volo => {
+  //     // Filtro per compagnia/aeroporto (usando partenza invece di compagniaAerea)
+  //     if (this.filtroCompagnia !== 'tutte' && volo.partenza !== this.filtroCompagnia) {
+  //       return false;
+  //     }
 
-      // Filtro per range di prezzo
-      if (this.filtroPrezzo === 'economici') {
-        return volo.prezzo <= 100;
-      } else if (this.filtroPrezzo === 'medi') {
-        return volo.prezzo > 100 && volo.prezzo <= 300;
-      } else if (this.filtroPrezzo === 'premium') {
-        return volo.prezzo > 300;
-      }
+  //     // Filtro per range di prezzo
+  //     if (this.filtroPrezzo === 'economici') {
+  //       return volo.prezzo <= 100;
+  //     } else if (this.filtroPrezzo === 'medi') {
+  //       return volo.prezzo > 100 && volo.prezzo <= 300;
+  //     } else if (this.filtroPrezzo === 'premium') {
+  //       return volo.prezzo > 300;
+  //     }
 
-      return true; // Se filtroPrezzo è "tutti"
-    });
+  //     return true; // Se filtroPrezzo è "tutti"
+  //   });
 
-    this.bigliettiRitornoFiltrati = this.bigliettiRitorno.filter(volo => {
-      // Filtro per compagnia/aeroporto
-      if (this.filtroCompagnia !== 'tutte' && volo.partenza !== this.filtroCompagnia) {
-        return false;
-      }
+  //   this.bigliettiRitornoFiltrati = this.bigliettiRitorno.filter(volo => {
+  //     // Filtro per compagnia/aeroporto
+  //     if (this.filtroCompagnia !== 'tutte' && volo.partenza !== this.filtroCompagnia) {
+  //       return false;
+  //     }
 
-      // Filtro per range di prezzo
-      if (this.filtroPrezzo === 'economici') {
-        return volo.prezzo <= 100;
-      } else if (this.filtroPrezzo === 'medi') {
-        return volo.prezzo > 100 && volo.prezzo <= 300;
-      } else if (this.filtroPrezzo === 'premium') {
-        return volo.prezzo > 300;
-      }
+  //     // Filtro per range di prezzo
+  //     if (this.filtroPrezzo === 'economici') {
+  //       return volo.prezzo <= 100;
+  //     } else if (this.filtroPrezzo === 'medi') {
+  //       return volo.prezzo > 100 && volo.prezzo <= 300;
+  //     } else if (this.filtroPrezzo === 'premium') {
+  //       return volo.prezzo > 300;
+  //     }
 
-      return true; // Se filtroPrezzo è "tutti"
-    });
+  //     return true; // Se filtroPrezzo è "tutti"
+  //   });
 
-    this.calcolaCombinazioniMigliori();
-  }
+  //   this.calcolaCombinazioniMigliori();
+  // }
 
   // Calcola le combinazioni migliori andata/ritorno
   calcolaCombinazioniMigliori() {

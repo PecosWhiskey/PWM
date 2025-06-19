@@ -6,13 +6,14 @@ import { Volo } from '../models/volo.models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Service } from '../tab1/tab1.service';
+import { RouterModule, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [CommonModule,FormsModule,IonHeader,IonToolbar,IonTitle,IonContent,ExploreContainerComponent,IonTabs,IonTabBar,IonTabButton,
+  imports: [RouterModule, RouterLink, CommonModule,FormsModule,IonHeader,IonToolbar,IonTitle,IonContent,ExploreContainerComponent,IonTabs,IonTabBar,IonTabButton,
     IonIcon,IonLabel,IonButton,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonList,IonItem,IonSelect,IonSelectOption,IonChip,IonBadge,],
 })
 export class Tab2Page implements OnInit {

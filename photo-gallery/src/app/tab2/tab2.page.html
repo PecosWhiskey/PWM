@@ -37,6 +37,16 @@
             <ion-select-option value="premium">Premium (> 300€)</ion-select-option>
           </ion-select>
         </ion-item>
+
+        <ion-item>
+          <ion-label>Città di partenza</ion-label>
+          <ion-select [(ngModel)]="filtroCompagnia" (ionChange)="applicaFiltri()">
+            <ion-select-option value="tutte">Tutte le città</ion-select-option>
+            <ion-select-option *ngFor="let compagnia of compagnieDisponibili" [value]="compagnia">
+              {{ compagnia }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-card-content>
     </ion-card>   
 
@@ -103,34 +113,6 @@
         <p>Errore interno del server!</p>
       }
     }    
-  
-
-    <ion-card class="filters-card">
-      <ion-card-header>
-        <ion-card-title>Filtri avanzati</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-label>Fascia di prezzo</ion-label>
-          <ion-select [(ngModel)]="filtroPrezzo" (ionChange)="applicaFiltri()">
-            <ion-select-option value="tutti">Tutti i prezzi</ion-select-option>
-            <ion-select-option value="economici">Economici (≤ 100€)</ion-select-option>
-            <ion-select-option value="medi">Medi (101€-300€)</ion-select-option>
-            <ion-select-option value="premium">Premium (> 300€)</ion-select-option>
-          </ion-select>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Città di partenza</ion-label>
-          <ion-select [(ngModel)]="filtroCompagnia" (ionChange)="applicaFiltri()">
-            <ion-select-option value="tutte">Tutte le città</ion-select-option>
-            <ion-select-option *ngFor="let compagnia of compagnieDisponibili" [value]="compagnia">
-              {{ compagnia }}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
 
    Combinazioni migliori 
    <ion-card class="results-card">

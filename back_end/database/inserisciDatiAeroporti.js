@@ -132,4 +132,4 @@ async function visualizzaVoli(){
 
 // visualizzaPosizione();
 // visualizzaAeroporto();
-// visualizzaVoli();
+visualizzaVoli();

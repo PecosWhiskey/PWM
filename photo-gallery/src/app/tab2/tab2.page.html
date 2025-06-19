@@ -9,8 +9,9 @@
 
 
 <ion-content [fullscreen]="true">
-  <div *ngIf="ricercaInfo.partenza">
-    <ion-card>
+  <div *ngIf="ricercaInfo.partenza" class="results-content">
+    <ion-card class="search-info-card">
+
       <ion-card-header>
         <ion-card-title>Dettagli ricerca</ion-card-title>
       </ion-card-header>
@@ -22,7 +23,7 @@
       </ion-card-content>
     </ion-card>
     
-    <ion-card>
+    <ion-card class="filters-card">
       <ion-card-header>
         <ion-card-title>Filtri avanzati</ion-card-title>
       </ion-card-header>
@@ -103,8 +104,8 @@
       }
     }    
   
-<!--
-    <ion-card>
+
+    <ion-card class="filters-card">
       <ion-card-header>
         <ion-card-title>Filtri avanzati</ion-card-title>
       </ion-card-header>
@@ -118,8 +119,7 @@
             <ion-select-option value="premium">Premium (> 300€)</ion-select-option>
           </ion-select>
         </ion-item>
--->        
-<!--
+
         <ion-item>
           <ion-label>Città di partenza</ion-label>
           <ion-select [(ngModel)]="filtroCompagnia" (ionChange)="applicaFiltri()">
@@ -131,9 +131,9 @@
         </ion-item>
       </ion-card-content>
     </ion-card>
--->
-    <!-- Combinazioni migliori 
-    <ion-card>
+
+   Combinazioni migliori 
+   <ion-card class="results-card">
       <ion-card-header>
         <ion-card-title>Le migliori combinazioni</ion-card-title>
       </ion-card-header>
@@ -162,16 +162,16 @@
                   <p>Partenza: {{ formattaData(combo.ritorno.oraPartenza) }} - {{ formattaOra(combo.ritorno.oraPartenza) }}</p>
                   <p>Prezzo: {{ combo.ritorno.prezzo }}€</p>
                 </div>
-                <ion-button expand="full" color="primary">Seleziona questa offerta</ion-button>
+                <ion-button expand="full" class="select-offer-btn">Seleziona questa offerta</ion-button>
               </ion-card-content>
             </ion-card>
           </ion-item>
         </ion-list>
       </ion-card-content>
     </ion-card>
-    -->    
+
   </div>
-<!--
+
   <div *ngIf="!ricercaInfo.partenza" class="empty-state">
     <ion-card>
       <ion-card-header>
@@ -183,5 +183,5 @@
       </ion-card-content>
     </ion-card>    
   </div>
--->  
+
 </ion-content>

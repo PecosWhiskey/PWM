@@ -30,15 +30,17 @@ ion-header {
     box-shadow: 0 2px 8px var(--vaygo-shadow);
     border-bottom: 1px solid var(--vaygo-border);
 
-    ion-toolbar {
-      --background: transparent;
-      --color: var(--vaygo-text-primary);
-      padding: 0 20px;
+      ion-toolbar {
+        --background: transparent;
+        --color: var(--vaygo-text-primary);
+        padding: 0 20px;
 
-      ion-title {
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--vaygo-primary);
+          ion-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--vaygo-primary);
+          }
+        }
       }
     }
   }
@@ -494,7 +496,5 @@ ion-list {
   @keyframes loading {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
-      }
-    }
   }
 }

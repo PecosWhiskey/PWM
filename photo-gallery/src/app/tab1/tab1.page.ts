@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,IonIcon,IonLabel,IonButton,
   IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, IonPopover, IonDatetime, IonCardHeader, IonCardTitle} from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+// import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tab1Service } from './tab1.service';
 import { Volo } from '../models/volo.models';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ import { SessionStorageService } from '../services/session-storage.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [RouterLink, RouterModule, IonHeader,IonToolbar,IonTitle,IonContent,ExploreContainerComponent,IonTabs,IonTabBar,IonTabButton,
+  imports: [RouterLink, RouterModule, IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,
     IonIcon,IonLabel,IonButton,IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, FormsModule, IonDatetime, IonPopover, IonCardHeader, IonCardTitle],
 })
 export class Tab1Page {
@@ -53,8 +53,6 @@ export class Tab1Page {
       destinazione : this.destinazione,
       oraPartenza : this.dataPartenza
     }
-    //Memorizza temporaneamente nel session storage i dati del volo di partenza 
-    this.sessionStorageService.setItem('datiVoloPartenza', datiVoloPartenza);
     //Oggetto con le informazioni sulla ricerca da mostrare nel tab2
     const ricercaInfo = {
       partenza : this.partenza,
@@ -72,8 +70,12 @@ export class Tab1Page {
         this.cercaVoloEsito= response.message;
         this.trovati = true;
         this.tab1Service.setVoliTrovatiAndata(this.trovati);
+        //Memorizza temporaneamente il risultato della ricerca dei voli di andata
+        this.sessionStorageService.setItem('voliAndataTrovati', this.trovati);
         this.bigliettiAndata = response.data;
         this.tab1Service.setBigliettiAndata(this.bigliettiAndata);
+        //Memorizza temporaneamente i biglietti di andata trovati nel Session Storage
+        this.sessionStorageService.setItem('bigliettiAndata', this.bigliettiAndata);
        },
        error: (err) => {
         console.log('Search error:', err);
@@ -93,39 +95,24 @@ export class Tab1Page {
             this.cercaVoloEsito= response.message;
             this.trovati = true;
             this.tab1Service.setVoliTrovatiRitorno(this.trovati);
+            //Memorizza temporaneamente il risultato della ricerca dei voli di ritorno
+            this.sessionStorageService.setItem('voliRitornoTrovati', this.trovati);
             this.bigliettiRitorno = response.data;
             this.tab1Service.setBigliettiRitorno(this.bigliettiRitorno);
+            //Memorizza temporaneamente i biglietti di ritorno trovati nel Session Storage
+            this.sessionStorageService.setItem('bigliettiRitorno', this.bigliettiRitorno);
           },
           error: (err) => {
             console.log('Search error:', err);
             this.cercaVoloEsito = err.error.message;
           },
         }); 
-      }
-      //Ricerca dei voli per la data di ritorno
-    //   const datiVoloRitorno = {
-    //   partenza: this.destinazione,
-    //   destinazione : this.partenza,
-    //   oraPartenza : this.dataRitorno
-    // }
-    //   this.tab1Service.CercaVolo(datiVoloRitorno).subscribe({ 
-    //     next: (response) => {
-    //     console.log('Search success:', response);
-    //     this.cercaVoloEsito= response.message;
-    //     this.trovati = true;
-    //     this.tab1Service.setVoliTrovatiRitorno(this.trovati);
-    //     this.bigliettiRitorno = response.data;
-    //     this.tab1Service.setBigliettiRitorno(this.bigliettiRitorno);
-    //    },
-    //    error: (err) => {
-    //     console.log('Search error:', err);
-    //     this.cercaVoloEsito = err.error.message;
-    //    },
-    //   }); 
+      } 
   }
 
   onClick(){
     console.log("Click su ", this.scelta);
     this.tab1Service.setSceltaUtente(this.scelta);
+    this.sessionStorageService.setItem('sceltaUtente', this.scelta);
   }
 }

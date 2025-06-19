@@ -11,7 +11,7 @@ export class SessionStorageService {
     sessionStorage.setItem(key, JSON.stringify(value));
   }
 
-  getItem(key: string): string | null{
+  getItem(key: string): any{
     const data = sessionStorage.getItem(key);
     return data ? JSON.parse(data) : null;
   }

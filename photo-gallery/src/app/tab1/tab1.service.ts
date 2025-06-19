@@ -73,44 +73,4 @@ export class Tab1Service {
   getSceltaUtente(): Observable<string>{
     return this.sceltaUtente.asObservable();
   }
-
-  // setRicercaInfo(datiRicerca : {partenza: string, destinazione: string, dataPartenza: string, dataRitorno: string}){
-  //   this.ricercaInfo = datiRicerca;
-  // }
-
-  // getRicercaInfo(){
-  //   return this.ricercaInfo;
-  // }
-
-  // setFoundedAndata(founded: boolean){
-  //   this.voliTrovatiAndata = founded;
-  // }
-
-  // getFoundedAndata(): boolean{
-  //   return this.voliTrovatiAndata;
-  // }
-
-  // setFoundedRitorno(founded: boolean){
-  //   this.voliTrovatiRitorno = founded;
-  // }
-
-  // getFoundedRitorno(): boolean{
-  //   return this.voliTrovatiRitorno;
-  // }
-
-  // setBigliettiAndata(biglietti: Volo[]){
-  //   this.bigliettiAndata = biglietti;
-  // }
-
-  // getBigliettiAndata(): Volo[]{
-  //   return this.bigliettiAndata;
-  // }
-
-  // setBigliettiRitorno(biglietti: Volo[]){
-  //   this.bigliettiRitorno = biglietti;
-  // }
-
-  // getBigliettiRitorno(): Volo[]{
-  //   return this.bigliettiRitorno;
-  // }
 }

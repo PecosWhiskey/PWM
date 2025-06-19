@@ -57,9 +57,10 @@
         <p>Non sono disponibili voli per queste città</p>
       }@else{
         @for(biglietto of bigliettiAndata; track $index; let i=$index){
-            <ion-card>
+            <ion-card class="results-card">
               <ion-card-header>
                 <ion-card-title>{{ricercaInfo.partenza}}    {{ricercaInfo.destinazione}}</ion-card-title>
+                <span *ngIf="biglietto.postiDisponibili <= 5" >Ultimi posti disponibili</span>
               </ion-card-header>
               <ion-card-content>
                 <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
@@ -78,9 +79,10 @@
         @if((bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
           @if(bigliettiAndata.length>0){
             @for(biglietto of bigliettiAndata; track $index; let i=$index){
-              <ion-card>
+              <ion-card class="results-card">
                 <ion-card-header>
                   <ion-card-title>{{ricercaInfo.partenza}}    {{ricercaInfo.destinazione}}</ion-card-title>
+                  <span *ngIf="biglietto.postiDisponibili <= 5" >Ultimi posti disponibili</span>
                 </ion-card-header>
                 <ion-card-content>
                   <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
@@ -94,9 +96,10 @@
           }
           @if(bigliettiRitorno.length>0){
             @for(biglietto of bigliettiRitorno; track $index; let i=$index){
-              <ion-card>
+              <ion-card class="results-card">
                 <ion-card-header>
                   <ion-card-title>{{ricercaInfo.destinazione}}    {{ricercaInfo.partenza}}</ion-card-title>
+                  <span *ngIf="biglietto.postiDisponibili <= 5" >Ultimi posti disponibili</span>
                 </ion-card-header>
                 <ion-card-content>
                   <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>

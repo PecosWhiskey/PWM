@@ -6,6 +6,7 @@ import { Volo } from '../models/volo.models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Service } from '../tab1/tab1.service';
+import { SessionStorageService } from '../services/session-storage.service';
 import { RouterModule, RouterLink } from '@angular/router';
 
 @Component({
@@ -18,7 +19,7 @@ import { RouterModule, RouterLink } from '@angular/router';
 })
 export class Tab2Page implements OnInit {
 
-  constructor(private tab1Service: Tab1Service) {}
+  constructor(private tab1Service: Tab1Service, private sessionStorageService: SessionStorageService) {}
 
   //Valori che cambiano in base ai risultati della ricerca effettuata nel tab1
   voliTrovatiAndata = false; 
@@ -79,6 +80,38 @@ export class Tab2Page implements OnInit {
     this.tab1Service.getSceltaUtente().subscribe(scelta => {
       this.sceltaUtente = scelta;
     })
+//RECUPERA I DATI DAL SESSION STORAGE QUANDO LA PAGINA DEL TAB1 VIENE RICARICATA PER MANTENERE I RISULTATI VISIBILI
+    const ricerca = this.sessionStorageService.getItem('ricercaInfo');
+    if(ricerca != null){
+      this.ricercaInfo = ricerca;
+    }
+
+    const bigliettiA = this.sessionStorageService.getItem('bigliettiAndata');
+    if(bigliettiA != null){
+      this.bigliettiAndata = bigliettiA;
+      this.bigliettiAndataOriginari = bigliettiA;
+    }
+
+    const bigliettiR = this.sessionStorageService.getItem('bigliettiRitorno');
+    if(bigliettiR != null){
+      this.bigliettiRitorno = bigliettiR;
+      this.bigliettiRitornoOriginari = bigliettiR;
+    }
+
+    const scelta = this.sessionStorageService.getItem('sceltaUtente');
+    if(scelta != null){
+      this.sceltaUtente = scelta;
+    }
+
+    const voliTrovatiA = this.sessionStorageService.getItem('voliAndataTrovati');
+    if(voliTrovatiA != null){
+      this.voliTrovatiAndata = voliTrovatiA;
+    }
+
+    const voliTrovatiR = this.sessionStorageService.getItem('voliRitornoTrovati');
+    if(voliTrovatiA != null){
+      this.voliTrovatiRitorno = voliTrovatiR;
+    }
   };
 
   applicaFiltri(){

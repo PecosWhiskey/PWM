@@ -21,6 +21,7 @@ const datiVoloValidator = [
   body('oraPartenza').notEmpty().withMessage('orario di partenza obbligatorio'),
   body('oraArrivo').notEmpty().withMessage('orario di arrivo obbligatorio'),
   body('prezzo').notEmpty().withMessage('prezzo obbligatorio'),
+  body('postiDisponibili').notEmpty().withMessage("i numeri di posti sull'aereo devono essere specificati"),
 ]
 
 const idVoloValidator = [

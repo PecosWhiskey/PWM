@@ -83,7 +83,7 @@ class AuthServiceBiglietti {
             const exist = await biglietti.trovaBiglietto(datiBiglietto.idPasseggero, datiBiglietto.idVolo);
 
             if(exist){
-                throw new Error('Biglietto per questo passeggero per questo volo già acquistato!');
+                throw new Error('Biglietto per questo passeggero e per questo volo già acquistato!');
             }
 
             return await biglietti.creaBiglietto(datiBiglietto);

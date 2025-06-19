@@ -30,6 +30,10 @@
       <ion-input type="number" name="prezzo" [(ngModel)]="prezzo" placeholder="Prezzo" ngDefaultControl required></ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-input type="number" name="posti disponibili" [(ngModel)]="postiDisponibili" placeholder="numero di posti sull'aereo" ngDefaultControl required></ion-input>
+    </ion-item>
+
     <ion-button type="submit" [disabled]="!userForm.valid" (click)="CreaVolo()">Crea Volo</ion-button>
     <ion-button type="submit" [disabled]="!userForm.valid" (click)="ModificaVolo()">Modifica Volo</ion-button>
 

@@ -11,12 +11,12 @@ export class GestioneVoliService {
 
   constructor(private http: HttpClient) {}
 
-  Crea(credentials: { idVolo: string, partenza: string, destinazione: string, oraPartenza: string, oraArrivo: string, prezzo: number}): Observable<any> {
+  Crea(credentials: { idVolo: string, partenza: string, destinazione: string, oraPartenza: string, oraArrivo: string, prezzo: number, postiDisponibili: number}): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/creazione-volo`, credentials);
 
   }
 
-  Modifica(credentials: { idVolo: string, partenza: string, destinazione: string, oraPartenza: string, oraArrivo: string, prezzo: number}): Observable<any> {
+  Modifica(credentials: { idVolo: string, partenza: string, destinazione: string, oraPartenza: string, oraArrivo: string, prezzo: number, postiDisponibili: number}): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/modifica-volo`, credentials);
   }
 }

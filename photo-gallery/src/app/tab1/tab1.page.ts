@@ -6,7 +6,7 @@ import { Tab1Service } from './tab1.service';
 import { Volo } from '../models/volo.models';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, RouterLink } from '@angular/router';
-// import { forkJoin } from 'rxjs';
+import { SessionStorageService } from '../services/session-storage.service';
 
 @Component({
   selector: 'app-tab1',
@@ -17,7 +17,7 @@ import { RouterModule, RouterLink } from '@angular/router';
     IonIcon,IonLabel,IonButton,IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, FormsModule, IonDatetime, IonPopover, IonCardHeader, IonCardTitle],
 })
 export class Tab1Page {
-  constructor(private tab1Service: Tab1Service){}
+  constructor(private tab1Service: Tab1Service, private sessionStorageService: SessionStorageService){}
 
   partenza = ''; //città di partenza
   destinazione = ''; //città di destinazione
@@ -53,6 +53,8 @@ export class Tab1Page {
       destinazione : this.destinazione,
       oraPartenza : this.dataPartenza
     }
+    //Memorizza temporaneamente nel session storage i dati del volo di partenza 
+    this.sessionStorageService.setItem('datiVoloPartenza', datiVoloPartenza);
     //Oggetto con le informazioni sulla ricerca da mostrare nel tab2
     const ricercaInfo = {
       partenza : this.partenza,
@@ -60,6 +62,8 @@ export class Tab1Page {
       dataPartenza : this.dataPartenza,
       dataRitorno : this.dataRitorno
     }
+    //Memorizza le informa
+    this.sessionStorageService.setItem('ricercaInfo', ricercaInfo);
     this.tab1Service.setRicercaInfo(ricercaInfo);
     //Ricerca dei voli per la data di partenza
     this.tab1Service.CercaVolo(datiVoloPartenza).subscribe({ 
@@ -76,7 +80,7 @@ export class Tab1Page {
         this.cercaVoloEsito = err.error.message;
        },
       }); 
-      //Se la scelta è stata andata e ritorno oppure nessuna scelta allora vengono cercati anche i voli di andata e ritorno
+      //Se la scelta è stata andata e ritorno oppure nessuna scelta allora vengono cercati anche i voli di ritorno
       if(this.scelta == 'roundtrip' || this.scelta == 'nessun selezionato'){
         const datiVoloRitorno = {
           partenza: this.destinazione,

@@ -35,10 +35,11 @@ const db = new sqlite3.Database("database\\dbBiglietti.sqlite", (err) => {
         oraPartenza TEXT NOT NULL,
         oraArrivo TEXT NOT NULL,
         prezzo REAL NOT NULL, 
+        postiDisponibili INTEGER NOT NULL,
         FOREIGN KEY (partenza) REFERENCES Aeroporto(idAeroporto) ON UPDATE CASCADE ON DELETE NO ACTION
         FOREIGN KEY (destinazione) REFERENCES Aeroporto(idAeroporto) ON UPDATE CASCADE ON DELETE NO ACTION
       )`);
-      //TABELLA CLIENTI
+      //TABELLA CLIENTI CHE HANNO UN ACCOUNT
       db.run(`CREATE TABLE IF NOT EXISTS Cliente(
         idCliente TEXT PRIMARY KEY NOT NULL,
         nome TEXT NOT NULL,
@@ -55,7 +56,7 @@ const db = new sqlite3.Database("database\\dbBiglietti.sqlite", (err) => {
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL UNIQUE
       )`);
-      //TABELLA PASSEGGERI
+      //TABELLA PASSEGGERI CHE INCLUDE COLORO CHE HANNO ACQUISTATO UN BIGLIETTO MA NON HANNO NECESSARIAMENTE UN ACCOUNT
       db.run(`CREATE TABLE IF NOT EXISTS Passeggero(
         idPasseggero TEXT PRIMARY KEY NOT NULL,
         nome TEXT NOT NULL,
@@ -69,7 +70,6 @@ const db = new sqlite3.Database("database\\dbBiglietti.sqlite", (err) => {
         idVolo TEXT NOT NULL,
         idCliente TEXT NOT NULL,
         idPasseggero TEXT NOT NULL,
-        numeroPosto TEXT NOT NULL,
         tariffa TEXT,
         dataAcquisto TEXT,
         FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente),

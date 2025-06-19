@@ -3,31 +3,31 @@ const bcrypt = require('bcryptjs');
 
 class Biglietti {
 
-    static async creaVolo({idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo}){
-        console.log('creaVolo: ',idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo);
+    static async creaVolo({idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo, postiDisponibili}){
+        console.log('creaVolo: ',idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo, postiDisponibili);
         return new Promise((resolve,reject)=>{
-            db.run(`INSERT INTO Volo (idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo) VALUES (?,?,?,?,?,?)`, 
-                [idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo],
+            db.run(`INSERT INTO Volo (idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo, postiDisponibili) VALUES (?,?,?,?,?,?,?)`, 
+                [idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo, postiDisponibili],
                 function (err){
                     if(err){
                         reject(err);
                         return;
                     }
-                    resolve({idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo});
+                    resolve({idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo, postiDisponibili});
                 }
             );
         });
     }
 
-    static async modificaVolo({idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo}){
+    static async modificaVolo({idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo, postiDisponibili}){
             return new Promise((resolve,reject)=>{
-                db.run('UPDATE Volo SET partenza=?, destinazione=?, oraPartenza=?, oraArrivo=?, prezzo=? WHERE idVolo = ?', 
-                    [partenza, destinazione, oraPartenza, oraArrivo, prezzo, idVolo], function(err){
+                db.run('UPDATE Volo SET partenza=?, destinazione=?, oraPartenza=?, oraArrivo=?, prezzo=?, postiDisponibili=? WHERE idVolo = ?', 
+                    [partenza, destinazione, oraPartenza, oraArrivo, prezzo, postiDisponibili, idVolo], function(err){
                         if(err){
                             reject(err);
                             return;
                         }
-                        resolve({idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo});
+                        resolve({idVolo, partenza, destinazione, oraPartenza, oraArrivo, prezzo, postiDisponibili});
                     });
             });
     }
@@ -50,7 +50,7 @@ class Biglietti {
         const oraInizio = oraPartenza + " 00:00:00";
         const oraFine = oraPartenza + " 23:59:59";
         return new Promise((resolve,reject)=>{
-            db.all(`SELECT * FROM Volo WHERE oraPartenza>=? AND oraPartenza<=? AND partenza IN 
+            db.all(`SELECT * FROM Volo WHERE postiDisponibili > 0 AND oraPartenza>=? AND oraPartenza<=? AND partenza IN 
                 (SELECT idAeroporto FROM Aeroporto WHERE idPosizione IN (
                 SELECT idPosizione FROM Posizione WHERE citta = ?)) AND destinazione IN (
                 SELECT idAeroporto FROM Aeroporto WHERE idPosizione IN(
@@ -173,17 +173,17 @@ class Biglietti {
         });
     }
 
-    static async creaBiglietto({idVolo, idCliente, idPasseggero, numeroPosto, tariffa, dataAcquisto}){
-        console.log('creaBiglietto: ',idVolo, idCliente, idPasseggero, numeroPosto, tariffa, dataAcquisto);
+    static async creaBiglietto({idVolo, idCliente, idPasseggero, tariffa, dataAcquisto}){
+        console.log('creaBiglietto: ',idVolo, idCliente, idPasseggero, tariffa, dataAcquisto);
         return new Promise((resolve,reject)=>{
-            db.run(`INSERT INTO Biglietto (idVolo, idCliente, idPasseggero, numeroPosto, tariffa, dataAcquisto) VALUES (?,?,?,?,?,?)`, 
-                [idVolo, idCliente, idPasseggero, numeroPosto, tariffa, dataAcquisto],
+            db.run(`INSERT INTO Biglietto (idVolo, idCliente, idPasseggero, tariffa, dataAcquisto) VALUES (?,?,?,?,?)`, 
+                [idVolo, idCliente, idPasseggero, tariffa, dataAcquisto],
                 function (err){
                     if(err){
                         reject(err);
                         return;
                     }
-                    resolve({idBiglietto:this.lastID, idVolo, idCliente, idPasseggero, numeroPosto, tariffa, dataAcquisto});
+                    resolve({idBiglietto:this.lastID, idVolo, idCliente, idPasseggero, tariffa, dataAcquisto});
                 }
             );
         });

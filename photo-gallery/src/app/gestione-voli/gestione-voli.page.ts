@@ -22,6 +22,7 @@ export class GestioneVoliPage{
   oraPartenza = '';
   oraArrivo = '';
   prezzo = 0.0;
+  postiDisponibili = 0;
   creaVoloEsito = '';
 
   formattaData(dataRicevuta:string, ora:string){
@@ -43,7 +44,8 @@ export class GestioneVoliPage{
       destinazione: this.destinazione,
       oraPartenza: oraP,
       oraArrivo: oraA,
-      prezzo: this.prezzo
+      prezzo: this.prezzo,
+      postiDisponibili: this.postiDisponibili
     }
     this.gestioneVoliService.Crea(datiVolo).subscribe({
         next: (response) => {
@@ -66,15 +68,16 @@ export class GestioneVoliPage{
       destinazione: this.destinazione,
       oraPartenza: oraP,
       oraArrivo: oraA,
-      prezzo: this.prezzo
+      prezzo: this.prezzo,
+      postiDisponibili: this.postiDisponibili
     }
     this.gestioneVoliService.Modifica(datiVolo).subscribe({
         next: (response) => {
-        console.log('Creation success:', response);
+        console.log('Modification success:', response);
         this.creaVoloEsito= response.message;
        },
        error: (err) => {
-        console.log('Creation error:', err);
+        console.log('Modification error:', err);
         console.log('Impossibile modificare il volo, perché assente nel database!');
         this.creaVoloEsito = err.error.message;
        },

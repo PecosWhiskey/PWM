@@ -21,7 +21,8 @@ ion-content {
   --background: var(--vaygo-background);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
-
+:host {
+  ::ng-deep {
 // Header personalizzato
 ion-header {
   &.custom-header {
@@ -493,5 +494,7 @@ ion-list {
   @keyframes loading {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
+      }
+    }
   }
 }

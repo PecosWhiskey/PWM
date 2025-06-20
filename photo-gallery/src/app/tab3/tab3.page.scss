@@ -1,405 +1,312 @@
-// Tab3 - Profilo Utente VayGo Airlines
-// ===========================================
-
+// Versione semplificata per debug
 .vaygo-content {
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-top: 0;
-    --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+// Container principale
+.logged-in-container,
+.logged-out-container {
+  padding: 20px;
+  min-height: 100%;
+}
+
+// STATO LOGGED IN
+.profile-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  color: white;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+
+  .avatar-icon {
+    font-size: 48px;
+    color: #667eea;
   }
+}
+
+.profile-name {
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.profile-email {
+  color: rgba(255,255,255,0.8);
+  font-size: 16px;
+  margin: 0;
+}
+
+// Statistiche Profilo
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  --background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid #e5e7eb;
+  margin: 0;
+
+  ion-card-content {
+    text-align: center;
+    padding: 16px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+// Menu Profilo
+.profile-menu-card {
+  --background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid #e5e7eb;
+  margin: 0 0 24px 0;
+
+  ion-list {
+    background: transparent;
+    border-radius: 12px;
+  }
+
+  .menu-item {
+    --background: transparent;
+    --border-color: #e5e7eb;
+    --padding-start: 24px;
+    --padding-end: 24px;
+    --min-height: 64px;
+
+    .menu-icon {
+      color: #667eea;
+      font-size: 20px;
+      margin-right: 8px;
+    }
+
+    ion-label {
+      font-weight: 500;
+      color: #374151;
+    }
+
+    .chevron-icon {
+      color: #9ca3af;
+      font-size: 16px;
+    }
+  }
+}
+
+// Sezione Logout
+.logout-section {
+  margin-top: 24px;
+}
+
+.logout-btn {
+  --background: #ef4444;
+  --color: white;
+  --border-radius: 8px;
+  font-weight: 600;
+}
+
+// STATO LOGGED OUT
+.welcome-card {
+  --background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  margin: 0 0 24px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+
+  ion-card-header {
+    text-align: center;
+    padding: 24px;
+  }
+
+  .welcome-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 8px;
+  }
+
+  .welcome-subtitle {
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.login-card {
+  --background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid #e5e7eb;
+  margin: 0 0 24px 0;
+
+  ion-card-header {
+    text-align: center;
+    padding: 24px 24px 16px;
+  }
+
+  .login-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 8px;
+  }
+
+  .login-subtitle {
+    color: #6b7280;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  ion-card-content {
+    padding: 24px;
+  }
+}
+
+// Form di Login
+.vaygo-input {
+  --background: white;
+  --border-color: #e5e7eb;
+  --border-radius: 8px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 56px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 8px 0;
+
+  &.item-has-focus {
+    --border-color: #667eea;
+    border-color: #667eea;
+  }
+
+  &.ion-invalid {
+    --border-color: #ef4444;
+    border-color: #ef4444;
+  }
+
+  ion-input {
+    --color: #374151;
+    --placeholder-color: #9ca3af;
+    font-weight: 500;
+  }
+
+  ion-icon {
+    color: #9ca3af;
+    margin-right: 8px;
+  }
+}
+
+.error-messages {
+  margin: 4px 0 8px 0;
+  padding-left: 16px;
+
+  small {
+    font-size: 12px;
+  }
+}
+
+.login-btn {
+  margin-top: 16px;
   
-  // Container principale
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 24px;
+
+  p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #6b7280;
+  }
+
+  ion-button {
+    --color: #667eea;
+    font-weight: 500;
+    text-transform: none;
+  }
+}
+
+.register-section {
+  margin-top: 24px;
+}
+
+// RESPONSIVE
+@media (max-width: 768px) {
   .logged-in-container,
   .logged-out-container {
-    padding: var(--vaygo-spacing-lg);
-    min-height: 100%;
+    padding: 16px;
   }
   
-  // STATO LOGGED IN
-  // ===========================================
+  .profile-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
   
-  // Header Profilo
   .profile-header {
-    background: var(--vaygo-gradient-primary);
-    border-radius: var(--vaygo-radius-xl);
-    padding: var(--vaygo-spacing-2xl);
-    text-align: center;
-    margin-bottom: var(--vaygo-spacing-xl);
-    box-shadow: 0 8px 32px var(--vaygo-shadow-strong);
-    position: relative;
-    overflow: hidden;
-  
-    // Animazione di sfondo
-    &::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-      animation: profileFloat 6s ease-in-out infinite;
-    }
-  }
-  
-  @keyframes profileFloat {
-    0%, 100% { 
-      transform: translateY(0px) rotate(0deg); 
-    }
-    50% { 
-      transform: translateY(-20px) rotate(180deg); 
-    }
+    padding: 24px;
+    margin-bottom: 16px;
   }
   
   .profile-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: var(--vaygo-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--vaygo-spacing-lg);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 1;
-  
+    width: 100px;
+    height: 100px;
+    
     .avatar-icon {
-      font-size: 48px;
-      color: var(--vaygo-primary);
+      font-size: 40px;
     }
   }
-  
+
   .profile-name {
-    color: var(--vaygo-white);
-    font-size: var(--vaygo-font-size-2xl);
-    font-weight: 700;
-    margin-bottom: var(--vaygo-spacing-sm);
-    position: relative;
-    z-index: 1;
+    font-size: 20px;
   }
-  
-  .profile-email {
-    color: rgba(255,255,255,0.8);
-    font-size: var(--vaygo-font-size-base);
-    position: relative;
-    z-index: 1;
-    margin: 0;
-  }
-  
-  // Statistiche Profilo
-  .profile-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--vaygo-spacing-md);
-    margin-bottom: var(--vaygo-spacing-xl);
-  }
-  
-  .stat-card {
-    --background: var(--vaygo-white);
-    border-radius: var(--vaygo-radius-lg);
-    box-shadow: 0 4px 20px var(--vaygo-shadow);
-    border: 1px solid var(--vaygo-border);
-    transition: all var(--vaygo-transition-base);
-    margin: 0;
-  
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px var(--vaygo-shadow-medium);
-    }
-  
-    ion-card-content {
-      text-align: center;
-      padding: var(--vaygo-spacing-lg);
-    }
-  
-    .stat-value {
-      font-size: var(--vaygo-font-size-xl);
-      font-weight: 700;
-      color: var(--vaygo-primary);
-      margin-bottom: var(--vaygo-spacing-xs);
-      display: block;
-    }
-  
-    .stat-label {
-      font-size: var(--vaygo-font-size-xs);
-      color: var(--vaygo-text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-      margin: 0;
-    }
-  }
-  
-  // Menu Profilo
-  .profile-menu-card {
-    --background: var(--vaygo-white);
-    border-radius: var(--vaygo-radius-lg);
-    box-shadow: 0 4px 20px var(--vaygo-shadow);
-    border: 1px solid var(--vaygo-border);
-    margin: 0 0 var(--vaygo-spacing-xl) 0;
-  
-    ion-list {
-      background: transparent;
-      border-radius: var(--vaygo-radius-lg);
-      overflow: hidden;
-    }
-  
-    .menu-item {
-      --background: transparent;
-      --border-color: var(--vaygo-border);
-      --padding-start: var(--vaygo-spacing-xl);
-      --padding-end: var(--vaygo-spacing-xl);
-      --min-height: 64px;
-      transition: all var(--vaygo-transition-fast);
-  
-      &:hover {
-        --background: var(--vaygo-surface);
-        transform: translateX(4px);
-      }
-  
-      .menu-icon {
-        color: var(--vaygo-primary);
-        font-size: 20px;
-        margin-right: var(--vaygo-spacing-sm);
-      }
-  
-      ion-label {
-        font-weight: 500;
-        color: var(--vaygo-text-primary);
-      }
-  
-      .chevron-icon {
-        color: var(--vaygo-text-muted);
-        font-size: 16px;
-      }
-  
-      ion-badge {
-        margin-right: var(--vaygo-spacing-sm);
-      }
-    }
-  }
-  
-  // Sezione Logout
-  .logout-section {
-    margin-top: var(--vaygo-spacing-xl);
-  }
-  
-  .logout-btn {
-    --background: var(--vaygo-error);
-    --color: var(--vaygo-white);
-    --border-radius: var(--vaygo-radius-md);
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: 0.3px;
-    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
-    transition: all var(--vaygo-transition-base);
-  
-    &:hover {
-      --background: #DC2626;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
-    }
-  }
-  
-  // STATO LOGGED OUT
-  // ===========================================
-  
-  // Card di benvenuto
+
+  .login-card,
   .welcome-card {
-    --background: var(--vaygo-gradient-surface);
-    border-radius: var(--vaygo-radius-lg);
-    border: 1px solid var(--vaygo-border);
-    margin: 0 0 var(--vaygo-spacing-xl) 0;
-  
-    ion-card-header {
-      text-align: center;
-      padding: var(--vaygo-spacing-xl);
-    }
-  
-    .welcome-title {
-      font-size: var(--vaygo-font-size-lg);
-      font-weight: 600;
-      color: var(--vaygo-primary);
-      margin-bottom: var(--vaygo-spacing-sm);
-    }
-  
-    .welcome-subtitle {
-      color: var(--vaygo-text-secondary);
-      font-size: var(--vaygo-font-size-base);
-      line-height: 1.5;
-      margin: 0;
-    }
-  }
-  
-  // Card di Login
-  .login-card {
-    --background: var(--vaygo-white);
-    border-radius: var(--vaygo-radius-lg);
-    box-shadow: 0 4px 20px var(--vaygo-shadow);
-    border: 1px solid var(--vaygo-border);
-    margin: 0 0 var(--vaygo-spacing-xl) 0;
-  
-    ion-card-header {
-      text-align: center;
-      padding: var(--vaygo-spacing-xl) var(--vaygo-spacing-xl) var(--vaygo-spacing-lg);
-    }
-  
-    .login-title {
-      font-size: var(--vaygo-font-size-2xl);
-      font-weight: 700;
-      color: var(--vaygo-primary);
-      margin-bottom: var(--vaygo-spacing-sm);
-    }
-  
-    .login-subtitle {
-      color: var(--vaygo-text-secondary);
-      font-size: var(--vaygo-font-size-base);
-      margin: 0;
-    }
-  
+    ion-card-header,
     ion-card-content {
-      padding: var(--vaygo-spacing-xl);
+      padding: 16px;
     }
   }
-  
-  // Form di Login
-  form {
-    .vaygo-input {
-      --background: var(--vaygo-white);
-      --border-color: var(--vaygo-border);
-      --border-radius: var(--vaygo-radius-md);
-      --padding-start: var(--vaygo-spacing-lg);
-      --padding-end: var(--vaygo-spacing-lg);
-      --min-height: 56px;
-      border: 2px solid var(--vaygo-border);
-      border-radius: var(--vaygo-radius-md);
-      margin: var(--vaygo-spacing-sm) 0;
-      transition: all var(--vaygo-transition-fast);
-  
-      &.item-has-focus {
-        --border-color: var(--vaygo-secondary);
-        border-color: var(--vaygo-secondary);
-        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-      }
-  
-      &.ion-invalid {
-        --border-color: var(--vaygo-error);
-        border-color: var(--vaygo-error);
-      }
-  
-      ion-input {
-        --color: var(--vaygo-text-primary);
-        --placeholder-color: var(--vaygo-text-secondary);
-        font-weight: 500;
-      }
-  
-      ion-icon {
-        color: var(--vaygo-text-secondary);
-        margin-right: var(--vaygo-spacing-sm);
-      }
-    }
-  }
-  
-  // Messaggi di errore
-  .error-messages {
-    margin: var(--vaygo-spacing-xs) 0 var(--vaygo-spacing-sm) 0;
-    padding-left: var(--vaygo-spacing-lg);
-  
-    small {
-      font-size: var(--vaygo-font-size-xs);
-    }
-  }
-  
-  // Pulsante Login
-  .login-btn {
-    margin-top: var(--vaygo-spacing-lg);
-    
-    &:disabled {
-      opacity: 0.6;
-    }
-  }
-  
-  // Footer del form
-  .form-footer {
-    text-align: center;
-    margin-top: var(--vaygo-spacing-xl);
-  
-    p {
-      margin: var(--vaygo-spacing-sm) 0;
-      font-size: var(--vaygo-font-size-sm);
-      color: var(--vaygo-text-secondary);
-    }
-  
-    ion-button {
-      --color: var(--vaygo-secondary);
-      font-weight: 500;
-      text-transform: none;
-    }
-  }
-  
-  // Sezione Registrazione
-  .register-section {
-    margin-top: var(--vaygo-spacing-xl);
-  }
-  
-  // RESPONSIVE
-  // ===========================================
-  @media (max-width: 768px) {
-    .logged-in-container,
-    .logged-out-container {
-      padding: var(--vaygo-spacing-md);
-    }
-    
-    .profile-stats {
-      grid-template-columns: 1fr;
-      gap: var(--vaygo-spacing-sm);
-    }
-    
-    .profile-header {
-      padding: var(--vaygo-spacing-xl);
-      margin-bottom: var(--vaygo-spacing-lg);
-    }
-    
-    .profile-avatar {
-      width: 100px;
-      height: 100px;
-      
-      .avatar-icon {
-        font-size: 40px;
-      }
-    }
-  
-    .profile-name {
-      font-size: var(--vaygo-font-size-xl);
-    }
-  
-    .login-card,
-    .welcome-card {
-      ion-card-header,
-      ion-card-content {
-        padding: var(--vaygo-spacing-lg);
-      }
-    }
-  }
-  
-  // Accessibilità
-  // ===========================================
-  @media (prefers-reduced-motion: reduce) {
-    .profile-header::before {
-      animation: none;
-    }
-    
-    .stat-card,
-    .menu-item,
-    .logout-btn {
-      transition: none;
-    }
-  }
-  
-  // Stati di focus
-  ion-button:focus-visible,
-  ion-item:focus-visible {
-    outline: 2px solid var(--vaygo-secondary);
-    outline-offset: 2px;
-  }
+}

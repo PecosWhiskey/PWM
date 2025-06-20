@@ -35,24 +35,24 @@ interface User {
 })
 export class Tab3Page implements OnInit {
   
-  // Stato del login
-  isLoggedIn = false;
+  // Stato del login - CAMBIATO A TRUE PER TESTARE
+  isLoggedIn = true;
   isLoading = false;
   
   // Form di login
   loginForm: FormGroup;
   
-  // Dati utente (verranno caricati dal backend)
+  // Dati utente simulati per il testing
   user: User = {
-    name: '',
-    email: '',
-    flights: 0,
-    miles: '0',
-    status: ''
+    name: 'Mario Rossi',
+    email: 'mario.rossi@email.com',
+    flights: 24,
+    miles: '48.500',
+    status: 'Gold'
   };
   
-  // Contatore notifiche (verrà caricato dal backend)
-  notificationCount = 0;
+  // Contatore notifiche simulato
+  notificationCount = 3;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,15 +72,15 @@ export class Tab3Page implements OnInit {
   }
 
   ngOnInit() {
-    // Controlla se l'utente è già loggato (es. da localStorage se fosse disponibile)
+    // Controlla se l'utente è già loggato
     this.checkLoginStatus();
   }
 
   // Controlla lo stato del login
   checkLoginStatus() {
-    // Qui controllerai il token di autenticazione dal backend
-    // o verificherai se l'utente è già autenticato
-    this.isLoggedIn = false;
+    // Per ora lasciamo isLoggedIn = true per testare la UI
+    // In futuro qui controllerai il token di autenticazione
+    this.isLoggedIn = true;
   }
 
   // Gestione del login
@@ -89,18 +89,24 @@ export class Tab3Page implements OnInit {
       this.isLoading = true;
       
       try {
-        // Qui farai la chiamata al tuo backend per l'autenticazione
         const loginData = {
           email: this.loginForm.get('email')?.value,
           password: this.loginForm.get('password')?.value
         };
         
-        // await this.authService.login(loginData);
-        // Se il login ha successo, carica i dati utente
-        // await this.loadUserData();
-        
-        // Per ora simulo il successo
+        // Simula il login
         await this.simulateLogin();
+        
+        // Carica dati utente simulati
+        this.user = {
+          name: 'Mario Rossi',
+          email: loginData.email,
+          flights: 24,
+          miles: '48.500',
+          status: 'Gold'
+        };
+        this.notificationCount = 3;
+        
         this.isLoggedIn = true;
         this.isLoading = false;
         
@@ -109,14 +115,13 @@ export class Tab3Page implements OnInit {
       } catch (error) {
         this.isLoading = false;
         console.error('Errore durante il login:', error);
-        // Mostra messaggio di errore all'utente
       }
     } else {
       this.loginForm.markAllAsTouched();
     }
   }
 
-  // Simula una chiamata di login (rimuovi quando implementi il backend)
+  // Simula una chiamata di login
   private simulateLogin(): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -128,10 +133,9 @@ export class Tab3Page implements OnInit {
   // Carica i dati utente dal backend
   async loadUserData() {
     try {
+      // Qui in futuro farai la chiamata al backend
       // const userData = await this.userService.getUserData();
       // this.user = userData;
-      // const notifications = await this.notificationService.getUnreadCount();
-      // this.notificationCount = notifications;
     } catch (error) {
       console.error('Errore nel caricamento dei dati utente:', error);
     }
@@ -151,9 +155,6 @@ export class Tab3Page implements OnInit {
       status: ''
     };
     this.notificationCount = 0;
-    
-    // Qui rimuoverai il token di autenticazione dal backend
-    // this.authService.logout();
     
     console.log('Logout effettuato');
   }

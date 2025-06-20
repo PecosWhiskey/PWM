@@ -1,5 +1,5 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   triangle,
@@ -68,7 +68,7 @@ export class TabsPage {
       shield,
       shieldCheckmark,
       bag,
-      bagOutline,
+      bagOutline, 
       card,
       cardOutline,
       search,

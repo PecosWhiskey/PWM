@@ -161,21 +161,64 @@
     }
   }
 
-  .search-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
-    gap: 20px;
+ // Search Header corretto - SOSTITUISCE la sezione esistente
+.search-header {
+  display: flex;
+  justify-content: flex-start; // Cambiato da space-between a flex-start
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-left: 8px; // Aggiunto padding per spostare più a sinistra
 
-    h3 {
-      margin: 0;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--vaygo-text-primary);
+  h3 {
+    margin: 0;
+    font-size: clamp(32px, 4vw, 42px); // Ingrandito e responsivo
+    font-weight: 800; // Più bold per maggiore impatto
+    color: var(--vaygo-primary); // Colore SOLIDO - non trasparente
+    letter-spacing: -0.8px; // Spacing più stretto per un look moderno
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Sottile ombra per profondità
+    position: relative;
+    
+
+    
+    // Animazione hover per interattività
+    transition: all 0.3s ease;
+    cursor: default;
+    
+    &:hover {
+      transform: translateX(4px);
+      letter-spacing: -0.5px;
+      color: var(--vaygo-secondary); // Cambia colore al hover
+    }
+    
+    // Elemento decorativo opzionale
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--vaygo-accent), transparent);
+      border-radius: 2px;
+      opacity: 0.8;
     }
   }
+}
+
+// Versione mobile ottimizzata
+@media (max-width: 768px) {
+  .search-header {
+    padding-left: 4px;
+    margin-bottom: 24px;
+    
+    h3 {
+      font-size: clamp(28px, 6vw, 36px);
+      letter-spacing: -0.6px;
+    }
+  }
+}
 
   .trip-segment {
     --background: var(--vaygo-blue-light);

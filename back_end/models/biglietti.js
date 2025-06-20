@@ -270,10 +270,11 @@ class Biglietti {
           if (err){
             return reject(err);
           }
+          delete row.password; //rimuove la password dal risultato per non inviarla al front-end
           resolve(row);
         });
       }); 
-  }
+    }
 
     //Funzione di ricerca del Cliente utilizzando il suo ID
     static async findByIdCliente(idCliente) {

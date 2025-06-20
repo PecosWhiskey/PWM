@@ -1,4 +1,5 @@
 const bigliettiService = require('../authService/authServiceBiglietti');
+const jwt = require('jsonwebtoken'); //modulo che crea e verifica i token JWT
 
 class AuthControllerBiglietti {
     static async voloCreation(req,res){
@@ -52,8 +53,17 @@ class AuthControllerBiglietti {
     static async loginClient(req,res){
         try{
             const cliente = await bigliettiService.loginCliente(req.body);
+
+            // Creazione del token JWT
+            const token = jwt.sign( 
+                { idCliente: cliente.idCliente, email: cliente.email, role: 'cliente' },
+                process.env.JWT_SECRET,
+                { expiresIn: '24h' } //Imposta la durata del token a 24 ore
+            );
+
             res.status(200).json({
                 success:true,
+                token: token, 
                 data: cliente
             });
         } catch(err){
@@ -67,8 +77,17 @@ class AuthControllerBiglietti {
     static async registerClient(req,res){
         try{
             const cliente = await bigliettiService.registrazioneCliente(req.body);
+
+            //Creazione del token
+            const token = jwt.sign( 
+                { idCliente: cliente.idCliente, email: cliente.email, role:'cliente' },
+                process.env.JWT_SECRET,
+                { expiresIn: '24h' } 
+            );
+
             res.status(201).json({
                 success:true,
+                token: token,
                 data: cliente
             });
         } catch(err){
@@ -95,8 +114,8 @@ class AuthControllerBiglietti {
     }
 
     static async returnTickets(req,res){
-        try{
-            const biglietti = await bigliettiService.returnBiglietti(req.body);
+        try{ //in questo modo è più sicuro che vengano cercati i biglietti del cliente il cui token è stato validato
+            const biglietti = await bigliettiService.returnBiglietti(req.user.idCliente);
 
             res.status(200).json({
                 success:true,

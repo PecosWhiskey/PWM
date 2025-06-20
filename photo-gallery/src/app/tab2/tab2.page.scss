@@ -1,26 +1,66 @@
-// Importa le variabili dal file principale
+// Variabili tema chiaro (default)
 :host {
+  // Colori primari
   --vaygo-primary: #2E8B57;
   --vaygo-secondary: #4A90E2;
   --vaygo-accent: #34D399;
+  
+  // Colori di sfondo chiari
   --vaygo-blue-light: #E0F2FE;
   --vaygo-green-light: #ECFDF5;
-  --vaygo-text-primary: #1F2937;
-  --vaygo-text-secondary: #6B7280;
   --vaygo-background: #FAFAFA;
   --vaygo-white: #FFFFFF;
+  
+  // Colori del testo chiari
+  --vaygo-text-primary: #1F2937;
+  --vaygo-text-secondary: #6B7280;
+  
+  // Effetti e bordi chiari
   --vaygo-shadow: rgba(0, 0, 0, 0.04);
   --vaygo-shadow-medium: rgba(0, 0, 0, 0.08);
   --vaygo-border: rgba(0, 0, 0, 0.06);
+  
+  // Colori di stato
   --vaygo-success: #10B981;
   --vaygo-warning: #F59E0B;
+}
+
+// Variabili tema scuro
+@media (prefers-color-scheme: dark) {
+  :host {
+    // Colori primari adattati per il tema scuro
+    --vaygo-primary: #34D399;
+    --vaygo-secondary: #60A5FA;
+    --vaygo-accent: #2E8B57;
+    
+    // Colori di sfondo scuri
+    --vaygo-blue-light: #1E3A8A;
+    --vaygo-green-light: #064E3B;
+    --vaygo-background: #111827;
+    --vaygo-white: #1F2937;
+    
+    // Colori del testo scuri
+    --vaygo-text-primary: #F9FAFB;
+    --vaygo-text-secondary: #D1D5DB;
+    
+    // Effetti e bordi scuri
+    --vaygo-shadow: rgba(0, 0, 0, 0.3);
+    --vaygo-shadow-medium: rgba(0, 0, 0, 0.5);
+    --vaygo-border: rgba(255, 255, 255, 0.1);
+    
+    // Colori di stato per tema scuro
+    --vaygo-success: #34D399;
+    --vaygo-warning: #FBBF24;
+  }
 }
 
 // Reset e configurazione base
 ion-content {
   --background: var(--vaygo-background);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--vaygo-text-primary);
 }
+
 // Header personalizzato
 ion-header {
   &.custom-header {
@@ -28,19 +68,19 @@ ion-header {
     box-shadow: 0 2px 8px var(--vaygo-shadow);
     border-bottom: 1px solid var(--vaygo-border);
 
-      ion-toolbar {
-        --background: transparent;
-        --color: var(--vaygo-text-primary);
-        padding: 0 20px;
+    ion-toolbar {
+      --background: transparent;
+      --color: var(--vaygo-text-primary);
+      padding: 0 20px;
 
-          ion-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--vaygo-primary);
-          }
-        }
+      ion-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--vaygo-primary);
       }
     }
+  }
+}
 
 // Contenuto principale
 .results-content {
@@ -51,47 +91,6 @@ ion-header {
 
 // Card informazioni ricerca
 .search-info-card {
-  --background: var(--vaygo-white);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px var(--vaygo-shadow);
-  border: 1px solid var(--vaygo-border);
-  margin-bottom: 24px;
-  overflow: hidden;
-
-  ion-card-header {
-    background: linear-gradient(135deg, var(--vaygo-blue-light), var(--vaygo-green-light));
-    padding: 20px 24px 16px;
-
-    ion-card-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--vaygo-text-primary);
-      margin: 0;
-    }
-  }
-
-  ion-card-content {
-    padding: 24px;
-
-    p {
-      margin: 0 0 12px 0;
-      color: var(--vaygo-text-secondary);
-      font-size: 15px;
-      line-height: 1.5;
-
-      strong {
-        color: var(--vaygo-text-primary);
-        font-weight: 600;
-      }
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-}
-
-.results-card {
   --background: var(--vaygo-white);
   border-radius: 16px;
   box-shadow: 0 4px 20px var(--vaygo-shadow);
@@ -166,6 +165,7 @@ ion-header {
     ion-item {
       --background: transparent;
       --border-color: var(--vaygo-border);
+      --color: var(--vaygo-text-primary);
       --padding-start: 24px;
       --padding-end: 24px;
       --min-height: 60px;
@@ -214,20 +214,20 @@ ion-header {
       }
     }
     
-    ion-button{
+    ion-button {
       --background: linear-gradient(135deg, var(--vaygo-primary) 0%, var(--vaygo-secondary) 100%);
-       --color: var(--vaygo-white);
+      --color: var(--vaygo-white);
       --border-radius: 16px;
-    height: 56px;
-    font-weight: 600;
-    font-size: 16px;
-    margin-top: 8px;
-    box-shadow: 0 4px 20px rgba(46, 139, 87, 0.3);
+      height: 56px;
+      font-weight: 600;
+      font-size: 16px;
+      margin-top: 8px;
+      box-shadow: 0 4px 20px rgba(46, 139, 87, 0.3);
 
-    &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 25px rgba(46, 139, 87, 0.4);
-    }
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 25px rgba(46, 139, 87, 0.4);
+      }
     }
   }
 
@@ -290,6 +290,12 @@ ion-header {
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        
+        // Fallback per tema scuro quando background-clip non funziona bene
+        @media (prefers-color-scheme: dark) {
+          -webkit-text-fill-color: var(--vaygo-primary);
+          background: none;
+        }
       }
     }
   }
@@ -323,7 +329,7 @@ ion-header {
     align-items: center;
     gap: 8px;
 
-    &:before {  //per aggiungere un'icona prima dell'h3
+    &:before {
       content: "✈️";
       font-size: 16px;
     }
@@ -344,8 +350,8 @@ ion-header {
   }
 
   // Icona decorativa per andata/ritorno
-  &:first-of-type:after { //:after inserisce un contenuto virtuale alla fine dell'elemento 
-    content: "🛫";  //per il primo elemento del tipo all'interno del genitore
+  &:first-of-type:after {
+    content: "🛫";
     position: absolute;
     top: 16px;
     right: 16px;
@@ -353,7 +359,7 @@ ion-header {
     opacity: 0.7;
   }
 
-  &:last-of-type:after { //stessa cosa per l'ultimo elemento
+  &:last-of-type:after {
     content: "🛬";
     position: absolute;
     top: 16px;
@@ -382,6 +388,15 @@ ion-header {
 
   &:active {
     transform: translateY(0);
+  }
+
+  // Adattamento per tema scuro
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0 4px 16px rgba(52, 211, 153, 0.3);
+
+    &:hover {
+      box-shadow: 0 6px 20px rgba(52, 211, 153, 0.4);
+    }
   }
 }
 
@@ -441,6 +456,7 @@ ion-list {
 
   ion-item {
     --background: transparent;
+    --color: var(--vaygo-text-primary);
     --padding-start: 0;
     --padding-end: 0;
     --border-color: transparent;
@@ -516,24 +532,23 @@ ion-list {
 }
 
 // Animazioni
-//verifica che l'utente non ha attivato l'opzione per ridurre le animazioni
 @media (prefers-reduced-motion: no-preference) {
   .combo-card {
-    animation: slideIn 0.5s ease-out; //durata e tipo di animazione: inizio veloce e fine lenta
+    animation: slideIn 0.5s ease-out;
   }
 
-  @keyframes slideIn { //le card si muovono verso l'alto sfumando da trasparenti a visbili
+  @keyframes slideIn {
     from {
       opacity: 0;
-      transform: translateY(20px); //parte da 20pxpiù in basso
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
-      transform: translateY(0); //torna nella posizione originale
+      transform: translateY(0);
     }
   }
 
-  // Animazione staggered per le cards. Ad ogni card viene aggiunto un ritardo crescente, così che le card appaiano una dopo l'altra
+  // Animazione staggered per le cards
   .combo-card:nth-child(1) { animation-delay: 0.1s; }
   .combo-card:nth-child(2) { animation-delay: 0.2s; }
   .combo-card:nth-child(3) { animation-delay: 0.3s; }
@@ -541,15 +556,19 @@ ion-list {
   .combo-card:nth-child(5) { animation-delay: 0.5s; }
 }
 
-// Utilità per il loading state. Una strisca si muove da desstra verso sinistra per simulare il caricamento
+// Utilità per il loading state
 .loading-skeleton {
-  //linear-gradient crea una sfumatura indicandone la direzione e i colori da quale e verso quale
-  background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.5) 50%, var(--vaygo-background) 75%); //le percentuali indicano dove si fermano i vari colori
+  background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.5) 50%, var(--vaygo-background) 75%);
   background-size: 200% 100%;
-  animation: loading 1.5s infinite; //infinite = in loop
+  animation: loading 1.5s infinite;
+
+  // Adattamento per tema scuro
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.1) 50%, var(--vaygo-background) 75%);
+  }
 
   @keyframes loading {
-    0% { background-position: 200% 0; } //da fuori lo schermo a destra
-    100% { background-position: -200% 0; } //verso fuori lo schermo a sinistra
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 }

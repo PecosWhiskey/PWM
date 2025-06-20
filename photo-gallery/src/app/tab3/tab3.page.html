@@ -1,125 +1,211 @@
-<!-- <ion-header [translucent]="true">
+<ion-header [translucent]="true" class="vaygo-header">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-ciao
-
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
-</ion-content> -->
-
-
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{form}}</ion-title>
+    <ion-title>Profilo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form #accountForm="ngForm">
-    @if(form == 'Registrazione') {
-
-      <ion-item>
-        <ion-label>Codice Fiscale</ion-label>
-        <ion-input type="text" name="CF" [(ngModel)]="idCliente" required></ion-input>
-      </ion-item>
+<ion-content [fullscreen]="true" class="vaygo-content">
+  
+  <!-- Stato LOGGED IN -->
+  <div *ngIf="isLoggedIn" class="logged-in-container">
     
-      <ion-item>
-        <ion-label>Nome</ion-label>
-        <ion-input type="text" name="nome" [(ngModel)]="nome" required></ion-input>
-      </ion-item>
+    <!-- Header Profilo -->
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <ion-icon name="person" class="avatar-icon"></ion-icon>
+      </div>
+      <h2 class="profile-name">{{ user.name }}</h2>
+      <p class="profile-email">{{ user.email }}</p>
+    </div>
 
-      <ion-item>
-        <ion-label>Cognome</ion-label>
-        <ion-input type="text" name="cognome" [(ngModel)]="cognome" required></ion-input>
-      </ion-item>
+    <!-- Statistiche Utente -->
+    <div class="profile-stats">
+      <ion-card class="stat-card">
+        <ion-card-content>
+          <div class="stat-value">{{ user.flights }}</div>
+          <div class="stat-label">Voli</div>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card class="stat-card">
+        <ion-card-content>
+          <div class="stat-value">{{ user.miles }}</div>
+          <div class="stat-label">Miglia</div>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card class="stat-card">
+        <ion-card-content>
+          <div class="stat-value">{{ user.status }}</div>
+          <div class="stat-label">Status</div>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
-      <ion-item>
-        <ion-label>Data di nascita</ion-label>
-        <ion-input type="text" name="data" [(ngModel)]="dataNascita" required></ion-input>
-      </ion-item>
+    <!-- Menu Profilo -->
+    <ion-card class="profile-menu-card">
+      <ion-list lines="full">
+        
+        <ion-item button (click)="navigateToFlights()" class="menu-item">
+          <ion-icon name="airplane" slot="start" class="menu-icon"></ion-icon>
+          <ion-label>I miei voli</ion-label>
+          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
+        </ion-item>
+        
+        <ion-item button (click)="navigateToTickets()" class="menu-item">
+          <ion-icon name="ticket" slot="start" class="menu-icon"></ion-icon>
+          <ion-label>Biglietti</ion-label>
+          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
+        </ion-item>
+        
+        <ion-item button (click)="navigateToLoyalty()" class="menu-item">
+          <ion-icon name="star" slot="start" class="menu-icon"></ion-icon>
+          <ion-label>Programma fedeltà</ion-label>
+          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
+        </ion-item>
+        
+        <ion-item button (click)="navigateToProfile()" class="menu-item">
+          <ion-icon name="person-circle" slot="start" class="menu-icon"></ion-icon>
+          <ion-label>Modifica profilo</ion-label>
+          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
+        </ion-item>
+        
+        <ion-item button (click)="navigateToNotifications()" class="menu-item">
+          <ion-icon name="notifications" slot="start" class="menu-icon"></ion-icon>
+          <ion-label>Notifiche</ion-label>
+          <ion-badge color="danger" *ngIf="notificationCount > 0">{{ notificationCount }}</ion-badge>
+          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
+        </ion-item>
+        
+        <ion-item button (click)="navigateToSettings()" class="menu-item">
+          <ion-icon name="settings" slot="start" class="menu-icon"></ion-icon>
+          <ion-label>Impostazioni</ion-label>
+          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
+        </ion-item>
+        
+        <ion-item button (click)="navigateToSupport()" class="menu-item">
+          <ion-icon name="help-circle" slot="start" class="menu-icon"></ion-icon>
+          <ion-label>Aiuto & Supporto</ion-label>
+          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
+        </ion-item>
+        
+      </ion-list>
+    </ion-card>
 
-      <ion-item>
-        <ion-label>Documento d'identità</ion-label>
-        <ion-input type="text" name="IDdocumento" [(ngModel)]="documentoID" placeholder="Inserire il numero della carta d'identità" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Sesso</ion-label>
-        <ion-select name="sesso" [(ngModel)]="sesso" required>
-          <ion-select-option value="M">Maschio</ion-select-option>
-          <ion-select-option value="F">Femmina</ion-select-option>
-          <ion-select-option value="G">Generico</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Nazionalità</ion-label>
-        <ion-input type="text" name="nazionalità" [(ngModel)]="nazionalita" required></ion-input>
-      </ion-item>    
-
-      <ion-item>
-        <ion-label>Stato</ion-label>
-        <ion-input type="text" name="stato" [(ngModel)]="stato" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Città</ion-label>
-        <ion-input type="text" name="città" [(ngModel)]="citta" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>CAP</ion-label>
-        <ion-input type="text" name="cap" [(ngModel)]="CAP" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Indirizzo</ion-label>
-        <ion-input type="text" name="indirizzo" [(ngModel)]="indirizzo" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Numero Civico</ion-label>
-        <ion-input type="text" name="numCivico" [(ngModel)]="numCivico" required></ion-input>
-      </ion-item>
+    <!-- Pulsante Logout -->
+    <div class="logout-section">
+      <ion-button 
+        expand="block" 
+        class="logout-btn" 
+        color="danger"
+        (click)="logout()">
+        <ion-icon name="log-out" slot="start"></ion-icon>
+        Logout
+      </ion-button>
+    </div>
     
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
-      </ion-item>
+  </div>
 
-      <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
-      </ion-item>
+  <!-- Stato LOGGED OUT -->
+  <div *ngIf="!isLoggedIn" class="logged-out-container">
+    
+    <!-- Messaggio di benvenuto -->
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title class="welcome-title">Benvenuto in VayGo Airlines</ion-card-title>
+        <ion-card-subtitle class="welcome-subtitle">
+          Accedi al tuo account per gestire i tuoi voli, controllare le tue miglia e molto altro.
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
 
-      <ion-button type="submit" [disabled]="!accountForm.valid" (click)="Registrazione()">Registrati</ion-button>
-      <ion-button type="submit" (click)="back()">Torna indietro</ion-button>
+    <!-- Form di Login -->
+    <ion-card class="login-card">
+      <ion-card-header>
+        <ion-card-title class="login-title">Accedi</ion-card-title>
+        <ion-card-subtitle class="login-subtitle">
+          Inserisci le tue credenziali per continuare
+        </ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          
+          <ion-item class="vaygo-input" lines="none">
+            <ion-icon name="mail" slot="start"></ion-icon>
+            <ion-input 
+              type="email" 
+              placeholder="La tua email"
+              formControlName="email"
+              [class.ion-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            </ion-input>
+          </ion-item>
+          
+          <ion-item class="vaygo-input" lines="none">
+            <ion-icon name="lock-closed" slot="start"></ion-icon>
+            <ion-input 
+              type="password" 
+              placeholder="La tua password"
+              formControlName="password"
+              [class.ion-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            </ion-input>
+          </ion-item>
+          
+          <!-- Messaggi di errore -->
+          <div class="error-messages" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <ion-text color="danger">
+              <small>Email non valida</small>
+            </ion-text>
+          </div>
+          
+          <div class="error-messages" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <ion-text color="danger">
+              <small>Password richiesta</small>
+            </ion-text>
+          </div>
+          
+          <ion-button 
+            expand="block" 
+            type="submit" 
+            class="vaygo-btn-primary login-btn"
+            [disabled]="loginForm.invalid || isLoading">
+            <ion-icon name="log-in" slot="start" *ngIf="!isLoading"></ion-icon>
+            <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+            {{ isLoading ? 'Accesso in corso...' : 'Accedi' }}
+          </ion-button>
+          
+        </form>
+        
+        <!-- Footer del form -->
+        <div class="form-footer">
+          <p>
+            Non hai un account? 
+            <ion-button fill="clear" size="small" (click)="navigateToRegister()">
+              Registrati
+            </ion-button>
+          </p>
+          <p>
+            <ion-button fill="clear" size="small" (click)="navigateToForgotPassword()">
+              Password dimenticata?
+            </ion-button>
+          </p>
+        </div>
+        
+      </ion-card-content>
+    </ion-card>
 
-    }@else if (form=='Login') {
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
-      </ion-item>
+    <!-- Registrazione alternativa -->
+    <div class="register-section">
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        class="vaygo-btn-secondary"
+        (click)="navigateToRegister()">
+        <ion-icon name="person-add" slot="start"></ion-icon>
+        Crea nuovo account
+      </ion-button>
+    </div>
+    
+  </div>
 
-      <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
-      </ion-item>
-
-      <ion-button type="submit" [disabled]="!accountForm.valid" (click)="Login()">Accedi</ion-button>
-      <ion-button type="submit" (click)="changeForm()">Registrati</ion-button>
-    }  
-
-  </form>
 </ion-content>

@@ -2,26 +2,22 @@ const express = require('express');
 const router = express.Router();
 const authControllerAdmin = require('../authController/authControllerAdmin');
 const authControllerBiglietti = require('../authController/authControllerBiglietti');
+const verifyToken = require('../../middlewares/verifyToken'); //Middleware per verificare il token JWT
+const onlyAdmin = require('../../middlewares/onlyAdmin');
 const { loginValidatorAdmin, loginValidatorClient, registerValidatorClient, datiVoloValidator, idVoloValidator, 
     creationTicketsValidator, createPassengerValidator, idClienteValidator, validate } = require('../authValidators/authValidators');
 
-// Login
+// Login Admin
 router.post('/login-admin', loginValidatorAdmin, validate, authControllerAdmin.login);
 
-//Registrazione 
-// router.post('/registrazione-admin', registerValidator, validate, authControllerAdmin.register);
-
 //Creazione di un nuovo volo
-router.post('/creazione-volo', datiVoloValidator, validate, authControllerBiglietti.voloCreation);
+router.post('/creazione-volo', datiVoloValidator, validate, verifyToken, onlyAdmin, authControllerBiglietti.voloCreation);
 
 //Modifica di un volo
-router.post('/modifica-volo', idVoloValidator, datiVoloValidator, validate, authControllerBiglietti.voloModification);
+router.post('/modifica-volo', idVoloValidator, datiVoloValidator, validate, verifyToken, onlyAdmin, authControllerBiglietti.voloModification);
 
 //Ricerca voli
 router.post('/ricerca-volo', authControllerBiglietti.voloSearch);
-
-// Verifica autenticazione
-router.post('/verify', authControllerAdmin.verify);
 
 //Login del cliente
 router.post('/login-cliente', loginValidatorClient, validate, authControllerBiglietti.loginClient);
@@ -33,7 +29,7 @@ router.post('/registrazione-cliente', registerValidatorClient, validate, authCon
 router.post('/creazione-biglietto', creationTicketsValidator, validate, authControllerBiglietti.createTicket);
 
 //Ricerca biglietti acquistati dal cliente
-router.post('/ricerca-biglietti', idClienteValidator, validate, authControllerBiglietti.returnTickets);
+router.post('/ricerca-biglietti', idClienteValidator, validate, verifyToken, authControllerBiglietti.returnTickets);
 
 //Creazione passeggero
 router.post('/inserimento-passeggero', createPassengerValidator, validate, authControllerBiglietti.createPassenger);

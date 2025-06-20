@@ -1,10 +1,11 @@
+require('dotenv').config(); //Carica le variabili d'ambiente dal file '.env' globalmente per tutta l'applicazione
 const express = require('express');
 const app = express();
 const authRoutes = require('./auth/authRoutes/authRoutes.js');
 const db = require('./database/dbAdmin');
 
-app.use(express.json());
 
+app.use(express.json());
 
 
 const cors = require('cors');
@@ -34,7 +35,7 @@ app.use((err, req, res, next) => {
 });
 
 // Avvio server
-const PORT = 3000; //process.env.port
+const PORT = process.env.PORT || 3000; 
 app.listen(PORT, () => {
   console.log(`Server in ascolto sulla porta ${PORT}`);
 });

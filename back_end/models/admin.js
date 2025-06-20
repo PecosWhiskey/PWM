@@ -3,21 +3,6 @@ const bcrypt = require('bcryptjs'); //per il confronto delle password
 
 class Admin {
 
-  static async create({username, email, password}){
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password,salt);
-
-    return new Promise((resolve,reject)=>{
-      db.run("INSERT INTO admin (username,email,password) VALUES (?,?,?)", [username,email,hashedPassword], function(err){
-        if(err){
-          reject(err);
-          return;
-        }
-        resolve({id: this.lastID, username, email});
-      })
-    })
-  }
-
 //metodo per trovare un utente in base all'username
   static async findByUsername(username) {
      console.log("findbyusername", username);
@@ -26,6 +11,7 @@ class Admin {
           if (err){
             return reject(err);
           }
+          delete row.password;
           resolve(row);
         });
       }); 

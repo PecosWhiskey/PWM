@@ -63,21 +63,16 @@ ion-content {
 
 // Header personalizzato
 ion-header {
-  &.custom-header {
+  & // Header personalizzato
+  .custom-header {
     --background: var(--vaygo-white);
-    box-shadow: 0 2px 8px var(--vaygo-shadow);
-    border-bottom: 1px solid var(--vaygo-border);
+    --border-color: var(--vaygo-border);
+    box-shadow: 0 1px 3px var(--vaygo-shadow);
 
     ion-toolbar {
       --background: transparent;
       --color: var(--vaygo-text-primary);
       padding: 0 20px;
-
-      ion-title {
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--vaygo-success); // Colore verde
-      }
     }
   }
 }

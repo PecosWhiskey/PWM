@@ -13,6 +13,9 @@ import {
   personCircle, notifications, settings, helpCircle, chevronForward
 } from 'ionicons/icons';
 
+import { TokenService } from '../services/token.service';
+import { AutenticazioneService } from '../services/autenticazione.service';
+
 // Interfaccia per i dati utente
 interface User {
   name: string;
@@ -65,7 +68,9 @@ throw new Error('Method not implemented.');
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService,
+    private autenticazioneService: AutenticazioneService,
   ) {
     // Registrazione delle icone Ionic
     addIcons({
@@ -225,7 +230,7 @@ closeSupportPopup() {
 
 // Rimuovi questi metodi se li avevi:
 // isContactPopupOpen, openContactPopup(), closeContactPopup()
-}
+
 
 /*  import { Component } from '@angular/core';
 import {IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,IonIcon,IonLabel,IonButton,IonCard,
@@ -278,4 +283,124 @@ export class Tab3Page {
   }
 }
 
+Login(){
+     this.accountSerivice.login({email:this.email, password:this.password}).subscribe({ 
+         next: (response) => {
+         console.log('Login success:', response);
+        },
+        error: (err) => {
+         console.log('Login error:', err);
+        },
+     });
+  }
+
 */
+
+ idCliente = ''; //codice fiscale del cliente che prendiamo come id
+  nome = '';
+  cognome = '';
+  dataNascita = '';
+  documentoID = '';
+  sesso = '';
+  nazionalita = '';
+  stato = '';
+  citta= '';
+  CAP = '';
+  indirizzo = '';
+  numCivico = 0;
+  disabile = 0;
+  email = '';
+  password= '';
+
+  isLogged = false;
+
+Login(){
+     this.autenticazioneService.login({email:this.email, password:this.password}).subscribe({ 
+         next: async (response) => {
+         console.log('Login success:', response);
+         if(response.token){
+          try{
+            //Salva il token ricevuto
+            await this.tokenService.setToken(response.token);
+          
+            //Salva le info del cliente contenute nel token
+            const userInfo = this.tokenService.getClientInfoFromToken(response.token);
+            await this.tokenService.setClientInfo(userInfo);
+          
+            console.log('Token e dati del cliente salvati con successo');
+
+            this.isLogged = true;
+
+          }catch(err){
+            console.log("Errore nel salvare i dati");
+            this.isLogged = false;
+          }
+
+         }else{
+          console.log("Nessun token ricevuto");
+          this.isLogged = false;
+         }
+        },
+        error: (err) => {
+         console.log('Login error:', err);
+         this.isLogged = false;
+        },
+     });
+  }
+
+  Registrazione(){
+    //creo l'oggetto che contiene i dati da inviare al server
+    const data= { 
+      idCliente: this.idCliente,
+      nome: this.nome,
+      cognome: this.cognome,
+      dataNascita: this.dataNascita,
+      documentoID: this.documentoID,
+      sesso: this.sesso,
+      nazionalita: this.nazionalita,
+      stato: this.stato,
+      citta: this.citta,
+      CAP: this.CAP,
+      indirizzo: this.indirizzo,
+      numCivico: this.numCivico,
+      email: this.email,
+      password: this.password,
+    }
+
+    this.autenticazioneService.register(data).subscribe({ 
+        next: async (response) => {
+         console.log('Registration success:', response);
+         console.log(response.data.email);
+
+         if(response.token){
+          try{
+            //Salva il token ricevuto
+            await this.tokenService.setToken(response.token);
+          
+            //Salva le info del cliente contenute nel token
+            const userInfo = this.tokenService.getClientInfoFromToken(response.token);
+            await this.tokenService.setClientInfo(userInfo);
+          
+            console.log('Token e dati del cliente salvati con successo');
+
+            this.isLogged = true;
+
+          }catch(err){
+            console.log("Errore nel salvare i dati");
+            this.isLogged = false;
+          }
+
+         }else{
+          console.log("Nessun token ricevuto");
+          this.isLogged = false;
+         }
+        },
+        error: (err) => {
+         console.log('Registration error:', err);
+         this.isLogged = false;
+
+        },
+       })
+  }
+
+}  

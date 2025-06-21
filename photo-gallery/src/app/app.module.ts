@@ -14,13 +14,11 @@ import {
   calendarOutline, calendar, peopleOutline,
   checkmarkCircleOutline, bagOutline, cardOutline,
   shieldCheckmarkOutline, shieldCheckmark, timeOutline, time,
-  heartOutline, heart
+  heartOutline, heart,
 } from 'ionicons/icons';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
-// Altri import necessari per la tua app...
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +27,6 @@ import { AppRoutingModule } from './app-routing.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    // Altri moduli...
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

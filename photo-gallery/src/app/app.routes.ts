@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'gestione-voli',
-    loadComponent: () => import('./gestione-voli/gestione-voli.page').then( m => m.GestioneVoliPage)
+    loadComponent: () => import('./gestione-voli/gestione-voli.page').then( m => m.GestioneVoliPage),
+    canActivate : [authGuard]
   },
 ];

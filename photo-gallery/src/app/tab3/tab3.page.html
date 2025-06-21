@@ -46,12 +46,6 @@
     <ion-card class="profile-menu-card">
       <ion-list lines="full">
         
-        <ion-item button (click)="navigateToFlights()" class="menu-item">
-          <ion-icon name="airplane" slot="start" class="menu-icon"></ion-icon>
-          <ion-label>I miei voli</ion-label>
-          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
-        </ion-item>
-        
         <ion-item button (click)="navigateToTickets()" class="menu-item">
           <ion-icon name="ticket" slot="start" class="menu-icon"></ion-icon>
           <ion-label>Biglietti</ion-label>
@@ -64,12 +58,6 @@
           <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
         </ion-item>
         
-        <ion-item button (click)="navigateToProfile()" class="menu-item">
-          <ion-icon name="person-circle" slot="start" class="menu-icon"></ion-icon>
-          <ion-label>Modifica profilo</ion-label>
-          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
-        </ion-item>
-        
         <ion-item button (click)="navigateToNotifications()" class="menu-item">
           <ion-icon name="notifications" slot="start" class="menu-icon"></ion-icon>
           <ion-label>Notifiche</ion-label>
@@ -77,13 +65,7 @@
           <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
         </ion-item>
         
-        <ion-item button (click)="navigateToSettings()" class="menu-item">
-          <ion-icon name="settings" slot="start" class="menu-icon"></ion-icon>
-          <ion-label>Impostazioni</ion-label>
-          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
-        </ion-item>
-        
-        <ion-item button (click)="navigateToSupport()" class="menu-item">
+        <ion-item button (click)="openSupportPopup()" class="menu-item">
           <ion-icon name="help-circle" slot="start" class="menu-icon"></ion-icon>
           <ion-label>Aiuto & Supporto</ion-label>
           <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
@@ -208,4 +190,47 @@
     
   </div>
 
-</ion-content>
+  <ion-modal [isOpen]="isSupportPopupOpen" (ionModalDidDismiss)="closeSupportPopup()">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Aiuto & Supporto</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeSupportPopup()">Chiudi</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div class="support-info">
+        <ion-card>
+          <ion-card-content>
+            <h3>Contatti</h3>
+            <p>Siamo qui per aiutarti</p>
+            
+            <ion-item lines="none">
+              <ion-icon name="call" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <h4>Telefono</h4>
+                <p>+39 123 456 789</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item lines="none">
+              <ion-icon name="mail" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <h4>Email</h4>
+                <p>support&#64;vaygoairlines.com</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item lines="none">
+              <ion-icon name="time" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <h4>Orari</h4>
+                <p>Lun-Ven: 8:00-20:00<br>Sab-Dom: 9:00-18:00</p>
+              </ion-label>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-content>
+

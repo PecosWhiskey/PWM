@@ -17,16 +17,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         switchMap(([isExpired, token]) => {
           //Se il token è presente verifica prima che non sia scaduto
           if (token) {
-            if(isExpired){ //Se è scaduto reindirizza al login
+            
+            //Se è scaduto reindirizza al login
+            if(isExpired){ 
               console.log('Token scaduto! Reindirizzamento al login');
-              return from(logout(tokenService, router)).pipe(
-                switchMap(() => throwError(() => new Error('Token scaduto'))),
-                catchError(logoutError => {
-                  console.error('Errore durante logout:', logoutError);
-                  // Anche se il logout fallisce, blocca comunque la richiesta
-                  return throwError(() => new Error('Token scaduto'));
-                })
-              );
+              logout(tokenService, router);
+              return throwError(() => new Error('Token scaduto'));
             }
             //Altrimenti lo aggiunge alla richiesta
             let clonedReq = req;

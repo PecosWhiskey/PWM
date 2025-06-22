@@ -22,3 +22,23 @@ async function inserisciAdmin(username, email, password) {
       console.log("Errore nella creazione dell'Admin ", err);
     }
 }
+
+async function visualizzaAdmin(){
+  try{
+    return new Promise((resolve,reject)=>{
+      db.all('SELECT * FROM admin', (err,rows)=>{
+        if(err){
+          reject(err);
+          return;
+        }
+        resolve(rows);
+        console.log(rows);
+      });
+    })
+  }catch(err){
+    console.log("Errore nella visualizzazione degli admin: ", err);
+  }
+}  
+
+//inserisciAdmin("susan", "susan@gmail.com", "susina");
+visualizzaAdmin();

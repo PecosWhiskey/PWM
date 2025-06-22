@@ -6,6 +6,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { importProvidersFrom } from '@angular/core';
 import { IonicStorageModule } from '@ionic/storage-angular';
+// import { provideIonicStorage } from '@ionic/storage-angular';
 
 import { authInterceptor } from './app/interceptors/auth.interceptor';
 import { withInterceptors } from '@angular/common/http';

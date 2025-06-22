@@ -14,7 +14,7 @@ export class AutenticazioneService {
   constructor(private tokenService: TokenService, private http : HttpClient) {}
 
   login(credentials: { email: string, password: string }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/auth/login-cliente`, credentials); 
+    return this.http.post(`${this.baseUrl}/api/auth/login-admin`, credentials); 
     
   } 
 

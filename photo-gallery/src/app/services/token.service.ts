@@ -9,6 +9,7 @@ export class TokenService {
   private storage_: Storage | null = null;
   private TOKEN_KEY = "access token"; //chiave a cui viene associato il token
   private CLIENT_KEY = "client info"; //chiave a cui vengono associate le info del cliente presenti nel payload del token
+  private ADMIN_KEY = "admin info";
 
   constructor(private storage: Storage) {
     this.init();
@@ -37,12 +38,14 @@ export class TokenService {
 
   //Inserimento delle informazioni recuperate dal payload del token nello storage locale
   async setClientInfo(clientInfo: any): Promise<void> {
-    await this.storage_?.set(this.CLIENT_KEY, clientInfo);
+    await this.storage_?.set(this.ADMIN_KEY, clientInfo);
+//    await this.storage_?.set(this.CLIENT_KEY, clientInfo);
   }
 
   //Recupero delle informazione del cliente
   async getClientInfo(): Promise<any> {
-    return await this.storage_?.get(this.CLIENT_KEY) || null;
+      return await this.storage_?.get(this.ADMIN_KEY) || null;
+    // return await this.storage_?.get(this.CLIENT_KEY) || null;
   }
 
   //Verifica se l'utente è loggato

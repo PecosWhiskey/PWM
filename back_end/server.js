@@ -14,8 +14,9 @@ app.use(cors());
 
 app.use(cors({
   origin: 'http://localhost:8100', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Authorization'] //per esporre l'headers al client nelle risposta
 }));
 
 app.use('/api/auth', authRoutes);
@@ -30,6 +31,7 @@ app.get('/admin', (req, res, next) => {
 
 // Intercetta errori del server
 app.use((err, req, res, next) => {
+  console.log("Headers ricevuti: ", req.headers);
   console.error(err.stack);
   res.status(500).json({ success: false, message: 'Errore interno del server' });
 });

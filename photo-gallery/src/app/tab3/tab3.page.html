@@ -85,11 +85,10 @@
     
   </div>
 -->
-  <!-- Stato LOGGED OUT -->
-<!-- <div *ngIf="!isLoggedIn" class="logged-out-container">   -->
+ <div *ngIf="!isLogged" class="logged-out-container">   
     
     <!-- Messaggio di benvenuto -->
- <!--<ion-card class="welcome-card">
+    <ion-card class="welcome-card">
       <ion-card-header>
         <ion-card-title class="welcome-title">Benvenuto in VayGo Airlines</ion-card-title>
         <ion-card-subtitle class="welcome-subtitle">
@@ -97,142 +96,38 @@
         </ion-card-subtitle>
       </ion-card-header>
     </ion-card> 
- <ion-header>
-  <ion-toolbar>
-    <ion-title>{{form}}</ion-title>
-  </ion-toolbar>
-</ion-header>
--->
-<ion-content>
-  <form #accountForm="ngForm">
- <!--   @if(form == 'Registrazione') {
 
-      <ion-item>
-        <ion-label>Codice Fiscale</ion-label>
-        <ion-input type="text" name="CF" [(ngModel)]="idCliente" required></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label>Nome</ion-label>
-        <ion-input type="text" name="nome" [(ngModel)]="nome" required></ion-input>
-      </ion-item>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{form}}</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-      <ion-item>
-        <ion-label>Cognome</ion-label>
-        <ion-input type="text" name="cognome" [(ngModel)]="cognome" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Data di nascita</ion-label>
-        <ion-input type="text" name="data" [(ngModel)]="dataNascita" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Documento d'identità</ion-label>
-        <ion-input type="text" name="IDdocumento" [(ngModel)]="documentoID" placeholder="Inserire il numero della carta d'identità" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Sesso</ion-label>
-        <ion-select name="sesso" [(ngModel)]="sesso" required>
-          <ion-select-option value="M">Maschio</ion-select-option>
-          <ion-select-option value="F">Femmina</ion-select-option>
-          <ion-select-option value="N">Non specificato</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Nazionalità</ion-label>
-        <ion-input type="text" name="nazionalità" [(ngModel)]="nazionalita" required></ion-input>
-      </ion-item>    
-
-      <ion-item>
-        <ion-label>Stato</ion-label>
-        <ion-input type="text" name="stato" [(ngModel)]="stato" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Città</ion-label>
-        <ion-input type="text" name="città" [(ngModel)]="citta" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>CAP</ion-label>
-        <ion-input type="text" name="cap" [(ngModel)]="CAP" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Indirizzo</ion-label>
-        <ion-input type="text" name="indirizzo" [(ngModel)]="indirizzo" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Numero Civico</ion-label>
-        <ion-input type="text" name="numCivico" [(ngModel)]="numCivico" required></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
-      </ion-item>
-
-      <ion-button type="submit" [disabled]="!accountForm.valid" (click)="Registrazione()">Registrati</ion-button>
-
-    }@else if (form=='Login') { -->
-      <ion-item>
-        <ion-label>Username</ion-label>
-        <ion-input type="text" name="username" [(ngModel)]="email" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
-      </ion-item>
-
-      <ion-button type="submit" [disabled]="!accountForm.valid" (click)="Login()">Accedi</ion-button>
-    <!--    }  -->
-
-  </form>
-</ion-content>
+    <ion-content>
+      <form #accountForm="ngForm">
     <!-- Form di Login -->
-<!--    <ion-card class="login-card">
-      <ion-card-header>
-        <ion-card-title class="login-title">Accedi</ion-card-title>
-        <ion-card-subtitle class="login-subtitle">
-          Inserisci le tue credenziali per continuare
-        </ion-card-subtitle>
-      </ion-card-header>
+        @if(form == "Login"){
+          <ion-card class="login-card">
+            <ion-card-header>
+              <ion-card-title class="login-title">Accedi</ion-card-title>
+                <ion-card-subtitle class="login-subtitle">
+                  Inserisci le tue credenziali per continuare
+                </ion-card-subtitle>
+            </ion-card-header>
       
-      <ion-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <ion-card-content>
+            <ion-item class="vaygo-input" lines="none">
+              <ion-icon name="email" slot="start"></ion-icon>
+              <ion-input type="email" placeholder="La tua email" name="email"[(ngModel)]="email"></ion-input>
+            </ion-item>
           
-          <ion-item class="vaygo-input" lines="none">
-            <ion-icon name="mail" slot="start"></ion-icon>
-            <ion-input 
-              type="email" 
-              placeholder="La tua email"
-              formControlName="email"
-              [class.ion-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-            </ion-input>
-          </ion-item>
-          
-          <ion-item class="vaygo-input" lines="none">
-            <ion-icon name="lock-closed" slot="start"></ion-icon>
-            <ion-input 
-              type="password" 
-              placeholder="La tua password"
-              formControlName="password"
-              [class.ion-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-            </ion-input>
-          </ion-item>
-        -->          
+            <ion-item class="vaygo-input" lines="none">
+              <ion-icon name="lock-closed" slot="start"></ion-icon>
+              <ion-input type="password" placeholder="La tua password" name="password" [(ngModel)]="password"></ion-input>
+            </ion-item>
+                  
           <!-- Messaggi di errore -->
- <!--         <div class="error-messages" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+<!--        <div class="error-messages" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
             <ion-text color="danger">
               <small>Email non valida</small>
             </ion-text>
@@ -243,49 +138,114 @@
               <small>Password richiesta</small>
             </ion-text>
           </div>
-          
-          <ion-button 
-            expand="block" 
-            type="submit" 
-            class="vaygo-btn-primary login-btn"
-            [disabled]="loginForm.invalid || isLoading">
-            <ion-icon name="log-in" slot="start" *ngIf="!isLoading"></ion-icon>
-            <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
-            {{ isLoading ? 'Accesso in corso...' : 'Accedi' }}
-          </ion-button>
-          
-        </form>
-      --> 
-        <!-- Footer del form -->
- <!--      <div class="form-footer">
-          <p>
-            Non hai un account? 
-            <ion-button fill="clear" size="small" (click)="navigateToRegister()">
-              Registrati
-            </ion-button>
-          </p>
-          <p>
-            <ion-button fill="clear" size="small" (click)="navigateToForgotPassword()">
-              Password dimenticata?
-            </ion-button>
-          </p>
-        </div>
+-->            
+            <ion-button expand="block" type="submit" class="vaygo-btn-primary login-btn" [disabled]="!accountForm.valid" (click)="Login()">
+              <ion-icon name="log-in" slot="start"></ion-icon>
+              <ion-spinner name="crescent"></ion-spinner>
+              Accedi
+            </ion-button>  
+       
+            <!-- Footer del form -->
+            <div class="form-footer">
+              <p>
+                Non hai un account? 
+              <ion-button fill="clear" size="small" (click)="changeForm()">Registrati</ion-button>
+              </p>
+<!--          <p>
+                <ion-button fill="clear" size="small">
+                  Password dimenticata?
+                </ion-button>
+              </p> -->
+            </div>
         
-      </ion-card-content>
-    </ion-card>
-  -->
-    <!-- Registrazione alternativa -->
-<!--   <div class="register-section">
-      <ion-button 
-        expand="block" 
-        fill="outline" 
-        class="vaygo-btn-secondary"
-        (click)="navigateToRegister()">
-        <ion-icon name="person-add" slot="start"></ion-icon>
-        Crea nuovo account
-      </ion-button>
-    </div>
-  -->   
+            </ion-card-content>
+          </ion-card>
+        }@else if(form == "Registrazione"){
+          <ion-item>
+            <ion-label>Codice Fiscale</ion-label>
+            <ion-input type="text" name="CF" [(ngModel)]="idCliente" required></ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label>Nome</ion-label>
+            <ion-input type="text" name="nome" [(ngModel)]="nome" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Cognome</ion-label>
+            <ion-input type="text" name="cognome" [(ngModel)]="cognome" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Data di nascita</ion-label>
+            <ion-input type="text" name="data" [(ngModel)]="dataNascita" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Documento d'identità</ion-label>
+            <ion-input type="text" name="IDdocumento" [(ngModel)]="documentoID" placeholder="Inserire il numero della carta d'identità" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Sesso</ion-label>
+            <ion-select name="sesso" [(ngModel)]="sesso" required ngDefaultControl>
+              <ion-select-option value="M">Maschio</ion-select-option>
+              <ion-select-option value="F">Femmina</ion-select-option>
+              <ion-select-option value="G">Generico</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Nazionalità</ion-label>
+            <ion-input type="text" name="nazionalità" [(ngModel)]="nazionalita" required></ion-input>
+          </ion-item>    
+
+          <ion-item>
+            <ion-label>Stato</ion-label>
+            <ion-input type="text" name="stato" [(ngModel)]="stato" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Città</ion-label>
+            <ion-input type="text" name="città" [(ngModel)]="citta" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>CAP</ion-label>
+            <ion-input type="text" name="cap" [(ngModel)]="CAP" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Indirizzo</ion-label>
+            <ion-input type="text" name="indirizzo" [(ngModel)]="indirizzo" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Numero Civico</ion-label>
+            <ion-input type="text" name="numCivico" [(ngModel)]="numCivico" required></ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
+          </ion-item>
+
+      <ion-button type="submit" [disabled]="!accountForm.valid" (click)="Registrazione()">Registrati</ion-button>
+
+          <!-- <div class="register-section">
+            <ion-button class="vaygo-btn-secondary" (click)="Registrazione()">
+            <ion-icon name="person-add" slot="start"></ion-icon>
+              Crea nuovo account
+            </ion-button>
+          </div> -->
+        }  
+        <!--      expand="block" fill="outline" -->
+      </form>  
  <!-- </div>
 
   <ion-modal [isOpen]="isSupportPopupOpen" (ionModalDidDismiss)="closeSupportPopup()">

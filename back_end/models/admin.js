@@ -11,7 +11,6 @@ class Admin {
           if (err){
             return reject(err);
           }
-          delete row.password;
           resolve(row);
         });
       }); 

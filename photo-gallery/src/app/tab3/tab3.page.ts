@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common'; // Importazione aggiunta
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader,
   IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton, IonIcon, IonLabel,
-  IonList, IonBadge, IonText, IonSpinner, IonModal, IonButtons } from '@ionic/angular/standalone';
+  IonList, IonBadge, IonText, IonSpinner, IonModal, IonButtons, IonSelectOption } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket, star,
@@ -36,7 +36,7 @@ import { FormsModule } from '@angular/forms';
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton,
     IonIcon, IonLabel, IonList, IonBadge, IonText, IonSpinner,
-    ReactiveFormsModule, FormsModule
+    ReactiveFormsModule, FormsModule, IonSelectOption
   ],
 })
  export class Tab3Page {
@@ -248,23 +248,6 @@ import { FormsModule } from '@angular/forms';
 //     imports: [IonHeader,IonToolbar,IonTitle,IonContent,ExploreContainerComponent,IonTabs,IonTabBar,IonTabButton,IonIcon,IonLabel,
 //     IonButton,IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, FormsModule, IonSelectOption, IonSelect],
 // })
-// export class Tab3Page {
-//   constructor() {}
-
-//   idCliente = ''; //codice fiscale del cliente che prendiamo come id
-//   nome = '';
-//   cognome = '';
-//   dataNascita = '';
-//   documentoID = '';
-//   sesso = '';
-//   nazionalita = '';
-//   stato = '';
-//   citta= '';
-//   CAP = '';
-//   indirizzo = '';
-//   numCivico = 0;
-//   disabile = 0;
-//   email = '';
 //   password= '';
 
 //   form= 'Login'; //di default assume valore 'login' se l'utente clicca sul bottone 'Registrati' cambai in 'registrazione
@@ -297,8 +280,15 @@ import { FormsModule } from '@angular/forms';
 
 // */
 
-  constructor(private autenticazioneService: AutenticazioneService, private tokenService: TokenService){}
+  constructor(private autenticazioneService: AutenticazioneService, private tokenService: TokenService){
+    addIcons({
+      person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket,
+       star, personCircle, notifications, settings, helpCircle, chevronForward
+     });
+  }
 
+  form='Login';
+  
   idCliente = ''; //codice fiscale del cliente che prendiamo come id
   nome = '';
   cognome = '';
@@ -317,6 +307,10 @@ import { FormsModule } from '@angular/forms';
 
   isLogged = false;
 
+   changeForm(){
+     this.form = 'Registrazione';
+   } 
+
 Login(){
      this.autenticazioneService.login({email:this.email, password:this.password}).subscribe({ 
          next: async (response) => {
@@ -333,8 +327,9 @@ Login(){
             const token = await this.tokenService.getToken();
             const adminInfo = await this.tokenService.getClientInfo();
             console.log('Token e dati del cliente salvati con successo', token);
+            console.log('Admin info: ', adminInfo);
 
-            this.isLogged = true;
+            this.isLogged = await this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 
           }catch(err){
@@ -389,7 +384,13 @@ Login(){
           
             console.log('Token e dati del cliente salvati con successo');
 
-            this.isLogged = true;
+            const token = await this.tokenService.getToken();
+            const adminInfo = await this.tokenService.getClientInfo();
+            console.log('Token e dati del cliente salvati con successo', token);
+            console.log('Admin info: ', adminInfo);
+
+            this.isLogged = await this.tokenService.isLogged();
+            console.log("Loggato: ", this.isLogged);
 
           }catch(err){
             console.log("Errore nel salvare i dati");

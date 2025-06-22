@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class GestioneVoliService {
   constructor(private http: HttpClient) {}
 
   Crea(credentials: { idVolo: string, partenza: string, destinazione: string, oraPartenza: string, oraArrivo: string, prezzo: number, postiDisponibili: number}): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/auth/creazione-volo`, credentials);
+    return this.http.post(`${this.baseUrl}/api/auth/creazione-volo`, credentials,);
 
   }
 

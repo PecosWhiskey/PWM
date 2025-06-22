@@ -6,27 +6,30 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class TokenService {
 
+  private inizializzazione: Promise<void>;
   private storage_: Storage | null = null;
   private TOKEN_KEY = "access token"; //chiave a cui viene associato il token
   private CLIENT_KEY = "client info"; //chiave a cui vengono associate le info del cliente presenti nel payload del token
   private ADMIN_KEY = "admin info";
 
   constructor(private storage: Storage) {
-    this.init();
+    this.inizializzazione = this.init();
    }
 
   //inizializza lo storage 
-  async init(){
+  async init(): Promise<void>{
     this.storage_ = await this.storage.create();
   } 
 
   //Inserimento del token nello storage locale (IndexedDB per browser, SQLite nativo per mobile)
   async setToken(token: string): Promise<void> {
+    await this.inizializzazione;
     await this.storage_?.set(this.TOKEN_KEY, token); //viene inserito solo se lo storage non è null
   }
 
   //Recupero del token
   async getToken(): Promise<string | null> {
+    await this.inizializzazione;
     return await this.storage_?.get(this.TOKEN_KEY) || null;
   }
 
@@ -50,20 +53,26 @@ export class TokenService {
 
   //Verifica se l'utente è loggato
   async isLogged(): Promise<boolean> {
-    const token = await this.getToken();
-    return token !== null && token !== '';
+//    const token = await this.getToken();
+//    return token != null && token != '';
+      const isExpired = await this.isTokenExpired();
+      return !isExpired;
   }
 
   //Verifica se il token è scaduto
   async isTokenExpired(): Promise<boolean> {
     const token = await this.getToken();
+    // console.log("Token in isTokenExpired: ", token);
     if (!token) return true;
 
     try {
       //Divide il token nelle sue tre parti: header, payload e signature e ricava solo il payload decodificandolo e ricreando
       const payload = JSON.parse(atob(token.split('.')[1])); //l'oggetto originale dove troviamo la data di scadenza
+      console.log("Payload del tokan: ", payload);
       const currentTime = Math.floor(Date.now() / 1000); //tempo attuale in secondi
-      return payload.exp < currentTime; //confronta il tempo attuale con la data di scadenza del token
+      console.log("Data odierna: ", currentTime);
+      console.log("Data token: ", payload.exp);
+      return payload.exp < currentTime; //confronta il tempo attuale con la data di scadenza del token (restituisce true se il token è scaduto)
     } catch (error) {
       console.error('Errore nel parsing del token:', error);
       return true; //se si è verificato un errore in qualsiasi caso il token non può essere valido

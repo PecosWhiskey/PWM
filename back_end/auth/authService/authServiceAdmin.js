@@ -2,7 +2,7 @@ const admin = require('../../models/admin.js');
 
 class AuthServiceAdmin {
       
-    static async loginAdmin(username, password){
+    static async loginAdmin({username, password}){
       console.log("service", username, password)  
       try{
             const user = await admin.findByUsername(username);  

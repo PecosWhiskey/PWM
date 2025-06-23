@@ -1,292 +1,588 @@
-// Versione semplificata per debug
+// Tab3 - Profile Page Styles with Dark/Light Mode Support
+// VayGo Airlines Design System
+// ================================================================
+
+// Light Mode Variables (default)
+:root {
+  // Profile specific colors - Light Mode
+  --tab3-bg: var(--vaygo-background);
+  --tab3-surface: var(--vaygo-white);
+  --tab3-text-primary: var(--vaygo-text-primary);
+  --tab3-text-secondary: var(--vaygo-text-secondary);
+  --tab3-text-muted: var(--vaygo-text-muted);
+  --tab3-border: var(--vaygo-border);
+  --tab3-shadow: var(--vaygo-shadow);
+  --tab3-shadow-medium: var(--vaygo-shadow-medium);
+  
+  // Profile header gradient - Light Mode
+  --tab3-header-gradient: linear-gradient(135deg, var(--vaygo-primary) 0%, var(--vaygo-secondary) 100%);
+  --tab3-avatar-bg: var(--vaygo-white);
+  --tab3-avatar-shadow: rgba(0, 0, 0, 0.1);
+  
+  // Menu and cards - Light Mode
+  --tab3-card-bg: var(--vaygo-white);
+  --tab3-card-hover: rgba(102, 126, 234, 0.05);
+  --tab3-divider: var(--vaygo-border);
+  
+  // Status colors
+  --tab3-success: var(--vaygo-success);
+  --tab3-warning: var(--vaygo-warning);
+  --tab3-error: var(--vaygo-error);
+}
+
+// Dark Mode Variables
+:root {
+  // Light mode (default)
+  --tab3-bg: #ffffff;
+  --tab3-surface: #f9fafb;
+  --tab3-text-primary: #1f2937;
+  --tab3-text-secondary: #4b5563;
+  --tab3-text-muted: #9ca3af;
+  --tab3-border: rgba(0, 0, 0, 0.06);
+  --tab3-shadow: rgba(0, 0, 0, 0.04);
+  --tab3-shadow-medium: rgba(0, 0, 0, 0.08);
+  --tab3-header-gradient: linear-gradient(135deg, #4A90E2 0%, #3eb772 100%);
+  --tab3-avatar-bg: #e5e7eb;
+  --tab3-avatar-shadow: rgba(0, 0, 0, 0.1);
+  --tab3-card-bg: #ffffff;
+  --tab3-card-hover: rgba(59, 130, 246, 0.04);
+  --tab3-divider: rgba(0, 0, 0, 0.05);
+
+  // VayGo brand colors
+  --vaygo-primary: #3eb772;
+  --vaygo-secondary: #4A90E2;
+  --vaygo-accent: #34D399;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    // Dark mode overrides
+    --tab3-bg: #0F172A;
+    --tab3-surface: #1E293B;
+    --tab3-text-primary: #F1F5F9;
+    --tab3-text-secondary: #CBD5E1;
+    --tab3-text-muted: #94A3B8;
+    --tab3-border: rgba(255, 255, 255, 0.1);
+    --tab3-shadow: rgba(0, 0, 0, 0.4);
+    --tab3-shadow-medium: rgba(0, 0, 0, 0.6);
+    --tab3-header-gradient: linear-gradient(135deg, #1E40AF 0%, #0F766E 100%);
+    --tab3-avatar-bg: #334155;
+    --tab3-avatar-shadow: rgba(0, 0, 0, 0.3);
+    --tab3-card-bg: #1E293B;
+    --tab3-card-hover: rgba(59, 130, 246, 0.1);
+    --tab3-divider: rgba(255, 255, 255, 0.1);
+
+    // Adjusted VayGo brand colors for dark
+    --vaygo-primary: #10B981;
+    --vaygo-secondary: #3B82F6;
+    --vaygo-accent: #06D6A0;
+  }
+}
+
+
+// Content Container
 .vaygo-content {
   --padding-start: 0;
   --padding-end: 0;
   --padding-top: 0;
   --padding-bottom: 0;
+  --background: var(--tab3-bg);
+  transition: background-color var(--vaygo-transition-base);
 }
 
-// Container principale
+// Main Containers
 .logged-in-container,
 .logged-out-container {
-  padding: 20px;
+  padding: var(--vaygo-spacing-lg);
   min-height: 100%;
+  background: var(--tab3-bg);
+  color: var(--tab3-text-primary);
+  transition: all var(--vaygo-transition-base);
 }
 
-// STATO LOGGED IN
+// ================================================================
+// LOGGED IN STATE - DARK/LIGHT MODE
+// ================================================================
+
+// Profile Header
 .profile-header {
-  background: linear-gradient(135deg, #667eea 0%, #0e74ab 100%);
-  border-radius: 16px;
-  padding: 32px;
+  background: var(--tab3-header-gradient);
+  border-radius: var(--vaygo-radius-lg);
+  padding: var(--vaygo-spacing-2xl);
   text-align: center;
-  margin-bottom: 24px;
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  margin-bottom: var(--vaygo-spacing-lg);
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
   color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--vaygo-transition-base);
+
+  // Subtle background pattern for depth
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .profile-content {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .profile-avatar {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: white;
+  background: var(--tab3-avatar-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: 0 auto var(--vaygo-spacing-md);
+  box-shadow: 0 8px 24px var(--tab3-avatar-shadow);
+  transition: all var(--vaygo-transition-base);
+  border: 4px solid rgba(255, 255, 255, 0.2);
 
   .avatar-icon {
     font-size: 48px;
-    color: #667eea;
+    color: var(--vaygo-primary);
+    transition: color var(--vaygo-transition-base);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px var(--tab3-avatar-shadow);
   }
 }
 
 .profile-name {
   color: white;
-  font-size: 24px;
+  font-size: var(--vaygo-font-size-2xl);
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: var(--vaygo-spacing-sm);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .profile-email {
-  color: rgba(255,255,255,0.8);
-  font-size: 16px;
+  color: rgba(255,255,255,0.9);
+  font-size: var(--vaygo-font-size-base);
   margin: 0;
+  font-weight: 500;
 }
 
-// Statistiche Profilo
+// Profile Statistics
 .profile-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--vaygo-spacing-md);
+  margin-bottom: var(--vaygo-spacing-lg);
 }
 
 .stat-card {
-  --background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  border: 1px solid #e5e7eb;
+  --background: var(--tab3-card-bg);
+  border-radius: var(--vaygo-radius-md);
+  box-shadow: 0 4px 20px var(--tab3-shadow);
+  border: 1px solid var(--tab3-border);
   margin: 0;
+  transition: all var(--vaygo-transition-base);
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px var(--tab3-shadow-medium);
+  }
 
   ion-card-content {
     text-align: center;
-    padding: 16px;
+    padding: var(--vaygo-spacing-lg);
+    background: var(--tab3-card-bg);
   }
 
   .stat-value {
-    font-size: 20px;
+    font-size: var(--vaygo-font-size-xl);
     font-weight: 700;
-    color: #667eea;
-    margin-bottom: 4px;
+    color: var(--vaygo-primary);
+    margin-bottom: var(--vaygo-spacing-xs);
     display: block;
+    transition: color var(--vaygo-transition-base);
   }
 
   .stat-label {
-    font-size: 12px;
-    color: #6b7280;
+    font-size: var(--vaygo-font-size-xs);
+    color: var(--tab3-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
     margin: 0;
+    transition: color var(--vaygo-transition-base);
   }
 }
 
-// Menu Profilo
+// Profile Menu
 .profile-menu-card {
-  --background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  border: 1px solid #e5e7eb;
-  margin: 0 0 24px 0;
+  --background: var(--tab3-card-bg);
+  border-radius: var(--vaygo-radius-md);
+  box-shadow: 0 4px 20px var(--tab3-shadow);
+  border: 1px solid var(--tab3-border);
+  margin: 0 0 var(--vaygo-spacing-lg) 0;
+  transition: all var(--vaygo-transition-base);
+  overflow: hidden;
 
   ion-list {
     background: transparent;
-    border-radius: 12px;
+    border-radius: var(--vaygo-radius-md);
   }
 
   .menu-item {
     --background: transparent;
-    --border-color: #e5e7eb;
-    --padding-start: 24px;
-    --padding-end: 24px;
+    --border-color: var(--tab3-divider);
+    --padding-start: var(--vaygo-spacing-lg);
+    --padding-end: var(--vaygo-spacing-lg);
     --min-height: 64px;
+    --ripple-color: rgba(16, 185, 129, 0.1);
+    transition: all var(--vaygo-transition-fast);
+    cursor: pointer;
+
+    &:hover {
+      --background: var(--tab3-card-hover);
+      transform: translateX(4px);
+    }
 
     .menu-icon {
-      color: #667eea;
+      color: var(--vaygo-primary);
       font-size: 20px;
-      margin-right: 8px;
+      margin-right: var(--vaygo-spacing-sm);
+      transition: color var(--vaygo-transition-base);
     }
 
     ion-label {
       font-weight: 500;
-      color: #374151;
+      color: var(--tab3-text-primary);
+      transition: color var(--vaygo-transition-base);
     }
 
     .chevron-icon {
-      color: #9ca3af;
+      color: var(--tab3-text-muted);
       font-size: 16px;
+      transition: all var(--vaygo-transition-base);
+    }
+
+    &:hover .chevron-icon {
+      color: var(--vaygo-primary);
+      transform: translateX(2px);
     }
   }
 }
 
-// Sezione Logout
+// Theme Toggle Section
+.theme-toggle-section {
+  margin-bottom: var(--vaygo-spacing-lg);
+
+  .theme-card {
+    --background: var(--tab3-card-bg);
+    border-radius: var(--vaygo-radius-md);
+    box-shadow: 0 4px 20px var(--tab3-shadow);
+    border: 1px solid var(--tab3-border);
+    margin: 0;
+    transition: all var(--vaygo-transition-base);
+
+    ion-card-content {
+      padding: var(--vaygo-spacing-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .theme-info {
+      display: flex;
+      align-items: center;
+      gap: var(--vaygo-spacing-md);
+
+      .theme-icon {
+        font-size: 24px;
+        color: var(--vaygo-primary);
+      }
+
+      .theme-text {
+        h3 {
+          margin: 0 0 4px 0;
+          font-size: var(--vaygo-font-size-base);
+          font-weight: 600;
+          color: var(--tab3-text-primary);
+        }
+
+        p {
+          margin: 0;
+          font-size: var(--vaygo-font-size-sm);
+          color: var(--tab3-text-secondary);
+        }
+      }
+    }
+
+    ion-toggle {
+      --background: var(--tab3-border);
+      --background-checked: var(--vaygo-primary);
+      --handle-background: var(--tab3-surface);
+      --handle-background-checked: white;
+    }
+  }
+}
+
+// Logout Section
 .logout-section {
-  margin-top: 24px;
+  margin-top: var(--vaygo-spacing-lg);
 }
 
 .logout-btn {
-  --background: #ef4444;
+  --background: var(--tab3-error);
   --color: white;
-  --border-radius: 8px;
+  --border-radius: var(--vaygo-radius-md);
   font-weight: 600;
+  width: 100%;
+  height: 56px;
+  transition: all var(--vaygo-transition-base);
+
+  &:hover {
+    --background: #DC2626;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+  }
 }
 
-// STATO LOGGED OUT
+// ================================================================
+// LOGGED OUT STATE - DARK/LIGHT MODE
+// ================================================================
+
+// Welcome Card
 .welcome-card {
-  --background: white;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  margin: 0 0 24px 0;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  --background: var(--tab3-card-bg);
+  border-radius: var(--vaygo-radius-md);
+  border: 1px solid var(--tab3-border);
+  margin: 0 0 var(--vaygo-spacing-lg) 0;
+  box-shadow: 0 4px 20px var(--tab3-shadow);
+  transition: all var(--vaygo-transition-base);
 
   ion-card-header {
     text-align: center;
-    padding: 24px;
+    padding: var(--vaygo-spacing-xl);
+    background: var(--tab3-card-bg);
   }
 
   .welcome-title {
-    font-size: 18px;
+    font-size: var(--vaygo-font-size-lg);
     font-weight: 600;
-    color: #667eea;
-    margin-bottom: 8px;
+    color: var(--vaygo-primary);
+    margin-bottom: var(--vaygo-spacing-sm);
+    transition: color var(--vaygo-transition-base);
   }
 
   .welcome-subtitle {
-    color: #6b7280;
-    font-size: 16px;
+    color: var(--tab3-text-secondary);
+    font-size: var(--vaygo-font-size-base);
     line-height: 1.5;
     margin: 0;
+    transition: color var(--vaygo-transition-base);
   }
 }
 
-.login-card {
-  --background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  border: 1px solid #e5e7eb;
-  margin: 0 0 24px 0;
+// Login & Register Cards
+.login-card,
+.register-card {
+  --background: var(--tab3-card-bg);
+  border-radius: var(--vaygo-radius-md);
+  box-shadow: 0 4px 20px var(--tab3-shadow);
+  border: 1px solid var(--tab3-border);
+  margin: 0 0 var(--vaygo-spacing-lg) 0;
+  transition: all var(--vaygo-transition-base);
 
   ion-card-header {
     text-align: center;
-    padding: 24px 24px 16px;
+    padding: var(--vaygo-spacing-xl) var(--vaygo-spacing-xl) var(--vaygo-spacing-md);
+    background: var(--tab3-card-bg);
   }
 
-  .login-title {
-    font-size: 24px;
+  .login-title,
+  .register-title {
+    font-size: var(--vaygo-font-size-2xl);
     font-weight: 700;
-    color: #667eea;
-    margin-bottom: 8px;
+    color: var(--vaygo-primary);
+    margin-bottom: var(--vaygo-spacing-sm);
+    transition: color var(--vaygo-transition-base);
   }
 
-  .login-subtitle {
-    color: #6b7280;
-    font-size: 16px;
+  .login-subtitle,
+  .register-subtitle {
+    color: var(--tab3-text-secondary);
+    font-size: var(--vaygo-font-size-base);
     margin: 0;
+    transition: color var(--vaygo-transition-base);
   }
 
   ion-card-content {
-    padding: 24px;
+    padding: var(--vaygo-spacing-xl);
+    background: var(--tab3-card-bg);
   }
 }
 
-// Form di Login
+// Form Inputs
 .vaygo-input {
-  --background: white;
-  --border-color: #e5e7eb;
-  --border-radius: 8px;
-  --padding-start: 16px;
-  --padding-end: 16px;
+  --background: var(--tab3-card-bg);
+  --border-color: var(--tab3-border);
+  --border-radius: var(--vaygo-radius-md);
+  --padding-start: var(--vaygo-spacing-md);
+  --padding-end: var(--vaygo-spacing-md);
   --min-height: 56px;
-  border: 2px solid #e5e7eb;
-  border-radius: 8px;
-  margin: 8px 0;
+  border: 2px solid var(--tab3-border);
+  border-radius: var(--vaygo-radius-md);
+  margin: var(--vaygo-spacing-sm) 0;
+  transition: all var(--vaygo-transition-fast);
 
   &.item-has-focus {
-    --border-color: #667eea;
-    border-color: #667eea;
+    --border-color: var(--vaygo-secondary);
+    border-color: var(--vaygo-secondary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &.ion-invalid {
-    --border-color: #ef4444;
-    border-color: #ef4444;
+    --border-color: var(--tab3-error);
+    border-color: var(--tab3-error);
   }
 
   ion-input {
-    --color: #374151;
-    --placeholder-color: #9ca3af;
+    --color: var(--tab3-text-primary);
+    --placeholder-color: var(--tab3-text-muted);
     font-weight: 500;
   }
 
   ion-icon {
-    color: #9ca3af;
-    margin-right: 8px;
+    color: var(--tab3-text-muted);
+    margin-right: var(--vaygo-spacing-sm);
+    transition: color var(--vaygo-transition-base);
   }
 }
 
+// Register Form Items
+.register-card ion-item {
+  --background: transparent;
+  --border-color: var(--tab3-border);
+  --border-width: 0 0 1px 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --min-height: 56px;
+  margin-bottom: var(--vaygo-spacing-md);
+  transition: all var(--vaygo-transition-fast);
+
+  ion-label {
+    color: var(--tab3-text-primary);
+    font-weight: 500;
+    font-size: var(--vaygo-font-size-sm);
+    transition: color var(--vaygo-transition-base);
+  }
+
+  ion-input,
+  ion-select {
+    --color: var(--tab3-text-primary);
+    --placeholder-color: var(--tab3-text-muted);
+    font-weight: 400;
+  }
+
+  &.item-has-focus {
+    --border-color: var(--vaygo-secondary);
+  }
+
+  &.ion-invalid {
+    --border-color: var(--tab3-error);
+  }
+}
+
+// Error Messages
 .error-messages {
-  margin: 4px 0 8px 0;
-  padding-left: 16px;
+  margin: var(--vaygo-spacing-xs) 0 var(--vaygo-spacing-sm) 0;
+  padding-left: var(--vaygo-spacing-md);
 
   small {
-    font-size: 12px;
+    font-size: var(--vaygo-font-size-xs);
+    color: var(--tab3-error);
+    display: block;
+    margin-top: 2px;
   }
 }
 
-.login-btn {
-  margin-top: 16px;
+// Form Buttons
+.login-btn,
+.register-btn {
+  margin-top: var(--vaygo-spacing-md);
+  --border-radius: var(--vaygo-radius-md);
+  font-weight: 600;
+  height: 56px;
+  transition: all var(--vaygo-transition-base);
   
   &:disabled {
     opacity: 0.6;
   }
 }
 
+// VayGo Primary Button
+.vaygo-btn-primary {
+  --background: var(--vaygo-gradient-primary);
+  --color: white;
+  --border-radius: var(--vaygo-radius-md);
+  font-weight: 600;
+  text-transform: none;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+  
+  &:hover {
+    --background: linear-gradient(135deg, #059669 0%, #1D4ED8 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  }
+}
+
+// Form Footer
 .form-footer {
   text-align: center;
-  margin-top: 24px;
+  margin-top: var(--vaygo-spacing-lg);
 
   p {
-    margin: 8px 0;
-    font-size: 14px;
-    color: #6b7280;
+    margin: var(--vaygo-spacing-sm) 0;
+    font-size: var(--vaygo-font-size-sm);
+    color: var(--tab3-text-secondary);
+    transition: color var(--vaygo-transition-base);
   }
 
   ion-button {
-    --color: #667eea;
+    --color: var(--vaygo-primary);
     font-weight: 500;
     text-transform: none;
+    font-size: var(--vaygo-font-size-sm);
+    transition: --color var(--vaygo-transition-base);
   }
 }
 
-.register-section {
-  margin-top: 24px;
-}
+// ================================================================
+// RESPONSIVE DESIGN
+// ================================================================
 
-// RESPONSIVE
 @media (max-width: 768px) {
   .logged-in-container,
   .logged-out-container {
-    padding: 16px;
+    padding: var(--vaygo-spacing-md);
   }
   
   .profile-stats {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: var(--vaygo-spacing-sm);
   }
   
   .profile-header {
-    padding: 24px;
-    margin-bottom: 16px;
+    padding: var(--vaygo-spacing-lg);
+    margin-bottom: var(--vaygo-spacing-md);
   }
   
   .profile-avatar {
@@ -299,14 +595,100 @@
   }
 
   .profile-name {
-    font-size: 20px;
+    font-size: var(--vaygo-font-size-xl);
   }
 
   .login-card,
-  .welcome-card {
+  .welcome-card,
+  .register-card {
     ion-card-header,
     ion-card-content {
-      padding: 16px;
+      padding: var(--vaygo-spacing-md);
     }
+  }
+
+  .login-title,
+  .register-title {
+    font-size: var(--vaygo-font-size-xl);
+  }
+
+  .welcome-title {
+    font-size: var(--vaygo-font-size-base);
+  }
+
+  .theme-card ion-card-content {
+    flex-direction: column;
+    gap: var(--vaygo-spacing-md);
+    text-align: center;
+  }
+}
+
+// ================================================================
+// ANIMATIONS & TRANSITIONS
+// ================================================================
+
+.logged-in-container,
+.logged-out-container {
+  animation: vaygoFadeIn 0.5s ease-out;
+}
+
+@keyframes vaygoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Hover effects for desktop
+@media (min-width: 769px) {
+  .menu-item {
+    transition: all var(--vaygo-transition-base);
+    
+    &:hover {
+      --background: var(--tab3-card-hover);
+      transform: translateX(4px);
+    }
+  }
+
+  .stat-card {
+    transition: all var(--vaygo-transition-base);
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px var(--tab3-shadow-medium);
+    }
+  }
+
+  .welcome-card,
+  .login-card,
+  .register-card {
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--tab3-shadow-medium);
+    }
+  }
+}
+
+// ================================================================
+// ACCESSIBILITY & REDUCED MOTION
+// ================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Focus states
+.vaygo-focus-visible {
+  &:focus-visible {
+    outline: 2px solid var(--vaygo-secondary);
+    outline-offset: 2px;
   }
 }

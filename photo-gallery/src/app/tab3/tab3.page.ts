@@ -39,7 +39,7 @@ import { FormsModule } from '@angular/forms';
     ReactiveFormsModule, FormsModule, IonSelectOption
   ],
 })
- export class Tab3Page {
+ export class Tab3Page implements OnInit{
 // closeContactPopup() {
 // throw new Error('Method not implemented.');
 // }
@@ -306,6 +306,10 @@ import { FormsModule } from '@angular/forms';
   password= '';
 
   isLogged = false;
+
+  ngOnInit(): void {
+      
+  }
 
    changeForm(){
      this.form = 'Registrazione';

@@ -6,7 +6,7 @@ import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
 import { from, throwError } from 'rxjs';
 import { switchMap, catchError, tap } from 'rxjs/operators';
-import { ContentType } from '@ionic/cli';
+
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);

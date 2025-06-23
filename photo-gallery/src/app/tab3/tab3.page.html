@@ -238,15 +238,17 @@
               <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
             </ion-item>
 
-            <ion-button 
-              expand="block"
-              type="submit" 
-              [disabled]="!accountForm.valid" 
-              (click)="Registrazione()"
-              class="vaygo-btn-primary register-btn">
-              <ion-icon name="person-add" slot="start"></ion-icon>
-              Registrati
-            </ion-button>
+            <div class="register-button-wrapper">
+              <ion-button 
+                expand="block"
+                type="submit" 
+                [disabled]="!accountForm.valid" 
+                (click)="Registrazione()"
+                class="vaygo-btn-primary register-btn">
+                <ion-icon name="person-add" slot="start"></ion-icon>
+                Registrati
+              </ion-button>
+            </div>
 
             <!-- Footer del form -->
             <div class="form-footer">

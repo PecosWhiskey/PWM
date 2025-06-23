@@ -58,7 +58,7 @@ class AuthControllerBiglietti {
             const token = jwt.sign( 
                 { idCliente: cliente.idCliente, email: cliente.email, role: 'cliente' },
                 process.env.JWT_SECRET,
-                { expiresIn: '24h' } //Imposta la durata del token a 24 ore
+                { expiresIn: '2h' } //Imposta la durata del token a 24 ore
             );
 
             res.status(200).json({
@@ -76,13 +76,14 @@ class AuthControllerBiglietti {
 
     static async registerClient(req,res){
         try{
+            console.log("Dati ricevuti in authController: ", req.body);
             const cliente = await bigliettiService.registrazioneCliente(req.body);
 
             //Creazione del token
             const token = jwt.sign( 
                 { idCliente: cliente.idCliente, email: cliente.email, role:'cliente' },
                 process.env.JWT_SECRET,
-                { expiresIn: '24h' } 
+                { expiresIn: '2h' } 
             );
 
             res.status(201).json({

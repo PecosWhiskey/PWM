@@ -6,10 +6,33 @@ import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
 import { from, throwError } from 'rxjs';
 import { switchMap, catchError, tap } from 'rxjs/operators';
+import { ContentType } from '@ionic/cli';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);
   const router = inject(Router);
+
+  if (req.url.includes('/login-admin') || 
+      req.url.includes('/registrazione-cliente') || 
+      req.url.includes('/login-cliente')) {
+    console.log("Richiesta di registrazione o login");
+
+    // let clonedReq = req;
+    
+    // clonedReq = req.clone({
+    //   setHeaders: {
+    //     'Content-Type':'application/json',
+    //   }
+    // })
+
+    return next(req).pipe(
+      tap(response => console.log("Registrazione completata con successo: dati inviati", req)),
+      catchError(httpError => {
+        console.log("Errore nella richiesta di registrazione:", httpError);
+        return throwError(() => httpError);
+      })
+    );
+  }
 
 
   //Poiché le due funzioni restituiscono una Promise, vengono trasformate in un Observable e gestite da switchMap (grazie a pipe)

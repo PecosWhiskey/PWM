@@ -46,6 +46,7 @@ export class HomePage {
   changeForm(){
     this.form='Registrazione';
   }
+
   
   Registrazione(){
     //creo l'oggetto che contiene i dati da inviare al server

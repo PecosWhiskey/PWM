@@ -242,22 +242,22 @@ class Biglietti {
     }
 
    //Funzione per inserire un nuovo Cliente
-   static async creaCliente({id, nome, cognome, dataN, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, civico, email, password}){
-        console.log('creaCliente: ',id, nome, cognome, dataN, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, civico, email, password);
+   static async creaCliente({idCliente, nome, cognome, dataNascita, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, numCivico, email, password}){
+        console.log('creaCliente: ',idCliente, nome, cognome, dataNascita, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, numCivico, email, password);
         //Hashing della password prima di inserirla nel database
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password,salt);
         //Promise che inserisce i dati nella tabella e resituisce l'oggetto con tutti i dati inseriti, eccetto la password
         return new Promise((resolve,reject)=>{
             db.run(`INSERT INTO Cliente (idCliente, nome, cognome, dataNascita, documentoID, sesso, nazionalita, 
-                stato, citta, CAP, indirizzo, numeroCivico, email, password) VALUES (?,?,?,?,?,?)`, 
-                [id, nome, cognome, dataN, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, civico, email, hashedPassword],
+                stato, citta, CAP, indirizzo, numeroCivico, email, password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`, 
+                [idCliente, nome, cognome, dataNascita, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, numCivico, email, hashedPassword],
                 function (err){
                     if(err){
                         reject(err);
                         return;
                     }
-                    resolve({id, nome, cognome, dataN, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, civico, email, password});
+                    resolve({idCliente, nome, cognome, dataNascita, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, numCivico, email, password});
                 }
             );
         });

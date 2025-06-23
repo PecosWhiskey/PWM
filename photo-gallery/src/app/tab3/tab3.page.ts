@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common'; // Importazione aggiunta
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader,
   IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton, IonIcon, IonLabel,
-  IonList, IonBadge, IonText, IonSpinner, IonModal, IonButtons, IonSelectOption } from '@ionic/angular/standalone';
+  IonList, IonBadge, IonText, IonSpinner, IonModal, IonButtons, IonSelectOption, IonSelect} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket, star,
@@ -36,7 +36,7 @@ import { FormsModule } from '@angular/forms';
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton,
     IonIcon, IonLabel, IonList, IonBadge, IonText, IonSpinner,
-    ReactiveFormsModule, FormsModule, IonSelectOption
+    ReactiveFormsModule, FormsModule, IonSelectOption, IonSelect
   ],
 })
  export class Tab3Page implements OnInit{
@@ -307,8 +307,8 @@ import { FormsModule } from '@angular/forms';
 
   isLogged = false;
 
-  ngOnInit(): void {
-      
+  async ngOnInit() {
+      this.isLogged = await this.tokenService.isLogged();
   }
 
    changeForm(){
@@ -371,6 +371,8 @@ Login(){
       email: this.email,
       password: this.password,
     }
+
+    console.log("Dati inseriti per la registrazione: ", data);
 
     this.autenticazioneService.register(data).subscribe({ 
         next: async (response) => {

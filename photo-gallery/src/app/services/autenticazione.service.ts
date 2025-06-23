@@ -19,6 +19,7 @@ export class AutenticazioneService {
   } 
 
   register(credentials: Cliente) : Observable<any>{
+    console.log("dati in autenticazione service: ", credentials);
     return this.http.post(`${this.baseUrl}/api/auth/registrazione-cliente`, credentials);
   }
 }

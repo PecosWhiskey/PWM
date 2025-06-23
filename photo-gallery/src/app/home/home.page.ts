@@ -1,83 +1,147 @@
 import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonItem, IonButton, IonInput, IonDatetime, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonPopover, IonHeader } from '@ionic/angular/standalone';
+import { IonContent, IonItem, IonButton, IonInput, IonDatetime, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonPopover, 
+  IonHeader, IonLabel, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 //import { CercaBigliettoService } from './home-service.service';
 import { HomeService } from './home.service';
-import { Volo } from '../models/volo.models';
 import { RouterModule, RouterOutlet, RouterLink} from '@angular/router';
-//import { AccountService } from '../account-cliente/account.service';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [RouterLink, RouterModule, IonHeader, RouterModule, IonPopover, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonDatetime, IonInput, IonButton, IonItem, IonContent, CommonModule, FormsModule]
+  imports: [RouterLink, RouterModule, IonHeader, RouterModule, IonPopover, IonCardContent, IonCardTitle, IonCardHeader, IonCard, 
+    IonDatetime, IonInput, IonButton, IonItem, IonContent, CommonModule, FormsModule, IonLabel, IonSelect, IonSelectOption, IonTitle, IonToolbar]
 })
 export class HomePage {
 
-  constructor(private homeService: HomeService){}
+  constructor(private accountSerivice: HomeService, private tokenService: TokenService) {}
 
-  partenza = ''; //città di partenza
-  destinazione = ''; //città di destinazione
-  dataInseritaP = ''; //recupera la data di partenza inserita dall'utente con fuso e ora
-  dataInseritaR = ''; //recupera la data di destinazione inserita dall'utente con fuso e ora
-  dataPartenza = ''; //data di partenza senza fuso e ora
-  dataRitorno = ''; //data di ritorno senza fuso e ora
-  cercaVoloEsito = ''; //esito della ricerca sei voli
+  idCliente = ''; //codice fiscale del cliente che prendiamo come id
+  nome = '';
+  cognome = '';
+  dataNascita = '';
+  documentoID = '';
+  sesso = '';
+  nazionalita = '';
+  stato = '';
+  citta= '';
+  CAP = '';
+  indirizzo = '';
+  numCivico = 0;
+  disabile = 0;
+  email = '';
+  password= '';
 
-  trovati = false;//serve per visualizzare i biglietti trovati
-  bigliettiAndata: Volo[] = []; //array dei biglietti di partenza trovati
-  bigliettiRitorno: Volo[] = []; //array dei biglietti di ritorno trovati
+  form= 'Login'; //uguale a login se l'utente clicca su login, uguale a registrazione se l'utente clicca su registrazione.
+  //          il valore viene passato dalla page cerca-biglietto all'accountService e ottenuto qui tramite il service.
 
-  form= ''; //variabile che viene settata su 'Login' o 'Registrazione' per stabilire quale form mostrare
+  isLogged=true;
 
+  ngOnInit(): void {}
 
-  Cerca(){
-    this.dataPartenza = this.dataInseritaP.split('T')[0];
-    this.dataRitorno = this.dataInseritaR.split('T')[0];
-    const datiVoloPartenza = {
-      partenza: this.partenza,                  //COME FACCIO A FARE IN MODO CHE NON CAMBI QUANDO IL CLIENTE DIGITA UN'ALTRA CITTA'?
-      destinazione : this.destinazione,
-      oraPartenza : this.dataPartenza
-    }
-    //Ricerca dei voli per la data di partenza
-    this.homeService.CercaVolo(datiVoloPartenza).subscribe({ 
-        next: (response) => {
-        console.log('Search success:', response);
-        this.cercaVoloEsito= response.message;
-        this.trovati = true;
-        this.bigliettiAndata = response.data;
-       },
-       error: (err) => {
-        console.log('Search error:', err);
-        this.cercaVoloEsito = err.error.message;
-       },
-      }); 
-      //Ricerca dei voli per la data di ritorno
-      const datiVoloRitorno = {
-      partenza: this.destinazione,
-      destinazione : this.partenza,
-      oraPartenza : this.dataRitorno
-    }
-      this.homeService.CercaVolo(datiVoloRitorno).subscribe({ 
-        next: (response) => {
-        console.log('Search success:', response);
-        this.cercaVoloEsito= response.message;
-        this.trovati = true;
-        this.bigliettiRitorno = response.data;
-       },
-       error: (err) => {
-        console.log('Search error:', err);
-        this.cercaVoloEsito = err.error.message;
-       },
-      }); 
+  changeForm(){
+    this.form='Registrazione';
   }
-/*
-  cambiaForm(form: string){
-    this.accountService.setForm(form);
-    console.log("L'utente ha cliccato su ", form);
+  
+  Registrazione(){
+    //creo l'oggetto che contiene i dati da inviare al server
+    const data= { 
+      idCliente: this.idCliente,
+      nome: this.nome,
+      cognome: this.cognome,
+      dataNascita: this.dataNascita,
+      documentoID: this.documentoID,
+      sesso: this.sesso,
+      nazionalita: this.nazionalita,
+      stato: this.stato,
+      citta: this.citta,
+      CAP: this.CAP,
+      indirizzo: this.indirizzo,
+      numCivico: this.numCivico,
+      email: this.email,
+      password: this.password,
+    }
+    console.log("Dati inseriti: ", data);
+
+    this.accountSerivice.register(data).subscribe({ 
+        next: async (response) => {
+         console.log('Registration success:', response);
+         console.log(response.data.email);
+         if(response.token){
+          try{
+            //Salva il token ricevuto
+            await this.tokenService.setToken(response.token);
+          
+            //Salva le info del cliente contenute nel token
+            const userInfo = this.tokenService.getClientInfoFromToken(response.token);
+            await this.tokenService.setClientInfo(userInfo);
+          
+            console.log('Token e dati del cliente salvati con successo');
+
+            const token = await this.tokenService.getToken();
+            const adminInfo = await this.tokenService.getClientInfo();
+            console.log('Token e dati del cliente salvati con successo', token);
+            console.log('Admin info: ', adminInfo);
+
+            this.isLogged = await this.tokenService.isLogged();
+            console.log("Loggato: ", this.isLogged);
+
+          }catch(err){
+            console.log("Errore nel salvare i dati");
+            this.isLogged = false;
+          }
+
+         }else{
+          console.log("Nessun token ricevuto");
+          this.isLogged = false;
+         }
+        },
+        error: (err) => {
+         console.log('Registration error:', err);
+         this.isLogged = false;
+        },
+       })
   }
-*/    
+  Login(){
+     this.accountSerivice.login({email:this.email, password:this.password}).subscribe({ 
+         next: async (response) => {
+         console.log('Login success:', response);
+         if(response.token){
+          try{
+            //Salva il token ricevuto
+            await this.tokenService.setToken(response.token);
+          
+            //Salva le info del cliente contenute nel token
+            const userInfo = this.tokenService.getClientInfoFromToken(response.token);
+            await this.tokenService.setClientInfo(userInfo);
+          
+            const token = await this.tokenService.getToken();
+            const adminInfo = await this.tokenService.getClientInfo();
+            console.log('Token e dati del cliente salvati con successo', token);
+            console.log('Admin info: ', adminInfo);
+
+            this.isLogged = await this.tokenService.isLogged();
+            console.log("Loggato: ", this.isLogged);
+
+          }catch(err){
+            console.log("Errore nel salvare i dati");
+            this.isLogged = false;
+          }
+
+         }else{
+          console.log("Nessun token ricevuto");
+          this.isLogged = false;
+         }
+
+        },
+        error: (err) => {
+         console.log('Login error:', err);
+        this.isLogged = false;
+        },
+     });
+  }
 }

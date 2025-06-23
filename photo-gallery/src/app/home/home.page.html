@@ -1,74 +1,105 @@
-<!--
-  <ion-header>
-      <a routerLink="login">Amministratore</a>
-      <p>|</p>
-      <a routerLink="account-cliente" (click)="cambiaForm('Login')">Accedi</a>
-      <p>|</p>
-      <a routerLink="account-cliente" (click)="cambiaForm('Registrazione')">Registrazione</a>
-  </ion-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{form}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content>
-    <router-outlet></router-outlet>
-  </ion-content>
--->
 <ion-content>
-  <form #cercaBigliettiForm="ngForm">
-    <ion-item>
-      <ion-input type="text" name="partenza" [(ngModel)]="partenza" placeholder="Partenza" required></ion-input>
-    </ion-item>
-      
-    <ion-item>
-      <ion-input type="text" name="destinazione" [(ngModel)]="destinazione" placeholder="Destinazione" required></ion-input>
-    </ion-item>
+  <form #accountForm="ngForm">
+    @if(form == 'Registrazione') {
+
+      <ion-item>
+        <ion-label>Codice Fiscale</ion-label>
+        <ion-input type="text" name="CF" [(ngModel)]="idCliente" required></ion-input>
+      </ion-item>
     
-    <ion-item id="click-trigger-partenza">
-      <ion-input [value]="dataInseritaP.split('T')[0]" readonly placeholder="Data di partenza"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Nome</ion-label>
+        <ion-input type="text" name="nome" [(ngModel)]="nome" required></ion-input>
+      </ion-item>
 
-    <ion-popover trigger="click-trigger-partenza" triggerAction="click">
-      <ng-template>
-        <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataPartenza" [(ngModel)]="dataInseritaP" ngDefaultControl></ion-datetime>
-      </ng-template> <!--presentation=date fa si che non compaia l'orario nel calendario-->
-    </ion-popover>
+      <ion-item>
+        <ion-label>Cognome</ion-label>
+        <ion-input type="text" name="cognome" [(ngModel)]="cognome" required></ion-input>
+      </ion-item>
 
-    <ion-item id="click-trigger-ritorno">
-      <ion-input [value]="dataInseritaR.split('T')[0]" readonly placeholder="Data di ritorno"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Data di nascita</ion-label>
+        <ion-input type="text" name="data" [(ngModel)]="dataNascita" required></ion-input>
+      </ion-item>
 
-    <ion-popover trigger="click-trigger-ritorno" triggerAction="click">
-      <ng-template>
-        <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataRitorno" [(ngModel)]="dataInseritaR" ngDefaultControl></ion-datetime>
-      </ng-template>
-    </ion-popover>
+      <ion-item>
+        <ion-label>Documento d'identità</ion-label>
+        <ion-input type="text" name="IDdocumento" [(ngModel)]="documentoID" placeholder="Inserire il numero della carta d'identità" required></ion-input>
+      </ion-item>
 
-    <ion-button type="submit" [disabled]="!cercaBigliettiForm.valid" (click)="Cerca()">Cerca</ion-button>
+      <ion-item>
+        <ion-label>Sesso</ion-label>
+        <ion-select name="sesso" [(ngModel)]="sesso" required>
+          <ion-select-option value="M">Maschio</ion-select-option>
+          <ion-select-option value="F">Femmina</ion-select-option>
+          <ion-select-option value="N">Non specificato</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Nazionalità</ion-label>
+        <ion-input type="text" name="nazionalità" [(ngModel)]="nazionalita" required></ion-input>
+      </ion-item>    
+
+      <ion-item>
+        <ion-label>Stato</ion-label>
+        <ion-input type="text" name="stato" [(ngModel)]="stato" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Città</ion-label>
+        <ion-input type="text" name="città" [(ngModel)]="citta" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>CAP</ion-label>
+        <ion-input type="text" name="cap" [(ngModel)]="CAP" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Indirizzo</ion-label>
+        <ion-input type="text" name="indirizzo" [(ngModel)]="indirizzo" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Numero Civico</ion-label>
+        <ion-input type="text" name="numCivico" [(ngModel)]="numCivico" required></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
+      </ion-item>
+
+      <ion-button type="submit" [disabled]="!accountForm.valid" (click)="Registrazione()">Registrati</ion-button>
+
+    }@else if (form=='Login') {
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
+      </ion-item>
+
+      <ion-button type="submit" [disabled]="!accountForm.valid" (click)="Login()">Accedi</ion-button>
+      <ion-button type="submit" (click)="changeForm()">Registrati</ion-button>
+    }  
 
   </form>
-
-  @if(trovati && (bigliettiAndata.length>0 || bigliettiRitorno.length>0)){
-    @for(biglietto of bigliettiAndata; track $index; let i=$index){
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{partenza}}    {{destinazione}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
-          <p>{{biglietto.prezzo}}</p>
-          <ion-button [routerLink]="'/dati-biglietto'">Seleziona</ion-button>
-        </ion-card-content>
-      </ion-card>
-    }
-    @for(biglietto of bigliettiRitorno; track $index; let i=$index){
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{destinazione}}    {{partenza}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
-          <p>{{biglietto.prezzo}}</p>
-          <ion-button [routerLink]="'/dati-biglietto'">Seleziona</ion-button>
-        </ion-card-content>
-      </ion-card>
-    }
-  }
 </ion-content>
+
+

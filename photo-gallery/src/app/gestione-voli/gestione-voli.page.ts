@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+/* import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton, IonItem, IonDatetime, IonInput } from '@ionic/angular/standalone';
@@ -82,5 +82,113 @@ export class GestioneVoliPage{
         this.creaVoloEsito = err.error.message;
        },
       });
+  }
+}
+*/
+
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { 
+  IonContent, 
+  IonButton, 
+  IonItem, 
+  IonDatetime, 
+  IonInput,
+  IonIcon
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { createOutline, listOutline, addCircleOutline } from 'ionicons/icons';
+import { GestioneVoliService } from './gestione-voli.service';
+
+@Component({
+  selector: 'app-gestione-voli',
+  templateUrl: './gestione-voli.page.html',
+  styleUrls: ['./gestione-voli.page.scss'],
+  standalone: true,
+  imports: [
+    IonInput, 
+    IonDatetime, 
+    IonButton, 
+    IonItem, 
+    IonContent, 
+    IonIcon,
+    CommonModule, 
+    FormsModule
+  ]
+})
+export class GestioneVoliPage {
+
+  constructor(private gestioneVoliService: GestioneVoliService) {
+    // Registra le icone che usi nel template
+    addIcons({ createOutline, listOutline, addCircleOutline });
+  }
+
+  idVolo = '';
+  partenza = '';
+  destinazione = '';
+  data = '';
+  oraPartenza = '';
+  oraArrivo = '';
+  prezzo = 0.0;
+  postiDisponibili = 0;
+  creaVoloEsito = '';
+
+  formattaData(dataRicevuta: string, ora: string) {
+    console.log("Data: ", dataRicevuta);
+    const dataStringa = dataRicevuta.split('T')[0];
+    console.log("Data Stringa: ", dataStringa);
+    const dataFormattata = dataStringa + ' ' + ora;
+    console.log("Data formattata: ", dataFormattata);
+    return dataFormattata;
+  }
+
+  CreaVolo() {
+    const oraP = this.formattaData(this.data, this.oraPartenza);
+    const oraA = this.formattaData(this.data, this.oraArrivo);
+    const datiVolo = {
+      idVolo: this.idVolo,
+      partenza: this.partenza,
+      destinazione: this.destinazione,
+      oraPartenza: oraP,
+      oraArrivo: oraA,
+      prezzo: this.prezzo,
+      postiDisponibili: this.postiDisponibili
+    }
+    this.gestioneVoliService.Crea(datiVolo).subscribe({
+      next: (response) => {
+        console.log('Creation success:', response);
+        this.creaVoloEsito = response.message;
+      },
+      error: (err) => {
+        console.log('Creation error:', err);
+        this.creaVoloEsito = err.error.message;
+      },
+    });
+  }
+
+  ModificaVolo() {
+    const oraP = this.formattaData(this.data, this.oraPartenza);
+    const oraA = this.formattaData(this.data, this.oraArrivo);
+    const datiVolo = {
+      idVolo: this.idVolo,
+      partenza: this.partenza,
+      destinazione: this.destinazione,
+      oraPartenza: oraP,
+      oraArrivo: oraA,
+      prezzo: this.prezzo,
+      postiDisponibili: this.postiDisponibili
+    }
+    this.gestioneVoliService.Modifica(datiVolo).subscribe({
+      next: (response) => {
+        console.log('Modification success:', response);
+        this.creaVoloEsito = response.message;
+      },
+      error: (err) => {
+        console.log('Modification error:', err);
+        console.log('Impossibile modificare il volo, perché assente nel database!');
+        this.creaVoloEsito = err.error.message;
+      },
+    });
   }
 }

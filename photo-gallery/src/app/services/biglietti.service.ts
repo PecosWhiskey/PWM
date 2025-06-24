@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Biglietto } from '../models/biglietto.models';
+import { Passeggero } from '../models/passeggero.models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,7 +14,11 @@ export class BigliettiService {
   constructor(private http: HttpClient) {}
 
   CreaBiglietto(credentials: Biglietto): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/auth/ricerca-volo`, credentials);
+    return this.http.post(`${this.baseUrl}/api/auth/creazione-biglietto`, credentials);
+  }
+
+  CreaPasseggero(credentials: Passeggero): Observable<any>{
+    return this.http.post(`${this.baseUrl}/api/auth/inserimento-passeggero`, credentials);
   }
 
   ModificaVolo(credentials: {idVolo: string, posti: number}): Observable<any> {

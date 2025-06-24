@@ -141,13 +141,46 @@ async function visualizzaClienti(){
     }
 }
 
+async function visualizzaBiglietti(){
+    try{
+        return new Promise((resolve,reject)=>{
+            db.all('SELECT * FROM Biglietto', (err,rows)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve(rows);
+                console.log(rows);
+            })
+        })
+    }catch(err){
+        console.log("Errore: ", err.message);
+    }
+}
+
+async function visualizzaPasseggeri(){
+    try{
+        return new Promise((resolve,reject)=>{
+            db.all('SELECT * FROM Passeggero', (err,rows)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve(rows);
+                console.log(rows);
+            })
+        })
+    }catch(err){
+        console.log("Errore: ", err.message);
+    }
+}
+
 // inserisciPosizione("Roma", "Italia", 41.789830174, 12.250665664);
 // inserisciPosizione("Milano", "Italia", 45.633333, 8.733333 );
 
-// inserisciAeroporto("FCO", "Fiumicino", 1);
-// inserisciAeroporto("MXP", "Malpensa", 2);
+// inserisciAeroporto("FCO", "Fiumicino", 2);
+// inserisciAeroporto("MXP", "Malpensa", 1);
 
-visualizzaPosizione();
-visualizzaAeroporto();
-// visualizzaVoli();
-// visualizzaClienti();
+// eliminaAeroporto('FCO');
+
+visualizzaBiglietti();

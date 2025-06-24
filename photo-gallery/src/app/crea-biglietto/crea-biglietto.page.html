@@ -4,11 +4,24 @@
 
     @for(numero of passeggeri; track $index; let i=$index){
       <ion-item>
-        <ion-input type="text" name="idCliente" [(ngModel)]="idCliente" placeholder="Codice fiscale dell'acquirente" ngDefaultControl  required></ion-input>
+        <ion-input type="text" name="idPasseggero" [(ngModel)]="idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input type="text" name="idPasseggero" [(ngModel)]="idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
+        <ion-input type="text" name="nome" [(ngModel)]="nome" placeholder="Nome del passeggero" ngDefaultControl  required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" name="cognome" [(ngModel)]="cognome" placeholder="Cognome del passeggero" ngDefaultControl  required></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="stacked">Data di nascita</ion-label>
+        <ion-input type="date" name="data" [(ngModel)]="dataNascita" required ngDefaultControl></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" name="documentoID" [(ngModel)]="documentoID" placeholder="Documento" ngDefaultControl  required></ion-input>
       </ion-item>
     }
 

@@ -186,17 +186,17 @@ class Biglietti {
         });
     }
 
-    static async creaBiglietto({idVolo, idCliente, idPasseggero, tariffa, posto, dataP, prezzoF, dataAcquisto}){
-        console.log('creaBiglietto: ',idVolo, idCliente, idPasseggero, tariffa, posto, dataP, prezzoF, dataAcquisto);
+    static async creaBiglietto({idVolo, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto}){
+        console.log('creaBiglietto: ',idVolo, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto);
         return new Promise((resolve,reject)=>{
-            db.run(`INSERT INTO Biglietto (idVolo, idCliente, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto) VALUES (?,?,?,?,?,?,?,?)`, 
-                [idVolo, idCliente, idPasseggero, tariffa, posto, dataP, prezzoF, dataAcquisto],
+            db.run(`INSERT INTO Biglietto (idVolo, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto) VALUES (?,?,?,?,?,?,?)`, 
+                [idVolo, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto],
                 function (err){
                     if(err){
                         reject(err);
                         return;
                     }
-                    resolve({idBiglietto:this.lastID, idVolo, idCliente, idPasseggero, tariffa, posto, dataP, prezzoF, dataAcquisto});
+                    resolve({idBiglietto:this.lastID, idVolo, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto});
                 }
             );
         });
@@ -218,7 +218,7 @@ class Biglietti {
     //Trova biglietti usando l'ID del cliente che li ha acquistati
     static async restituisciBiglietti(idCliente){
         return new Promise((resolve,reject)=>{
-            db.all('SELECT * FROM Biglietto WHERE idCliente=?', [idCliente], (err,rows)=>{
+            db.all('SELECT * FROM Biglietto WHERE idPasseggero=?', [idCliente], (err,rows)=>{
                 if(err){
                     reject (err);
                     return;

@@ -168,13 +168,14 @@ class AuthServiceBiglietti {
 
     static async createPasseggero(datiPasseggero){
         try{
+            console.log("AUTHSERVICE PASSEGGERO: ", datiPasseggero);
             const exist = await biglietti.cercaPasseggero(datiPasseggero.idPasseggero);
 
             if(exist){
                 throw new Error('Passeggero già presente nel database');
             }
 
-            return exist;
+            return await biglietti.creaPasseggero(datiPasseggero);
         }catch(err){
             console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
             throw err;

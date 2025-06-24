@@ -68,14 +68,12 @@ const db = new sqlite3.Database("database\\dbBiglietti.sqlite", (err) => {
       db.run(`CREATE TABLE IF NOT EXISTS Biglietto(
         idBiglietto INTEGER PRIMARY KEY AUTOINCREMENT,
         idVolo TEXT NOT NULL,
-        idCliente TEXT NOT NULL,
         idPasseggero TEXT NOT NULL,
         tariffa TEXT,
         posto TEXT,
         dataPartenza TEXT NOT NULL,
         prezzoFinale REAL NOT NULL,
         dataAcquisto TEXT,
-        FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente),
         FOREIGN KEY (idPasseggero) REFERENCES Passeggero(idPasseggero),
         FOREIGN KEY (idVolo) REFERENCES Volo(idVolo) 
       )`);

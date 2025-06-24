@@ -34,8 +34,9 @@ const idVoloValidator = [
 
 const creationTicketsValidator = [
     body('idVolo').notEmpty().withMessage('codice del volo obbligatorio'),
-    body('idCliente').notEmpty().withMessage('id del cliente obbligatorio'),
     body('idPasseggero').notEmpty().withMessage('id del passeggero obbligatorio'),
+    body('dataPartenza').notEmpty().withMessage('data di partenza obbligatoria'),
+    body('prezzoFinale').notEmpty().withMessage('prezzo finale obbligatorio'),
 ]
 
 const createPassengerValidator = [

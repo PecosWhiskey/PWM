@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Importazione aggiunta
 
 import {
@@ -16,6 +15,7 @@ import {
 import { TokenService } from '../services/token.service';
 import { AutenticazioneService } from '../services/autenticazione.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 // // Interfaccia per i dati utente
 // interface User {
@@ -280,7 +280,8 @@ import { FormsModule } from '@angular/forms';
 
 // */
 
-  constructor(private autenticazioneService: AutenticazioneService, private tokenService: TokenService){
+  constructor(private autenticazioneService: AutenticazioneService, 
+    private tokenService: TokenService, private router: Router){
     addIcons({
       person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket,
        star, personCircle, notifications, settings, helpCircle, chevronForward
@@ -315,7 +316,7 @@ import { FormsModule } from '@angular/forms';
      this.form = 'Registrazione';
    } 
 
-Login(){
+LoginCliente(){
      this.autenticazioneService.loginClient({email:this.email, password:this.password}).subscribe({ 
          next: async (response) => {
          console.log('Login success:', response);
@@ -436,6 +437,8 @@ Login(){
 
             this.isLogged = await this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
+
+            this.router.navigate(['/gestione-voli']);
 
           }catch(err){
             console.log("Errore nel salvare i dati");

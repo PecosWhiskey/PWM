@@ -136,10 +136,20 @@
               type="submit" 
               class="vaygo-btn-primary login-btn" 
               [disabled]="!accountForm.valid" 
-              (click)="Login()">
+              (click)="LoginCliente()">
               <ion-icon name="log-in" slot="start"></ion-icon>
               Accedi
             </ion-button>  
+
+            <ion-button 
+              expand="block" 
+              type="submit" 
+              class="vaygo-btn-primary login-btn" 
+              [disabled]="!accountForm.valid" 
+              (click)="LoginAmministratore()">
+              <ion-icon name="log-in" slot="start"></ion-icon>
+              Accedi come amministratore
+            </ion-button> 
        
             <!-- Footer del form -->
             <div class="form-footer">

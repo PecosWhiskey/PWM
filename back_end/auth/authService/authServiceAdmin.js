@@ -2,11 +2,11 @@ const admin = require('../../models/admin.js');
 
 class AuthServiceAdmin {
       
-    static async loginAdmin({username, password}){
-      console.log("service", username, password)  
+    static async loginAdmin({email, password}){
+      console.log("loginAdmin service: ", email, password)  
       try{
-            const user = await admin.findByUsername(username);  
-            console.log("Risultato findbyUsername: ",user);
+            const user = await admin.findByEmail(email);  
+            console.log("Risultato findbyEmail: ",user);
             const pass = await admin.comparePassword(password, user.password);
 
             if(!user || !pass ){

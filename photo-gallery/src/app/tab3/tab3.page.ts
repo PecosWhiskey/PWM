@@ -316,7 +316,7 @@ import { FormsModule } from '@angular/forms';
    } 
 
 Login(){
-     this.autenticazioneService.login({email:this.email, password:this.password}).subscribe({ 
+     this.autenticazioneService.loginClient({email:this.email, password:this.password}).subscribe({ 
          next: async (response) => {
          console.log('Login success:', response);
          if(response.token){
@@ -329,9 +329,9 @@ Login(){
             await this.tokenService.setClientInfo(userInfo);
           
             const token = await this.tokenService.getToken();
-            const adminInfo = await this.tokenService.getClientInfo();
+            const clientInfo = await this.tokenService.getClientInfo();
             console.log('Token e dati del cliente salvati con successo', token);
-            console.log('Admin info: ', adminInfo);
+            console.log('Client info: ', clientInfo);
 
             this.isLogged = await this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
@@ -372,7 +372,7 @@ Login(){
       password: this.password,
     }
 
-    console.log("Dati inseriti per la registrazione: ", data);
+    // console.log("Dati inseriti per la registrazione: ", data);
 
     this.autenticazioneService.register(data).subscribe({ 
         next: async (response) => {
@@ -391,9 +391,9 @@ Login(){
             console.log('Token e dati del cliente salvati con successo');
 
             const token = await this.tokenService.getToken();
-            const adminInfo = await this.tokenService.getClientInfo();
+            const clientInfo = await this.tokenService.getClientInfo();
             console.log('Token e dati del cliente salvati con successo', token);
-            console.log('Admin info: ', adminInfo);
+            console.log('Client info: ', clientInfo);
 
             this.isLogged = await this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
@@ -414,6 +414,50 @@ Login(){
 
         },
        })
+  }
+
+  LoginAmministratore(){
+    this.autenticazioneService.loginAdmin({email:this.email, password:this.password}).subscribe({ 
+         next: async (response) => {
+         console.log('Login success:', response);
+         if(response.token){
+          try{
+            //Salva il token ricevuto
+            await this.tokenService.setToken(response.token);
+          
+            //Salva le info del cliente contenute nel token
+            const userInfo = this.tokenService.getAdminInfoFromToken(response.token);
+            await this.tokenService.setAdminInfo(userInfo);
+          
+            const token = await this.tokenService.getToken();
+            const adminInfo = await this.tokenService.getAdminInfo();
+            console.log("Token e dati dell'amministratore  salvati con successo", token);
+            console.log('Admin info: ', adminInfo);
+
+            this.isLogged = await this.tokenService.isLogged();
+            console.log("Loggato: ", this.isLogged);
+
+          }catch(err){
+            console.log("Errore nel salvare i dati");
+            this.isLogged = false;
+          }
+
+         }else{
+          console.log("Nessun token ricevuto");
+          this.isLogged = false;
+         }
+        },
+        error: (err) => {
+         console.log('Login error:', err);
+         this.isLogged = false;
+        },
+     });
+  }
+
+  async Logout(){
+    await this.tokenService.logout();
+    this.isLogged = await this.tokenService.isLogged();
+    console.log(this.isLogged);
   }
 
 }  

@@ -124,6 +124,23 @@ async function visualizzaVoli(){
     }
 }
 
+async function visualizzaClienti(){
+    try{
+        return new Promise((resolve,reject)=>{
+            db.all('SELECT * FROM Cliente', (err,rows)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve(rows);
+                console.log(rows);
+            })
+        })
+    }catch(err){
+        console.log("Errore: ", err.message);
+    }
+}
+
 // inserisciPosizione("Roma", "Italia", 41.789830174, 12.250665664);
 // inserisciPosizione("Milano", "Italia", 45.633333, 8.733333 );
 
@@ -132,4 +149,5 @@ async function visualizzaVoli(){
 
 // visualizzaPosizione();
 // visualizzaAeroporto();
-visualizzaVoli();
+// visualizzaVoli();
+// visualizzaClienti();

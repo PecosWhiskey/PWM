@@ -34,29 +34,46 @@ export class TokenService {
   }
 
   //Rimozione del token e di tutti i dati memorizzati nello storage quando vine effettuato il logout
+  //Logout per il cliente
+  // async logoutClient(): Promise<void> {
+  //   await this.storage_?.remove(this.TOKEN_KEY);
+  //   await this.storage_?.remove(this. CLIENT_KEY);
+  // }
+
+  //Funzione di logout
   async logout(): Promise<void> {
-    await this.storage_?.remove(this.TOKEN_KEY);
-    await this.storage_?.remove(this.CLIENT_KEY);
+    if (this.storage_) {
+      await Promise.all([
+        this.storage_.remove(this.TOKEN_KEY),
+        this.storage_.remove(this.ADMIN_KEY),
+        this.storage_.remove(this.CLIENT_KEY)
+      ]);
+    }
   }
 
   //Inserimento delle informazioni recuperate dal payload del token nello storage locale
   async setClientInfo(clientInfo: any): Promise<void> {
-    await this.storage_?.set(this.ADMIN_KEY, clientInfo);
-//    await this.storage_?.set(this.CLIENT_KEY, clientInfo);
+    await this.storage_?.set(this.CLIENT_KEY, clientInfo);
+  }
+
+  async setAdminInfo(adminInfo: any): Promise<void> {
+    await this.storage_?.set(this.ADMIN_KEY, adminInfo);
   }
 
   //Recupero delle informazione del cliente
   async getClientInfo(): Promise<any> {
-      return await this.storage_?.get(this.ADMIN_KEY) || null;
-    // return await this.storage_?.get(this.CLIENT_KEY) || null;
+    return await this.storage_?.get(this.CLIENT_KEY) || null;
+  }
+
+  //Recupero delle informazione dell'amministratore
+  async getAdminInfo(): Promise<any> {
+    return await this.storage_?.get(this.ADMIN_KEY) || null;
   }
 
   //Verifica se l'utente è loggato
   async isLogged(): Promise<boolean> {
-//    const token = await this.getToken();
-//    return token != null && token != '';
-      const isExpired = await this.isTokenExpired();
-      return !isExpired;
+    const isExpired = await this.isTokenExpired();
+    return !isExpired;
   }
 
   //Verifica se il token è scaduto
@@ -70,8 +87,8 @@ export class TokenService {
       const payload = JSON.parse(atob(token.split('.')[1])); //l'oggetto originale dove troviamo la data di scadenza
       console.log("Payload del tokan: ", payload);
       const currentTime = Math.floor(Date.now() / 1000); //tempo attuale in secondi
-      console.log("Data odierna: ", currentTime);
-      console.log("Data token: ", payload.exp);
+      // console.log("Data odierna: ", currentTime);
+      // console.log("Data token: ", payload.exp);
       return payload.exp < currentTime; //confronta il tempo attuale con la data di scadenza del token (restituisce true se il token è scaduto)
     } catch (error) {
       console.error('Errore nel parsing del token:', error);
@@ -79,7 +96,7 @@ export class TokenService {
     }
   }
 
-  //Estrare le informazioni del cliente dal payload del token
+  //Estrae le informazioni del cliente dal payload del token
   getClientInfoFromToken(token: string): any {
   try {
     if (!token) {
@@ -108,6 +125,38 @@ export class TokenService {
   } catch (error) {
     console.error('Errore nella decodifica del token:', error);
     throw new Error('Impossibile estrarre le informazioni del cliente dal token');
+  }
+}
+
+//Estrae le informazioni dell'amministratore dal payload del token
+getAdminInfoFromToken(token: string): any {
+  try {
+    if (!token) {
+      throw new Error('Token non fornito');
+    }
+
+    //Divide il token nelle sue parti (header.payload.signature)
+    const tokenArray = token.split('.');
+    
+    //Se l'array ottenuto ha meno di 3 elementi il token non è valido
+    if (tokenArray.length !== 3) {
+      throw new Error('Formato del token non valido');
+    }
+
+    //Ricava il payload
+    const payload = tokenArray[1];
+    
+    //Decodifica da Base64 e ottiene una stringa
+    const decoded = atob(payload);
+    
+    //Ricava l'oggetto originario
+    const adminInfo = JSON.parse(decoded);
+    
+    return adminInfo;
+    
+  } catch (error) {
+    console.error('Errore nella decodifica del token:', error);
+    throw new Error("Impossibile estrarre le informazioni dell'admin dal token");
   }
 }
 

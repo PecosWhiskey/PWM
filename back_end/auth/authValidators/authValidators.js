@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 
 const loginValidatorAdmin = [
-    body('username').notEmpty().withMessage('Username obbligatorio'),
+    body('email').notEmpty().withMessage('Email obbligatoria'),
     body('password').notEmpty().withMessage('Password obbligatoria')
 ];
 

@@ -3,11 +3,11 @@ const bcrypt = require('bcryptjs'); //per il confronto delle password
 
 class Admin {
 
-//metodo per trovare un utente in base all'username
-  static async findByUsername(username) {
-     console.log("findbyusername", username);
+//metodo per trovare un utente in base all'email
+  static async findByEmail(email) {
+     console.log("findbyEmail", email);
      return new Promise((resolve, reject) => {
-        db.get('SELECT * FROM admin WHERE username = ?', [username], (err, row) => {
+        db.get('SELECT * FROM admin WHERE email = ?', [email], (err, row) => {
           if (err){
             return reject(err);
           }

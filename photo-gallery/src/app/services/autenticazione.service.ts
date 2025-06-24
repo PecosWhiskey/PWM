@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { TokenService } from './token.service';
 import { HttpClient } from '@angular/common/http';
 import { Cliente } from '../models/cliente.models';
 import { Observable } from 'rxjs';
@@ -11,15 +10,23 @@ export class AutenticazioneService {
 
   private baseUrl = 'http://localhost:3000'; 
 
-  constructor(private tokenService: TokenService, private http : HttpClient) {}
+  constructor(private http : HttpClient) {}
 
-  login(credentials: { email: string, password: string }): Observable<any> {
+  //Richiesta HTTP di login per il cliente
+  loginClient(credentials: { email: string, password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/login-cliente`, credentials); 
     
   } 
 
+  //Richiesta HTTP di registrazione per il cliente
   register(credentials: Cliente) : Observable<any>{
     console.log("dati in autenticazione service: ", credentials);
     return this.http.post(`${this.baseUrl}/api/auth/registrazione-cliente`, credentials);
+  }
+
+  //Richiesta HTTP di login per l'amministratore
+  loginAdmin(credentials: { email: string, password: string }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/auth/login-admin`, credentials); 
+    
   }
 }

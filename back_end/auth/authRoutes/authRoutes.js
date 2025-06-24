@@ -5,7 +5,7 @@ const authControllerBiglietti = require('../authController/authControllerBigliet
 const verifyToken = require('../../middlewares/verifyToken'); //Middleware per verificare il token JWT
 const onlyAdmin = require('../../middlewares/onlyAdmin');
 const { loginValidatorAdmin, loginValidatorClient, registerValidatorClient, datiVoloValidator, idVoloValidator, 
-    creationTicketsValidator, createPassengerValidator, idClienteValidator, validate } = require('../authValidators/authValidators');
+    creationTicketsValidator, createPassengerValidator, idClienteValidator, idTicketValidator, validate } = require('../authValidators/authValidators');
 
 // Login Admin
 router.post('/login-admin', loginValidatorAdmin, validate, authControllerAdmin.login);
@@ -15,6 +15,9 @@ router.post('/creazione-volo', datiVoloValidator, validate, verifyToken, onlyAdm
 
 //Modifica di un volo
 router.post('/modifica-volo', idVoloValidator, datiVoloValidator, validate, verifyToken, onlyAdmin, authControllerBiglietti.voloModification);
+
+//Decremento posti disponibili
+router.post('/decremento-posti', idVoloValidator, authControllerBiglietti.decreseSeats);
 
 //Ricerca voli
 router.post('/ricerca-volo', authControllerBiglietti.voloSearch);
@@ -27,6 +30,12 @@ router.post('/registrazione-cliente', registerValidatorClient, validate, authCon
 
 //Creazione del biglietto
 router.post('/creazione-biglietto', creationTicketsValidator, validate, authControllerBiglietti.createTicket);
+
+//Ricerca del biglietto per effettuare il check-in
+router.post('/ricerca-biglietto', idTicketValidator, validate, authControllerBiglietti.findTicket);
+
+//Modifica del posto a sedere del biglietto
+router.post('/modifica-biglietto', idTicketValidator, validate, authControllerBiglietti.ticketModification);
 
 //Ricerca biglietti acquistati dal cliente
 router.post('/ricerca-biglietti', idClienteValidator, validate, verifyToken, authControllerBiglietti.returnTickets);

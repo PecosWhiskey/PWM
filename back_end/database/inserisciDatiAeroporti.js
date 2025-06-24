@@ -147,7 +147,7 @@ async function visualizzaClienti(){
 // inserisciAeroporto("FCO", "Fiumicino", 1);
 // inserisciAeroporto("MXP", "Malpensa", 2);
 
-// visualizzaPosizione();
-// visualizzaAeroporto();
+visualizzaPosizione();
+visualizzaAeroporto();
 // visualizzaVoli();
 // visualizzaClienti();

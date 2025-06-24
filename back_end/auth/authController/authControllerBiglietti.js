@@ -34,6 +34,22 @@ class AuthControllerBiglietti {
         }
     }
 
+    static async decreseSeats(req,res){
+        console.log('decreseSeats: ', req.body);
+        try{
+            const created = await bigliettiService.decrementaPosti(req.body);
+            res.status(201).json({
+                succes: true,
+                data: created
+            });
+        }catch(err){
+            res.status(400).json({
+                success: false, 
+                message: err.message
+            })
+        }
+    }
+
     static async voloSearch(req,res){
         console.log('voloSearch:', req.body);
         try{
@@ -112,6 +128,36 @@ class AuthControllerBiglietti {
                 message:err.message
             });
        }
+    }
+
+    static async ticketModification(req,res){
+        try{
+            const biglietto = await bigliettiService.modificaBiglietto(req.body);
+             res.status(201).json({
+                succes: true,
+                data: biglietto
+            });
+        }catch(err){
+             res.status(400).json({
+                success: false, 
+                message: err.message
+            })
+        }
+    }
+
+    static async findTicket(req,res){
+        try{
+            const biglietto = await bigliettiService.returnTicket(req.body);
+             res.status(200).json({
+                success:true,
+                data: biglietto
+            });
+        }catch(err){
+            res.status(400).json({
+                success:false,
+                message:err.message
+            });
+        }
     }
 
     static async returnTickets(req,res){

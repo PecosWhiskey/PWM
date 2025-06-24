@@ -8,7 +8,6 @@ const db = new sqlite3.Database("database\\dbAdmin.sqlite", (err) => {
       console.log('Connessione al database ADMIN sqlite avvenuta con successo');
       db.run(`CREATE TABLE IF NOT EXISTS admin (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT UNIQUE NOT NULL
       )`);

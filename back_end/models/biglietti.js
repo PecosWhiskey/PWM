@@ -31,6 +31,19 @@ class Biglietti {
                     });
             });
     }
+     
+    //Aggiorna il numero di posti disponibili per un volo decrementandolo ogni volta che viene acquistato un biglietto
+    static async decrementaPostiDisponibili({idVolo, posti}){
+        return new Promise((resolve,reject)=>{
+            db.run('UPDATE Volo SET postiDisponibili=? WHERE idVolo=?', [posti, idVolo], function(err){
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve({idVolo, posti});
+            } )
+        })
+    }
 
     static async verificaEsistenzaVolo({idAeroportoPartenza, idAeroportoDestinazione, oraPartenza, oraArrivo}){
         return new Promise((resolve,reject)=>{
@@ -173,21 +186,35 @@ class Biglietti {
         });
     }
 
-    static async creaBiglietto({idVolo, idCliente, idPasseggero, tariffa, dataAcquisto}){
-        console.log('creaBiglietto: ',idVolo, idCliente, idPasseggero, tariffa, dataAcquisto);
+    static async creaBiglietto({idVolo, idCliente, idPasseggero, tariffa, posto, dataP, prezzoF, dataAcquisto}){
+        console.log('creaBiglietto: ',idVolo, idCliente, idPasseggero, tariffa, posto, dataP, prezzoF, dataAcquisto);
         return new Promise((resolve,reject)=>{
-            db.run(`INSERT INTO Biglietto (idVolo, idCliente, idPasseggero, tariffa, dataAcquisto) VALUES (?,?,?,?,?)`, 
-                [idVolo, idCliente, idPasseggero, tariffa, dataAcquisto],
+            db.run(`INSERT INTO Biglietto (idVolo, idCliente, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto) VALUES (?,?,?,?,?,?,?,?)`, 
+                [idVolo, idCliente, idPasseggero, tariffa, posto, dataP, prezzoF, dataAcquisto],
                 function (err){
                     if(err){
                         reject(err);
                         return;
                     }
-                    resolve({idBiglietto:this.lastID, idVolo, idCliente, idPasseggero, tariffa, dataAcquisto});
+                    resolve({idBiglietto:this.lastID, idVolo, idCliente, idPasseggero, tariffa, posto, dataP, prezzoF, dataAcquisto});
                 }
             );
         });
     }
+
+    //Modifica posto a sedere
+    static async modificaPosto({idBiglietto, posto}){
+        return new Promise((resolve,reject)=>{
+            db.run("UPDATE Biglietto SET posto=? WHERE idBiglietto=?", [posto, idBiglietto], function(err){
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve({idBiglietto, posto});
+            })
+        })
+    }
+
     //Trova biglietti usando l'ID del cliente che li ha acquistati
     static async restituisciBiglietti(idCliente){
         return new Promise((resolve,reject)=>{
@@ -204,6 +231,19 @@ class Biglietti {
     static async trovaBiglietto(idPasseggero, idVolo){
         return new Promise((resolve,reject)=>{
             db.get('SELECT * FROM Biglietto WHERE idPasseggero=? AND idVolo=?', [idPasseggero, idVolo], (err,row)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve(row);
+            })
+        })
+    }
+    
+    //Ricerca di un biglietto tramite il suo id
+    static async findTicketById(idBiglietto){
+        return new Promise((resolve,reject)=>{
+            db.get('SELECT * FROM Biglietto WHERE idBiglietto', [idBiglietto], (err,row)=>{
                 if(err){
                     reject(err);
                     return;

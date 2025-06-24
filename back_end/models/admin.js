@@ -19,7 +19,7 @@ class Admin {
 // metodo per ricercare l'admin per id
   static async findById(id) {
     return new Promise((resolve, reject) => {
-      db.get('SELECT id, username, email FROM admin WHERE id = ?', [id], (err, row) => {
+      db.get('SELECT id, email FROM admin WHERE id = ?', [id], (err, row) => {
         if (err){
           return reject(err);
         } 

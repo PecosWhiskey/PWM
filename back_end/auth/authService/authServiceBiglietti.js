@@ -17,7 +17,7 @@ class AuthServiceBiglietti {
             }
             return await biglietti.creaVolo(datiVolo);
         }catch (err){
-            console.log("Errore AuthServiceBiglietti : ", err.message);
+            console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
             throw err;
         }
     }
@@ -30,7 +30,20 @@ class AuthServiceBiglietti {
             }
             return await biglietti.modificaVolo(datiVolo);
         }catch(err){
-            console.log('Errore AuthServiceBiglietti: ', err.message);
+            console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
+            throw err;
+        }
+    }
+
+    static async decrementaPosti(dati){
+        try{
+            const volo= await biglietti.findByIdVolo(dati.idVolo);
+            if(!volo){
+                throw new Error("Volo per l'aggiornamento dei posti disponibili insesistente");
+            }
+            return await biglietti.decrementaPostiDisponibili(dati);
+        }catch(err){
+            console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
             throw err;
         }
     }
@@ -44,7 +57,7 @@ class AuthServiceBiglietti {
            }
            return exist; 
         }catch(err){
-            console.log("Errore AuthServiceBiglietti : ", err.message);
+            console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
             throw err;
         } 
     }
@@ -59,7 +72,7 @@ class AuthServiceBiglietti {
             
             return await biglietti.creaCliente(datiCliente);
         }catch(err){
-            console.log("ERRORE generaCliente authService: ", err.message);
+            console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
             throw err;
         }
     }
@@ -74,7 +87,7 @@ class AuthServiceBiglietti {
             }
             return cliente;
         }catch(err){
-            console.log("ERRORE login authServiceBiglietti: ", err.message);
+            console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
             throw err;
         }
     }
@@ -89,7 +102,36 @@ class AuthServiceBiglietti {
 
             return await biglietti.creaBiglietto(datiBiglietto);
         }catch(err){
-            console.log("ERRORE creaBiglietto service: ", err.message);
+            console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
+            throw err;
+        }
+    }
+
+    static async modificaBiglietto(dati){
+        try{
+            const biglietto = await biglietti.findTicketById(dati.idBiglietto);
+
+            if(!biglietto){
+                throw new Error('Nessun biglietto da modificare trovato')
+            }
+
+            return await biglietti.modificaPosto(dati);
+        }catch(err){
+            console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
+            throw err;
+        }
+    }
+
+    static async returnTicket(idBiglietto){
+        try{
+            const biglietto = await biglietti.findTicketById(idBiglietto);
+
+            if(!biglietto){
+                throw new Error("Non è stato acquistato nessun biglietto con questo id");
+            }
+            return biglietto;
+        }catch(err){
+            console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
             throw err;
         }
     }
@@ -104,7 +146,7 @@ class AuthServiceBiglietti {
 
             return exist;
         }catch(err){
-            console.log('ERRORE returnBiglietto service: ', err.message);
+            console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
             throw err;
         }
     }
@@ -119,7 +161,7 @@ class AuthServiceBiglietti {
 
             return exist;
         }catch(err){
-            console.log('ERRORE createPassenger: ', err.message);
+            console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
             throw err;
         }
     }

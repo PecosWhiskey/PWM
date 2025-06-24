@@ -15,6 +15,10 @@ const registerValidatorClient = [
   body('password').notEmpty().withMessage('Password obbligatoria')
 ]
 
+const idTicketValidator = [
+  body('idBiglietto').notEmpty().withMessage('Id del biglietto obbligatorio per la ricerca')
+]
+
 const datiVoloValidator = [
   body('partenza').notEmpty().withMessage('città di partenza obbligatorio').isLength({max: 3}).withMessage("Il codice dell'aeroporto può essere dilunghezza massima 3"),
   body('destinazione').notEmpty().withMessage('città di destinazione obbligatoria').isLength({max: 3}).withMessage("Il codice dell'aeroporto può essere dilunghezza massima 3"),
@@ -56,4 +60,4 @@ const validate = (req, res, next) => {
 };
   
 module.exports = {loginValidatorAdmin, loginValidatorClient, registerValidatorClient, datiVoloValidator, idVoloValidator, 
-    creationTicketsValidator, createPassengerValidator, idClienteValidator, validate};
+    creationTicketsValidator, createPassengerValidator, idClienteValidator, idTicketValidator, validate};

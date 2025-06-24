@@ -186,19 +186,19 @@
     letter-spacing: -0.8px; // Spacing più stretto per un look moderno
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Sottile ombra per profondità
     position: relative;
-    
 
-    
+
+
     // Animazione hover per interattività
     transition: all 0.3s ease;
     cursor: default;
-    
+
     &:hover {
       transform: translateX(4px);
       letter-spacing: -0.5px;
       color: var(--vaygo-secondary); // Cambia colore al hover
     }
-    
+
     // Elemento decorativo opzionale
     &::after {
       content: '';
@@ -219,7 +219,7 @@
   .search-header {
     padding-left: 4px;
     margin-bottom: 24px;
-    
+
     h3 {
       font-size: clamp(28px, 6vw, 36px);
       letter-spacing: -0.6px;
@@ -383,7 +383,6 @@
     padding: 60px 20px;
     background: var(--vaygo-green-light);
   }
-
   .section-header {
     text-align: center;
     margin-bottom: 40px;
@@ -392,7 +391,7 @@
       margin: 0 0 12px 0;
       font-size: 32px;
       font-weight: 700;
-      color: var(--vaygo-text-primary);
+      color: var(--ion-color-medium);
     }
 
     p {

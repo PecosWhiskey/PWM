@@ -141,6 +141,21 @@ class AuthServiceBiglietti {
             const exist = await biglietti.restituisciBiglietti(idCliente);
 
             if(!exist){
+                throw new Error('Non ci sono biglietti acquistati per questo cliente!');
+            }
+
+            return exist;
+        }catch(err){
+            console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
+            throw err;
+        }
+    }
+
+    static async returnBigliettiAdmin(){
+        try{
+            const exist = await biglietti.restituisciBigliettiAdmin();
+
+            if(!exist){
                 throw new Error('Non ci sono biglietti acquistati!');
             }
 

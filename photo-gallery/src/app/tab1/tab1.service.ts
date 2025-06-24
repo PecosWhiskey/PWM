@@ -51,7 +51,7 @@ export class Tab1Service {
   }
 
   setVoliTrovatiAndata(founded: boolean) {
-    this.voliTrovatiAndata.next(founded);;
+    this.voliTrovatiAndata.next(founded);
   }
 
   getVoliTrovatiAndata(): Observable<boolean>{

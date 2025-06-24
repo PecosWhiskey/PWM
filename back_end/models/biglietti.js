@@ -227,6 +227,20 @@ class Biglietti {
             })
         })
     }
+
+    //Restituice tutti i biglietti che sono stati acquistati per farli visualizzare all'amministratore
+    static async restituisciBigliettiAdmin(){
+        return new Promise((resolve,reject)=>{
+            db.all('SELECT * FROM Biglietto', (err,rows)=>{
+                if(err){
+                    reject (err);
+                    return;
+                }
+                resolve(rows);
+            })
+        })
+    }
+
     //Trova il biglietto per id passeggero e id volo
     static async trovaBiglietto(idPasseggero, idVolo){
         return new Promise((resolve,reject)=>{

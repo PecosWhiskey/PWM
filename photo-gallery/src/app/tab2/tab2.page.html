@@ -32,7 +32,7 @@
           </ion-select>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Città di partenza</ion-label>
           <ion-select [(ngModel)]="filtroCompagnia" (ionChange)="applicaFiltri()">
             <ion-select-option value="tutte">Tutte le città</ion-select-option>
@@ -40,7 +40,7 @@
               {{ compagnia }}
             </ion-select-option>
           </ion-select>
-        </ion-item>
+        </ion-item> -->
       </ion-card-content>
     </ion-card>   
 
@@ -59,7 +59,7 @@
               <ion-card-content>
                 <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
                 <p>{{biglietto.prezzo}}</p>
-                <ion-button>Seleziona</ion-button>
+                <ion-button (click)="selezionaAndata(biglietto)">Seleziona</ion-button>
               </ion-card-content>
             </ion-card>
         }
@@ -81,7 +81,7 @@
                 <ion-card-content>
                   <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
                   <p>{{biglietto.prezzo}}</p>
-                  <ion-button>Seleziona</ion-button>
+                  <ion-button (click)="selezionaAndata(biglietto)">Seleziona</ion-button>
                 </ion-card-content>
               </ion-card>
             }
@@ -98,7 +98,7 @@
                 <ion-card-content>
                   <p>{{biglietto.oraPartenza.split(' ')[1]}}    {{biglietto.oraArrivo.split(' ')[1]}}</p>
                   <p>{{biglietto.prezzo}}</p>
-                  <ion-button>Seleziona</ion-button>
+                  <ion-button (click)="selezionaRitorno(biglietto)">Seleziona</ion-button>
                 </ion-card-content>
               </ion-card>
             }

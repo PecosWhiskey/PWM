@@ -16,6 +16,9 @@ router.post('/creazione-volo', datiVoloValidator, validate, verifyToken, onlyAdm
 //Modifica di un volo
 router.post('/modifica-volo', idVoloValidator, datiVoloValidator, validate, verifyToken, onlyAdmin, authControllerBiglietti.voloModification);
 
+//Ricerca di tutti i biglietti acquistati
+router.post('/prenotazioni-ricevute', verifyToken, onlyAdmin, authControllerBiglietti.returnTicketsAdmin);
+
 //Decremento posti disponibili
 router.post('/decremento-posti', idVoloValidator, authControllerBiglietti.decreseSeats);
 

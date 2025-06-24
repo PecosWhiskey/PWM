@@ -176,6 +176,22 @@ class AuthControllerBiglietti {
         }
     }
 
+    static async returnTicketsAdmin(req,res){
+        try{
+            const biglietti = await bigliettiService.returnBigliettiAdmin();
+
+            res.status(200).json({
+                success:true,
+                data: biglietti
+            });
+        } catch(err){
+            res.status(400).json({
+                success:false,
+                message:err.message
+            });
+        }
+    }
+
     static async createPassenger(req,res){
         try{
             const passeggero = await bigliettiService.createPasseggero(req.body);

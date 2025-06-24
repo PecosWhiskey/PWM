@@ -1,0 +1,17 @@
+<ion-content>
+
+  <form #userForm="ngForm">
+
+    @for(numero of passeggeri; track $index; let i=$index){
+      <ion-item>
+        <ion-input type="text" name="idCliente" [(ngModel)]="idCliente" placeholder="Codice fiscale dell'acquirente" ngDefaultControl  required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" name="idPasseggero" [(ngModel)]="idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
+      </ion-item>
+    }
+
+    <ion-button (click)="Acquista()">Acquista</ion-button>
+  </form>
+</ion-content>    

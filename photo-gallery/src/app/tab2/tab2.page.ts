@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Service } from '../tab1/tab1.service';
 import { SessionStorageService } from '../services/session-storage.service';
-import { RouterModule, RouterLink } from '@angular/router';
+import { RouterModule, RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -19,7 +19,8 @@ import { RouterModule, RouterLink } from '@angular/router';
 })
 export class Tab2Page implements OnInit {
 
-  constructor(private tab1Service: Tab1Service, private sessionStorageService: SessionStorageService) {}
+  constructor(private tab1Service: Tab1Service, private sessionStorageService: SessionStorageService,
+    private router: Router) {}
 
   //Valori che cambiano in base ai risultati della ricerca effettuata nel tab1
   voliTrovatiAndata = false; 
@@ -49,9 +50,6 @@ export class Tab2Page implements OnInit {
   //Biglietti filtrati
   bigliettiAndataFiltrati: Volo[] = [];
   bigliettiRitornoFiltrati: Volo[] = [];
-
-  // Combinazioni migliori
-  combinazioniMigliori: { andata: Volo, ritorno: Volo, prezzoTotale: number }[] = [];
 
 
   ngOnInit() {
@@ -113,6 +111,18 @@ export class Tab2Page implements OnInit {
       this.voliTrovatiRitorno = voliTrovatiR;
     }
   };
+
+  selezionaAndata(biglietto: Volo){
+    this.sessionStorageService.setItem('biglietto di andata scelto', biglietto);
+  }
+
+  selezionaRitorno(biglietto: Volo){
+    this.sessionStorageService.setItem('biglietto di ritorno scelto', biglietto);
+  }
+
+  CreaBiglietto(){
+    this.router.navigate(['/crea-biglietto']);
+  }
 
   applicaFiltri(){
     switch(this.filtroPrezzo){

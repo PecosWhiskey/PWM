@@ -1,0 +1,480 @@
+// CreaBigliettoPage - VayGo Airlines Styles
+// ===========================================
+
+.crea-biglietto-page {
+  
+    // Main Content Container
+    ion-content {
+      --background: var(--vaygo-gradient-surface);
+      
+      // Form Container
+      form {
+        padding: var(--vaygo-spacing-lg);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+    }
+  
+    // Page Header
+    .page-header {
+      background: var(--vaygo-white);
+      padding: var(--vaygo-spacing-xl) var(--vaygo-spacing-lg);
+      margin-bottom: var(--vaygo-spacing-lg);
+      border-radius: 0 0 var(--vaygo-radius-xl) var(--vaygo-radius-xl);
+      box-shadow: 0 4px 20px var(--vaygo-shadow);
+      
+      .header-title {
+        font-size: var(--vaygo-font-size-2xl);
+        font-weight: 700;
+        color: var(--vaygo-primary);
+        text-align: center;
+        margin: 0;
+        letter-spacing: -0.5px;
+      }
+      
+      .header-subtitle {
+        font-size: var(--vaygo-font-size-sm);
+        color: var(--vaygo-text-secondary);
+        text-align: center;
+        margin: var(--vaygo-spacing-sm) 0 0 0;
+        font-weight: 500;
+      }
+    }
+  
+    // Passenger Section
+    .passenger-section {
+      background: var(--vaygo-white);
+      border-radius: var(--vaygo-radius-lg);
+      margin: 0 0 var(--vaygo-spacing-lg) 0;
+      box-shadow: 0 4px 20px var(--vaygo-shadow);
+      border: 1px solid var(--vaygo-border);
+      overflow: hidden;
+      animation: vaygoFadeIn 0.5s ease-out;
+      
+      .passenger-header {
+        background: var(--vaygo-gradient-primary);
+        padding: var(--vaygo-spacing-lg);
+        
+        h3 {
+          color: var(--vaygo-white);
+          font-size: var(--vaygo-font-size-lg);
+          font-weight: 600;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: var(--vaygo-spacing-sm);
+          
+          ion-icon {
+            font-size: 20px;
+          }
+        }
+      }
+      
+      .passenger-form {
+        padding: var(--vaygo-spacing-lg);
+        
+        // Input styling
+        ion-item {
+          --background: var(--vaygo-white);
+          --border-radius: var(--vaygo-radius-md);
+          --padding-start: var(--vaygo-spacing-lg);
+          --padding-end: var(--vaygo-spacing-lg);
+          --min-height: 60px;
+          border: 2px solid var(--vaygo-border);
+          margin: 0 0 var(--vaygo-spacing-md) 0;
+          transition: all var(--vaygo-transition-base);
+          border-radius: var(--vaygo-radius-md);
+          
+          &.item-has-focus {
+            --border-color: var(--vaygo-secondary);
+            border-color: var(--vaygo-secondary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+            transform: translateY(-1px);
+          }
+          
+          &.item-has-value {
+            border-color: var(--vaygo-success);
+          }
+          
+          ion-input {
+            --color: var(--vaygo-text-primary);
+            --placeholder-color: var(--vaygo-text-muted);
+            --placeholder-opacity: 0.7;
+            font-weight: 500;
+            font-size: var(--vaygo-font-size-base);
+          }
+          
+          ion-label {
+            color: var(--vaygo-text-primary);
+            font-weight: 600;
+            font-size: var(--vaygo-font-size-sm);
+            margin-bottom: var(--vaygo-spacing-xs);
+          }
+        }
+        
+        // Date input special styling
+        ion-item.date-input {
+          ion-label {
+            color: var(--vaygo-primary);
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  
+    // Flight Information Cards
+    .flight-info-section {
+      margin: var(--vaygo-spacing-lg) 0;
+      
+      .flight-card {
+        background: var(--vaygo-white);
+        border-radius: var(--vaygo-radius-lg);
+        margin: 0 0 var(--vaygo-spacing-md) 0;
+        box-shadow: 0 4px 20px var(--vaygo-shadow);
+        border: 1px solid var(--vaygo-border);
+        overflow: hidden;
+        transition: all var(--vaygo-transition-base);
+        
+        &:hover {
+          box-shadow: 0 8px 32px var(--vaygo-shadow-medium);
+          transform: translateY(-2px);
+        }
+        
+        &.outbound-flight {
+          border-left: 4px solid var(--vaygo-primary);
+        }
+        
+        &.return-flight {
+          border-left: 4px solid var(--vaygo-secondary);
+        }
+        
+        ion-item {
+          --background: transparent;
+          --border-color: transparent;
+          --padding-start: var(--vaygo-spacing-xl);
+          --padding-end: var(--vaygo-spacing-xl);
+          --min-height: auto;
+          
+          ion-label {
+            margin: var(--vaygo-spacing-md) 0;
+            
+            h3 {
+              color: var(--vaygo-text-primary);
+              font-size: var(--vaygo-font-size-lg);
+              font-weight: 700;
+              margin: 0 0 var(--vaygo-spacing-sm) 0;
+              display: flex;
+              align-items: center;
+              gap: var(--vaygo-spacing-sm);
+              
+              ion-icon {
+                color: var(--vaygo-primary);
+                font-size: 20px;
+              }
+            }
+            
+            p {
+              color: var(--vaygo-text-secondary);
+              font-size: var(--vaygo-font-size-sm);
+              margin: 4px 0;
+              font-weight: 500;
+              
+              strong {
+                color: var(--vaygo-text-primary);
+                font-weight: 600;
+              }
+            }
+            
+            .price {
+              color: var(--vaygo-success);
+              font-size: var(--vaygo-font-size-lg);
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  
+    // Status Messages
+    .status-section {
+      margin: var(--vaygo-spacing-lg) 0;
+      
+      .status-card {
+        background: var(--vaygo-white);
+        border-radius: var(--vaygo-radius-lg);
+        margin: 0 0 var(--vaygo-spacing-md) 0;
+        box-shadow: 0 4px 20px var(--vaygo-shadow);
+        border: 1px solid var(--vaygo-border);
+        overflow: hidden;
+        
+        &.success {
+          border-left: 4px solid var(--vaygo-success);
+          
+          .status-icon {
+            color: var(--vaygo-success);
+          }
+        }
+        
+        &.error {
+          border-left: 4px solid var(--vaygo-error);
+          
+          .status-icon {
+            color: var(--vaygo-error);
+          }
+        }
+        
+        &.info {
+          border-left: 4px solid var(--vaygo-info);
+          
+          .status-icon {
+            color: var(--vaygo-info);
+          }
+        }
+        
+        ion-item {
+          --background: transparent;
+          --border-color: transparent;
+          --padding-start: var(--vaygo-spacing-xl);
+          --padding-end: var(--vaygo-spacing-xl);
+          
+          ion-label {
+            margin: var(--vaygo-spacing-md) 0;
+            
+            h3 {
+              color: var(--vaygo-text-primary);
+              font-size: var(--vaygo-font-size-base);
+              font-weight: 600;
+              margin: 0 0 var(--vaygo-spacing-sm) 0;
+              display: flex;
+              align-items: center;
+              gap: var(--vaygo-spacing-sm);
+              
+              .status-icon {
+                font-size: 18px;
+              }
+            }
+            
+            p {
+              color: var(--vaygo-text-secondary);
+              font-size: var(--vaygo-font-size-sm);
+              margin: 0;
+              line-height: 1.5;
+            }
+          }
+        }
+      }
+    }
+  
+    // Purchase Button
+    .purchase-section {
+      margin: var(--vaygo-spacing-xl) 0;
+      padding: var(--vaygo-spacing-lg) 0;
+      text-align: center;
+      
+      .purchase-button {
+        --background: var(--vaygo-gradient-primary);
+        --color: var(--vaygo-white);
+        --border-radius: var(--vaygo-radius-lg);
+        --padding-top: var(--vaygo-spacing-lg);
+        --padding-bottom: var(--vaygo-spacing-lg);
+        --padding-start: var(--vaygo-spacing-2xl);
+        --padding-end: var(--vaygo-spacing-2xl);
+        font-size: var(--vaygo-font-size-lg);
+        font-weight: 700;
+        text-transform: none;
+        letter-spacing: 0.3px;
+        box-shadow: 0 8px 32px rgba(46, 139, 87, 0.4);
+        transition: all var(--vaygo-transition-base);
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.6s, height 0.6s;
+        }
+        
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 40px rgba(46, 139, 87, 0.5);
+          
+          &::before {
+            width: 300px;
+            height: 300px;
+          }
+        }
+        
+        &:disabled {
+          --background: var(--vaygo-text-muted);
+          box-shadow: none;
+          transform: none;
+          opacity: 0.6;
+          cursor: not-allowed;
+          
+          &:hover {
+            transform: none;
+            box-shadow: none;
+            
+            &::before {
+              width: 0;
+              height: 0;
+            }
+          }
+        }
+        
+        ion-icon {
+          margin-left: var(--vaygo-spacing-sm);
+          font-size: 20px;
+        }
+      }
+    }
+  
+    // Form Validation Indicators
+    .validation-indicator {
+      display: flex;
+      align-items: center;
+      gap: var(--vaygo-spacing-xs);
+      margin: var(--vaygo-spacing-xs) 0 0 var(--vaygo-spacing-lg);
+      font-size: var(--vaygo-font-size-xs);
+      
+      &.valid {
+        color: var(--vaygo-success);
+        
+        ion-icon {
+          color: var(--vaygo-success);
+        }
+      }
+      
+      &.invalid {
+        color: var(--vaygo-error);
+        
+        ion-icon {
+          color: var(--vaygo-error);
+        }
+      }
+      
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+  
+    // Progress Indicator
+    .progress-indicator {
+      background: var(--vaygo-white);
+      padding: var(--vaygo-spacing-lg);
+      margin: 0 0 var(--vaygo-spacing-lg) 0;
+      border-radius: var(--vaygo-radius-lg);
+      box-shadow: 0 2px 16px var(--vaygo-shadow);
+      
+      .progress-bar {
+        height: 4px;
+        background: var(--vaygo-border);
+        border-radius: 2px;
+        overflow: hidden;
+        margin: var(--vaygo-spacing-sm) 0;
+        
+        .progress-fill {
+          height: 100%;
+          background: var(--vaygo-gradient-primary);
+          border-radius: 2px;
+          transition: width var(--vaygo-transition-slow);
+        }
+      }
+      
+      .progress-text {
+        font-size: var(--vaygo-font-size-sm);
+        color: var(--vaygo-text-secondary);
+        text-align: center;
+        font-weight: 500;
+      }
+    }
+  
+    // Responsive Design
+    @media (max-width: 768px) {
+      form {
+        padding: var(--vaygo-spacing-md);
+      }
+      
+      .passenger-section {
+        margin: 0 0 var(--vaygo-spacing-md) 0;
+        
+        .passenger-form {
+          padding: var(--vaygo-spacing-md);
+        }
+      }
+      
+      .flight-card ion-item {
+        --padding-start: var(--vaygo-spacing-lg);
+        --padding-end: var(--vaygo-spacing-lg);
+      }
+      
+      .purchase-button {
+        --padding-start: var(--vaygo-spacing-xl);
+        --padding-end: var(--vaygo-spacing-xl);
+        font-size: var(--vaygo-font-size-base);
+      }
+    }
+  
+    // Loading States
+    .loading-skeleton {
+      .passenger-section,
+      .flight-card,
+      .status-card {
+        position: relative;
+        overflow: hidden;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: var(--vaygo-skeleton);
+          opacity: 0.7;
+        }
+      }
+    }
+  
+    // Animations
+    .slide-in-up {
+      animation: slideInUp 0.5s ease-out;
+    }
+    
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .bounce-in {
+      animation: bounceIn 0.6s ease-out;
+    }
+    
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }

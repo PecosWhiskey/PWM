@@ -1,206 +1,222 @@
-// CreaBigliettoPage - VayGo Airlines
-// Ionic Angular Standalone Component Styles
-// ===========================================
-
 // Page Container
 .crea-biglietto-page {
     ion-content {
-      --background: var(--vaygo-gradient-surface);
+      --background: var(--ion-color-light);
     }
   
     // Form Container
     form {
-      padding: var(--vaygo-spacing-md);
-      
-      // Passenger Cards (for each passenger in the loop)
-      .passenger-card {
-        background: var(--vaygo-white);
-        border-radius: var(--vaygo-radius-lg);
-        margin-bottom: var(--vaygo-spacing-lg);
-        box-shadow: 0 4px 20px var(--vaygo-shadow);
-        border: 1px solid var(--vaygo-border);
-        overflow: hidden;
-        
-        .passenger-header {
-          background: var(--vaygo-gradient-primary);
-          padding: var(--vaygo-spacing-md) var(--vaygo-spacing-lg);
-          
-          h3 {
-            color: var(--vaygo-white);
-            font-size: var(--vaygo-font-size-lg);
-            font-weight: 600;
-            margin: 0;
-          }
-        }
-        
-        .passenger-inputs {
-          padding: var(--vaygo-spacing-lg);
-        }
-      }
+      padding: var(--ion-padding);
+      max-width: 600px;
+      margin: 0 auto;
     }
   
-    // Ion-Item Input Styling
+    // Ion-Item Input Styling - applicato direttamente agli ion-item del form
     ion-item {
-      --background: var(--vaygo-white);
-      --border-radius: var(--vaygo-radius-md);
-      --padding-start: var(--vaygo-spacing-lg);
-      --padding-end: var(--vaygo-spacing-lg);
+      --background: var(--ion-color-step-50, #ffffff);
+      --border-radius: 12px;
+      --padding-start: 24px;
+      --padding-end: 24px;
       --min-height: 60px;
-      border: 2px solid var(--vaygo-border);
-      margin-bottom: var(--vaygo-spacing-md);
-      border-radius: var(--vaygo-radius-md);
-      transition: all var(--vaygo-transition-base);
+      border: 2px solid var(--ion-color-step-150, #e2e8f0);
+      margin-bottom: 16px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(var(--ion-color-dark-rgb, 0, 0, 0), 0.08);
       
       &.item-has-focus {
-        border-color: var(--vaygo-secondary);
-        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+        border-color: var(--ion-color-primary);
+        box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb), 0.15);
         transform: translateY(-1px);
       }
       
       &.item-has-value {
-        border-color: var(--vaygo-success);
+        border-color: var(--ion-color-success);
+      }
+      
+      &.item-invalid {
+        border-color: var(--ion-color-danger);
+        box-shadow: 0 0 0 3px rgba(var(--ion-color-danger-rgb), 0.15);
       }
       
       ion-input {
-        --color: var(--vaygo-text-primary);
-        --placeholder-color: var(--vaygo-text-muted);
+        --color: var(--ion-color-dark);
+        --placeholder-color: var(--ion-color-medium);
         font-weight: 500;
-        font-size: var(--vaygo-font-size-base);
+        font-size: 16px;
+        
+        input {
+          font-family: inherit;
+        }
       }
       
       ion-label {
-        color: var(--vaygo-primary);
+        color: var(--ion-color-primary);
         font-weight: 600;
-        font-size: var(--vaygo-font-size-sm);
-      }
-    }
-  
-    // Flight Information Display
-    .flight-info {
-      background: var(--vaygo-white);
-      border-radius: var(--vaygo-radius-lg);
-      margin: var(--vaygo-spacing-lg) var(--vaygo-spacing-md);
-      box-shadow: 0 4px 20px var(--vaygo-shadow);
-      border: 1px solid var(--vaygo-border);
-      
-      &.outbound {
-        border-left: 4px solid var(--vaygo-primary);
-      }
-      
-      &.return {
-        border-left: 4px solid var(--vaygo-secondary);
-      }
-      
-      ion-item {
-        --background: transparent;
-        --border-color: transparent;
-        border: none;
-        margin: 0;
-        
-        ion-label {
-          h3 {
-            color: var(--vaygo-text-primary);
-            font-size: var(--vaygo-font-size-lg);
-            font-weight: 700;
-            margin: 0 0 var(--vaygo-spacing-sm) 0;
-          }
-          
-          p {
-            color: var(--vaygo-text-secondary);
-            font-size: var(--vaygo-font-size-sm);
-            margin: 4px 0;
-            font-weight: 500;
-            
-            &.price {
-              color: var(--vaygo-success);
-              font-size: var(--vaygo-font-size-lg);
-              font-weight: 700;
-            }
-          }
-        }
-      }
-    }
-  
-    // Status Messages
-    .status-message {
-      background: var(--vaygo-white);
-      border-radius: var(--vaygo-radius-lg);
-      margin: var(--vaygo-spacing-md);
-      box-shadow: 0 4px 20px var(--vaygo-shadow);
-      border: 1px solid var(--vaygo-border);
-      
-      &.success {
-        border-left: 4px solid var(--vaygo-success);
-      }
-      
-      &.error {
-        border-left: 4px solid var(--vaygo-error);
-      }
-      
-      ion-item {
-        --background: transparent;
-        --border-color: transparent;
-        border: none;
-        margin: 0;
-        
-        ion-label {
-          h3 {
-            color: var(--vaygo-text-primary);
-            font-size: var(--vaygo-font-size-base);
-            font-weight: 600;
-            margin: 0 0 var(--vaygo-spacing-xs) 0;
-          }
-          
-          p {
-            color: var(--vaygo-text-secondary);
-            font-size: var(--vaygo-font-size-sm);
-            margin: 0;
-          }
-        }
+        font-size: 14px;
+        margin-bottom: 4px;
       }
     }
   
     // Purchase Button
     ion-button {
-      --background: var(--vaygo-gradient-primary);
-      --color: var(--vaygo-white);
-      --border-radius: var(--vaygo-radius-lg);
-      --padding-top: var(--vaygo-spacing-lg);
-      --padding-bottom: var(--vaygo-spacing-lg);
-      font-size: var(--vaygo-font-size-lg);
+      --background: var(--ion-color-primary);
+      --color: var(--ion-color-primary-contrast);
+      --border-radius: 16px;
+      --padding-top: 20px;
+      --padding-bottom: 20px;
+      font-size: 18px;
       font-weight: 700;
       text-transform: none;
       letter-spacing: 0.3px;
-      box-shadow: 0 8px 32px rgba(46, 139, 87, 0.4);
-      margin: var(--vaygo-spacing-xl) var(--vaygo-spacing-md) var(--vaygo-spacing-lg);
-      transition: all var(--vaygo-transition-base);
+      box-shadow: 0 8px 32px rgba(var(--ion-color-primary-rgb), 0.4);
+      margin: 32px 0 24px;
+      width: 100%;
+      height: 56px;
+      transition: all 0.3s ease;
       
       &:hover:not([disabled]) {
         transform: translateY(-2px);
-        box-shadow: 0 12px 40px rgba(46, 139, 87, 0.5);
+        box-shadow: 0 12px 40px rgba(var(--ion-color-primary-rgb), 0.5);
       }
       
       &[disabled] {
-        --background: var(--vaygo-text-muted);
+        --background: var(--ion-color-medium);
         opacity: 0.6;
         box-shadow: none;
         transform: none;
+      }
+  
+      ion-spinner {
+        margin-right: 8px;
       }
     }
   
     // Responsive adjustments
     @media (max-width: 768px) {
       form {
-        padding: var(--vaygo-spacing-sm);
-      }
-      
-      .passenger-card .passenger-inputs {
-        padding: var(--vaygo-spacing-md);
+        padding: 12px;
       }
       
       ion-item {
-        --padding-start: var(--vaygo-spacing-md);
-        --padding-end: var(--vaygo-spacing-md);
+        --padding-start: 16px;
+        --padding-end: 16px;
+        margin-bottom: 12px;
       }
+    }
+  }
+  
+  // Dark mode support - CSS media query
+  @media (prefers-color-scheme: dark) {
+    .crea-biglietto-page {
+      ion-content {
+        --background: var(--ion-color-dark);
+      }
+  
+      ion-item {
+        --background: var(--ion-color-step-100);
+        border-color: var(--ion-color-step-200);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        
+        &.item-has-focus {
+          box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb), 0.25);
+        }
+        
+        &.item-invalid {
+          box-shadow: 0 0 0 3px rgba(var(--ion-color-danger-rgb), 0.25);
+        }
+  
+        ion-input {
+          --color: var(--ion-color-light);
+          --placeholder-color: var(--ion-color-medium-tint);
+        }
+  
+        ion-label {
+          color: var(--ion-color-primary-tint);
+        }
+      }
+  
+      ion-button {
+        box-shadow: 0 8px 32px rgba(var(--ion-color-primary-rgb), 0.6);
+        
+        &:hover:not([disabled]) {
+          box-shadow: 0 12px 40px rgba(var(--ion-color-primary-rgb), 0.7);
+        }
+      }
+    }
+  }
+  
+  // Force dark mode support for Ionic's class-based dark mode
+  :host-context(.ion-palette-dark) {
+    .crea-biglietto-page {
+      ion-content {
+        --background: var(--ion-color-dark);
+      }
+  
+      ion-item {
+        --background: var(--ion-color-step-100);
+        border-color: var(--ion-color-step-200);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        
+        &.item-has-focus {
+          box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb), 0.3);
+        }
+        
+        &.item-invalid {
+          box-shadow: 0 0 0 3px rgba(var(--ion-color-danger-rgb), 0.3);
+        }
+  
+        ion-input {
+          --color: var(--ion-color-light);
+          --placeholder-color: var(--ion-color-medium-tint);
+        }
+  
+        ion-label {
+          color: var(--ion-color-primary-tint);
+        }
+      }
+  
+      ion-button {
+        box-shadow: 0 8px 32px rgba(var(--ion-color-primary-rgb), 0.6);
+        
+        &:hover:not([disabled]) {
+          box-shadow: 0 12px 40px rgba(var(--ion-color-primary-rgb), 0.7);
+        }
+      }
+    }
+  }
+  
+  // Additional styling for better UX
+  .crea-biglietto-page {
+    // Smooth transitions for theme switching
+    * {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+  
+    // Focus outline removal for better custom focus styles
+    ion-item ion-input {
+      &:focus, &:focus-visible {
+        outline: none;
+      }
+    }
+  
+    // Form validation styling
+    form.ng-submitted {
+      ion-item {
+        &.ng-invalid {
+          border-color: var(--ion-color-danger);
+          animation: shake 0.5s ease-in-out;
+        }
+      }
+    }
+  }
+  
+  // Shake animation for invalid fields
+  @keyframes shake {
+    0%, 20%, 40%, 60%, 80% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-5px);
     }
   }

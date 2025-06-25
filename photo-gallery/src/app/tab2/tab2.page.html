@@ -31,7 +31,15 @@
             <ion-select-option value="premium">Premium (> 300€)</ion-select-option>
           </ion-select>
         </ion-item>
-
+        
+        <section class="acquista-section">
+          <div class="acquista-section">
+            <ion-button expand="block" class="acquista-button" [routerLink]="'/crea-biglietto'">
+              <ion-icon name="card" slot="start"></ion-icon>
+              Vai all'acquisto
+            </ion-button>
+          </div>
+        </section>
         <!-- <ion-item>
           <ion-label>Città di partenza</ion-label>
           <ion-select [(ngModel)]="filtroCompagnia" (ionChange)="applicaFiltri()">

@@ -24,5 +24,11 @@ export const routes: Routes = [
     path: 'check-in',
     loadComponent: () => import('./check-in/check-in.page').then( m => m.CheckInPage)
   },
+  {
+    path: 'prenotazioni',
+    loadComponent: () => import('./prenotazioni/prenotazioni.page').then( m => m.PrenotazioniPage),
+    canActivate : [authGuard]
+  },
+
 
 ];

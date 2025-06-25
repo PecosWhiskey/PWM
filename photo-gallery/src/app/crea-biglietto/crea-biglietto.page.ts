@@ -12,7 +12,7 @@ import { BigliettiService } from '../services/biglietti.service';
   templateUrl: './crea-biglietto.page.html',
   styleUrls: ['./crea-biglietto.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonLabel, IonButton, IonItem, IonContent, CommonModule, FormsModule]
 })
 export class CreaBigliettoPage implements OnInit {
 

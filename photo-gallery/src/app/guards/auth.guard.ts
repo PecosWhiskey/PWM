@@ -13,12 +13,12 @@ export const authGuard: CanActivateFn = async (route, state) => {
     const isLogged = await tokenService.isLogged(); 
     
     if (isLogged) { 
-      console.log('Accesso alla gestione dei voli consentito'); 
+      console.log('Accesso consentito'); 
        // Permette l'accesso 
       return true;
     } else { 
       // Reindirizza al login bloccandone l'accesso 
-      console.log('Accesso alla gestione-voli negato'); 
+      console.log('Accesso negato'); 
       router.navigate(['/tabs/tab3']); 
       return false; 
     } 

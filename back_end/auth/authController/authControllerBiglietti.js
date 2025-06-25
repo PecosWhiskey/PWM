@@ -192,6 +192,22 @@ class AuthControllerBiglietti {
         }
     }
 
+    static async returnFlightsForAdmin(req,res){
+        try{
+            const voli = await bigliettiService.returnForAdmin();
+
+            res.status(200).json({
+                success:true,
+                data: voli
+            });
+        } catch(err){
+            res.status(400).json({
+                success:false,
+                message:err.message
+            });
+        }
+    }
+
     static async returnForCheckIn(req,res){
         try{
             const biglietto = await bigliettiService.returnForCheckIn(req.body);

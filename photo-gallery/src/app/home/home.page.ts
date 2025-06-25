@@ -6,7 +6,8 @@ import { IonContent, IonItem, IonButton, IonInput, IonDatetime, IonCard, IonCard
 //import { CercaBigliettoService } from './home-service.service';
 import { HomeService } from './home.service';
 import { RouterModule, RouterOutlet, RouterLink} from '@angular/router';
-import { TokenService } from '../services/token.service';
+import { Volo } from '../models/volo.models';
+import { GestioneVoliService } from '../gestione-voli/gestione-voli.service';
 
 @Component({
   selector: 'app-home',
@@ -18,131 +19,23 @@ import { TokenService } from '../services/token.service';
 })
 export class HomePage {
 
-  constructor(private accountSerivice: HomeService, private tokenService: TokenService) {}
+  voli: Volo[] = [];
 
-  idCliente = ''; //codice fiscale del cliente che prendiamo come id
-  nome = '';
-  cognome = '';
-  dataNascita = '';
-  documentoID = '';
-  sesso = '';
-  nazionalita = '';
-  stato = '';
-  citta= '';
-  CAP = '';
-  indirizzo = '';
-  numCivico = 0;
-  disabile = 0;
-  email = '';
-  password= '';
+  constructor(private gestioneVoliService: GestioneVoliService) {}
 
-  form= 'Login'; //uguale a login se l'utente clicca su login, uguale a registrazione se l'utente clicca su registrazione.
-  //          il valore viene passato dalla page cerca-biglietto all'accountService e ottenuto qui tramite il service.
-
-  isLogged=true;
-
-  ngOnInit(): void {}
-
-  changeForm(){
-    this.form='Registrazione';
+  ngOnInit(): void {
+    this.caricaVoli();
   }
 
-  
-  Registrazione(){
-    //creo l'oggetto che contiene i dati da inviare al server
-    const data= { 
-      idCliente: this.idCliente,
-      nome: this.nome,
-      cognome: this.cognome,
-      dataNascita: this.dataNascita,
-      documentoID: this.documentoID,
-      sesso: this.sesso,
-      nazionalita: this.nazionalita,
-      stato: this.stato,
-      citta: this.citta,
-      CAP: this.CAP,
-      indirizzo: this.indirizzo,
-      numCivico: this.numCivico,
-      email: this.email,
-      password: this.password,
-    }
-    console.log("Dati inseriti: ", data);
-
-    this.accountSerivice.register(data).subscribe({ 
-        next: async (response) => {
-         console.log('Registration success:', response);
-         console.log(response.data.email);
-         if(response.token){
-          try{
-            //Salva il token ricevuto
-            await this.tokenService.setToken(response.token);
-          
-            //Salva le info del cliente contenute nel token
-            const userInfo = this.tokenService.getClientInfoFromToken(response.token);
-            await this.tokenService.setClientInfo(userInfo);
-          
-            console.log('Token e dati del cliente salvati con successo');
-
-            const token = await this.tokenService.getToken();
-            const adminInfo = await this.tokenService.getClientInfo();
-            console.log('Token e dati del cliente salvati con successo', token);
-            console.log('Admin info: ', adminInfo);
-
-            this.isLogged = await this.tokenService.isLogged();
-            console.log("Loggato: ", this.isLogged);
-
-          }catch(err){
-            console.log("Errore nel salvare i dati");
-            this.isLogged = false;
-          }
-
-         }else{
-          console.log("Nessun token ricevuto");
-          this.isLogged = false;
-         }
-        },
-        error: (err) => {
-         console.log('Registration error:', err);
-         this.isLogged = false;
-        },
-       })
-  }
-  Login(){
-     this.accountSerivice.login({email:this.email, password:this.password}).subscribe({ 
-         next: async (response) => {
-         console.log('Login success:', response);
-         if(response.token){
-          try{
-            //Salva il token ricevuto
-            await this.tokenService.setToken(response.token);
-          
-            //Salva le info del cliente contenute nel token
-            const userInfo = this.tokenService.getClientInfoFromToken(response.token);
-            await this.tokenService.setClientInfo(userInfo);
-          
-            const token = await this.tokenService.getToken();
-            const adminInfo = await this.tokenService.getClientInfo();
-            console.log('Token e dati del cliente salvati con successo', token);
-            console.log('Admin info: ', adminInfo);
-
-            this.isLogged = await this.tokenService.isLogged();
-            console.log("Loggato: ", this.isLogged);
-
-          }catch(err){
-            console.log("Errore nel salvare i dati");
-            this.isLogged = false;
-          }
-
-         }else{
-          console.log("Nessun token ricevuto");
-          this.isLogged = false;
-         }
-
-        },
-        error: (err) => {
-         console.log('Login error:', err);
-        this.isLogged = false;
-        },
-     });
+  caricaVoli(){
+    this.gestioneVoliService.CercaVoliDisponibili().subscribe({
+      next: (response) => {
+        console.log("Search success: ", response);
+        this.voli = response.data;
+      },
+       error: (err) => {
+        console.log("Search error: ", err);
+       }
+    })
   }
 }

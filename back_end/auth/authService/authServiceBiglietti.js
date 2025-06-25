@@ -167,6 +167,21 @@ class AuthServiceBiglietti {
         }
     }
 
+    static async returnForAdmin(){
+        try{
+            const exist = await biglietti.findForAdmin();
+
+            if(!exist){
+                throw new Error('Non ci sono voli disponibili');
+            }
+
+            return exist;
+        }catch(err){
+            console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
+            throw err;
+        }
+    }
+
     static async returnForCheckIn(dati){
         try{
             console.log("service returnForCheckIn: ", dati);

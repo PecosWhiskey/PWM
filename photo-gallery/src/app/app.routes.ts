@@ -8,13 +8,15 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadComponent: () => import('./home/home.page').then( m => m.HomePage)
+    loadComponent: () => import('./home/home.page').then( m => m.HomePage),
+    canActivate : [authGuard]
   },
   {
     path: 'gestione-voli',
     loadComponent: () => import('./gestione-voli/gestione-voli.page').then( m => m.GestioneVoliPage),
     canActivate : [authGuard]
-  },  {
+  },
+  {
     path: 'crea-biglietto',
     loadComponent: () => import('./crea-biglietto/crea-biglietto.page').then( m => m.CreaBigliettoPage)
   },

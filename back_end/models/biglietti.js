@@ -242,6 +242,19 @@ class Biglietti {
             })
         })
     }
+    
+    //Restituisce tutti i voli disponibili da far visualizzare all'amministratore
+    static async findForAdmin(){
+        return new Promise((resolve,reject)=>{
+            db.all('SELECT * FROM Volo WHERE postiDisponibili > 0', (err,rows)=>{
+                if(err){
+                    reject (err);
+                    return;
+                }
+                resolve(rows);
+            })
+        })
+    }
 
     //Trova il biglietto per id passeggero e id volo
     static async trovaBiglietto(idPasseggero, idVolo){

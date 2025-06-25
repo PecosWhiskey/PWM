@@ -1,222 +1,234 @@
-// Page Container
-.crea-biglietto-page {
-    ion-content {
-      --background: var(--ion-color-light);
-    }
+// Stili per la pagina crea-biglietto
+ion-content {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 24px;
+  --background: var(--ion-background-color);
+}
+
+// Stili per il form
+form {
+  background: var(--ion-card-background);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px var(--ion-color-step-100);
+  border: 1px solid var(--ion-color-step-150);
   
-    // Form Container
-    form {
-      padding: var(--ion-padding);
-      max-width: 600px;
-      margin: 0 auto;
+  ion-item {
+    margin-bottom: 16px;
+    border-radius: 12px;
+    --background: var(--ion-item-background);
+    --border-color: var(--ion-color-step-200);
+    --border-width: 1px;
+    --border-style: solid;
+    --color: var(--ion-text-color);
+    box-shadow: 0 2px 8px var(--ion-color-step-50);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      --background: var(--ion-color-step-50);
+      box-shadow: 0 4px 16px var(--ion-color-step-150);
+      transform: translateY(-2px);
     }
-  
-    // Ion-Item Input Styling - applicato direttamente agli ion-item del form
-    ion-item {
-      --background: var(--ion-color-step-50, #ffffff);
-      --border-radius: 12px;
-      --padding-start: 24px;
-      --padding-end: 24px;
-      --min-height: 60px;
-      border: 2px solid var(--ion-color-step-150, #e2e8f0);
-      margin-bottom: 16px;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(var(--ion-color-dark-rgb, 0, 0, 0), 0.08);
+    
+    &:focus-within {
+      --border-color: var(--ion-color-primary);
+      --border-width: 2px;
+      box-shadow: 0 0 0 3px var(--ion-color-primary-tint);
+    }
+    
+    &:last-of-type {
+      margin-bottom: 24px;
+    }
+    
+    ion-input {
+      --color: var(--ion-text-color);
+      --placeholder-color: var(--ion-color-step-600);
+      font-size: 16px;
+      font-weight: 400;
+      transition: color 0.2s ease;
       
-      &.item-has-focus {
-        border-color: var(--ion-color-primary);
-        box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb), 0.15);
-        transform: translateY(-1px);
-      }
-      
-      &.item-has-value {
-        border-color: var(--ion-color-success);
-      }
-      
-      &.item-invalid {
-        border-color: var(--ion-color-danger);
-        box-shadow: 0 0 0 3px rgba(var(--ion-color-danger-rgb), 0.15);
-      }
-      
-      ion-input {
-        --color: var(--ion-color-dark);
-        --placeholder-color: var(--ion-color-medium);
-        font-weight: 500;
-        font-size: 16px;
-        
-        input {
-          font-family: inherit;
-        }
-      }
-      
-      ion-label {
-        color: var(--ion-color-primary);
-        font-weight: 600;
-        font-size: 14px;
-        margin-bottom: 4px;
+      &:focus {
+        --color: var(--ion-color-primary);
       }
     }
-  
-    // Purchase Button
-    ion-button {
-      --background: var(--ion-color-primary);
-      --color: var(--ion-color-primary-contrast);
-      --border-radius: 16px;
-      --padding-top: 20px;
-      --padding-bottom: 20px;
-      font-size: 18px;
-      font-weight: 700;
-      text-transform: none;
-      letter-spacing: 0.3px;
-      box-shadow: 0 8px 32px rgba(var(--ion-color-primary-rgb), 0.4);
-      margin: 32px 0 24px;
-      width: 100%;
-      height: 56px;
-      transition: all 0.3s ease;
-      
-      &:hover:not([disabled]) {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 40px rgba(var(--ion-color-primary-rgb), 0.5);
-      }
-      
-      &[disabled] {
-        --background: var(--ion-color-medium);
-        opacity: 0.6;
-        box-shadow: none;
-        transform: none;
-      }
-  
-      ion-spinner {
-        margin-right: 8px;
-      }
-    }
-  
-    // Responsive adjustments
-    @media (max-width: 768px) {
-      form {
-        padding: 12px;
-      }
-      
-      ion-item {
-        --padding-start: 16px;
-        --padding-end: 16px;
-        margin-bottom: 12px;
-      }
+    
+    ion-label {
+      font-weight: 600;
+      color: var(--ion-color-primary);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
   }
   
-  // Dark mode support - CSS media query
-  @media (prefers-color-scheme: dark) {
-    .crea-biglietto-page {
-      ion-content {
-        --background: var(--ion-color-dark);
-      }
+  // Stile per il bottone
+  ion-button {
+    margin-top: 32px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 56px;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    --border-radius: 16px;
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-primary-contrast);
+    --box-shadow: 0 8px 24px var(--ion-color-primary-tint);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      --background: var(--ion-color-primary-shade);
+      --box-shadow: 0 12px 32px var(--ion-color-primary-tint);
+      transform: translateY(-3px);
+    }
+    
+    &:active {
+      transform: translateY(-1px);
+      --box-shadow: 0 4px 16px var(--ion-color-primary-tint);
+    }
+  }
+}
+
+// Stili specifici per gli input
+ion-input {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --color: var(--ion-text-color);
   
-      ion-item {
-        --background: var(--ion-color-step-100);
-        border-color: var(--ion-color-step-200);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        
-        &.item-has-focus {
-          box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb), 0.25);
-        }
-        
-        &.item-invalid {
-          box-shadow: 0 0 0 3px rgba(var(--ion-color-danger-rgb), 0.25);
-        }
-  
-        ion-input {
-          --color: var(--ion-color-light);
-          --placeholder-color: var(--ion-color-medium-tint);
-        }
-  
-        ion-label {
-          color: var(--ion-color-primary-tint);
-        }
-      }
-  
-      ion-button {
-        box-shadow: 0 8px 32px rgba(var(--ion-color-primary-rgb), 0.6);
-        
-        &:hover:not([disabled]) {
-          box-shadow: 0 12px 40px rgba(var(--ion-color-primary-rgb), 0.7);
-        }
+  &[type="date"] {
+    --padding-top: 14px;
+    
+    // Personalizza l'icona del calendario per tema chiaro/scuro
+    &::-webkit-calendar-picker-indicator {
+      filter: var(--ion-color-step-400);
+      opacity: 0.8;
+      cursor: pointer;
+      
+      &:hover {
+        opacity: 1;
+        transform: scale(1.1);
       }
     }
   }
+}
+
+// Stile per gli item con data
+ion-item[lines="full"] {
+  background: var(--ion-color-step-50);
   
-  // Force dark mode support for Ionic's class-based dark mode
-  :host-context(.ion-palette-dark) {
-    .crea-biglietto-page {
-      ion-content {
-        --background: var(--ion-color-dark);
-      }
+  ion-label[position="stacked"] {
+    margin-bottom: 12px;
+    font-size: 13px;
+    position: relative;
+    color: var(--ion-color-primary);
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: var(--ion-color-primary);
+      border-radius: 1px;
+    }
+  }
+}
+
+// Effetti di loading per migliorare l'UX
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+// Animazioni per l'ingresso del form
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+form {
+  animation: slideInUp 0.8s ease-out;
   
-      ion-item {
-        --background: var(--ion-color-step-100);
-        border-color: var(--ion-color-step-200);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-        
-        &.item-has-focus {
-          box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb), 0.3);
-        }
-        
-        &.item-invalid {
-          box-shadow: 0 0 0 3px rgba(var(--ion-color-danger-rgb), 0.3);
-        }
-  
-        ion-input {
-          --color: var(--ion-color-light);
-          --placeholder-color: var(--ion-color-medium-tint);
-        }
-  
-        ion-label {
-          color: var(--ion-color-primary-tint);
-        }
-      }
-  
-      ion-button {
-        box-shadow: 0 8px 32px rgba(var(--ion-color-primary-rgb), 0.6);
-        
-        &:hover:not([disabled]) {
-          box-shadow: 0 12px 40px rgba(var(--ion-color-primary-rgb), 0.7);
-        }
+  ion-item {
+    animation: slideInUp 0.6s ease-out;
+    animation-fill-mode: both;
+    
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
       }
     }
   }
+}
+
+// Stili responsivi
+@media (max-width: 768px) {
+  ion-content {
+    --padding-start: 16px;
+    --padding-end: 16px;
+  }
   
-  // Additional styling for better UX
-  .crea-biglietto-page {
-    // Smooth transitions for theme switching
-    * {
-      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-    }
+  form {
+    padding: 20px;
+    margin: 10px 0;
+  }
+}
+
+// Stili specifici per tema scuro
+@media (prefers-color-scheme: dark) {
+  form {
+    border: 1px solid var(--ion-color-step-200);
+  }
   
-    // Focus outline removal for better custom focus styles
-    ion-item ion-input {
-      &:focus, &:focus-visible {
-        outline: none;
-      }
-    }
-  
-    // Form validation styling
-    form.ng-submitted {
-      ion-item {
-        &.ng-invalid {
-          border-color: var(--ion-color-danger);
-          animation: shake 0.5s ease-in-out;
-        }
-      }
+  ion-item {
+    &:hover {
+      --background: var(--ion-color-step-100);
     }
   }
   
-  // Shake animation for invalid fields
-  @keyframes shake {
-    0%, 20%, 40%, 60%, 80% {
-      transform: translateX(0);
-    }
-    10%, 30%, 50%, 70%, 90% {
-      transform: translateX(-5px);
+  ion-input[type="date"] {
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(1);
     }
   }
+}
+
+// Supporto per il tema scuro di Ionic
+.ios.dark,
+.md.dark {
+  ion-content {
+    --background: var(--ion-background-color);
+  }
+  
+  form {
+    background: var(--ion-card-background);
+    border-color: var(--ion-color-step-200);
+  }
+  
+  ion-item {
+    --background: var(--ion-item-background);
+    --color: var(--ion-text-color);
+  }
+  
+  ion-input[type="date"] {
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(0.8);
+    }
+  }
+}

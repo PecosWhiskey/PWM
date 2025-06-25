@@ -79,6 +79,93 @@ export class CreaBigliettoPage implements OnInit {
         console.log('Creation success:', response);
         this.creazioneEsito = response.message;
         this.passeggeroCreato= true;
+        this.idPasseggero = response.data.idPasseggero;
+        
+        //Creato il passeggero procedo a creare il biglietto
+        //Ottengo la data corrente
+        const data = new Date(); 
+        this.dataAcquisto = data.toISOString().split('T')[0]; //la traformo in formato ISO e ricavo solo la prima parte (YYYY-MM-DD)
+        //Creazione del biglietto di andata
+        const datiAndata = {
+          idVolo: this.bigliettoAndata.idVolo,
+          idPasseggero : this.idPasseggero,
+          tariffa: this.tariffa,
+          posto: this.posto,
+          dataPartenza: this.bigliettoAndata.oraPartenza,
+          prezzoFinale: this.bigliettoAndata.prezzo,
+          dataAcquisto: this.dataAcquisto
+        }
+
+        this.bigliettiService.CreaBiglietto(datiAndata).subscribe({
+          next: (response) => {
+            console.log('Creation success:', response);
+            this.creazioneEsito = response.message;
+
+            //Creato il biglietto decremento dei posti disponibili per i voli di cui è stato acquistato un biglietto
+            //Decremento per il volo di andata
+            const postiNuovi = this.bigliettoAndata.postiDisponibili - 1;
+            const datiVolo = {
+              idVolo: this.bigliettoAndata.idVolo,
+              posti: postiNuovi
+            }
+            this.bigliettiService.ModificaVolo(datiVolo).subscribe({
+              next: (response) => {
+                console.log('Modification success:', response);
+                this.creazioneEsito = response.message;
+              },
+               error: (err) => {
+                console.log('Modification error:', err);
+                this.creazioneEsito = err.error.message;
+               },
+            });
+          },
+           error: (err) => {
+            console.log('Creation error:', err);
+            this.creazioneEsito = err.error.message;
+           },
+        });
+
+        //Se il cliente ha anche acquistato il biglietto di ritorno
+        if(this.sceltaUtente == 'roundtrip'){
+        //Creazione biglietto di ritorno
+          const datiRitorno = {
+            idVolo: this.bigliettoRitorno.idVolo,
+            idPasseggero : this.idPasseggero,
+            tariffa: this.tariffa,
+            posto: this.posto,
+            dataPartenza: this.bigliettoRitorno.oraPartenza,
+            prezzoFinale: this.bigliettoRitorno.prezzo,
+            dataAcquisto: this.dataAcquisto
+          }
+
+          this.bigliettiService.CreaBiglietto(datiRitorno).subscribe({
+            next: (response) => {
+              console.log('Creation success:', response);
+              this.creazioneEsito = response.message;
+
+              //Decremento per il volo di ritorno
+              const postiNuoviR = this.bigliettoAndata.postiDisponibili - 1;
+              const datiVoloR = {
+                idVolo: this.bigliettoAndata.idVolo,
+                posti: postiNuoviR
+              }
+              this.bigliettiService.ModificaVolo(datiVoloR).subscribe({
+                next: (response) => {
+                  console.log('Modification success:', response);
+                  this.modificaEsito = response.message;
+                },
+                 error: (err) => {
+                  console.log('Modification error:', err);
+                  this.modificaEsito = err.error.message;
+                },
+              })
+            },
+             error: (err) => {
+              console.log('Creation error:', err);
+              this.creazioneEsito = err.error.message;
+            },
+          });
+        }
       },
        error: (err) => {
         console.log('Creation error:', err);
@@ -86,145 +173,5 @@ export class CreaBigliettoPage implements OnInit {
         this.passeggeroCreato = false;
        },
     });
-
-    if(this.passeggeroCreato==true){
-      //Creo la data corrente
-    const data = new Date(); 
-    this.dataAcquisto = data.toISOString().split('T')[0]; //la traformo in formato ISO e ricavo solo la prima parte (YYYY-MM-DD)
-    //Creazione del biglietto di andata
-    const datiAndata = {
-      idVolo: this.bigliettoAndata.idVolo,
-      idPasseggero : this.idPasseggero,
-      tariffa: this.tariffa,
-      posto: this.posto,
-      dataPartenza: this.bigliettoAndata.oraPartenza,
-      prezzoFinale: this.bigliettoAndata.prezzo,
-      dataAcquisto: this.dataAcquisto
-    }
-
-    this.bigliettiService.CreaBiglietto(datiAndata).subscribe({
-      next: (response) => {
-        console.log('Creation success:', response);
-        this.creazioneEsito = response.message;
-      },
-       error: (err) => {
-        console.log('Creation error:', err);
-        this.creazioneEsito = err.error.message;
-       },
-    });
-
-    //Se il cliente ha anche acquistato il biglietto di ritorno
-    if(this.sceltaUtente == 'roundtrip'){
-      //Creazione biglietto di ritorno
-      const datiRitorno = {
-        idVolo: this.bigliettoRitorno.idVolo,
-        idPasseggero : this.idPasseggero,
-        tariffa: this.tariffa,
-        posto: this.posto,
-        dataPartenza: this.bigliettoRitorno.oraPartenza,
-        prezzoFinale: this.bigliettoRitorno.prezzo,
-        dataAcquisto: this.dataAcquisto
-      }
-
-      this.bigliettiService.CreaBiglietto(datiRitorno).subscribe({
-        next: (response) => {
-          console.log('Creation success:', response);
-          this.creazioneEsito = response.message;
-        },
-         error: (err) => {
-          console.log('Creation error:', err);
-          this.creazioneEsito = err.error.message;
-         },
-      });
-    }
-    }
-
-    // //Creo la data corrente
-    // const data = new Date(); 
-    // this.dataAcquisto = data.toISOString().split('T')[0]; //la traformo in formato ISO e ricavo solo la prima parte (YYYY-MM-DD)
-    // //Creazione del biglietto di andata
-    // const datiAndata = {
-    //   idVolo: this.bigliettoAndata.idVolo,
-    //   idPasseggero : this.idPasseggero,
-    //   tariffa: this.tariffa,
-    //   posto: this.posto,
-    //   dataPartenza: this.bigliettoAndata.oraPartenza,
-    //   prezzoFinale: this.bigliettoAndata.prezzo,
-    //   dataAcquisto: this.dataAcquisto
-    // }
-
-    // this.bigliettiService.CreaBiglietto(datiAndata).subscribe({
-    //   next: (response) => {
-    //     console.log('Creation success:', response);
-    //     this.creazioneEsito = response.message;
-    //   },
-    //    error: (err) => {
-    //     console.log('Creation error:', err);
-    //     this.creazioneEsito = err.error.message;
-    //    },
-    // });
-
-    // //Se il cliente ha anche acquistato il biglietto di ritorno
-    // if(this.sceltaUtente == 'roundtrip'){
-    //   //Creazione biglietto di ritorno
-    //   const datiRitorno = {
-    //     idVolo: this.bigliettoRitorno.idVolo,
-    //     idPasseggero : this.idPasseggero,
-    //     tariffa: this.tariffa,
-    //     posto: this.posto,
-    //     dataPartenza: this.bigliettoRitorno.oraPartenza,
-    //     prezzoFinale: this.bigliettoRitorno.prezzo,
-    //     dataAcquisto: this.dataAcquisto
-    //   }
-
-    //   this.bigliettiService.CreaBiglietto(datiRitorno).subscribe({
-    //     next: (response) => {
-    //       console.log('Creation success:', response);
-    //       this.creazioneEsito = response.message;
-    //     },
-    //      error: (err) => {
-    //       console.log('Creation error:', err);
-    //       this.creazioneEsito = err.error.message;
-    //      },
-    //   });
-    // }
-
-    //Decremento dei posti disponibili per i voli di cui è stato acquistato un biglietto
-    //Decremento per il volo di andata
-  //   const postiNuovi = this.bigliettoAndata.postiDisponibili - 1;
-  //   const datiVolo = {
-  //     idVolo: this.bigliettoAndata.idVolo,
-  //     posti: postiNuovi
-  //   }
-  //   this.bigliettiService.ModificaVolo(datiVolo).subscribe({
-  //     next: (response) => {
-  //       console.log('Modification success:', response);
-  //       this.creazioneEsito = response.message;
-  //     },
-  //      error: (err) => {
-  //       console.log('Modification error:', err);
-  //       this.creazioneEsito = err.error.message;
-  //      },
-  //   });
-
-  //  //Se il cliente ha anche acquistato il biglietto di ritorno
-  //   if(this.sceltaUtente == 'roundtrip'){
-  //     //Decremento per il volo di ritorno
-  //     const postiNuoviR = this.bigliettoAndata.postiDisponibili - 1;
-  //     const datiVoloR = {
-  //       idVolo: this.bigliettoAndata.idVolo,
-  //       posti: postiNuoviR
-  //     }
-  //     this.bigliettiService.ModificaVolo(datiVoloR).subscribe({
-  //       next: (response) => {
-  //         console.log('Modification success:', response);
-  //         this.modificaEsito = response.message;
-  //       },
-  //        error: (err) => {
-  //         console.log('Modification error:', err);
-  //         this.modificaEsito = err.error.message;
-  //        },
-  //     })
-  //   }
-   }
+  }
 }

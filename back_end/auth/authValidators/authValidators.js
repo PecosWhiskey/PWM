@@ -40,11 +40,11 @@ const creationTicketsValidator = [
 ]
 
 const createPassengerValidator = [
-  body('idPassegero').notEmpty().withMessage('id del passeggero obbligatorio'),
+  body('idPasseggero').notEmpty().withMessage('id del passeggero obbligatorio'),
   body('nome').notEmpty().withMessage('nome obbligatorio'),
   body('cognome').notEmpty().withMessage('cognome obbligatorio'),
-  body('dataNascita').notEmpty().withMessage('data di nascita obbligatorio'),
-  body('documentoID').notEmpty().withMessage("numero di carta d'identità obbligatorio"),
+  body('dataNascita').notEmpty().withMessage('data di nascita obbligatoria'),
+  body('documentoID').notEmpty().withMessage("documento obbligatorio"),
 ]
 
 const idClienteValidator = [

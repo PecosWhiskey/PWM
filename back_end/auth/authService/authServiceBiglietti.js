@@ -172,8 +172,9 @@ class AuthServiceBiglietti {
             const exist = await biglietti.cercaPasseggero(datiPasseggero.idPasseggero);
 
             if(exist){
-                throw new Error('Passeggero già presente nel database');
-            }
+                // throw new Error('Passeggero già presente nel database');
+                return exist; //Non lancia errore perché un passeggero può acquistare più di un biglietto 
+            }                 //quindi non serve lanciare errori, ma basta restituire quello già presente
 
             return await biglietti.creaPasseggero(datiPasseggero);
         }catch(err){

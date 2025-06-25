@@ -184,3 +184,4 @@ async function visualizzaPasseggeri(){
 // eliminaAeroporto('FCO');
 
 visualizzaBiglietti();
+visualizzaPasseggeri();

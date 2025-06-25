@@ -267,17 +267,17 @@ class Biglietti {
         })
     }
      
-    static async creaPasseggero({idPasseggero, nome, cognome, dataNascita, docIdentità}){
-        console.log('creaPasseggero: ',idPasseggero, nome, cognome, dataNascita, docIdentità);
+    static async creaPasseggero({idPasseggero, nome, cognome, dataNascita, documentoID}){
+        console.log('creaPasseggero: ',idPasseggero, nome, cognome, dataNascita, documentoID);
         return new Promise((resolve,reject)=>{
-            db.run(`INSERT INTO Passeggero (idPasseggero, nome, cognome, dataNascita, documentoID) VALUES (?,?,?,?,?,?)`, 
-                [idPasseggero, nome, cognome, dataNascita, docIdentità],
+            db.run(`INSERT INTO Passeggero (idPasseggero, nome, cognome, dataNascita, documentoID) VALUES (?,?,?,?,?)`, 
+                [idPasseggero, nome, cognome, dataNascita, documentoID],
                 function (err){
                     if(err){
                         reject(err);
                         return;
                     }
-                    resolve({idPasseggero, nome, cognome, dataNascita, docIdentità});
+                    resolve({idPasseggero, nome, cognome, dataNascita, documentoID});
                 }
             );
         });

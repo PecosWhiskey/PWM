@@ -35,10 +35,13 @@ router.post('/registrazione-cliente', registerValidatorClient, validate, authCon
 router.post('/creazione-biglietto', creationTicketsValidator, validate, authControllerBiglietti.createTicket);
 
 //Ricerca del biglietto per effettuare il check-in
-router.post('/ricerca-biglietto', idTicketValidator, validate, authControllerBiglietti.findTicket);
+// router.post('/ricerca-biglietto', idTicketValidator, validate, authControllerBiglietti.findTicket);
 
-//Modifica del posto a sedere del biglietto
-router.post('/modifica-biglietto', idTicketValidator, validate, authControllerBiglietti.ticketModification);
+//Ricerca del biglietto per effettuare il check-in
+router.post('/cerca-biglietto', idTicketValidator, validate, authControllerBiglietti.returnForCheckIn);
+
+//Modifica del biglietto dopo il check-in
+router.post('/modifica-biglietto', authControllerBiglietti.ticketModification);
 
 //Ricerca biglietti acquistati dal cliente
 router.post('/ricerca-biglietti', idClienteValidator, validate, verifyToken, authControllerBiglietti.returnTickets);

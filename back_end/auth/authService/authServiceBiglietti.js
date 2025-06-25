@@ -107,15 +107,16 @@ class AuthServiceBiglietti {
         }
     }
 
-    static async modificaBiglietto(dati){
+    static async modificaTicket(dati){
         try{
+            console.log("service modificaTicket: ", dati);
             const biglietto = await biglietti.findTicketById(dati.idBiglietto);
 
             if(!biglietto){
                 throw new Error('Nessun biglietto da modificare trovato')
             }
 
-            return await biglietti.modificaPosto(dati);
+            return await biglietti.modificaBiglietto(dati);
         }catch(err){
             console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
             throw err;
@@ -154,6 +155,22 @@ class AuthServiceBiglietti {
     static async returnBigliettiAdmin(){
         try{
             const exist = await biglietti.restituisciBigliettiAdmin();
+
+            if(!exist){
+                throw new Error('Non ci sono biglietti acquistati!');
+            }
+
+            return exist;
+        }catch(err){
+            console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
+            throw err;
+        }
+    }
+
+    static async returnForCheckIn(dati){
+        try{
+            console.log("service returnForCheckIn: ", dati);
+            const exist = await biglietti.findForCheckIn(dati);
 
             if(!exist){
                 throw new Error('Non ci sono biglietti acquistati!');

@@ -26,5 +26,12 @@ export class BigliettiService {
   ModificaVolo(credentials: {idVolo: string, posti: number}): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/decremento-posti`, credentials);
   }
-  
+
+  CercaBiglietto(credentials: {idPasseggero:string, idBiglietto: number}): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/auth/cerca-biglietto`, credentials);
+  }
+
+  ModificaBiglietto(credentials: {idBiglietto: number, tariffa:string, posto: string, prezzoFinale: number}): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/auth/modifica-biglietto`, credentials);
+  }
 }

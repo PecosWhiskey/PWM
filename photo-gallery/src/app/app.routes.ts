@@ -18,5 +18,9 @@ export const routes: Routes = [
     path: 'crea-biglietto',
     loadComponent: () => import('./crea-biglietto/crea-biglietto.page').then( m => m.CreaBigliettoPage)
   },
+  {
+    path: 'check-in',
+    loadComponent: () => import('./check-in/check-in.page').then( m => m.CheckInPage)
+  },
 
 ];

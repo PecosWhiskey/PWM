@@ -132,7 +132,7 @@ class AuthControllerBiglietti {
 
     static async ticketModification(req,res){
         try{
-            const biglietto = await bigliettiService.modificaBiglietto(req.body);
+            const biglietto = await bigliettiService.modificaTicket(req.body);
              res.status(201).json({
                 succes: true,
                 data: biglietto
@@ -185,6 +185,23 @@ class AuthControllerBiglietti {
                 data: biglietti
             });
         } catch(err){
+            res.status(400).json({
+                success:false,
+                message:err.message
+            });
+        }
+    }
+
+    static async returnForCheckIn(req,res){
+        try{
+            const biglietto = await bigliettiService.returnForCheckIn(req.body);
+
+            res.status(200).json({
+                success:true,
+                data: biglietto,
+            });
+        }
+        catch(err){
             res.status(400).json({
                 success:false,
                 message:err.message

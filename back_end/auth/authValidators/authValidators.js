@@ -16,7 +16,8 @@ const registerValidatorClient = [
 ]
 
 const idTicketValidator = [
-  body('idBiglietto').notEmpty().withMessage('Id del biglietto obbligatorio per la ricerca')
+  body('idPasseggero').notEmpty().withMessage('Id del passeggero obbligatorio per la ricerca'),
+  body('idBiglietto').notEmpty().withMessage('Id del biglietto obbligatorio per la ricerca'),
 ]
 
 const datiVoloValidator = [

@@ -203,14 +203,16 @@ class Biglietti {
     }
 
     //Modifica posto a sedere
-    static async modificaPosto({idBiglietto, posto}){
+    static async modificaBiglietto({idBiglietto, tariffa, posto, prezzoFinale}){
         return new Promise((resolve,reject)=>{
-            db.run("UPDATE Biglietto SET posto=? WHERE idBiglietto=?", [posto, idBiglietto], function(err){
+            db.run("UPDATE Biglietto SET tariffa=?, posto=?, prezzoFinale=? WHERE idBiglietto=?", [tariffa, posto, prezzoFinale, idBiglietto], function(err){
                 if(err){
+                    console.log("Errore modifica: ", err);
                     reject(err);
                     return;
                 }
-                resolve({idBiglietto, posto});
+                console.log("Risultato modifica", {idBiglietto, tariffa, posto, prezzoFinale});
+                resolve({idBiglietto, tariffa, posto, prezzoFinale});
             })
         })
     }
@@ -253,15 +255,29 @@ class Biglietti {
             })
         })
     }
-    
-    //Ricerca di un biglietto tramite il suo id
-    static async findTicketById(idBiglietto){
+
+    static async findForCheckIn({idPasseggero, idBiglietto}){
         return new Promise((resolve,reject)=>{
-            db.get('SELECT * FROM Biglietto WHERE idBiglietto', [idBiglietto], (err,row)=>{
+            db.get('SELECT * FROM Biglietto WHERE idPasseggero=? AND idBiglietto=?', [idPasseggero, idBiglietto], (err,row)=>{
                 if(err){
                     reject(err);
                     return;
                 }
+                resolve(row);
+            })
+        })
+    }
+    
+    //Ricerca di un biglietto tramite il suo id
+    static async findTicketById(idBiglietto){
+        return new Promise((resolve,reject)=>{
+            db.get('SELECT * FROM Biglietto WHERE idBiglietto=?', [idBiglietto], (err,row)=>{
+                if(err){
+                    console.log("Errore find: ", err);
+                    reject(err);
+                    return;
+                }
+                console.log("risultato find: ", row);
                 resolve(row);
             })
         })

@@ -120,10 +120,6 @@ export class Tab2Page implements OnInit {
     this.sessionStorageService.setItem('biglietto di ritorno scelto', biglietto);
   }
 
-  CreaBiglietto(){
-    this.router.navigate(['/crea-biglietto']);
-  }
-
   applicaFiltri(){
     switch(this.filtroPrezzo){
       case 'tutti':

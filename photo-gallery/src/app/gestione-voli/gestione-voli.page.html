@@ -63,10 +63,16 @@
       <ion-button 
         class="menu-button" 
         fill="clear"
-        routerLink="/visualizza-voli"
-        routerLinkActive="active">
+        [routerLink]="'/voli-disponibili'">
         <ion-icon name="list-outline"></ion-icon>
         Visualizza Voli
+      </ion-button>
+      <ion-button 
+        class="menu-button" 
+        fill="clear"
+        [routerLink]="'/prenotazioni'">
+        <ion-icon name="list-outline"></ion-icon>
+        Prenotazioni ricevute
       </ion-button>
     </div>
   </div>

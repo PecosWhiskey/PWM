@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next){
-    console.log("Campo authorization arrivato nel server: ", req.headers['authorization']);
     const authHeader = req.headers['authorization']; //dalla richiesta recupera il campo "authorization" che contiene il token
     const token = authHeader && authHeader.split(' ')[1];  //se 
 

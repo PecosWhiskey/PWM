@@ -100,22 +100,14 @@ import {
 import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline } from 'ionicons/icons';
 import { GestioneVoliService } from './gestione-voli.service';
+import { RouterModule, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-gestione-voli',
   templateUrl: './gestione-voli.page.html',
   styleUrls: ['./gestione-voli.page.scss'],
   standalone: true,
-  imports: [
-    IonInput, 
-    IonDatetime, 
-    IonButton, 
-    IonItem, 
-    IonContent, 
-    IonIcon,
-    CommonModule, 
-    FormsModule
-  ]
+  imports: [IonInput, IonDatetime, IonButton, IonItem, IonContent, IonIcon,CommonModule, FormsModule, RouterModule, RouterLink]
 })
 export class GestioneVoliPage {
 

@@ -33,7 +33,11 @@ export const routes: Routes = [
     path: 'biglietti-acquistati',
     loadComponent: () => import('./biglietti-acquistati/biglietti-acquistati.page').then( m => m.BigliettiAcquistatiPage),
     canActivate : [authGuard]
+  },  {
+    path: 'voli-disponibili',
+    loadComponent: () => import('./voli-disponibili/voli-disponibili.page').then( m => m.VoliDisponibiliPage)
   },
+
 
 
 

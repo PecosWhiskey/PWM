@@ -34,16 +34,16 @@
 
 
 
-@for(biglietto of biglietti; track $index){
+@for(volo of voli; track $index){
   <ion-card class="results-card">
     <ion-card-header>
-      <ion-card-title>{{biglietto.idVolo}}    Partenza: {{biglietto.dataPartenza.split(' ')[0]}}    Ora:{{biglietto.dataPartenza.split(' ')[1]}}</ion-card-title>
+      <ion-card-title>{{volo.idVolo}}        Partenza: {{volo.partenza}}      Destinazione: {{volo.destinazione}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p>CF: {{biglietto.idPasseggero}}</p>
-        <p>Tariffa: {{biglietto.tariffa}}   Posto: {{biglietto.posto}}</p>
-        <p>Prezzo complessivo: {{biglietto.prezzoFinale}} €</p>
-        <p>Data di acquisto: {{biglietto.dataAcquisto}}</p>
+        <p>Partenza: {{volo.oraPartenza}}</p>
+        <p>Arrivo: {{volo.oraArrivo}}</p>
+        <p>Posti disponibili: {{volo.postiDisponibili}} €</p>
+        <p>Prezzo: {{volo.prezzo}}</p>
       </ion-card-content>
   </ion-card>
 }

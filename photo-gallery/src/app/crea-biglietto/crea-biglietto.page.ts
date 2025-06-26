@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { Tab1Service } from '../tab1/tab1.service';
 import { Volo } from '../models/volo.models';
 import { SessionStorageService } from '../services/session-storage.service';
@@ -12,7 +12,7 @@ import { BigliettiService } from '../services/biglietti.service';
   templateUrl: './crea-biglietto.page.html',
   styleUrls: ['./crea-biglietto.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonButton, IonItem, IonContent, CommonModule, FormsModule]
+  imports: [IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonLabel, IonButton, IonItem, IonContent, CommonModule, FormsModule]
 })
 export class CreaBigliettoPage implements OnInit {
 
@@ -40,6 +40,7 @@ export class CreaBigliettoPage implements OnInit {
   bigliettoAndata! : Volo;
   bigliettoRitorno! : Volo;
   sceltaUtente=  ''; 
+  bigliettiCreati: Volo[] = [];
 
   ngOnInit() {
     //Recupera i dati dei biglietti scelti dal session storage

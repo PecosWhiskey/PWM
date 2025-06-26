@@ -101,11 +101,21 @@
             }
           </div>
 
-          <div class="passenger-input">
+          <!-- <div class="passenger-input">
             <ion-item class="custom-item">
               <ion-icon name="people-outline" slot="start"></ion-icon>
               <ion-input type = 'number' value="1" label="Passeggeri" label-placement="stacked" [(ngModel)]="numPasseggeri" ngDefaultControl></ion-input>
             </ion-item>
+          </div> -->
+          
+          <h4>
+            <ion-icon name="people-outline" slot="start"></ion-icon>
+            Numero di Passeggeri
+          </h4>
+          <div class="counter__section">
+            <ion-button class="search-button" (click)="decrement()">-</ion-button>
+            <p>{{numPasseggeri}}</p>
+            <ion-button class="search-button" (click)="increment()">+</ion-button>
           </div>
 
           <ion-button expand="block" class="search-button" [disabled]="!CampiValidi()" (click)="Cerca()" [routerLink]="'/tabs/tab2'">

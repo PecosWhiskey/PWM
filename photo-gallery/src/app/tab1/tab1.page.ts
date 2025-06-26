@@ -49,12 +49,20 @@ export class Tab1Page {
     this.isAlertOpen = isOpen;
   }
 
+  increment(){
+    this.numPasseggeri++;
+  }
+
+  decrement(){
+    this.numPasseggeri--;
+  }
+
 
   CampiValidi(){
     if(this.scelta == 'oneway'){
       return this.partenza && this.destinazione && this.dataInseritaP
     }else{
-      return this.partenza && this.destinazione && this.dataInseritaP && this.dataInseritaR;
+      return this.partenza && this.destinazione && this.dataInseritaP && this.dataInseritaR &&this.numPasseggeri!=0;
     }
   }
 

@@ -29,6 +29,12 @@ export const routes: Routes = [
     loadComponent: () => import('./prenotazioni/prenotazioni.page').then( m => m.PrenotazioniPage),
     canActivate : [authGuard]
   },
+  {
+    path: 'biglietti-acquistati',
+    loadComponent: () => import('./biglietti-acquistati/biglietti-acquistati.page').then( m => m.BigliettiAcquistatiPage),
+    canActivate : [authGuard]
+  },
+
 
 
 ];

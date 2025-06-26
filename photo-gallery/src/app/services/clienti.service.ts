@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class ClientiService {
 
   constructor(private http: HttpClient) {}
 
-  getClienti() {
-    return this.http.get(`${this.baseUrl}/clienti`);
+  CercaBiglietti(credentials: {idCliente: string}): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/auth/ricerca-biglietti`,  credentials);
   }
 }

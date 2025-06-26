@@ -22,6 +22,7 @@ export class TokenService {
   } 
 
   //Inserimento del token nello storage locale (IndexedDB per browser, SQLite nativo per mobile)
+  //utilizza il miglior motore di archiviazione disponibile sulla piattaforma senza dover interagire direttamente con esso 
   async setToken(token: string): Promise<void> {
     await this.inizializzazione;
     await this.storage_?.set(this.TOKEN_KEY, token); //viene inserito solo se lo storage non è null
@@ -32,13 +33,6 @@ export class TokenService {
     await this.inizializzazione;
     return await this.storage_?.get(this.TOKEN_KEY) || null;
   }
-
-  //Rimozione del token e di tutti i dati memorizzati nello storage quando vine effettuato il logout
-  //Logout per il cliente
-  // async logoutClient(): Promise<void> {
-  //   await this.storage_?.remove(this.TOKEN_KEY);
-  //   await this.storage_?.remove(this. CLIENT_KEY);
-  // }
 
   //Funzione di logout
   async logout(): Promise<void> {
@@ -159,7 +153,5 @@ getAdminInfoFromToken(token: string): any {
     throw new Error("Impossibile estrarre le informazioni dell'admin dal token");
   }
 }
-
-
 
 }

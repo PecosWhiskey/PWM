@@ -139,6 +139,7 @@ class AuthServiceBiglietti {
 
     static async returnBiglietti(idCliente){
         try{
+            console.log("Service returnBiglietto: ", idCliente);
             const exist = await biglietti.restituisciBiglietti(idCliente);
 
             if(!exist){

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,IonIcon,IonLabel,IonButton,
-  IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, IonPopover, IonDatetime, IonCardHeader, IonCardTitle} from '@ionic/angular/standalone';
+  IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, IonPopover, IonDatetime, IonCardHeader, IonCardTitle, IonAlert } from '@ionic/angular/standalone';
 // import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tab1Service } from './tab1.service';
 import { Volo } from '../models/volo.models';
@@ -13,7 +13,7 @@ import { SessionStorageService } from '../services/session-storage.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [RouterLink, RouterModule, IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,
+  imports: [IonAlert, RouterLink, RouterModule, IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,
     IonIcon,IonLabel,IonButton,IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, FormsModule, IonDatetime, IonPopover, IonCardHeader, IonCardTitle],
 })
 export class Tab1Page {
@@ -35,6 +35,19 @@ export class Tab1Page {
   form= ''; //variabile che viene settata su 'Login' o 'Registrazione' per stabilire quale form mostrare
 
   scelta = 'nessun selezionato'; //assume il valore corrispondente alla scelta tra andata e ritorno o solo andata
+
+  //Variabili che gestiscono la comparsa del pop up al click su "Iscriviti"
+  email = "";
+  isAlertOpen = false;
+  alertButtons = ['Chiudi'];
+
+  isEmailValid(){
+    return this.email;
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
+  }
 
 
   CampiValidi(){

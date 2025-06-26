@@ -91,7 +91,7 @@
                   <ion-item id="click-trigger-ritorno">
                     <ion-input [value]="dataInseritaR.split('T')[0]" readonly placeholder="Seleziona data" label="Ritorno" label-placement="stacked"></ion-input>
                   </ion-item>
-                  <ion-popover trigger="click-trigger-ritorno" triggerAction="click">
+                  <ion-popover trigger="click-trigger-ritorno" triggerAction="click" showBackdrop="false">
                     <ng-template>
                       <ion-datetime class="data" [showDefaultButtons]="true" doneText="Fatto" cancelText="Chiudi" presentation="date" name="dataRitorno" [(ngModel)]="dataInseritaR" ngDefaultControl></ion-datetime>
                     </ng-template>
@@ -232,11 +232,20 @@
       <p>Ricevi offerte esclusive e aggiornamenti sui nostri voli</p>
       <div class="newsletter-form">
         <ion-item class="email-input">
-          <ion-input placeholder="La tua email" type="email"></ion-input>
+          <ion-input placeholder="La tua email" type="email" [(ngModel)]="email"></ion-input>
         </ion-item>
-        <ion-button class="subscribe-btn">
+        <ion-button class="subscribe-btn" [disabled]="!isEmailValid()" (click)="setOpen(true)">
           Iscriviti
         </ion-button>
+
+        <ion-alert
+        [isOpen]="isAlertOpen"
+        header="Grazie per esserti iscritto!"
+        subHeader="Ti invieremo un'email non appena ci saranno novità"
+        [buttons]="alertButtons"
+        (didDismiss)="setOpen(false)"
+        ></ion-alert>
+
       </div>
     </div>
   </section>

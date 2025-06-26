@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common'; // Importazione aggiunta
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader,
   IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton, IonIcon, IonLabel,
-  IonList, IonBadge, IonText, IonSpinner, IonModal, IonButtons, IonSelectOption, IonSelect} from '@ionic/angular/standalone';
+  IonList, IonBadge, IonText, IonSpinner, IonModal, IonButtons, IonSelectOption, IonSelect, IonAlert } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket, star,
@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
   standalone: true,
-  imports: [IonButtons, IonModal, 
+  imports: [IonAlert, IonButtons, IonModal, 
     CommonModule, // *** AGGIUNTO QUI ***
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton,
@@ -62,6 +62,21 @@ import { Router } from '@angular/router';
 
   async ngOnInit() {
     this.isLogged = await this.tokenService.isLogged();
+  }
+ 
+  //Variabili che gestiscono la comparsa del pop up al click su "Notifiche"
+  isAlertOpen = false;
+  alertButtons = ['Chiudi'];
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
+  }
+
+  //Variabili che gestiscono l'apertura della modale al click su "Aiuto & Supporto"
+   isModalOpen = false;
+
+  setModalOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
   }
 
   changeForm(){

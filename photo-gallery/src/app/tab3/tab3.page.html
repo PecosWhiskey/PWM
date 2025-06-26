@@ -54,17 +54,46 @@
           <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
         </ion-item>
         
-        <ion-item button class="menu-item">
+        <ion-item button class="menu-item" (click)="setOpen(true)">
           <ion-icon name="notifications" slot="start" class="menu-icon"></ion-icon>
           <ion-label>Notifiche</ion-label>
           <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
         </ion-item>
+
+        <ion-alert
+        [isOpen]="isAlertOpen"
+        header="Spiacenti!😞"
+        subHeader="Nessun messaggio da leggere al momento"
+        message="Ti avviseremo quando avrai nuove notifiche "
+        [buttons]="alertButtons"
+        (didDismiss)="setOpen(false)"
+        ></ion-alert>
         
-        <ion-item button class="menu-item">
+        <ion-item button class="menu-item" (click)="setModalOpen(true)">
           <ion-icon name="help-circle" slot="start" class="menu-icon"></ion-icon>
           <ion-label>Aiuto & Supporto</ion-label>
           <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
         </ion-item>
+
+      <ion-modal [isOpen]="isModalOpen">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Aiuto & Supporto</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="setModalOpen(false)">Chiudi</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
+              reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui. Eaque,
+              dicta.
+            </p>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
         
       </ion-list>
     </ion-card>

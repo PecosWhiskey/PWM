@@ -25,7 +25,7 @@ router.get('/voli-disponibili', verifyToken, onlyAdmin, authControllerBiglietti.
 //Decremento posti disponibili
 router.post('/decremento-posti', idVoloValidator, authControllerBiglietti.decreseSeats);
 
-//Ricerca voli
+//Ricerca voli effettuata dall'utente
 router.post('/ricerca-volo', authControllerBiglietti.voloSearch);
 
 //Login del cliente

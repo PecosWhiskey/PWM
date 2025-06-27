@@ -109,45 +109,6 @@
         <p>Errore interno del server!</p>
       }
     }    
-
-   <!-- Combinazioni migliori 
-   <ion-card class="results-card">
-      <ion-card-header>
-        <ion-card-title>Le migliori combinazioni</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div *ngIf="combinazioniMigliori.length === 0">
-          Nessuna combinazione disponibile con i filtri attuali.
-        </div>
-
-        <ion-list>
-          <ion-item *ngFor="let combo of combinazioniMigliori; let i = index">
-            <ion-card class="combo-card">
-              <ion-card-header>
-                <ion-badge color="success">Opzione {{ i + 1 }}</ion-badge>
-                <h2><strong>Prezzo totale: {{ combo.prezzoTotale }}€</strong></h2>
-              </ion-card-header>
-              <ion-card-content>
-                <div class="flight-info">
-                  <h3>ANDATA:</h3>
-                  <p>Da {{ combo.andata.partenza }} a {{ combo.andata.destinazione }}</p>
-                  <p>Partenza: {{ formattaData(combo.andata.oraPartenza) }} - {{ formattaOra(combo.andata.oraPartenza) }}</p>
-                  <p>Prezzo: {{ combo.andata.prezzo }}€</p>
-                </div>
-                <div class="flight-info">
-                  <h3>RITORNO:</h3>
-                  <p>Da {{ combo.ritorno.partenza }} a {{ combo.ritorno.destinazione }}</p>
-                  <p>Partenza: {{ formattaData(combo.ritorno.oraPartenza) }} - {{ formattaOra(combo.ritorno.oraPartenza) }}</p>
-                  <p>Prezzo: {{ combo.ritorno.prezzo }}€</p>
-                </div>
-                <ion-button expand="full" class="select-offer-btn">Seleziona questa offerta</ion-button>
-              </ion-card-content>
-            </ion-card>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-  -->
   </div> 
 
   <div *ngIf="!ricercaInfo.partenza" class="empty-state">

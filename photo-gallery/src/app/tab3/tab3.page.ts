@@ -96,7 +96,7 @@ import { Router } from '@angular/router';
             //Salva il token ricevuto
             await this.tokenService.setToken(response.token);
           
-            //Salva le info del cliente contenute nel token
+            //Ricava e salva le info del cliente contenute nel token
             const userInfo = this.tokenService.getClientInfoFromToken(response.token);
             await this.tokenService.setClientInfo(userInfo);
           
@@ -105,6 +105,7 @@ import { Router } from '@angular/router';
             console.log('Token e dati del cliente salvati con successo', token);
             console.log('Client info: ', clientInfo);
 
+            //Verifica che il cliente sia autenticato
             this.isLogged = await this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 
@@ -156,7 +157,7 @@ import { Router } from '@angular/router';
             //Salva il token ricevuto
             await this.tokenService.setToken(response.token);
           
-            //Salva le info del cliente contenute nel token
+            //Ricava e salva le info del cliente contenute nel token
             const userInfo = this.tokenService.getClientInfoFromToken(response.token);
             await this.tokenService.setClientInfo(userInfo);
           
@@ -167,6 +168,7 @@ import { Router } from '@angular/router';
             console.log('Token e dati del cliente salvati con successo', token);
             console.log('Client info: ', clientInfo);
 
+            //Verifica che il cliente sia autenticato
             this.isLogged = await this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 
@@ -197,7 +199,7 @@ import { Router } from '@angular/router';
             //Salva il token ricevuto
             await this.tokenService.setToken(response.token);
           
-            //Salva le info del cliente contenute nel token
+            //Ricava e salva le info dell'amministratore contenute nel token
             const userInfo = this.tokenService.getAdminInfoFromToken(response.token);
             await this.tokenService.setAdminInfo(userInfo);
           
@@ -206,6 +208,7 @@ import { Router } from '@angular/router';
             console.log("Token e dati dell'amministratore  salvati con successo", token);
             console.log('Admin info: ', adminInfo);
 
+            //Verifica che l'amministratores sia autenticato
             this.isLogged = await this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 

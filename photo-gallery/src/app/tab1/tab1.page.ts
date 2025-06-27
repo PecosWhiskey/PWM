@@ -69,7 +69,7 @@ export class Tab1Page {
   Cerca(){
     this.dataPartenza = this.dataInseritaP.split('T')[0];
     this.dataRitorno = this.dataInseritaR.split('T')[0];
-    //Oggetto con i dati che devono essere invaiti al server per la ricerca dei voli
+    //Oggetto con i dati che devono essere inviati al server per la ricerca dei voli
     const datiVoloPartenza = {
       partenza: this.partenza,                 
       destinazione : this.destinazione,

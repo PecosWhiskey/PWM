@@ -39,10 +39,6 @@ export class Tab2Page implements OnInit {
   // Filtri per la ricerca avanzata
   filtroPrezzo = 'tutti'; // tutti, economici, medi, premium
 
-
-  filtroCompagnia = 'tutte'; // tutte, o specifiche compagnie
-  compagnieDisponibili: string[] = [];
-
   //Copia dei biglietti di andata e ritorno trovati per usare questi per filtrare i biglietti e mostrarli all'utente
   bigliettiAndataOriginari: Volo[] = this.bigliettiAndata; 
   bigliettiRitornoOriginari: Volo[] = this.bigliettiRitorno;

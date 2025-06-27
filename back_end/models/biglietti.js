@@ -60,6 +60,7 @@ class Biglietti {
     }
 
     static async ricercaVolo({partenza, destinazione, oraPartenza}){
+        //oraInizio e oraFine permettono di cercare i voli disponibili in tutte le 24 ore del giorno cercato
         const oraInizio = oraPartenza + " 00:00:00";
         const oraFine = oraPartenza + " 23:59:59";
         return new Promise((resolve,reject)=>{

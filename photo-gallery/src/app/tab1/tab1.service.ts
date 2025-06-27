@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Volo } from '../models/volo.models';
 import { RicercaInfo } from '../models/ricercaInfo.models';
-import { BehaviorSubject } from 'rxjs'; //permette di memorizzare lo stato corrente e aggiornare gli altri tab quando i dati cambiano
+import { BehaviorSubject } from 'rxjs'; 
+//permette di memorizzare lo stato corrente e aggiornare gli altri tab quando i dati cambiano
 
 @Injectable({
   providedIn: 'root'

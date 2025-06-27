@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,9 @@
 
   </head>
   <body>
-      <div class="container">
+      <div class="container"> -->
           <!-- Ricerca Biglietto -->
-          <div class="vaygo-card">
+          <!-- <div class="vaygo-card">
               <div class="card-header">
                   <h1>
                       <ion-icon name="airplane-outline"></ion-icon>
@@ -30,6 +30,7 @@
                                   name="idBiglietto" 
                                   class="vaygo-input" 
                                   placeholder="Inserisci il codice del biglietto" 
+                                  [(ngModel)]="idBiglietto"
                                   required
                               >
                           </div>
@@ -45,21 +46,73 @@
                                   name="idPasseggero" 
                                   class="vaygo-input" 
                                   placeholder="Inserisci il codice fiscale" 
+                                  [(ngModel)]="idPasseggero"
                                   required
                               >
                           </div>
                       </div>
   
-                      <button type="button" class="vaygo-btn-primary" onclick="cercaBiglietto()">
+                      <ion-button type="button" class="vaygo-btn-primary" (click)="Cerca()">
                           <ion-icon name="search-outline"></ion-icon>
                           Cerca Biglietto
-                      </button>
+                      </ion-button>
                   </form>
               </div>
-          </div>
+          </div> -->
+          <!-- <ion-content>
+  <form>
+    <ion-item>
+      <ion-input type="number" name="idBiglietto" [(ngModel)]="idBiglietto" placeholder="Codice del biglietto" ngDefaultControl  required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" name="idPasseggero" [(ngModel)]="idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
+    </ion-item>
+
+    <ion-button (click)="Cerca()">Fai il check-in</ion-button>
+  </form>
+
+  @if(found){
+    <ion-content>
+      <form>
+        <ion-item>
+          <ion-select name="tariffa" [(ngModel)]="tariffa" required>
+            <ion-select-option value="standard">Standard</ion-select-option>
+            <ion-select-option value="flex">Flex</ion-select-option>
+            <ion-select-option value="plus">Plus</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" name="posto" placeholder="Scegli il posto" [(ngModel)]="sceltaPosto" ngDefaultControl></ion-input>
+        </ion-item>
+
+        <ion-button (click)="CheckIn()">Check-In</ion-button>
+      </form>
+    </ion-content>
+  }
+</ion-content> -->
   
           <!-- Form Check-in (mostrato solo dopo ricerca) -->
-          <div id="checkinForm" class="checkin-form vaygo-card">
+        <!-- @if(found){
+            <ion-content>
+      <form>
+        <ion-item>
+          <ion-select name="tariffa" [(ngModel)]="tariffa" required>
+            <ion-select-option value="standard">Standard</ion-select-option>
+            <ion-select-option value="flex">Flex</ion-select-option>
+            <ion-select-option value="plus">Plus</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" name="posto" placeholder="Scegli il posto" [(ngModel)]="sceltaPosto" ngDefaultControl></ion-input>
+        </ion-item>
+
+        <ion-button (click)="CheckIn()">Check-In</ion-button>
+      </form>
+    </ion-content> -->
+            <!-- <div id="checkinForm" class="checkin-form vaygo-card">
               <div class="card-header">
                   <h1>
                       <ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -74,9 +127,9 @@
                           Biglietto trovato! Procedi con la selezione della tariffa e del posto.
                       </div>
                   </div>
-  
+                -->
                   <!-- Selezione Tariffa -->
-                  <div class="tariff-selection">
+                  <!-- <div class="tariff-selection">
                       <div class="section-title">
                           <ion-icon name="pricetag-outline"></ion-icon>
                           Scegli la Tariffa
@@ -98,10 +151,10 @@
                               <div class="tariff-price">2x</div>
                           </div>
                       </div>
-                  </div>
+                  </div> -->
   
                   <!-- Selezione Posto -->
-                  <div class="seat-selection">
+                  <!-- <div class="seat-selection">
                       <div class="section-title">
                           <ion-icon name="airplane-outline"></ion-icon>
                           Scegli il Posto
@@ -109,9 +162,9 @@
                       <div class="seat-grid-container">
                           <div class="airplane-container">
                               <div class="airplane-nose"></div>
-                              <div class="seat-grid" id="seatGrid">
+                              <div class="seat-grid" id="seatGrid"> -->
                                   <!-- I posti verranno generati dinamicamente -->
-                              </div>
+                              <!-- </div>
                               <div class="airplane-tail"></div>
                           </div>
                           <div class="seat-legend">
@@ -131,10 +184,12 @@
                       </div>
                   </div>
   
-                  <button type="button" class="vaygo-btn-primary" onclick="completaCheckin()" style="margin-top: var(--vaygo-spacing-xl);">
+                  <ion-button type="button" class="vaygo-btn-primary" (click)="CheckIn()" style="margin-top: var(--vaygo-spacing-xl);">
                       <ion-icon name="checkmark-done-outline"></ion-icon>
                       Completa Check-in
-                  </button>
+                  </ion-button>
               </div>
-          </div>
-      </div>
+          </div>  -->
+        <!-- }   
+          
+      </div> -->

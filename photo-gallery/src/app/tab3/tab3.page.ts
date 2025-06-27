@@ -60,8 +60,9 @@ import { Router } from '@angular/router';
 
   isLogged = false;
 
-  async ngOnInit() {
-    this.isLogged = await this.tokenService.isLogged();
+  ngOnInit() {  //PRIMA DI NGONINIT C'ERA ASYNC
+    // this.isLogged = await this.tokenService.isLogged();
+    this.isLogged = this.tokenService.isLogged();
   }
  
   //Variabili che gestiscono la comparsa del pop up al click su "Notifiche"
@@ -89,24 +90,29 @@ import { Router } from '@angular/router';
 
   LoginCliente(){
     this.autenticazioneService.loginClient({email:this.email, password:this.password}).subscribe({ 
-      next: async (response) => {
+      next: (response) => {  //PRIMA DI RESPONSE C'ERA ASYNC
         console.log('Login success:', response);
           if(response.token){
           try{
-            //Salva il token ricevuto
-            await this.tokenService.setToken(response.token);
+             //Salva il token ricevuto
+            // await this.tokenService.setToken(response.token);
+            this.tokenService.setToken(response.token);
           
             //Ricava e salva le info del cliente contenute nel token
             const userInfo = this.tokenService.getClientInfoFromToken(response.token);
-            await this.tokenService.setClientInfo(userInfo);
+          //  await this.tokenService.setClientInfo(userInfo);
+            this.tokenService.setClientInfo(userInfo);
           
-            const token = await this.tokenService.getToken();
-            const clientInfo = await this.tokenService.getClientInfo();
+            //  const token = await this.tokenService.getToken();
+            const token = this.tokenService.getToken();
+          //  const clientInfo = await this.tokenService.getClientInfo();
+            const clientInfo = this.tokenService.getClientInfo();
             console.log('Token e dati del cliente salvati con successo', token);
             console.log('Client info: ', clientInfo);
 
             //Verifica che il cliente sia autenticato
-            this.isLogged = await this.tokenService.isLogged();
+          //  this.isLogged = await this.tokenService.isLogged();
+            this.isLogged = this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 
           }catch(err){
@@ -148,28 +154,31 @@ import { Router } from '@angular/router';
     // console.log("Dati inseriti per la registrazione: ", data);
 
     this.autenticazioneService.register(data).subscribe({ 
-        next: async (response) => {
+        next: (response) => {
          console.log('Registration success:', response);
          console.log(response.data.email);
 
          if(response.token){
           try{
             //Salva il token ricevuto
-            await this.tokenService.setToken(response.token);
+            // await this.tokenService.setToken(response.token);
+             this.tokenService.setToken(response.token);
           
             //Ricava e salva le info del cliente contenute nel token
             const userInfo = this.tokenService.getClientInfoFromToken(response.token);
-            await this.tokenService.setClientInfo(userInfo);
-          
-            console.log('Token e dati del cliente salvati con successo');
+          //  await this.tokenService.setClientInfo(userInfo);
+            this.tokenService.setClientInfo(userInfo);
 
-            const token = await this.tokenService.getToken();
-            const clientInfo = await this.tokenService.getClientInfo();
+            //  const token = await this.tokenService.getToken();
+            const token = this.tokenService.getToken();
+            // const clientInfo = await this.tokenService.getClientInfo();
+             const clientInfo = this.tokenService.getClientInfo();
             console.log('Token e dati del cliente salvati con successo', token);
             console.log('Client info: ', clientInfo);
 
             //Verifica che il cliente sia autenticato
-            this.isLogged = await this.tokenService.isLogged();
+            // this.isLogged = await this.tokenService.isLogged();
+            this.isLogged = this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 
           }catch(err){
@@ -192,24 +201,30 @@ import { Router } from '@angular/router';
 
   LoginAmministratore(){
     this.autenticazioneService.loginAdmin({email:this.email, password:this.password}).subscribe({ 
-         next: async (response) => {
+         next: (response) => {
          console.log('Login success:', response);
          if(response.token){
           try{
             //Salva il token ricevuto
-            await this.tokenService.setToken(response.token);
+            // await this.tokenService.setToken(response.token);
+            this.tokenService.setToken(response.token);
           
             //Ricava e salva le info dell'amministratore contenute nel token
             const userInfo = this.tokenService.getAdminInfoFromToken(response.token);
-            await this.tokenService.setAdminInfo(userInfo);
+          //  await this.tokenService.setAdminInfo(userInfo);
+            this.tokenService.setAdminInfo(userInfo);
           
-            const token = await this.tokenService.getToken();
-            const adminInfo = await this.tokenService.getAdminInfo();
+            // const token = await this.tokenService.getToken();
+            const token = this.tokenService.getToken();
+          //  const adminInfo = await this.tokenService.getAdminInfo();
+            const adminInfo = this.tokenService.getAdminInfo();
             console.log("Token e dati dell'amministratore  salvati con successo", token);
             console.log('Admin info: ', adminInfo);
 
+
             //Verifica che l'amministratores sia autenticato
-            this.isLogged = await this.tokenService.isLogged();
+            // this.isLogged = await this.tokenService.isLogged();
+            this.isLogged = this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 
             this.router.navigate(['/gestione-voli']);
@@ -231,9 +246,11 @@ import { Router } from '@angular/router';
      });
   }
 
-  async Logout(){
-    await this.tokenService.logout();
-    this.isLogged = await this.tokenService.isLogged();
+  Logout(){  //PRIMA DI LOGOUT C'ERA ASYNC
+    //  await this.tokenService.logout();
+    this.tokenService.logout();
+    // this.isLogged = await this.tokenService.isLogged();
+    this.isLogged = this.tokenService.isLogged();
     console.log(this.isLogged);
   }
 

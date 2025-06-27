@@ -193,3 +193,38 @@
         <!-- }   
           
       </div> -->
+
+      <ion-content>
+        <form>
+          <ion-item>
+            <ion-input type="number" name="idBiglietto" [(ngModel)]="idBiglietto" placeholder="Codice del biglietto" ngDefaultControl  required></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-input type="text" name="idPasseggero" [(ngModel)]="idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
+          </ion-item>
+      
+          <ion-button (click)="Cerca()">Fai il check-in</ion-button>
+        </form>
+      
+        @if(found){
+          <ion-content>
+            <form>
+              <ion-item>
+                <ion-select name="tariffa" [(ngModel)]="tariffa" required>
+                  <ion-select-option value="standard">Standard</ion-select-option>
+                  <ion-select-option value="flex">Flex</ion-select-option>
+                  <ion-select-option value="plus">Plus</ion-select-option>
+                </ion-select>
+              </ion-item>
+      
+              <ion-item>
+                <ion-input type="text" name="posto" placeholder="Scegli il posto" [(ngModel)]="sceltaPosto" ngDefaultControl></ion-input>
+              </ion-item>
+      
+              <ion-button (click)="CheckIn()">Check-In</ion-button>
+            </form>
+          </ion-content>
+        }
+      </ion-content> 
+      

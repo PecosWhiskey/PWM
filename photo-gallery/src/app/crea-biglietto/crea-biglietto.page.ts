@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { Tab1Service } from '../tab1/tab1.service';
 import { Volo } from '../models/volo.models';
+import { Biglietto } from '../models/biglietto.models';
 import { SessionStorageService } from '../services/session-storage.service';
 import { BigliettiService } from '../services/biglietti.service';
 
@@ -17,7 +18,7 @@ import { BigliettiService } from '../services/biglietti.service';
 export class CreaBigliettoPage implements OnInit {
 
   constructor(private tab1Service: Tab1Service, private sessionStorage: SessionStorageService,
-    private bigliettiService: BigliettiService) { }
+    private bigliettiService: BigliettiService) {}
 
   idVolo = '';
   idPasseggero = '';
@@ -32,15 +33,20 @@ export class CreaBigliettoPage implements OnInit {
   dataAcquisto = '';
 
   creazioneEsito = '';
+  bigliettoCreato = false;
   modificaEsito = '';
   passeggeroCreato = false;
+  numBigliettiCreati = 0;
 
-  passeggeri : number[] = []; //array di lunghezza pari al numero di passeggeri
+  numPasseggeri = 0;
+  numeroPasseggeri : number[] = []; //array di lunghezza pari al numero di passeggeri
+  passeggeri: any[] = [];
+
 
   bigliettoAndata! : Volo;
   bigliettoRitorno! : Volo;
   sceltaUtente=  ''; 
-  bigliettiCreati: Volo[] = [];
+  bigliettiCreati: Biglietto[] = [];
 
   ngOnInit() {
     //Recupera i dati dei biglietti scelti dal session storage
@@ -56,7 +62,9 @@ export class CreaBigliettoPage implements OnInit {
 
     const passeggeri = this.sessionStorage.getItem('numero passeggeri');
     if(passeggeri != 0){
-      this.passeggeri = Array.from({ length: passeggeri }, (_, i) => i + 1);
+      this.numPasseggeri = passeggeri;
+      this.numeroPasseggeri = Array.from({ length: passeggeri }, (_, i) => i + 1);
+      this.inizializzaPasseggeri();
     }
 
     const scelta = this.sessionStorage.getItem('sceltaUtente');
@@ -65,15 +73,31 @@ export class CreaBigliettoPage implements OnInit {
     }
   }
 
-  Acquista(){
-    //Memorizzazione dei dati del passeggero nel database
-    const passeggero = {
-      idPasseggero: this.idPasseggero,
-      nome: this.nome,
-      cognome: this.cognome,
-      dataNascita: this.dataNascita,
-      documentoID: this.documentoID
+  inizializzaPasseggeri() {
+    this.passeggeri = []; // Svuota l'array prima di inizializzare
+  
+    for (let i = 0; i < this.numPasseggeri; i++) {
+      this.passeggeri.push({
+        idPasseggero: '',
+        nome: '',
+        cognome: '',
+        dataNascita: '',
+        documentoID: '',
+      });
     }
+  }  
+  
+  //Funzione che permette di creare il biglietto, ricevendo in input i dati del passeggero di cui viene confermata la creazione del biglietto
+  Acquista(passeggero: any){
+    console.log(passeggero);
+    //Memorizzazione dei dati del passeggero nel database
+    //  const passeggero = {
+    //    idPasseggero: this.idPasseggero,
+    //   nome: this.nome,
+    //   cognome: this.cognome,
+    //   dataNascita: this.dataNascita,
+    //   documentoID: this.documentoID
+    // }
 
     this.bigliettiService.CreaPasseggero(passeggero).subscribe({
       next: (response) => {
@@ -101,10 +125,13 @@ export class CreaBigliettoPage implements OnInit {
           next: (response) => {
             console.log('Creation success:', response);
             this.creazioneEsito = response.message;
+            this.numBigliettiCreati++;
+            this.bigliettiCreati.push(response.data);
+            this.bigliettoCreato = true;
 
             //Creato il biglietto decremento dei posti disponibili per i voli di cui è stato acquistato un biglietto
             //Decremento per il volo di andata
-            const postiNuovi = this.bigliettoAndata.postiDisponibili - 1;
+            const postiNuovi = this.bigliettoAndata.postiDisponibili - this.numBigliettiCreati;
             const datiVolo = {
               idVolo: this.bigliettoAndata.idVolo,
               posti: postiNuovi
@@ -143,9 +170,12 @@ export class CreaBigliettoPage implements OnInit {
             next: (response) => {
               console.log('Creation success:', response);
               this.creazioneEsito = response.message;
+              this.numBigliettiCreati++;
+              this.bigliettiCreati.push(response.data);
+              this.bigliettoCreato = true;
 
               //Decremento per il volo di ritorno
-              const postiNuoviR = this.bigliettoAndata.postiDisponibili - 1;
+              const postiNuoviR = this.bigliettoAndata.postiDisponibili - this.numBigliettiCreati;
               const datiVoloR = {
                 idVolo: this.bigliettoAndata.idVolo,
                 posti: postiNuoviR

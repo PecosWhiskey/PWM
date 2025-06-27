@@ -93,13 +93,30 @@ async function eliminaPasseggero(id){
 async function eliminaBiglietto(id){
     try{
         return new Promise((resolve,reject)=>{
-            db.run('DELETE FROM Biglietto WHERE idBiglietto=?',[id], (err)=>{
+            db.run('DELETE FROM Biglietto WHERE idPasseggero=?',[id], (err)=>{
                 if(err){
                     reject(err);
                     return;
                 }
                 resolve({idBiglietto:id});
                 console.log("Eliminazione avvenuta con successo!");
+            })
+        })
+    }catch(err){
+        console.log("Errore: ", err.message);
+    }
+}
+
+async function eliminaPasseggero(id){
+    try{
+        return new Promise((resolve,reject)=>{
+            db.run('DELETE FROM Passeggero WHERE idPasseggero=?',[id], (err)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve({idPasseggero:id});
+                console.log("Eliminazione avvenuta con successo: ", id);
             })
         })
     }catch(err){
@@ -215,4 +232,4 @@ async function visualizzaPasseggeri(){
 // inserisciAeroporto("FCO", "Fiumicino", 2);
 // inserisciAeroporto("MXP", "Malpensa", 1);
 
-visualizzaVoli();
+visualizzaBiglietti();

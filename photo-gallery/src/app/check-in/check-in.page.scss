@@ -1,0 +1,457 @@
+:root {
+    --vaygo-primary: #2E8B57;
+    --vaygo-secondary: #4A90E2;
+    --vaygo-accent: #34D399;
+    --vaygo-tertiary: #8B5CF6;
+    --vaygo-blue-light: #E0F2FE;
+    --vaygo-green-light: #ECFDF5;
+    --vaygo-purple-light: #F3E8FF;
+    --vaygo-text-primary: #1F2937;
+    --vaygo-text-secondary: #6B7280;
+    --vaygo-text-muted: #9CA3AF;
+    --vaygo-background: #FAFAFA;
+    --vaygo-white: #FFFFFF;
+    --vaygo-surface: #F9FAFB;
+    --vaygo-shadow: rgba(0, 0, 0, 0.04);
+    --vaygo-shadow-medium: rgba(0, 0, 0, 0.08);
+    --vaygo-shadow-strong: rgba(0, 0, 0, 0.12);
+    --vaygo-border: rgba(0, 0, 0, 0.06);
+    --vaygo-border-medium: rgba(0, 0, 0, 0.12);
+    --vaygo-success: #10B981;
+    --vaygo-warning: #F59E0B;
+    --vaygo-error: #EF4444;
+    --vaygo-info: #3B82F6;
+    --vaygo-gradient-primary: linear-gradient(135deg, var(--vaygo-primary) 0%, var(--vaygo-secondary) 100%);
+    --vaygo-gradient-accent: linear-gradient(135deg, var(--vaygo-accent) 0%, var(--vaygo-tertiary) 100%);
+    --vaygo-gradient-surface: linear-gradient(135deg, var(--vaygo-blue-light) 0%, var(--vaygo-green-light) 100%);
+    --vaygo-spacing-xs: 4px;
+    --vaygo-spacing-sm: 8px;
+    --vaygo-spacing-md: 16px;
+    --vaygo-spacing-lg: 24px;
+    --vaygo-spacing-xl: 32px;
+    --vaygo-spacing-2xl: 48px;
+    --vaygo-radius-sm: 8px;
+    --vaygo-radius-md: 12px;
+    --vaygo-radius-lg: 16px;
+    --vaygo-radius-xl: 20px;
+    --vaygo-radius-2xl: 24px;
+    --vaygo-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    --vaygo-font-size-xs: 12px;
+    --vaygo-font-size-sm: 14px;
+    --vaygo-font-size-base: 16px;
+    --vaygo-font-size-lg: 18px;
+    --vaygo-font-size-xl: 20px;
+    --vaygo-font-size-2xl: 24px;
+    --vaygo-font-size-3xl: 32px;
+    --vaygo-transition-fast: 0.15s ease;
+    --vaygo-transition-base: 0.3s ease;
+    --vaygo-transition-slow: 0.5s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--vaygo-font-family);
+    background-color: var(--vaygo-background);
+    color: var(--vaygo-text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--vaygo-spacing-lg);
+}
+
+.vaygo-card {
+    background: var(--vaygo-white);
+    border-radius: var(--vaygo-radius-lg);
+    box-shadow: 0 4px 20px var(--vaygo-shadow);
+    border: 1px solid var(--vaygo-border);
+    margin-bottom: var(--vaygo-spacing-xl);
+    overflow: hidden;
+}
+
+.card-header {
+    background: var(--vaygo-gradient-primary);
+    color: var(--vaygo-white);
+    padding: var(--vaygo-spacing-xl);
+    text-align: center;
+}
+
+.card-header h1 {
+    font-size: var(--vaygo-font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--vaygo-spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--vaygo-spacing-md);
+}
+
+.card-header p {
+    opacity: 0.9;
+    font-size: var(--vaygo-font-size-base);
+}
+
+.card-content {
+    padding: var(--vaygo-spacing-xl);
+}
+
+.form-group {
+    margin-bottom: var(--vaygo-spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--vaygo-spacing-sm);
+    font-weight: 600;
+    color: var(--vaygo-text-primary);
+    font-size: var(--vaygo-font-size-sm);
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper ion-icon {
+    position: absolute;
+    left: var(--vaygo-spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--vaygo-text-secondary);
+    font-size: 20px;
+    z-index: 1;
+}
+
+.vaygo-input {
+    width: 100%;
+    padding: var(--vaygo-spacing-lg) var(--vaygo-spacing-lg) var(--vaygo-spacing-lg) var(--vaygo-spacing-2xl);
+    border: 2px solid var(--vaygo-border);
+    border-radius: var(--vaygo-radius-md);
+    font-size: var(--vaygo-font-size-base);
+    font-weight: 500;
+    background: var(--vaygo-white);
+    transition: all var(--vaygo-transition-fast);
+    min-height: 56px;
+}
+
+.vaygo-input:focus {
+    outline: none;
+    border-color: var(--vaygo-secondary);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.vaygo-input::placeholder {
+    color: var(--vaygo-text-secondary);
+}
+
+.vaygo-select {
+    width: 100%;
+    padding: var(--vaygo-spacing-lg) var(--vaygo-spacing-lg) var(--vaygo-spacing-lg) var(--vaygo-spacing-2xl);
+    border: 2px solid var(--vaygo-border);
+    border-radius: var(--vaygo-radius-md);
+    font-size: var(--vaygo-font-size-base);
+    font-weight: 500;
+    background: var(--vaygo-white);
+    transition: all var(--vaygo-transition-fast);
+    min-height: 56px;
+}
+
+.vaygo-select:focus {
+    outline: none;
+    border-color: var(--vaygo-secondary);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.vaygo-btn-primary {
+    background: var(--vaygo-gradient-primary);
+    color: var(--vaygo-white);
+    border: none;
+    border-radius: var(--vaygo-radius-md);
+    padding: var(--vaygo-spacing-lg) var(--vaygo-spacing-xl);
+    font-weight: 600;
+    font-size: var(--vaygo-font-size-base);
+    cursor: pointer;
+    transition: all var(--vaygo-transition-base);
+    box-shadow: 0 4px 16px rgba(46, 139, 87, 0.3);
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--vaygo-spacing-sm);
+}
+
+.vaygo-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+}
+
+.vaygo-btn-primary:active {
+    transform: translateY(0);
+}
+
+.checkin-form {
+    display: none;
+    animation: slideIn 0.5s ease-out;
+}
+
+.checkin-form.show {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Airplane Seat Grid */
+.seat-selection {
+    margin-top: var(--vaygo-spacing-xl);
+}
+
+.seat-grid-container {
+    background: var(--vaygo-gradient-surface);
+    border-radius: var(--vaygo-radius-lg);
+    padding: var(--vaygo-spacing-xl);
+    margin-top: var(--vaygo-spacing-lg);
+}
+
+.airplane-container {
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.airplane-nose {
+    width: 60px;
+    height: 30px;
+    background: var(--vaygo-primary);
+    border-radius: 50px 50px 0 0;
+    margin: 0 auto var(--vaygo-spacing-lg);
+}
+
+.seat-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--vaygo-spacing-sm);
+    margin-bottom: var(--vaygo-spacing-lg);
+}
+
+.seat {
+    aspect-ratio: 1;
+    border: 2px solid var(--vaygo-border);
+    border-radius: var(--vaygo-radius-sm);
+    background: var(--vaygo-white);
+    cursor: pointer;
+    transition: all var(--vaygo-transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: var(--vaygo-font-size-sm);
+    color: var(--vaygo-text-secondary);
+    position: relative;
+    min-height: 40px;
+}
+
+.seat:hover {
+    background: var(--vaygo-blue-light);
+    border-color: var(--vaygo-secondary);
+    transform: scale(1.05);
+}
+
+.seat.selected {
+    background: var(--vaygo-primary);
+    border-color: var(--vaygo-primary);
+    color: var(--vaygo-white);
+    transform: scale(1.1);
+}
+
+.seat.occupied {
+    background: var(--vaygo-error);
+    border-color: var(--vaygo-error);
+    color: var(--vaygo-white);
+    cursor: not-allowed;
+}
+
+.seat.occupied:hover {
+    transform: none;
+}
+
+.aisle {
+    grid-column: 4;
+    border: none;
+    background: transparent;
+    cursor: default;
+}
+
+.aisle:hover {
+    background: transparent;
+    transform: none;
+}
+
+.airplane-tail {
+    width: 80px;
+    height: 20px;
+    background: var(--vaygo-primary);
+    border-radius: 0 0 20px 20px;
+    margin: 0 auto;
+}
+
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    gap: var(--vaygo-spacing-lg);
+    margin-top: var(--vaygo-spacing-lg);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--vaygo-spacing-sm);
+    font-size: var(--vaygo-font-size-sm);
+    color: var(--vaygo-text-secondary);
+}
+
+.legend-seat {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--vaygo-radius-sm);
+    border: 2px solid var(--vaygo-border);
+}
+
+.legend-seat.available {
+    background: var(--vaygo-white);
+}
+
+.legend-seat.selected {
+    background: var(--vaygo-primary);
+    border-color: var(--vaygo-primary);
+}
+
+.legend-seat.occupied {
+    background: var(--vaygo-error);
+    border-color: var(--vaygo-error);
+}
+
+/* Tariff Selection */
+.tariff-selection {
+    margin-top: var(--vaygo-spacing-xl);
+}
+
+.tariff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--vaygo-spacing-md);
+    margin-top: var(--vaygo-spacing-lg);
+}
+
+.tariff-card {
+    background: var(--vaygo-white);
+    border: 2px solid var(--vaygo-border);
+    border-radius: var(--vaygo-radius-md);
+    padding: var(--vaygo-spacing-lg);
+    cursor: pointer;
+    transition: all var(--vaygo-transition-fast);
+    text-align: center;
+}
+
+.tariff-card:hover {
+    border-color: var(--vaygo-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--vaygo-shadow-medium);
+}
+
+.tariff-card.selected {
+    border-color: var(--vaygo-primary);
+    background: var(--vaygo-green-light);
+}
+
+.tariff-card h3 {
+    font-size: var(--vaygo-font-size-lg);
+    font-weight: 700;
+    color: var(--vaygo-primary);
+    margin-bottom: var(--vaygo-spacing-sm);
+}
+
+.tariff-card p {
+    color: var(--vaygo-text-secondary);
+    font-size: var(--vaygo-font-size-sm);
+    margin-bottom: var(--vaygo-spacing-md);
+}
+
+.tariff-price {
+    font-size: var(--vaygo-font-size-xl);
+    font-weight: 700;
+    color: var(--vaygo-primary);
+}
+
+.section-title {
+    font-size: var(--vaygo-font-size-xl);
+    font-weight: 700;
+    color: var(--vaygo-text-primary);
+    margin-bottom: var(--vaygo-spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--vaygo-spacing-sm);
+}
+
+.alert {
+    background: var(--vaygo-blue-light);
+    border: 1px solid var(--vaygo-secondary);
+    border-radius: var(--vaygo-radius-md);
+    padding: var(--vaygo-spacing-lg);
+    margin-bottom: var(--vaygo-spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--vaygo-spacing-md);
+}
+
+.alert ion-icon {
+    color: var(--vaygo-secondary);
+    font-size: 24px;
+}
+
+.alert-text {
+    color: var(--vaygo-text-primary);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: var(--vaygo-spacing-md);
+    }
+    
+    .card-content {
+        padding: var(--vaygo-spacing-lg);
+    }
+    
+    .seat-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: var(--vaygo-spacing-xs);
+    }
+    
+    .seat {
+        min-height: 35px;
+        font-size: var(--vaygo-font-size-xs);
+    }
+    
+    .tariff-grid {
+        grid-template-columns: 1fr;
+    }
+}

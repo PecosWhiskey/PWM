@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonSelectOption, IonInput,
-  IonSelect} from '@ionic/angular/standalone';
+  IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, IonLabel, IonChip } from '@ionic/angular/standalone';
 import { BigliettiService } from '../services/biglietti.service';
 import { Biglietto } from '../models/biglietto.models';
 
@@ -11,7 +11,7 @@ import { Biglietto } from '../models/biglietto.models';
   templateUrl: './check-in.page.html',
   styleUrls: ['./check-in.page.scss'],
   standalone: true,
-  imports: [IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonChip, IonLabel, IonRadio, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CheckInPage implements OnInit {
 

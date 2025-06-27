@@ -1,33 +1,140 @@
-<ion-content>
-  <form>
-    <ion-item>
-      <ion-input type="number" name="idBiglietto" [(ngModel)]="idBiglietto" placeholder="Codice del biglietto" ngDefaultControl  required></ion-input>
-    </ion-item>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VayGo Airlines - Check-in</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons.min.css" rel="stylesheet">
 
-    <ion-item>
-      <ion-input type="text" name="idPasseggero" [(ngModel)]="idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
-    </ion-item>
-
-    <ion-button (click)="Cerca()">Fai il check-in</ion-button>
-  </form>
-
-  @if(found){
-    <ion-content>
-      <form>
-        <ion-item>
-          <ion-select name="tariffa" [(ngModel)]="tariffa" required>
-            <ion-select-option value="standard">Standard</ion-select-option>
-            <ion-select-option value="flex">Flex</ion-select-option>
-            <ion-select-option value="plus">Plus</ion-select-option>
-          </ion-select>
-        </ion-item>
-
-        <ion-item>
-          <ion-input type="text" name="posto" placeholder="Scegli il posto" [(ngModel)]="sceltaPosto" ngDefaultControl></ion-input>
-        </ion-item>
-
-        <ion-button (click)="CheckIn()">Check-In</ion-button>
-      </form>
-    </ion-content>
-  }
-</ion-content>
+  </head>
+  <body>
+      <div class="container">
+          <!-- Ricerca Biglietto -->
+          <div class="vaygo-card">
+              <div class="card-header">
+                  <h1>
+                      <ion-icon name="airplane-outline"></ion-icon>
+                      Check-in VayGo Airlines
+                  </h1>
+                  <p>Inserisci i tuoi dati per iniziare il check-in</p>
+              </div>
+              <div class="card-content">
+                  <form id="searchForm">
+                      <div class="form-group">
+                          <label for="idBiglietto">Codice Biglietto</label>
+                          <div class="input-wrapper">
+                              <ion-icon name="ticket-outline"></ion-icon>
+                              <input 
+                                  type="number" 
+                                  id="idBiglietto" 
+                                  name="idBiglietto" 
+                                  class="vaygo-input" 
+                                  placeholder="Inserisci il codice del biglietto" 
+                                  required
+                              >
+                          </div>
+                      </div>
+  
+                      <div class="form-group">
+                          <label for="idPasseggero">Codice Fiscale</label>
+                          <div class="input-wrapper">
+                              <ion-icon name="person-outline"></ion-icon>
+                              <input 
+                                  type="text" 
+                                  id="idPasseggero" 
+                                  name="idPasseggero" 
+                                  class="vaygo-input" 
+                                  placeholder="Inserisci il codice fiscale" 
+                                  required
+                              >
+                          </div>
+                      </div>
+  
+                      <button type="button" class="vaygo-btn-primary" onclick="cercaBiglietto()">
+                          <ion-icon name="search-outline"></ion-icon>
+                          Cerca Biglietto
+                      </button>
+                  </form>
+              </div>
+          </div>
+  
+          <!-- Form Check-in (mostrato solo dopo ricerca) -->
+          <div id="checkinForm" class="checkin-form vaygo-card">
+              <div class="card-header">
+                  <h1>
+                      <ion-icon name="checkmark-circle-outline"></ion-icon>
+                      Completa il Check-in
+                  </h1>
+                  <p>Seleziona la tariffa e il posto a sedere</p>
+              </div>
+              <div class="card-content">
+                  <div class="alert">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <div class="alert-text">
+                          Biglietto trovato! Procedi con la selezione della tariffa e del posto.
+                      </div>
+                  </div>
+  
+                  <!-- Selezione Tariffa -->
+                  <div class="tariff-selection">
+                      <div class="section-title">
+                          <ion-icon name="pricetag-outline"></ion-icon>
+                          Scegli la Tariffa
+                      </div>
+                      <div class="tariff-grid">
+                          <div class="tariff-card" onclick="selectTariff('standard')">
+                              <h3>Standard</h3>
+                              <p>Tariffa base</p>
+                              <div class="tariff-price">1x</div>
+                          </div>
+                          <div class="tariff-card" onclick="selectTariff('flex')">
+                              <h3>Flex</h3>
+                              <p>Maggiore flessibilità</p>
+                              <div class="tariff-price">1.5x</div>
+                          </div>
+                          <div class="tariff-card" onclick="selectTariff('plus')">
+                              <h3>Plus</h3>
+                              <p>Servizi premium</p>
+                              <div class="tariff-price">2x</div>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <!-- Selezione Posto -->
+                  <div class="seat-selection">
+                      <div class="section-title">
+                          <ion-icon name="airplane-outline"></ion-icon>
+                          Scegli il Posto
+                      </div>
+                      <div class="seat-grid-container">
+                          <div class="airplane-container">
+                              <div class="airplane-nose"></div>
+                              <div class="seat-grid" id="seatGrid">
+                                  <!-- I posti verranno generati dinamicamente -->
+                              </div>
+                              <div class="airplane-tail"></div>
+                          </div>
+                          <div class="seat-legend">
+                              <div class="legend-item">
+                                  <div class="legend-seat available"></div>
+                                  <span>Disponibile</span>
+                              </div>
+                              <div class="legend-item">
+                                  <div class="legend-seat selected"></div>
+                                  <span>Selezionato</span>
+                              </div>
+                              <div class="legend-item">
+                                  <div class="legend-seat occupied"></div>
+                                  <span>Occupato</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <button type="button" class="vaygo-btn-primary" onclick="completaCheckin()" style="margin-top: var(--vaygo-spacing-xl);">
+                      <ion-icon name="checkmark-done-outline"></ion-icon>
+                      Completa Check-in
+                  </button>
+              </div>
+          </div>
+      </div>

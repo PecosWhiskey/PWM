@@ -71,6 +71,10 @@ export class CreaBigliettoPage implements OnInit {
     if(scelta != null){
       this.sceltaUtente = scelta;
     }
+
+    this.bigliettiService.getnumBigliettiCreati().subscribe(numero => {
+      this.numBigliettiCreati = numero;
+    });
   }
 
   inizializzaPasseggeri() {
@@ -125,7 +129,9 @@ export class CreaBigliettoPage implements OnInit {
           next: (response) => {
             console.log('Creation success:', response);
             this.creazioneEsito = response.message;
+            //Memorizza il numero di biglietti creati nel BigliettiService
             this.numBigliettiCreati++;
+            this.bigliettiService.setnumBigliettiCreati(this.numBigliettiCreati);
             this.bigliettiCreati.push(response.data);
             this.bigliettoCreato = true;
 
@@ -170,7 +176,9 @@ export class CreaBigliettoPage implements OnInit {
             next: (response) => {
               console.log('Creation success:', response);
               this.creazioneEsito = response.message;
+              //Memorizza il numero di biglietti creati nel BigliettiService
               this.numBigliettiCreati++;
+              this.bigliettiService.setnumBigliettiCreati(this.numBigliettiCreati);
               this.bigliettiCreati.push(response.data);
               this.bigliettoCreato = true;
 

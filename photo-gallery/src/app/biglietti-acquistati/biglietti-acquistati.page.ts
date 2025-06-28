@@ -22,16 +22,23 @@ export class BigliettiAcquistatiPage implements OnInit {
 
   constructor(private clientiService: ClientiService, private tokenService: TokenService) { }
 
-  async ngOnInit(){
-    this.isLogged = await this.tokenService.isLogged();
-    if(this.isLogged){
-      await this.caricaBiglietti();
+  // async ngOnInit(){
+  //   this.isLogged = await this.tokenService.isLogged();
+  //   if(this.isLogged){
+  //     await this.caricaBiglietti();
+  //   }
+  //   }
+  ngOnInit(){
+   this.isLogged = this.tokenService.isLogged();
+   if(this.isLogged){
+     this.caricaBiglietti();
     }
-    }
+  }
   
-  async caricaBiglietti(){
+  caricaBiglietti(){ //PRIMA C'ERA ASYNC
 
-    this.clientInfo = await this.tokenService.getClientInfo();
+  //  this.clientInfo = await this.tokenService.getClientInfo();
+    this.clientInfo = this.tokenService.getClientInfo();
     this.idCliente = this.clientInfo.idCliente;
 
     this.clientiService.CercaBiglietti({idCliente : this.idCliente}).subscribe({

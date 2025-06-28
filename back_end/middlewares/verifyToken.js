@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next){
     const authHeader = req.headers['authorization']; //dalla richiesta recupera il campo "authorization" che contiene il token
-    const token = authHeader && authHeader.split(' ')[1];  //se 
+    const token = authHeader && authHeader.split(' ')[1];  //se presente recupera il token
 
   if (!token) {
     return res.status(401).json({ message: 'Token mancante' });

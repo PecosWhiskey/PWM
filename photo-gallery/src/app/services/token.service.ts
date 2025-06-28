@@ -176,7 +176,10 @@ export class TokenService {
     const decoded = atob(payload);
     
     //Ricava l'oggetto originario
-    const clientInfo = JSON.parse(decoded);
+    const decodedInfo = JSON.parse(decoded);
+
+    //Crea l'oggetto che contine solo le informazioni sul cliente contenute nel payload
+    const clientInfo = {idCliente: decodedInfo.idCliente, email: decodedInfo.email, role: decodedInfo.role};
     
     return clientInfo;
     
@@ -208,7 +211,10 @@ getAdminInfoFromToken(token: string): any {
     const decoded = atob(payload);
     
     //Ricava l'oggetto originario
-    const adminInfo = JSON.parse(decoded);
+    const decodedInfo = JSON.parse(decoded);
+
+    //Crea l'oggetto che contine solo le informazioni sull'amministratore contenute nel payload
+    const adminInfo = {idCliente: decodedInfo.idCliente, email: decodedInfo.email, role: decodedInfo.role};
     
     return adminInfo;
     

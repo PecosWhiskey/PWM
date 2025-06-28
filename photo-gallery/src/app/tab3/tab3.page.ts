@@ -66,7 +66,9 @@ import { Router } from '@angular/router';
     // this.isLogged = await this.tokenService.isLogged();
     this.isLogged = this.tokenService.isLogged();
     const adminInfo = this.tokenService.getAdminInfo();
-    this.role = adminInfo.role;
+    if(adminInfo){
+      this.role = adminInfo.role;
+    }
   }
  
   //Variabili che gestiscono la comparsa del pop up al click su "Notifiche"
@@ -222,7 +224,7 @@ import { Router } from '@angular/router';
             const token = this.tokenService.getToken();
           //  const adminInfo = await this.tokenService.getAdminInfo();
             const adminInfo = this.tokenService.getAdminInfo();
-            this.isAdmin = true;
+            this.role = adminInfo.role;
 
             console.log("Token e dati dell'amministratore  salvati con successo", token);
             console.log('Admin info: ', adminInfo);

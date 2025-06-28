@@ -123,6 +123,22 @@ class AuthServiceBiglietti {
         }
     }
 
+    static async getPostiOccupati(dati){
+        try{
+            console.log("ID VOLO AUTHSERVICE: ", dati.idVolo);
+            const numero = await biglietti.findTicketsByIdVolo(dati.idVolo);
+
+            if(numero == 0){
+                throw new Error("Non sono stati acquistati biglietti per questo volo!");
+            }
+
+            return await biglietti.ottieniPostiOccupati(dati.idVolo);
+        }catch(err){
+            console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
+            throw err;
+        }
+    }
+
     static async returnTicket(idBiglietto){
         try{
             const biglietto = await biglietti.findTicketById(idBiglietto);

@@ -218,6 +218,34 @@ class Biglietti {
         })
     }
 
+    static async ottieniPostiOccupati(idVolo){
+        return new Promise((resolve,reject)=>{
+            db.all('SELECT posto FROM Biglietto WHERE idVolo=?', [idVolo], (err,rows)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                console.log("POSTI TROVATI: ", rows);
+                resolve(rows);
+            })
+        })
+    }
+    
+    //Conta il numero di biglietti acquistati per un determinato volo
+    static async findTicketsByIdVolo(idVolo){
+        console.log("ID VOLO BIGLIETTI.JS: ", idVolo);
+        return new Promise((resolve,reject)=>{
+            db.get('SELECT COUNT(*) AS count FROM Biglietto WHERE idVolo = ?', [idVolo], (err,row)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                console.log("NUMERO DI BIGLIETTI: ", row.count);
+                resolve(row.count);
+            })
+        })
+    }
+
     //Trova biglietti usando l'ID del cliente che li ha acquistati
     static async restituisciBiglietti(idCliente){
         return new Promise((resolve,reject)=>{

@@ -38,6 +38,10 @@ export class BigliettiService {
     return this.http.post(`${this.baseUrl}/api/auth/modifica-biglietto`, credentials);
   }
 
+  OttieniPostiOccupati(credentials: {idVolo: string}): Observable<any>{
+    return this.http.post(`${this.baseUrl}/api/auth/posti-occupati`, credentials);
+  }
+
   setnumBigliettiCreati(numero: number) {
     this.numBigliettiCreati.next(numero);
   }

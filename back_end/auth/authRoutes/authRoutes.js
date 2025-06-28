@@ -37,6 +37,9 @@ router.post('/registrazione-cliente', registerValidatorClient, validate, authCon
 //Creazione del biglietto
 router.post('/creazione-biglietto', creationTicketsValidator, validate, authControllerBiglietti.createTicket);
 
+//Ricerca dei posti già occupati sull'aereo
+router.post('/posti-occupati', idVoloValidator, validate, authControllerBiglietti.getPosti);
+
 //Ricerca del biglietto per effettuare il check-in
 // router.post('/ricerca-biglietto', idTicketValidator, validate, authControllerBiglietti.findTicket);
 

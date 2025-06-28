@@ -27,6 +27,8 @@ export class CheckInPage implements OnInit {
   postiDisponibili = Array.from({ length: this.numPosti}, (_, i) => i + 1);
   postiLettere = ['A', 'B', 'C', 'D', 'E', 'F'];
   postiTotali: string[] = [];
+  postiOccupati: any[] = [];
+  idVolo = '';
 
   //Dati necessari per il check-in
   sceltaPosto = '';
@@ -55,6 +57,18 @@ export class CheckInPage implements OnInit {
         console.log('Search success: ', response);
         this.found = true;
         this.bigliettoTrovato = response.data;
+       
+        //Ricerca dei posti già prenotati per il volo per cui è stato acquistato il biglietto
+        this.idVolo = this.bigliettoTrovato.idVolo;
+        console.log("ID VOLO: ", this.idVolo);
+        this.bigliettiService.OttieniPostiOccupati({idVolo : this.idVolo}).subscribe({
+          next: (response)=>{
+            console.log('Search success: ', response);
+            this.postiOccupati = response.data;
+          },error: (err)=>{
+            console.log("Search error: ", err);
+          }
+        })
       },
        error: (err)=> {
         console.log('Search error: ', err);
@@ -64,6 +78,15 @@ export class CheckInPage implements OnInit {
   }
 
   CheckIn(){
+    //Verifica che il posto non sia già stato prenotato
+    for(let i=0; i<this.postiOccupati.length; i++){
+      console.log("posto occupato: ", this.postiOccupati[i].posto);
+      console.log("posto scelto: ", this.sceltaPosto);
+      if(this.sceltaPosto == this.postiOccupati[i].posto){
+        alert("Il posto selezionato è già occupato! Scegliere un altro posto");
+        break;
+      }
+    }
     //Modifica del prezzo in base alla tariffa scelta
     switch (this.tariffa){
       case 'standard':

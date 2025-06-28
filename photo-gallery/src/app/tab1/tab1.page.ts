@@ -5,7 +5,7 @@ import {IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,
 import { Tab1Service } from './tab1.service';
 import { Volo } from '../models/volo.models';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, RouterLink } from '@angular/router';
+import { RouterModule, RouterLink} from '@angular/router';
 import { SessionStorageService } from '../services/session-storage.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { SessionStorageService } from '../services/session-storage.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonAlert, RouterLink, RouterModule, IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,
+  imports: [IonAlert, RouterLink, RouterModule, IonHeader,IonToolbar,IonTitle,IonContent,
     IonIcon,IonLabel,IonButton,IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, FormsModule, IonDatetime, IonPopover, IonCardHeader, IonCardTitle],
 })
 export class Tab1Page {

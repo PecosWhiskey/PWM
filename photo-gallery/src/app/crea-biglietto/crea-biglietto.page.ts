@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonModal } from '@ionic/angular/standalone';
 import { Tab1Service } from '../tab1/tab1.service';
 import { Volo } from '../models/volo.models';
 import { Biglietto } from '../models/biglietto.models';
@@ -13,7 +13,7 @@ import { BigliettiService } from '../services/biglietti.service';
   templateUrl: './crea-biglietto.page.html',
   styleUrls: ['./crea-biglietto.page.scss'],
   standalone: true,
-  imports: [IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonLabel, IonButton, IonItem, IonContent, CommonModule, FormsModule]
+  imports: [IonModal, IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonLabel, IonButton, IonItem, IonContent, CommonModule, FormsModule]
 })
 export class CreaBigliettoPage implements OnInit {
 
@@ -40,7 +40,7 @@ export class CreaBigliettoPage implements OnInit {
 
   numPasseggeri = 0;
   numeroPasseggeri : number[] = []; //array di lunghezza pari al numero di passeggeri
-  passeggeri: any[] = [];
+  passeggeri: any[] = []; //array che conterrà i dati dei passeggeri per cui verrà creato il biglietto
 
 
   bigliettoAndata! : Volo;

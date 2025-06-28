@@ -59,10 +59,14 @@ import { Router } from '@angular/router';
   password= '';
 
   isLogged = false;
+  isAdmin = false;
+  role = '';
 
   ngOnInit() {  //PRIMA DI NGONINIT C'ERA ASYNC
     // this.isLogged = await this.tokenService.isLogged();
     this.isLogged = this.tokenService.isLogged();
+    const adminInfo = this.tokenService.getAdminInfo();
+    this.role = adminInfo.role;
   }
  
   //Variabili che gestiscono la comparsa del pop up al click su "Notifiche"
@@ -218,6 +222,8 @@ import { Router } from '@angular/router';
             const token = this.tokenService.getToken();
           //  const adminInfo = await this.tokenService.getAdminInfo();
             const adminInfo = this.tokenService.getAdminInfo();
+            this.isAdmin = true;
+
             console.log("Token e dati dell'amministratore  salvati con successo", token);
             console.log('Admin info: ', adminInfo);
 
@@ -244,6 +250,10 @@ import { Router } from '@angular/router';
          this.isLogged = false;
         },
      });
+  }
+
+  VaiAGestioneVoli(){
+    this.router.navigate(['/gestione-voli']);
   }
 
   Logout(){  //PRIMA DI LOGOUT C'ERA ASYNC

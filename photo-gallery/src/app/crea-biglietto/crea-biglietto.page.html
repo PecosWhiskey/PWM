@@ -31,7 +31,7 @@
     }   
 
 
- @if(bigliettoCreato){
+ @if(numBigliettiCreati == numPasseggeri){
   <h1>Dati riepilogativi dei biglietti</h1>
   @for(biglietto of bigliettiCreati; track $index){
   <ion-card class="results-card">

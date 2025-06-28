@@ -98,7 +98,7 @@ import {
   IonIcon
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { createOutline, listOutline, addCircleOutline } from 'ionicons/icons';
+import { createOutline, listOutline, addCircleOutline, personOutline } from 'ionicons/icons';
 import { GestioneVoliService } from './gestione-voli.service';
 import { RouterModule, RouterLink } from '@angular/router';
 
@@ -107,13 +107,13 @@ import { RouterModule, RouterLink } from '@angular/router';
   templateUrl: './gestione-voli.page.html',
   styleUrls: ['./gestione-voli.page.scss'],
   standalone: true,
-  imports: [IonInput, IonDatetime, IonButton, IonItem, IonContent, IonIcon,CommonModule, FormsModule, RouterModule, RouterLink]
+  imports: [IonInput, IonDatetime, IonButton, IonItem, IonContent, IonIcon, CommonModule, FormsModule, RouterModule, RouterLink]
 })
 export class GestioneVoliPage {
 
   constructor(private gestioneVoliService: GestioneVoliService) {
     // Registra le icone che usi nel template
-    addIcons({ createOutline, listOutline, addCircleOutline });
+    addIcons({ createOutline, listOutline, addCircleOutline, personOutline });
   }
 
   idVolo = '';

@@ -41,6 +41,12 @@
     <!-- Menu Profilo -->
     <ion-card class="profile-menu-card">
       <ion-list lines="full">
+
+        <ion-item *ngIf="role == 'admin'" button class="menu-item" (click)="VaiAGestioneVoli()">
+          <ion-icon name="ticket" slot="start" class="menu-icon"></ion-icon>
+          <ion-label>Gestione Voli</ion-label>
+          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
+        </ion-item>
         
         <ion-item button class="menu-item" (click)="VaiABigliettiAcquistati()">
           <ion-icon name="ticket" slot="start" class="menu-icon"></ion-icon>

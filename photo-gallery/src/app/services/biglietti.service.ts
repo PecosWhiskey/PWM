@@ -15,6 +15,7 @@ export class BigliettiService {
   private baseUrl = 'http://localhost:3000';
 
   private numBigliettiCreati = new BehaviorSubject<number>(0);
+  private bigliettoModificato = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -48,5 +49,13 @@ export class BigliettiService {
   
   getnumBigliettiCreati(): Observable<number>{
     return this.numBigliettiCreati.asObservable();
+  }
+
+  setBigliettoModificato(numero: number) {
+    this.bigliettoModificato.next(numero);
+  }
+  
+  getBigliettoModificato(): Observable<number>{
+    return this.bigliettoModificato.asObservable();
   }
 }

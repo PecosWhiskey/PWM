@@ -29,6 +29,7 @@ export class CheckInPage implements OnInit {
   postiTotali: string[] = [];
   postiOccupati: any[] = [];
   idVolo = '';
+  bigliettoModificato: any = null;
 
   //Dati necessari per il check-in
   sceltaPosto = '';
@@ -37,6 +38,10 @@ export class CheckInPage implements OnInit {
   prezzo = 0.0;
 
   ngOnInit() {
+    this.bigliettiService.getBigliettoModificato().subscribe(biglietto => {
+      this.bigliettoModificato = biglietto;
+    });
+
     for(let i=0; i<this.postiDisponibili.length; i++){
       const lettera = this.postiLettere[i % this.postiLettere.length]; //'%' permette di ciclare le lettere quando finiscono
       this.postiTotali.push(lettera + (i+1));
@@ -121,6 +126,8 @@ export class CheckInPage implements OnInit {
     this.bigliettiService.ModificaBiglietto(data).subscribe({
       next: (response) => {
         console.log("Modification success: ", response);
+        this.bigliettoModificato = response.data;
+        this.bigliettiService.setBigliettoModificato(this.bigliettoModificato);
       },
        error: (err) => {
         console.log("Modification error: ", err);

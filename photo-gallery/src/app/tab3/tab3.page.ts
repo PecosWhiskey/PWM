@@ -258,6 +258,8 @@ import { Router } from '@angular/router';
     this.tokenService.logout();
     // this.isLogged = await this.tokenService.isLogged();
     this.isLogged = this.tokenService.isLogged();
+    //imposta il valore di 'role' uguale ad una stringa vuota 
+    this.role = '';
     console.log(this.isLogged);
   }
 

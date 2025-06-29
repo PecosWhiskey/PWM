@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
 import { ClientiService } from '../services/clienti.service';
 import { TokenService } from '../services/token.service';
 import { Biglietto } from '../models/biglietto.models';
@@ -11,7 +11,7 @@ import { Biglietto } from '../models/biglietto.models';
   templateUrl: './biglietti-acquistati.page.html',
   styleUrls: ['./biglietti-acquistati.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCardContent, IonCardTitle, IonCardHeader, IonCard, CommonModule, FormsModule]
 })
 export class BigliettiAcquistatiPage implements OnInit {
 

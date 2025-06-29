@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonModal } from '@ionic/angular/standalone';
-import { Tab1Service } from '../tab1/tab1.service';
+import { IonContent, IonItem, IonButton, IonLabel, IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { Volo } from '../models/volo.models';
-import { Biglietto } from '../models/biglietto.models';
 import { SessionStorageService } from '../services/session-storage.service';
 import { BigliettiService } from '../services/biglietti.service';
 
@@ -13,11 +11,11 @@ import { BigliettiService } from '../services/biglietti.service';
   templateUrl: './crea-biglietto.page.html',
   styleUrls: ['./crea-biglietto.page.scss'],
   standalone: true,
-  imports: [IonModal, IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonLabel, IonButton, IonItem, IonContent, CommonModule, FormsModule]
+  imports: [IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonLabel, IonButton, IonItem, IonContent, CommonModule, FormsModule]
 })
 export class CreaBigliettoPage implements OnInit {
 
-  constructor(private tab1Service: Tab1Service, private sessionStorage: SessionStorageService,
+  constructor(private sessionStorage: SessionStorageService,
     private bigliettiService: BigliettiService) {}
 
   idVolo = '';

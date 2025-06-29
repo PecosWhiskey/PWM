@@ -160,7 +160,7 @@ export class CreaBigliettoPage implements OnInit {
         });
 
         //Se il cliente ha anche acquistato il biglietto di ritorno
-        if(this.sceltaUtente == 'roundtrip'){
+        if((this.sceltaUtente == 'roundtrip' || this.sceltaUtente == 'nessun selezionato') && this.bigliettoRitorno){
         //Creazione biglietto di ritorno
           const datiRitorno = {
             idVolo: this.bigliettoRitorno.idVolo,

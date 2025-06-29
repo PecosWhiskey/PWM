@@ -139,19 +139,19 @@ class AuthServiceBiglietti {
         }
     }
 
-    static async returnTicket(idBiglietto){
-        try{
-            const biglietto = await biglietti.findTicketById(idBiglietto);
+    // static async returnTicket(idBiglietto){
+    //     try{
+    //         const biglietto = await biglietti.findTicketById(idBiglietto);
 
-            if(!biglietto){
-                throw new Error("Non è stato acquistato nessun biglietto con questo id");
-            }
-            return biglietto;
-        }catch(err){
-            console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
-            throw err;
-        }
-    }
+    //         if(!biglietto){
+    //             throw new Error("Non è stato acquistato nessun biglietto con questo id");
+    //         }
+    //         return biglietto;
+    //     }catch(err){
+    //         console.log("ERRORE SERVICE BIGLIETTI: ", err.message);
+    //         throw err;
+    //     }
+    // }
 
     static async returnBiglietti(idCliente){
         try{

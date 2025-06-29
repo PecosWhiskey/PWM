@@ -220,7 +220,7 @@ class Biglietti {
 
     static async ottieniPostiOccupati(idVolo){
         return new Promise((resolve,reject)=>{
-            db.all('SELECT posto FROM Biglietto WHERE idVolo=?', [idVolo], (err,rows)=>{
+            db.all("SELECT posto FROM Biglietto WHERE idVolo=? AND posto <> '' ", [idVolo], (err,rows)=>{
                 if(err){
                     reject(err);
                     return;

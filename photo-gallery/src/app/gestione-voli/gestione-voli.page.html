@@ -42,6 +42,22 @@
 </ion-content>
 -->
 
+<ion-header [translucent]="true" class="custom-header">
+  <ion-toolbar>
+    <div class="header-content">
+      <div class="logo-section">
+        <h1>VayGo</h1>
+        <span class="logo-subtitle">Airlines</span>
+      </div>
+      <div class="header-actions">
+        <ion-button fill="clear" size="small" href="tabs/tab3">
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
 
 <ion-content>
   <div class="gestione-voli-container">
@@ -209,6 +225,15 @@
           <ion-icon name="add-circle-outline" slot="start"></ion-icon>
           Crea Volo
         </ion-button>
+
+        <ion-alert
+        [isOpen]="isAlertOpenCreated"
+        header="Creazione avvenuta con successo!"
+        message="E' possibile visualizzare il volo appena creato nella pagina 'Visualizza Voli'"
+        [buttons]="alertButtons"
+        (didDismiss)="setOpenCreated(false)"
+        ></ion-alert>
+
         <ion-button 
           type="submit" 
           class="secondary-btn"
@@ -217,6 +242,15 @@
           <ion-icon name="create-outline" slot="start"></ion-icon>
           Modifica Volo
         </ion-button>
+
+        <ion-alert
+        [isOpen]="isAlertOpenModified"
+        header="Modifica avvenuta con successo!"
+        message="E' possibile visualizzare il volo appena modificato nella pagina 'Visualizza Voli'"
+        [buttons]="alertButtons"
+        (didDismiss)="setOpenModified(false)"
+        ></ion-alert>
+
       </div>
 
     </form>

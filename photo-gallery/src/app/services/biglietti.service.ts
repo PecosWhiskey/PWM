@@ -30,7 +30,7 @@ export class BigliettiService {
     return this.http.post(`${this.baseUrl}/api/auth/decremento-posti`, credentials);
   }
 
-  CercaBiglietto(credentials: {idPasseggero:string, idBiglietto: number}): Observable<any> {
+  CercaBiglietto(credentials: {idPasseggero:string, idVolo: string}): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/cerca-biglietto`, credentials);
   }
 

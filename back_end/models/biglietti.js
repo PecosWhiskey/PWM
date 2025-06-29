@@ -93,99 +93,99 @@ class Biglietti {
         });
     }
 
-    static async findByIdAeroportoPartenza(idAeroporto){
-        console.log('findByIdAeroportoPartenza: ', idAeroporto);
-        return new Promise((resolve,reject)=>{
-            db.all('SELECT * FROM Volo WHERE partenza = ?', [idAeroporto], (err,rows)=>{
-                if(err){
-                    reject(err);
-                }
-                resolve(rows);
-            });
-        });
-    }
+    // static async findByIdAeroportoPartenza(idAeroporto){
+    //     console.log('findByIdAeroportoPartenza: ', idAeroporto);
+    //     return new Promise((resolve,reject)=>{
+    //         db.all('SELECT * FROM Volo WHERE partenza = ?', [idAeroporto], (err,rows)=>{
+    //             if(err){
+    //                 reject(err);
+    //             }
+    //             resolve(rows);
+    //         });
+    //     });
+    // }
 
-    static async findByIdAeroportoDestinazione(idAeroporto){
-        console.log('findByIdAeroportoDestinazione: ', idAeroporto);
-        return new Promise((resolve,reject)=>{
-            db.all('SELECT * FROM Volo WHERE destinazione = ?', [idAeroporto], (err,rows)=>{
-                if(err){
-                    reject(err);
-                }
-                resolve(rows);
-            });
-        });
-    }
+    // static async findByIdAeroportoDestinazione(idAeroporto){
+    //     console.log('findByIdAeroportoDestinazione: ', idAeroporto);
+    //     return new Promise((resolve,reject)=>{
+    //         db.all('SELECT * FROM Volo WHERE destinazione = ?', [idAeroporto], (err,rows)=>{
+    //             if(err){
+    //                 reject(err);
+    //             }
+    //             resolve(rows);
+    //         });
+    //     });
+    // }
 
-    static async findByOraPartenza(ora){
-        console.log('findiByOraPartenza: ', ora);
-        const oraInizio = ora + " 00:00:00";
-        const oraFine = ora + " 23:59:59";
-        return new Promise((resolve,reject)=>{
-            db.all('SELECT * FROM Volo WHERE oraPartenza >= ? AND oraPartenza <= ?', [oraInizio, oraFine], (err,rows)=>{
-                if(err){
-                    reject(err);
-                    return;
-                }
-                resolve(rows);
-            });
-        });
-    }
+    // static async findByOraPartenza(ora){
+    //     console.log('findiByOraPartenza: ', ora);
+    //     const oraInizio = ora + " 00:00:00";
+    //     const oraFine = ora + " 23:59:59";
+    //     return new Promise((resolve,reject)=>{
+    //         db.all('SELECT * FROM Volo WHERE oraPartenza >= ? AND oraPartenza <= ?', [oraInizio, oraFine], (err,rows)=>{
+    //             if(err){
+    //                 reject(err);
+    //                 return;
+    //             }
+    //             resolve(rows);
+    //         });
+    //     });
+    // }
 
-    static async findByOraArrivo(ora){
-        console.log('findiByOraArrivo: ', ora);
-        const oraInizio = ora + " 00:00:00";
-        const oraFine = ora + " 23:59:59";
-        return new Promise((resolve,reject)=>{
-            db.all('SELECT * FROM Volo WHERE oraArrivo >= ? AND oraArrivo <= ?', [oraInizio, oraFine], (err,rows)=>{
-                if(err){
-                    reject(err);
-                    return;
-                }
-                resolve(rows);
-            });
-        });
-    }
+    // static async findByOraArrivo(ora){
+    //     console.log('findiByOraArrivo: ', ora);
+    //     const oraInizio = ora + " 00:00:00";
+    //     const oraFine = ora + " 23:59:59";
+    //     return new Promise((resolve,reject)=>{
+    //         db.all('SELECT * FROM Volo WHERE oraArrivo >= ? AND oraArrivo <= ?', [oraInizio, oraFine], (err,rows)=>{
+    //             if(err){
+    //                 reject(err);
+    //                 return;
+    //             }
+    //             resolve(rows);
+    //         });
+    //     });
+    // }
     
-    static async findByCittaPartenza(citta){
-        console.log('findByCittaPartenza: ', citta, idAeroporto);
-        return new Promise((resolve,reject)=>{
-            db.all(`SELECT * FROM Volo WHERE partenza IN 
-                (SELECT idAeroporto FROM Aeroporto WHERE idPosizione IN (
-                SELECT idPosizione FROM Posizione WHERE citta = ?))`, [citta], (err,rows)=>{
-                if(err){
-                    reject(err);
-                }
-                resolve(rows);
-            });
-        });
-    }
+    // static async findByCittaPartenza(citta){
+    //     console.log('findByCittaPartenza: ', citta, idAeroporto);
+    //     return new Promise((resolve,reject)=>{
+    //         db.all(`SELECT * FROM Volo WHERE partenza IN 
+    //             (SELECT idAeroporto FROM Aeroporto WHERE idPosizione IN (
+    //             SELECT idPosizione FROM Posizione WHERE citta = ?))`, [citta], (err,rows)=>{
+    //             if(err){
+    //                 reject(err);
+    //             }
+    //             resolve(rows);
+    //         });
+    //     });
+    // }
 
-    static async findByCittaDestinazione(citta){
-        console.log('findByCittaDestinazione: ', citta);
-        return new Promise((resolve,reject)=>{
-            db.all(`SELECT * FROM Volo WHERE destinazione IN 
-                (SELECT idAeroporto FROM Aeroporto WHERE idPosizione IN (
-                SELECT idPosizione FROM Posizione WHERE citta = ?`, [citta], (err,rows)=>{
-                if(err){
-                    reject(err);
-                }
-                resolve(rows);
-            });
-        });
-    }
+    // static async findByCittaDestinazione(citta){
+    //     console.log('findByCittaDestinazione: ', citta);
+    //     return new Promise((resolve,reject)=>{
+    //         db.all(`SELECT * FROM Volo WHERE destinazione IN 
+    //             (SELECT idAeroporto FROM Aeroporto WHERE idPosizione IN (
+    //             SELECT idPosizione FROM Posizione WHERE citta = ?`, [citta], (err,rows)=>{
+    //             if(err){
+    //                 reject(err);
+    //             }
+    //             resolve(rows);
+    //         });
+    //     });
+    // }
 
-    static async findByPrezzo(prezzo){
-        console.log('findByPrezzo: ', prezzo);
-        return new Promise((resolve,reject)=>{
-            db.get('SELECT * FROM Volo WHERE prezzo = ?', [prezzo], (err,row)=>{
-                if(err){
-                    reject(err);
-                }
-                resolve(row);
-            });
-        });
-    }
+    // static async findByPrezzo(prezzo){
+    //     console.log('findByPrezzo: ', prezzo);
+    //     return new Promise((resolve,reject)=>{
+    //         db.get('SELECT * FROM Volo WHERE prezzo = ?', [prezzo], (err,row)=>{
+    //             if(err){
+    //                 reject(err);
+    //             }
+    //             resolve(row);
+    //         });
+    //     });
+    // }
 
     static async creaBiglietto({idVolo, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto}){
         console.log('creaBiglietto: ',idVolo, idPasseggero, tariffa, posto, dataPartenza, prezzoFinale, dataAcquisto);

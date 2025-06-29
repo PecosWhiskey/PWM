@@ -19,8 +19,9 @@ export class CheckInPage implements OnInit {
 
   //Dati necessari per la ricerca del biglietto di cui l'utente desisera fare il check-in
   idPasseggero = '';
-  idBiglietto = 0;
+  idVolo = '';
 
+  idBiglietto = 0;
   bigliettoTrovato!: Biglietto;
   found = false;
   numPosti = 10;
@@ -28,7 +29,6 @@ export class CheckInPage implements OnInit {
   postiLettere = ['A', 'B', 'C', 'D', 'E', 'F'];
   postiTotali: string[] = [];
   postiOccupati: any[] = [];
-  idVolo = '';
 
   //Dati necessari per il check-in
   sceltaPosto = '';
@@ -49,7 +49,7 @@ export class CheckInPage implements OnInit {
   Cerca(){
     const dati = {
       idPasseggero: this.idPasseggero,
-      idBiglietto: this.idBiglietto
+      idVolo: this.idVolo
     }
 
     this.bigliettiService.CercaBiglietto(dati).subscribe({
@@ -104,7 +104,7 @@ export class CheckInPage implements OnInit {
     }
     //Creo l'oggetto per inviare i dati al back-end
     const data = {
-      idBiglietto: this.idBiglietto,
+      idBiglietto: this.bigliettoTrovato.idBiglietto,
       tariffa: this.tariffa,
       posto: this.sceltaPosto,
       prezzoFinale: this.prezzo

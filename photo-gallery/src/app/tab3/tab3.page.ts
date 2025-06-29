@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // Importazione aggiunta
-
+import { CommonModule } from '@angular/common'; 
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader,
   IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton, IonIcon, IonLabel,
@@ -11,7 +10,6 @@ import {
   person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket, star,
   personCircle, notifications, settings, helpCircle, chevronForward
 } from 'ionicons/icons';
-
 import { TokenService } from '../services/token.service';
 import { AutenticazioneService } from '../services/autenticazione.service';
 import { FormsModule } from '@angular/forms';
@@ -22,8 +20,7 @@ import { Router } from '@angular/router';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
   standalone: true,
-  imports: [IonAlert, IonButtons, IonModal, 
-    CommonModule, // *** AGGIUNTO QUI ***
+  imports: [IonAlert, IonButtons, IonModal, CommonModule, 
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton,
     IonIcon, IonLabel, IonList, IonBadge, IonText, IonSpinner,
@@ -71,7 +68,7 @@ import { Router } from '@angular/router';
     }
   }
  
-  //Variabili che gestiscono la comparsa del pop up al click su "Notifiche"
+  //Variabili e funzione che gestiscono la comparsa del pop up al click su "Notifiche"
   isAlertOpen = false;
   alertButtons = ['Chiudi'];
 

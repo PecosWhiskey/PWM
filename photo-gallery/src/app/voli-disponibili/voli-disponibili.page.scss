@@ -1,0 +1,130 @@
+.custom-header {
+  --background: var(--vaygo-white);
+  --border-color: var(--vaygo-border);
+  box-shadow: 0 1px 3px var(--vaygo-shadow);
+
+  ion-toolbar {
+    --background: transparent;
+    --color: var(--vaygo-text-primary);
+    padding: 0 20px;
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+
+  h1 {
+    margin: 0 ;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--vaygo-primary);
+    letter-spacing: -0.5px;
+  }
+
+  .logo-subtitle {
+    font-size: 14px;
+    color: var(--vaygo-text-secondary);
+    font-weight: 500;
+  }
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+
+  ion-button {
+    --color: var(--vaygo-text-secondary);
+    --background-hover: var(--vaygo-blue-light);
+    width: 40px;
+    height: 40px;
+    --border-radius: 12px;
+  }
+}
+
+.gestione-voli-container {
+  min-height: 100vh;
+  background: var(--vaygo-gradient-surface);
+  padding: var(--vaygo-spacing-md);
+}
+  
+  // Menu di Navigazione
+  // ===========================================
+.voli-navigation-menu {
+  background: var(--vaygo-white);
+  border-radius: var(--vaygo-radius-lg);
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  margin-bottom: var(--vaygo-spacing-xl);
+  overflow: hidden;
+  
+  .menu-header {
+    background: var(--vaygo-gradient-primary);
+    padding: var(--vaygo-spacing-lg);
+    color: var(--vaygo-white);
+    text-align: center;
+      
+    h2 {
+      margin: 0;
+      font-size: var(--vaygo-font-size-xl);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+  }
+  
+  .menu-buttons {
+    display: flex;
+    background: var(--vaygo-white);
+      
+    .menu-button {
+      flex: 1;
+      --background: transparent;
+      --color: var(--vaygo-text-secondary);
+      --border-radius: 0;
+      height: 56px;
+      margin: 0;
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0.3px;
+      transition: all var(--vaygo-transition-base);
+      position: relative;
+        
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: transparent;
+        transition: all var(--vaygo-transition-base);
+      }
+        
+      &.active {
+        --background: var(--vaygo-blue-light);
+        --color: var(--vaygo-primary);
+          
+        &::before {
+          background: var(--vaygo-gradient-primary);
+        }
+      }
+        
+      &:hover:not(.active) {
+        --background: var(--vaygo-surface);
+        --color: var(--vaygo-text-primary);
+      }
+      
+      ion-icon {
+        margin-right: var(--vaygo-spacing-sm);
+        font-size: 20px;
+      }
+    }
+  }
+}

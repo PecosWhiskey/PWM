@@ -89,14 +89,8 @@ export class GestioneVoliPage{
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { 
-  IonContent, 
-  IonButton, 
-  IonItem, 
-  IonDatetime, 
-  IonInput,
-  IonIcon
-} from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonItem, IonDatetime, IonInput,IonIcon, IonAlert, IonToolbar,
+  IonHeader} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline, personOutline } from 'ionicons/icons';
 import { GestioneVoliService } from './gestione-voli.service';
@@ -107,7 +101,8 @@ import { RouterModule, RouterLink } from '@angular/router';
   templateUrl: './gestione-voli.page.html',
   styleUrls: ['./gestione-voli.page.scss'],
   standalone: true,
-  imports: [IonInput, IonDatetime, IonButton, IonItem, IonContent, IonIcon, CommonModule, FormsModule, RouterModule, RouterLink]
+  imports: [IonAlert, IonInput, IonDatetime, IonButton, IonItem, IonContent, IonIcon, IonToolbar, IonHeader,
+    CommonModule, FormsModule, RouterModule, RouterLink]
 })
 export class GestioneVoliPage {
 
@@ -125,6 +120,20 @@ export class GestioneVoliPage {
   prezzo = 0.0;
   postiDisponibili = 0;
   creaVoloEsito = '';
+
+  //Variabili e funzioni che gestiscono la comparsa del pop up al click su "Crea Volo" o "Modifica Volo"
+  isAlertOpenCreated = false;
+  isAlertOpenModified = false;
+  alertButtons = ['Chiudi'];
+
+  setOpenCreated(isOpen: boolean) {
+    this.isAlertOpenCreated = isOpen;
+  }
+
+  setOpenModified(isOpen: boolean){
+    this.isAlertOpenModified = isOpen;
+  }
+
 
   formattaData(dataRicevuta: string, ora: string) {
     console.log("Data: ", dataRicevuta);
@@ -151,6 +160,9 @@ export class GestioneVoliPage {
       next: (response) => {
         console.log('Creation success:', response);
         this.creaVoloEsito = response.message;
+
+        //Permette al pop up di apparire
+        this.setOpenCreated(true);
       },
       error: (err) => {
         console.log('Creation error:', err);
@@ -175,6 +187,9 @@ export class GestioneVoliPage {
       next: (response) => {
         console.log('Modification success:', response);
         this.creaVoloEsito = response.message;
+
+        //Permette al pop up di apparire
+        this.setOpenModified(true);
       },
       error: (err) => {
         console.log('Modification error:', err);

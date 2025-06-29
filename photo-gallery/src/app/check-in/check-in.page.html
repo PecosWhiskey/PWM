@@ -235,15 +235,17 @@
           </ion-content>
         }
 
-        @if(bigliettoModificato != null){
+       @if(bigliettoModificato != null){ 
           <ion-card class="results-card">
             <ion-card-header>
-              <ion-card-title>CODICE: {{bigliettoModificato.idBiglietto}}    </ion-card-title>
+              <ion-card-title>{{bigliettoModificato.partenza.citta}}    {{bigliettoModificato.destinazione.citta}}</ion-card-title>
+              <!-- <ion-card-title>{{bigliettoModificato.destinazione.citta}}</ion-card-title> -->
             </ion-card-header>
             <ion-card-content>
-              <p>CF: {{bigliettoModificato.idPasseggero}}</p>
+              <p>Orario di partenza: {{bigliettoModificato.dataPartenza.split(' ')[0]}}  {{bigliettoModificato.dataPartenza.split(' ')[1]}}</p>
+              <p>Orario di arrivo: {{bigliettoModificato.dataPartenza.split(' ')[0]}}  {{bigliettoModificato.dataPartenza.split(' ')[2]}}</p>
               <p>Tariffa: {{bigliettoModificato.tariffa}}</p>
-              <p>Posto: Posto: {{bigliettoModificato.posto}}</p>
+              <p>Posto: {{bigliettoModificato.posto}}</p>
               <p>Prezzo complessivo: {{bigliettoModificato.prezzoFinale}} €</p>
             </ion-card-content>
           </ion-card>

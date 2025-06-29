@@ -118,7 +118,7 @@ export class CreaBigliettoPage implements OnInit {
           idPasseggero : this.idPasseggero,
           tariffa: this.tariffa,
           posto: this.posto,
-          dataPartenza: this.bigliettoAndata.oraPartenza,
+          dataPartenza: this.bigliettoAndata.oraPartenza + " "+this.bigliettoAndata.oraArrivo.split(' ')[1],
           prezzoFinale: this.bigliettoAndata.prezzo,
           dataAcquisto: this.dataAcquisto
         }
@@ -167,7 +167,7 @@ export class CreaBigliettoPage implements OnInit {
             idPasseggero : this.idPasseggero,
             tariffa: this.tariffa,
             posto: this.posto,
-            dataPartenza: this.bigliettoRitorno.oraPartenza,
+            dataPartenza: this.bigliettoAndata.oraPartenza + " "+this.bigliettoAndata.oraArrivo.split(' ')[1],
             prezzoFinale: this.bigliettoRitorno.prezzo,
             dataAcquisto: this.dataAcquisto
           }

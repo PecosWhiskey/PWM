@@ -116,7 +116,28 @@ class AuthServiceBiglietti {
                 throw new Error('Nessun biglietto da modificare trovato')
             }
 
-            return await biglietti.modificaBiglietto(dati);
+            const modificato = await biglietti.modificaBiglietto(dati);
+
+            if(!modificato){
+                throw new Error('Errore nella modifica del biglietto');
+            }
+
+            const partenza = await biglietti.trovaCittàPartenza(biglietto.idVolo);
+            const destinazione = await biglietti.trovaCittàDestinazione(biglietto.idVolo);
+
+            const risultato = {
+                idBiglietto: modificato.idBiglietto, 
+                idVolo: biglietto.idVolo, 
+                partenza: partenza,
+                destinazione: destinazione,
+                tariffa: modificato.tariffa,
+                posto: modificato.posto,
+                dataPartenza: biglietto.dataPartenza,
+                prezzoFinale: modificato.prezzoFinale
+            }
+
+            console.log("RISULTATO: ", risultato);
+            return risultato;
         }catch(err){
             console.log('ERRORE SERVICE BIGLIETTI: ', err.message);
             throw err;

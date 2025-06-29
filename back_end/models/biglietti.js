@@ -93,6 +93,37 @@ class Biglietti {
         });
     }
 
+    static async trovaCittàPartenza(idVolo){
+        console.log("trovaCittaPartenza: ", idVolo);
+        return new Promise((resolve,reject)=>{
+            db.get(`SELECT citta FROM Posizione WHERE idPosizione IN(
+                SELECT idPosizione FROM Aeroporto WHERE idAeroporto IN(
+                SELECT partenza FROM Volo WHERE idVolo = ?))`, [idVolo], (err,row)=>{
+                    if(err){
+                        reject(err);
+                        return;
+                    }
+                    resolve(row);
+                });
+
+        });
+    }
+
+    static async trovaCittàDestinazione(idVolo){
+        console.log("trovaCittaPartenza: ", idVolo);
+        return new Promise((resolve,reject)=>{
+            db.get(`SELECT citta FROM Posizione WHERE idPosizione IN(
+                SELECT idPosizione FROM Aeroporto WHERE idAeroporto IN(
+                SELECT destinazione FROM Volo WHERE idVolo = ?))`, [idVolo], (err,row)=>{
+                    if(err){
+                        reject(err);
+                        return;
+                    }
+                    resolve(row);
+                });
+        });
+    }
+
     // static async findByIdAeroportoPartenza(idAeroporto){
     //     console.log('findByIdAeroportoPartenza: ', idAeroporto);
     //     return new Promise((resolve,reject)=>{

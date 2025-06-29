@@ -23,9 +23,7 @@ import { Router } from '@angular/router';
   imports: [IonAlert, IonButtons, IonModal, CommonModule, 
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonItem, IonInput, IonButton,
-    IonIcon, IonLabel, IonList, IonBadge, IonText, IonSpinner,
-    ReactiveFormsModule, FormsModule, IonSelectOption, IonSelect
-  ],
+    IonIcon, IonLabel, IonList,ReactiveFormsModule, FormsModule, IonSelectOption, IonSelect],
 })
  export class Tab3Page implements OnInit{
 

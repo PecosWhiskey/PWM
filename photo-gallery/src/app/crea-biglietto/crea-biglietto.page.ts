@@ -46,7 +46,7 @@ export class CreaBigliettoPage implements OnInit {
   bigliettoAndata! : Volo;
   bigliettoRitorno! : Volo;
   sceltaUtente=  ''; 
-  bigliettiCreati: Biglietto[] = [];
+  bigliettiCreati: any[] = [];
 
   ngOnInit() {
     //Recupera i dati dei biglietti scelti dal session storage
@@ -133,7 +133,9 @@ export class CreaBigliettoPage implements OnInit {
             this.numBigliettiCreati++;
             this.bigliettiService.setnumBigliettiCreati(this.numBigliettiCreati);
             this.bigliettiCreati.push(response.data);
+            console.log(this.bigliettiCreati);
             this.bigliettoCreato = true;
+            
 
             //Creato il biglietto decremento dei posti disponibili per i voli di cui è stato acquistato un biglietto
             //Decremento per il volo di andata

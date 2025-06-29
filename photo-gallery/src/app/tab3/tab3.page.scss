@@ -1,8 +1,6 @@
-// Tab3 - Profile Page Styles with Dark/Light Mode Support
-// VayGo Airlines Design System
-// ================================================================
+// Tab3 - Profile Page Styles con supporto della modalità chiara/scura
 
-// Light Mode Variables (default)
+// Variabili per la modalità giorno(default)
 :root {
   // Profile specific colors - Light Mode
   --tab3-bg: var(--vaygo-background);
@@ -54,9 +52,10 @@
   --vaygo-accent: #34D399;
 }
 
+//Stile che si adatta quando l'utente imposta la modalità scura
 @media (prefers-color-scheme: dark) {
   :root {
-    // Dark mode overrides
+    // Colori per la modalità scura
     --tab3-bg: #0F172A;
     --tab3-surface: #1E293B;
     --tab3-text-primary: #F1F5F9;
@@ -72,7 +71,7 @@
     --tab3-card-hover: rgba(59, 130, 246, 0.1);
     --tab3-divider: rgba(255, 255, 255, 0.1);
 
-    // Adjusted VayGo brand colors for dark
+    // VayGo brand colors for dark
     --vaygo-primary: #10B981;
     --vaygo-secondary: #3B82F6;
     --vaygo-accent: #06D6A0;
@@ -87,7 +86,8 @@
   --padding-top: 0;
   --padding-bottom: 0;
   --background: var(--tab3-bg);
-  transition: background-color var(--vaygo-transition-base);
+  //cambio graduale del colore dello sfondo dell'elemento
+  transition: background-color var(--vaygo-transition-base); 
 }
 
 // Main Containers
@@ -97,6 +97,7 @@
   min-height: 100%;
   background: var(--tab3-bg);
   color: var(--tab3-text-primary);
+  //cambio graduale di tutte le proprietà dell'elemento
   transition: all var(--vaygo-transition-base);
 }
 
@@ -117,7 +118,7 @@
   overflow: hidden;
   transition: all var(--vaygo-transition-base);
 
-  // Subtle background pattern for depth
+  // Motivo di sfondo leggero per dare profondità
   &::before {
     content: '';
     position: absolute;
@@ -132,6 +133,7 @@
 
   .profile-content {
     position: relative;
+    //porta leggermente in primo piano l'elemento
     z-index: 1;
   }
 }
@@ -156,6 +158,7 @@
   }
 
   &:hover {
+    //ingrandisce l'elemento del 5%
     transform: scale(1.05);
     box-shadow: 0 12px 32px var(--tab3-avatar-shadow);
   }
@@ -176,7 +179,7 @@
   font-weight: 500;
 }
 
-// Profile Statistics
+//Statistiche del profilo
 .profile-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -280,7 +283,7 @@
   }
 }
 
-// Theme Toggle Section
+//Sezione per il cambio del tema
 .theme-toggle-section {
   margin-bottom: var(--vaygo-spacing-lg);
 
@@ -392,9 +395,6 @@
 }
 
 // Login & Register Cards
-// Add these specific styles to fix the centering and text wrapping issues
-
-// Login & Register Cards - Enhanced
 .login-card,
 .register-card {
   --background: var(--tab3-card-bg);
@@ -438,19 +438,19 @@
   ion-card-content {
     padding: var(--vaygo-spacing-xl);
     background: var(--tab3-card-bg);
-    text-align: center; // Ensure all content is centered
+    text-align: center;
   }
 }
 
-// Form Buttons - Enhanced centering
+//Stile per i bottoni
 .login-btn,
 .register-btn {
-  margin: var(--vaygo-spacing-md) auto 0 auto; // Center the button
+  margin: var(--vaygo-spacing-md) auto 0 auto;
   --border-radius: var(--vaygo-radius-md);
   font-weight: 600;
   height: 56px;
   width: 100%;
-  max-width: 280px; // Prevent button from being too wide
+  max-width: 280px;
   display: block;
   transition: all var(--vaygo-transition-base);
   
@@ -459,7 +459,7 @@
   }
 }
 
-// VayGo Primary Button - Enhanced
+// VayGo Primary Button
 .vaygo-btn-primary {
   --background: var(--vaygo-gradient-primary);
   --color: white;
@@ -478,7 +478,7 @@
   }
 }
 
-// Form Footer - Enhanced centering
+// Form Footer
 .form-footer {
   text-align: center;
   margin-top: var(--vaygo-spacing-lg);
@@ -507,7 +507,7 @@
   }
 }
 
-// Specific fixes for input containers
+// Input containers
 .login-form,
 .register-form {
   width: 100%;
@@ -517,11 +517,11 @@
   .form-group {
     width: 100%;
     margin-bottom: var(--vaygo-spacing-md);
-    text-align: left; // Keep inputs left-aligned for better UX
+    text-align: left;
   }
 }
 
-// Welcome Card - Enhanced centering
+// Welcome Card
 .welcome-card {
   --background: var(--tab3-card-bg);
   border-radius: var(--vaygo-radius-md);
@@ -560,7 +560,7 @@
   }
 }
 
-// Mobile responsiveness enhancements
+//Stile adattato ai dispositivi mobili
 @media (max-width: 768px) {
   .login-card,
   .register-card,
@@ -669,7 +669,7 @@
   }
 }
 
-// Error Messages
+//Messaggi di errore
 .error-messages {
   margin: var(--vaygo-spacing-xs) 0 var(--vaygo-spacing-sm) 0;
   padding-left: var(--vaygo-spacing-md);
@@ -845,6 +845,7 @@
 // ACCESSIBILITY & REDUCED MOTION
 // ================================================================
 
+//Riduce le animazioni se l'utente ha impostato questa opzione sul suo sistema
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

@@ -223,6 +223,14 @@
               </ion-item>
       
               <ion-button (click)="CheckIn()">Check-In</ion-button>
+
+               <ion-alert
+                [isOpen]="isAlertOpen"
+                header="Oops! Il posto che hai scelto è già occupato"
+                message="Ti preghiamo di scegliere un altro posto, grazie"
+                [buttons]="alertButtons"
+                (didDismiss)="setOpen(false)">
+              </ion-alert>
             </form>
           </ion-content>
         }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonSelectOption, IonInput,
-  IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, IonLabel, IonChip } from '@ionic/angular/standalone';
+  IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, IonLabel, IonChip, IonAlert } from '@ionic/angular/standalone';
 import { BigliettiService } from '../services/biglietti.service';
 import { Biglietto } from '../models/biglietto.models';
 
@@ -11,7 +11,7 @@ import { Biglietto } from '../models/biglietto.models';
   templateUrl: './check-in.page.html',
   styleUrls: ['./check-in.page.scss'],
   standalone: true,
-  imports: [IonChip, IonLabel, IonRadio, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonAlert, IonChip, IonLabel, IonRadio, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CheckInPage implements OnInit {
 
@@ -19,9 +19,8 @@ export class CheckInPage implements OnInit {
 
   //Dati necessari per la ricerca del biglietto di cui l'utente desisera fare il check-in
   idPasseggero = '';
-  idVolo = '';
-
   idBiglietto = 0;
+
   bigliettoTrovato!: Biglietto;
   found = false;
   numPosti = 10;
@@ -29,6 +28,7 @@ export class CheckInPage implements OnInit {
   postiLettere = ['A', 'B', 'C', 'D', 'E', 'F'];
   postiTotali: string[] = [];
   postiOccupati: any[] = [];
+  idVolo = '';
 
   //Dati necessari per il check-in
   sceltaPosto = '';
@@ -46,10 +46,18 @@ export class CheckInPage implements OnInit {
     console.log("Posti Totali: ", this.postiTotali);
   }
 
+  //Variabili e funzione che gestiscono la comparsa dell'alert se il posto scelto dl cliente è già occupato
+  isAlertOpen = false;
+  alertButtons = ['Chiudi'];
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
+  }
+
   Cerca(){
     const dati = {
       idPasseggero: this.idPasseggero,
-      idVolo: this.idVolo
+      idBiglietto: this.idBiglietto
     }
 
     this.bigliettiService.CercaBiglietto(dati).subscribe({
@@ -83,7 +91,7 @@ export class CheckInPage implements OnInit {
       console.log("posto occupato: ", this.postiOccupati[i].posto);
       console.log("posto scelto: ", this.sceltaPosto);
       if(this.sceltaPosto == this.postiOccupati[i].posto){
-        alert("Il posto selezionato è già occupato! Scegliere un altro posto");
+        this.setOpen(true);
         break;
       }
     }
@@ -104,7 +112,7 @@ export class CheckInPage implements OnInit {
     }
     //Creo l'oggetto per inviare i dati al back-end
     const data = {
-      idBiglietto: this.bigliettoTrovato.idBiglietto,
+      idBiglietto: this.idBiglietto,
       tariffa: this.tariffa,
       posto: this.sceltaPosto,
       prezzoFinale: this.prezzo

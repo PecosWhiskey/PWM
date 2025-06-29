@@ -30,6 +30,7 @@ export class CheckInPage implements OnInit {
   postiOccupati: any[] = [];
   idVolo = '';
   bigliettoModificato: any = null;
+  occupied = false;
 
   //Dati necessari per il check-in
   sceltaPosto = '';
@@ -40,6 +41,7 @@ export class CheckInPage implements OnInit {
   ngOnInit() {
     this.bigliettiService.getBigliettoModificato().subscribe(biglietto => {
       this.bigliettoModificato = biglietto;
+      console.log("BIGLIETTO MODIFICATO NGONINIT: ", this.bigliettoModificato);
     });
 
     for(let i=0; i<this.postiDisponibili.length; i++){
@@ -91,14 +93,21 @@ export class CheckInPage implements OnInit {
   }
 
   CheckIn(){
+    //Inizializzo la variabile a faòse prima di iniziare il ciclo per sovrascrivere il valore precedente 
+    this.occupied = false;
     //Verifica che il posto non sia già stato prenotato
     for(let i=0; i<this.postiOccupati.length; i++){
       console.log("posto occupato: ", this.postiOccupati[i].posto);
       console.log("posto scelto: ", this.sceltaPosto);
       if(this.sceltaPosto == this.postiOccupati[i].posto){
         this.setOpen(true);
+        this.occupied = true;
         break;
       }
+    }
+    //Se il posto scelto è già occupato mostra l'alert ed esci dalla funzione per non continuare con la modifica del biglietto
+    if(this.occupied){
+      return;
     }
     //Modifica del prezzo in base alla tariffa scelta
     switch (this.tariffa){
@@ -127,7 +136,8 @@ export class CheckInPage implements OnInit {
       next: (response) => {
         console.log("Modification success: ", response);
         this.bigliettoModificato = response.data;
-        this.bigliettiService.setBigliettoModificato(this.bigliettoModificato);
+        console.log("BIGLIETTO MODIFICATO: ", this.bigliettoModificato);
+        this.bigliettiService.setBigliettoModificato(response.data);
       },
        error: (err) => {
         console.log("Modification error: ", err);

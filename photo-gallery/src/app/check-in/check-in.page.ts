@@ -95,6 +95,9 @@ export class CheckInPage implements OnInit {
        error: (err)=> {
         console.log('Search error: ', err);
         this.found = false;
+        if(err.error.message= "Check-in già fatto!"){
+          this.setOpen(true);
+        }
        }
     })
   }

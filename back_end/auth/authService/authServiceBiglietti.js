@@ -128,8 +128,8 @@ class AuthServiceBiglietti {
             const risultato = {
                 idBiglietto: modificato.idBiglietto, 
                 idVolo: biglietto.idVolo, 
-                partenza: partenza,
-                destinazione: destinazione,
+                partenza: partenza.citta,
+                destinazione: destinazione.citta,
                 tariffa: modificato.tariffa,
                 posto: modificato.posto,
                 dataPartenza: biglietto.dataPartenza,
@@ -227,6 +227,10 @@ class AuthServiceBiglietti {
 
             if(!exist){
                 throw new Error('Non ci sono biglietti acquistati!');
+            }
+
+            if(exist.posto != '' || exist.tariffa != ''){
+                throw new Error('Check-in già fatto!');
             }
 
             return exist;

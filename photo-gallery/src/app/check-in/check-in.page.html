@@ -194,7 +194,7 @@
           
       </div> -->
 
-    <ion-content>
+<ion-content>
         <form>
           <ion-item>
             <ion-input type="number" name="idBiglietto" [(ngModel)]="idBiglietto" placeholder="Codice del biglietto" ngDefaultControl  required></ion-input>
@@ -205,6 +205,13 @@
           </ion-item>
       
           <ion-button (click)="Cerca()">Fai il check-in</ion-button>
+
+          <ion-alert
+            [isOpen]="isAlertOpen"
+            header="Hai già fatto il check-in di questo biglietto!"
+            [buttons]="alertButtons"
+            (didDismiss)="setOpen(false)">
+          </ion-alert>
         </form>
       
         @if(found){
@@ -239,7 +246,7 @@
         <ng-template>
           <ion-card class="results-card">
             <ion-card-header>
-              <ion-card-title>{{bigliettoModificato.partenza.citta}}    {{bigliettoModificato.destinazione.citta}}</ion-card-title>
+              <ion-card-title>{{bigliettoModificato.partenza}}    {{bigliettoModificato.destinazione}}</ion-card-title>
               <ion-card-subtitle>{{bigliettoModificato.dataPartenza.split(' ')[0]}}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>

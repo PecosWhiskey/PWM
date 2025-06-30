@@ -219,6 +219,7 @@ import { Router } from '@angular/router';
             const token = this.tokenService.getToken();
           //  const adminInfo = await this.tokenService.getAdminInfo();
             const adminInfo = this.tokenService.getAdminInfo();
+            //Ricava il ruolo dalle informazioni ottenute dal payload del token, che sarà admin
             this.role = adminInfo.role;
 
             console.log("Token e dati dell'amministratore  salvati con successo", token);
@@ -230,7 +231,7 @@ import { Router } from '@angular/router';
             this.isLogged = this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 
-            this.router.navigate(['/gestione-voli']);
+            // this.router.navigate(['/gestione-voli']);
 
           }catch(err){
             console.log("Errore nel salvare i dati");

@@ -372,9 +372,9 @@ class Biglietti {
         });
     }
 
-    static async cercaPasseggero(idPasseggero){
+    static async cercaPasseggero({idPasseggero, nome, cognome, dataNascita, documentoID}){
         return new Promise((resolve,reject)=>{
-            db.get('SELECT * FROM Passeggero WHERE idPasseggero=?', [idPasseggero], (err,row)=>{
+            db.get('SELECT * FROM Passeggero WHERE idPasseggero=? AND nome=? AND cognome=? AND dataNascita=? AND documentoID=?', [idPasseggero, nome, cognome, dataNascita, documentoID], (err,row)=>{
                 if(err){
                     reject(err);
                     return;

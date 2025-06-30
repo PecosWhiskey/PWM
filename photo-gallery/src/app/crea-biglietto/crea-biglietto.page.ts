@@ -61,7 +61,9 @@ export class CreaBigliettoPage implements OnInit {
     const passeggeri = this.sessionStorage.getItem('numero passeggeri');
     if(passeggeri != 0){
       this.numPasseggeri = passeggeri;
+      //Array numerico di lunghezza pari al numero di passeggeri, che viene utilizzato per il primo ciclo for presente nell'html
       this.numeroPasseggeri = Array.from({ length: passeggeri }, (_, i) => i + 1);
+      //Richiamo alla funzione che inizializza l'array di oggetti, con i dati dei passeggeri, con valori nulli
       this.inizializzaPasseggeri();
     }
 
@@ -70,13 +72,16 @@ export class CreaBigliettoPage implements OnInit {
       this.sceltaUtente = scelta;
     }
 
+    //Vaiabile che tiene traccia del numero di biglietti creati
     this.bigliettiService.getnumBigliettiCreati().subscribe(numero => {
       this.numBigliettiCreati = numero;
     });
   }
 
+  //Funzione che inizializza un array di lunghezza pari al numero di passeggeri con i dati da inserire nel form a valori nulli
   inizializzaPasseggeri() {
-    this.passeggeri = []; // Svuota l'array prima di inizializzare
+    // Svuota l'array prima di inizializzare
+    this.passeggeri = [];
   
     for (let i = 0; i < this.numPasseggeri; i++) {
       this.passeggeri.push({

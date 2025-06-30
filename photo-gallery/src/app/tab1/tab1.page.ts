@@ -41,14 +41,17 @@ export class Tab1Page {
   isAlertOpen = false;
   alertButtons = ['Chiudi'];
 
+  //Abilita il click su "Registrati" solo se il campo per inserire l'email è stato riempito
   isEmailValid(){
     return this.email;
   }
 
+  //Gestisce l'apertura del pop up
   setOpen(isOpen: boolean) {
     this.isAlertOpen = isOpen;
   }
 
+  //Incremento o decremento del numero di passeggeri in base ai click effettuati dall'utente
   increment(){
     this.numPasseggeri++;
   }
@@ -57,7 +60,7 @@ export class Tab1Page {
     this.numPasseggeri--;
   }
 
-
+  //Abilita il bottone per la ricerca dei voli "Cerca" solo se tutti i campi sono stati riempiti.
   CampiValidi(){
     if(this.scelta == 'oneway'){
       return this.partenza && this.destinazione && this.dataInseritaP
@@ -66,6 +69,7 @@ export class Tab1Page {
     }
   }
 
+  //Ricerca i voli in base alle richieste dell'utente
   Cerca(){
     this.dataPartenza = this.dataInseritaP.split('T')[0];
     this.dataRitorno = this.dataInseritaR.split('T')[0];

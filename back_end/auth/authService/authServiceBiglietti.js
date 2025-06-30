@@ -39,7 +39,7 @@ class AuthServiceBiglietti {
         try{
             const volo= await biglietti.findByIdVolo(dati.idVolo);
             if(!volo){
-                throw new Error("Volo per l'aggiornamento dei posti disponibili insesistente");
+                throw new Error("Volo per l'aggiornamento dei posti disponibili inesistente");
             }
             return await biglietti.decrementaPostiDisponibili(dati);
         }catch(err){
@@ -229,6 +229,7 @@ class AuthServiceBiglietti {
                 throw new Error('Non ci sono biglietti acquistati!');
             }
 
+            //Se la tariffa e il posto sono stati già cambiati viene restituito un errore
             if(exist.posto != '' || exist.tariffa != ''){
                 throw new Error('Check-in già fatto!');
             }
@@ -243,12 +244,12 @@ class AuthServiceBiglietti {
     static async createPasseggero(datiPasseggero){
         try{
             console.log("AUTHSERVICE PASSEGGERO: ", datiPasseggero);
-            const exist = await biglietti.cercaPasseggero(datiPasseggero.idPasseggero);
+            const exist = await biglietti.cercaPasseggero(datiPasseggero);
 
             if(exist){
-                // throw new Error('Passeggero già presente nel database');
-                return exist; //Non lancia errore perché un passeggero può acquistare più di un biglietto 
-            }                 //quindi non serve lanciare errori, ma basta restituire quello già presente
+                //Se il passeggero è stato già memorizzato con i suoi dati nel database vengono restituiti i dati presenti
+                return exist; 
+            }                 
 
             return await biglietti.creaPasseggero(datiPasseggero);
         }catch(err){

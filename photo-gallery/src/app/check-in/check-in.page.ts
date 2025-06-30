@@ -46,6 +46,7 @@ export class CheckInPage implements OnInit {
   }
 
   ngOnInit() {
+    //Recupero del biglietto modificato dopo il check-in per mostrarlo all'utente
     this.bigliettiService.getBigliettoModificato().subscribe(biglietto => {
       this.bigliettoModificato = biglietto;
       console.log("BIGLIETTO MODIFICATO NGONINIT: ", this.bigliettoModificato);
@@ -60,7 +61,7 @@ export class CheckInPage implements OnInit {
     console.log("Posti Totali: ", this.postiTotali);
   }
 
-  //Variabili e funzione che gestiscono la comparsa dell'alert se il posto scelto dl cliente è già occupato
+  //Variabili e funzione che gestiscono la comparsa dell'alert se il posto scelto dal cliente è già occupato
   isAlertOpen = false;
   alertButtons = ['Chiudi'];
 
@@ -68,6 +69,7 @@ export class CheckInPage implements OnInit {
     this.isAlertOpen = isOpen;
   }
 
+  //Funzione che ricerca il biglietto con idBiglietto e idPasseggero inseriti dall'utente
   Cerca(){
     const dati = {
       idPasseggero: this.idPasseggero,
@@ -103,7 +105,7 @@ export class CheckInPage implements OnInit {
   }
 
   CheckIn(){
-    //Inizializzo la variabile a faòse prima di iniziare il ciclo per sovrascrivere il valore precedente 
+    //Inizializzo la variabile a false prima di iniziare il ciclo per sovrascrivere il valore precedente 
     this.occupied = false;
     //Verifica che il posto non sia già stato prenotato
     for(let i=0; i<this.postiOccupati.length; i++){
@@ -111,11 +113,12 @@ export class CheckInPage implements OnInit {
       console.log("posto scelto: ", this.sceltaPosto);
       if(this.sceltaPosto == this.postiOccupati[i].posto){
         this.setOpen(true);
+        //Essendo occupato il posto la variabile cambia il suo valore in true
         this.occupied = true;
         break;
       }
     }
-    //Se il posto scelto è già occupato mostra l'alert ed esci dalla funzione per non continuare con la modifica del biglietto
+    //Se il posto scelto è già occupato mostra l'alert ed esce dalla funzione per non continuare con la modifica del biglietto
     if(this.occupied){
       return;
     }

@@ -43,12 +43,9 @@ export class Tab2Page implements OnInit {
   bigliettiAndataOriginari: Volo[] = this.bigliettiAndata; 
   bigliettiRitornoOriginari: Volo[] = this.bigliettiRitorno;
 
-  //Biglietti filtrati
-  bigliettiAndataFiltrati: Volo[] = [];
-  bigliettiRitornoFiltrati: Volo[] = [];
-
 
   ngOnInit() {
+    //Inizializzazione dei dati che vengono mostrati all'utente all'apertura della pagina
     this.tab1Service.getRicercaInfo().subscribe(info => {
       this.ricercaInfo = info;
     });
@@ -108,6 +105,8 @@ export class Tab2Page implements OnInit {
     }
   };
 
+  //Funzioni che gestiscono la selezione o la deselezione dei biglietti di andata e ritorno
+
   selezionaAndata(biglietto: Volo){
     this.sessionStorageService.setItem('biglietto di andata scelto', biglietto);
     console.log("Biglietto andata selezionato: ", this.sessionStorageService.getItem('biglietto di andata scelto'));
@@ -128,6 +127,7 @@ export class Tab2Page implements OnInit {
     console.log("Biglietto ritorno deselezionato: ", this.sessionStorageService.getItem('biglietto di ritorno scelto'));
   }
 
+  //Funzione che mostra i biglietti il cui prezzo rientrano in un certo intervallo, in base alla scelta dell'utente
   applicaFiltri(){
     switch(this.filtroPrezzo){
       case 'tutti':

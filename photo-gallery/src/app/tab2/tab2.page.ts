@@ -110,10 +110,22 @@ export class Tab2Page implements OnInit {
 
   selezionaAndata(biglietto: Volo){
     this.sessionStorageService.setItem('biglietto di andata scelto', biglietto);
+    console.log("Biglietto andata selezionato: ", this.sessionStorageService.getItem('biglietto di andata scelto'));
+  }
+
+  deselezionaAndata(){
+    this.sessionStorageService.removeItem('biglietto di andata scelto');
+    console.log("Biglietto andata deselezionato: ", this.sessionStorageService.getItem('biglietto di andata scelto'));
   }
 
   selezionaRitorno(biglietto: Volo){
     this.sessionStorageService.setItem('biglietto di ritorno scelto', biglietto);
+    console.log("Biglietto ritorno selezionato: ", this.sessionStorageService.getItem('biglietto di ritorno scelto'));
+  }
+
+  deselezionaRitorno(){
+    this.sessionStorageService.removeItem('biglietto di ritorno scelto');
+    console.log("Biglietto ritorno deselezionato: ", this.sessionStorageService.getItem('biglietto di ritorno scelto'));
   }
 
   applicaFiltri(){

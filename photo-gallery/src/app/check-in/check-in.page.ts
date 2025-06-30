@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonSelectOption, IonInput,
-  IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, IonLabel, IonChip, IonAlert } from '@ionic/angular/standalone';
+  IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, IonLabel, IonChip, IonAlert, IonModal } from '@ionic/angular/standalone';
 import { BigliettiService } from '../services/biglietti.service';
 import { Biglietto } from '../models/biglietto.models';
 
@@ -11,7 +11,7 @@ import { Biglietto } from '../models/biglietto.models';
   templateUrl: './check-in.page.html',
   styleUrls: ['./check-in.page.scss'],
   standalone: true,
-  imports: [IonAlert, IonChip, IonLabel, IonRadio, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonModal, IonAlert, IonChip, IonLabel, IonRadio, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CheckInPage implements OnInit {
 
@@ -29,7 +29,7 @@ export class CheckInPage implements OnInit {
   postiTotali: string[] = [];
   postiOccupati: any[] = [];
   idVolo = '';
-  bigliettoModificato: any = null;
+  bigliettoModificato: any;
   occupied = false;
 
   //Dati necessari per il check-in
@@ -37,6 +37,13 @@ export class CheckInPage implements OnInit {
   tariffa = '';
   //Prezzo finale del biglietto calcolato in base alla tariffa scelta
   prezzo = 0.0;
+
+  //Variabili che gestiscono l'apertura della modale per mostrare il biglietto modificato
+  isModalOpen = false;
+
+  setModalOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
 
   ngOnInit() {
     this.bigliettiService.getBigliettoModificato().subscribe(biglietto => {
@@ -137,7 +144,8 @@ export class CheckInPage implements OnInit {
         console.log("Modification success: ", response);
         this.bigliettoModificato = response.data;
         console.log("BIGLIETTO MODIFICATO: ", this.bigliettoModificato);
-        this.bigliettiService.setBigliettoModificato(response.data);
+        this.bigliettiService.setBigliettoModificato(this.bigliettoModificato);
+        this.setModalOpen(true);
       },
        error: (err) => {
         console.log("Modification error: ", err);

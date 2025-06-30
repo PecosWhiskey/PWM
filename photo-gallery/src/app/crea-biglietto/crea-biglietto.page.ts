@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonItem, IonButton, IonLabel, IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
+import { IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonLabel, IonButton, IonItem, IonContent} from '@ionic/angular/standalone';
 import { Volo } from '../models/volo.models';
 import { SessionStorageService } from '../services/session-storage.service';
 import { BigliettiService } from '../services/biglietti.service';
@@ -93,14 +93,6 @@ export class CreaBigliettoPage implements OnInit {
   Acquista(passeggero: any){
     console.log(passeggero);
     //Memorizzazione dei dati del passeggero nel database
-    //  const passeggero = {
-    //    idPasseggero: this.idPasseggero,
-    //   nome: this.nome,
-    //   cognome: this.cognome,
-    //   dataNascita: this.dataNascita,
-    //   documentoID: this.documentoID
-    // }
-
     this.bigliettiService.CreaPasseggero(passeggero).subscribe({
       next: (response) => {
         console.log('Creation success:', response);

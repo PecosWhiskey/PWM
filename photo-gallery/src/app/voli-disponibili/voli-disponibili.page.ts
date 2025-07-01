@@ -21,9 +21,11 @@ export class VoliDisponibiliPage implements OnInit {
   constructor(private gestioneVoliService: GestioneVoliService) { }
 
   ngOnInit() {
+    //Caricamento dei voli disponibili
     this.caricaVoli();
   }
 
+  //Funzione che permette di ottenere i voli disponibili direttamente dal database 
   caricaVoli(){
     this.gestioneVoliService.CercaVoliDisponibili().subscribe({
       next: (response) => {

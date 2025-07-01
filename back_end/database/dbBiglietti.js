@@ -17,15 +17,15 @@ const db = new sqlite3.Database("database\\dbBiglietti.sqlite", (err) => {
         idPosizione INTEGER PRIMARY KEY AUTOINCREMENT,
         citta TEXT NOT NULL,
         stato TEXT NOT NULL,
-        latitudine REAL UNIQUE,
-        longitudine REAL UNIQUE
+        latitudine TEXT UNIQUE,
+        longitudine TEXT UNIQUE
       )`);
       //TABELLA AEROPORTI
       db.run(`CREATE TABLE IF NOT EXISTS Aeroporto(
         idAeroporto TEXT PRIMARY KEY NOT NULL,
         nome TEXT NOT NULL,
         idPosizione INTEGER, 
-        FOREIGN KEY (idPosizione) REFERENCES Posizione(idPosizione) ON UPDATE CASCADE ON DELETE SET NULL
+        FOREIGN KEY (idPosizione) REFERENCES Posizione(idPosizione) ON UPDATE CASCADE ON DELETE NO ACTION
       )`);
       //TABELLA VOLI
       db.run(`CREATE TABLE IF NOT EXISTS Volo(

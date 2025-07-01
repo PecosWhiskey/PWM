@@ -226,10 +226,20 @@ async function visualizzaPasseggeri(){
     }
 }
 
-// inserisciPosizione("Roma", "Italia", 41.789830174, 12.250665664);
-// inserisciPosizione("Milano", "Italia", 45.633333, 8.733333 );
+// inserisciPosizione("ROMA", "Italia", "41°47′44.16″N", "12°14′59.64″E");
+// inserisciPosizione("MILANO", "Italia", "45°37′48″N", "8°43′23″E");
+// inserisciPosizione("MILANO", "Italia", "45°27′39.24″N", "9°16′48″E");
+// inserisciPosizione("BOLOGNA", "Italia", "44°31′48″N", "11°17′36″E");
+// inserisciPosizione("PARIGI", "Francia", "49°00′35″N", "2°32′52″E");
+// inserisciPosizione("PARIGI", "Francia", "48°43′24″N", "2°22′46″E");
+// inserisciPosizione("PARIGI", "Francia", "49°27′16″N", "2°06′46″E");
 
-// inserisciAeroporto("FCO", "Fiumicino", 2);
-// inserisciAeroporto("MXP", "Malpensa", 1);
+// inserisciAeroporto("BVA", 'Beauvais', 9 );
+// inserisciAeroporto("ORY", "Orly", 8);
+// inserisciAeroporto("CDG", "Charles de Gaulle", 7);
+// inserisciAeroporto("BLQ", "Guglielmo Marconi", 6);
+// inserisciAeroporto("FCO", "Fiumicino", 5);
+// inserisciAeroporto("MXP", "Malpensa", 3);
+// inserisciAeroporto("LIN", "Linate", 4);
 
-visualizzaBiglietti();
+// visualizzaBiglietti();

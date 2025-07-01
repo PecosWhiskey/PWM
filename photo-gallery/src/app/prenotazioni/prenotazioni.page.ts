@@ -18,21 +18,23 @@ export class PrenotazioniPage implements OnInit {
 
   biglietti: Biglietto[] = [];
   
-    constructor(private gestioneVoliService: GestioneVoliService) {}
+  constructor(private gestioneVoliService: GestioneVoliService) {}
   
-    ngOnInit(): void {
-      this.caricaPrenotazioni();
-    }
+  ngOnInit(): void {
+    //Caricamento dei biglietti
+    this.caricaPrenotazioni();
+  }
   
-    caricaPrenotazioni(){
-      this.gestioneVoliService.CercaBigliettiAcquistati().subscribe({
-        next: (response) => {
-          console.log("Search success: ", response);
-          this.biglietti = response.data;
-        },
-         error: (err) => {
+  //Funzione che permette di ottenere le prenotazioni dei voli ricevute direttamente dal database 
+  caricaPrenotazioni(){
+    this.gestioneVoliService.CercaBigliettiAcquistati().subscribe({
+      next: (response) => {
+        console.log("Search success: ", response);
+        this.biglietti = response.data;
+      },
+        error: (err) => {
           console.log("Search error: ", err);
-         }
-      })
-    }
+       }
+    })
+  }
 }

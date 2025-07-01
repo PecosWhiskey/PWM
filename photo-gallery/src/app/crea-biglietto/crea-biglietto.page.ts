@@ -35,7 +35,8 @@ export class CreaBigliettoPage implements OnInit {
   bigliettoCreato = false;
   modificaEsito = '';
   passeggeroCreato = false;
-  numBigliettiCreati = 0; //Tiene traccia del numero di biglietti creati
+  numBigliettiCreatiAndata = 0; //Tiene traccia del numero di biglietti creati
+  numBigliettiCreatiRitorno = 0;
 
   numPasseggeri = 0; //numero di passeggeri selezionato dall'utente in fase di ricerca dei voli
   numeroPasseggeri : number[] = []; //array di lunghezza pari al numero di passeggeri, che viene utilizzato per il primo ciclo for presente nell'html
@@ -54,11 +55,13 @@ export class CreaBigliettoPage implements OnInit {
     const andata = this.sessionStorage.getItem('biglietto di andata scelto');
     if(andata != null){
       this.bigliettoAndata = andata;
+      console.log(this.bigliettoAndata);
     }
 
     const ritorno = this.sessionStorage.getItem('biglietto di ritorno scelto');
     if(ritorno != null){
       this.bigliettoRitorno = ritorno;
+      console.log(this.bigliettoRitorno);
     }
 
     const passeggeri = this.sessionStorage.getItem('numero passeggeri');
@@ -74,8 +77,12 @@ export class CreaBigliettoPage implements OnInit {
       this.sceltaUtente = scelta;
     }
 
-    this.bigliettiService.getnumBigliettiCreati().subscribe(numero => {
-      this.numBigliettiCreati = numero;
+    this.bigliettiService.getnumBigliettiCreatiAndata().subscribe(numero => {
+      this.numBigliettiCreatiAndata = numero;
+    });
+
+    this.bigliettiService.getnumBigliettiCreatiRitorno().subscribe(numero => {
+      this.numBigliettiCreatiRitorno = numero;
     });
   }
 
@@ -126,8 +133,8 @@ export class CreaBigliettoPage implements OnInit {
             console.log('Creation success:', response);
             this.creazioneEsito = response.message;
             //Memorizza il numero di biglietti creati nel BigliettiService
-            this.numBigliettiCreati++;
-            this.bigliettiService.setnumBigliettiCreati(this.numBigliettiCreati);
+            this.numBigliettiCreatiAndata++;
+            this.bigliettiService.setnumBigliettiCreatiAndata(this.numBigliettiCreatiAndata);
             this.bigliettiCreati.push(response.data);
             console.log(this.bigliettiCreati);
             this.bigliettoCreato = true;
@@ -135,7 +142,7 @@ export class CreaBigliettoPage implements OnInit {
 
             //Creato il biglietto decremento dei posti disponibili per i voli di cui è stato acquistato un biglietto
             //Decremento per il volo di andata
-            const postiNuovi = this.bigliettoAndata.postiDisponibili - this.numBigliettiCreati;
+            const postiNuovi = this.bigliettoAndata.postiDisponibili - this.numBigliettiCreatiAndata;
             const datiVolo = {
               idVolo: this.bigliettoAndata.idVolo,
               posti: postiNuovi
@@ -165,7 +172,7 @@ export class CreaBigliettoPage implements OnInit {
             idPasseggero : this.idPasseggero,
             tariffa: this.tariffa,
             posto: this.posto,
-            dataPartenza: this.bigliettoAndata.oraPartenza + " "+this.bigliettoAndata.oraArrivo.split(' ')[1],
+            dataPartenza: this.bigliettoRitorno.oraPartenza + " "+this.bigliettoRitorno.oraArrivo.split(' ')[1],
             prezzoFinale: this.bigliettoRitorno.prezzo,
             dataAcquisto: this.dataAcquisto
           }
@@ -175,15 +182,15 @@ export class CreaBigliettoPage implements OnInit {
               console.log('Creation success:', response);
               this.creazioneEsito = response.message;
               //Memorizza il numero di biglietti creati nel BigliettiService
-              this.numBigliettiCreati++;
-              this.bigliettiService.setnumBigliettiCreati(this.numBigliettiCreati);
+              this.numBigliettiCreatiRitorno++;
+              this.bigliettiService.setnumBigliettiCreatiRitorno(this.numBigliettiCreatiRitorno);
               this.bigliettiCreati.push(response.data);
               this.bigliettoCreato = true;
 
               //Decremento per il volo di ritorno
-              const postiNuoviR = this.bigliettoAndata.postiDisponibili - this.numBigliettiCreati;
+              const postiNuoviR = this.bigliettoRitorno.postiDisponibili - this.numBigliettiCreatiRitorno;
               const datiVoloR = {
-                idVolo: this.bigliettoAndata.idVolo,
+                idVolo: this.bigliettoRitorno.idVolo,
                 posti: postiNuoviR
               }
               this.bigliettiService.ModificaVolo(datiVoloR).subscribe({

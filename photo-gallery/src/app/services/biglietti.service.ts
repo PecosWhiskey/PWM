@@ -14,7 +14,8 @@ export class BigliettiService {
 
   private baseUrl = 'http://localhost:3000';
 
-  private numBigliettiCreati = new BehaviorSubject<number>(0);
+  private numBigliettiCreatiAndata = new BehaviorSubject<number>(0);
+  private numBigliettiCreatiRitorno = new BehaviorSubject<number>(0);
   private bigliettoModificato = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) {}
@@ -49,13 +50,21 @@ export class BigliettiService {
     return this.http.post(`${this.baseUrl}/api/auth/posti-occupati`, credentials);
   }
 
-  //Funzioni che memorizzano e ricavano il numero di biglietti creati
-  setnumBigliettiCreati(numero: number) {
-    this.numBigliettiCreati.next(numero);
+  //Funzioni che memorizzano e ricavano il numero di biglietti creati sia di andata che di ritorno
+  setnumBigliettiCreatiAndata(numero: number) {
+    this.numBigliettiCreatiAndata.next(numero);
   }
   
-  getnumBigliettiCreati(): Observable<number>{
-    return this.numBigliettiCreati.asObservable();
+  getnumBigliettiCreatiAndata(): Observable<number>{
+    return this.numBigliettiCreatiAndata.asObservable();
+  }
+
+  setnumBigliettiCreatiRitorno(numero: number) {
+    this.numBigliettiCreatiRitorno.next(numero);
+  }
+  
+  getnumBigliettiCreatiRitorno(): Observable<number>{
+    return this.numBigliettiCreatiRitorno.asObservable();
   }
 
   //Funzioni che memorizzano e ricavano il biglietto modificato del cliente dopo il check-in

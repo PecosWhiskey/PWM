@@ -1,12 +1,15 @@
 .custom-header {
   --background: var(--vaygo-white);
   --border-color: var(--vaygo-border);
-  box-shadow: 0 1px 3px var(--vaygo-shadow);
+  box-shadow: 0 2px 8px var(--vaygo-shadow);
+  border-bottom: 1px solid var(--vaygo-border);
 
   ion-toolbar {
-    --background: transparent;
+    --background: var(--vaygo-white);
     --color: var(--vaygo-text-primary);
-    padding: 0 20px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --min-height: 56px;
   }
 }
 
@@ -23,7 +26,7 @@
   gap: 4px;
 
   h1 {
-    margin: 0 ;
+    margin: 0;
     font-size: 24px;
     font-weight: 700;
     color: var(--vaygo-primary);
@@ -50,39 +53,39 @@
   }
 }
 
+// Container principale
 .gestione-voli-container {
   min-height: 100vh;
-  background: var(--vaygo-gradient-surface);
-  padding: var(--vaygo-spacing-md);
+  background: var(--vaygo-background);
+  padding: 20px;
 }
-  
-  // Menu di Navigazione
-  // ===========================================
+
+// Menu di Navigazione
 .voli-navigation-menu {
   background: var(--vaygo-white);
-  border-radius: var(--vaygo-radius-lg);
+  border-radius: 16px;
   box-shadow: 0 4px 20px var(--vaygo-shadow);
-  margin-bottom: var(--vaygo-spacing-xl);
+  margin-bottom: 24px;
   overflow: hidden;
-  
+
   .menu-header {
-    background: var(--vaygo-gradient-primary);
-    padding: var(--vaygo-spacing-lg);
+    background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+    padding: 20px;
     color: var(--vaygo-white);
     text-align: center;
-      
+
     h2 {
       margin: 0;
-      font-size: var(--vaygo-font-size-xl);
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.5px;
     }
   }
-  
+
   .menu-buttons {
     display: flex;
     background: var(--vaygo-white);
-      
+
     .menu-button {
       flex: 1;
       --background: transparent;
@@ -93,9 +96,9 @@
       font-weight: 600;
       text-transform: none;
       letter-spacing: 0.3px;
-      transition: all var(--vaygo-transition-base);
+      transition: all 0.3s ease;
       position: relative;
-        
+
       &::before {
         content: '';
         position: absolute;
@@ -104,27 +107,370 @@
         right: 0;
         height: 3px;
         background: transparent;
-        transition: all var(--vaygo-transition-base);
+        transition: all 0.3s ease;
       }
-        
+
       &.active {
         --background: var(--vaygo-blue-light);
         --color: var(--vaygo-primary);
-          
+
         &::before {
-          background: var(--vaygo-gradient-primary);
+          background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
         }
       }
-        
+
       &:hover:not(.active) {
-        --background: var(--vaygo-surface);
+        --background: var(--vaygo-background);
         --color: var(--vaygo-text-primary);
       }
-      
+
       ion-icon {
-        margin-right: var(--vaygo-spacing-sm);
+        margin-right: 8px;
         font-size: 20px;
       }
+    }
+  }
+}
+
+// Container voli
+.voli-container {
+  background: var(--vaygo-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  border: 1px solid var(--vaygo-border);
+  padding: 24px;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 32px;
+
+    h2 {
+      margin: 0 0 8px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--vaygo-primary);
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--vaygo-text-secondary);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Grid dei voli
+.voli-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+// Card dei voli
+.volo-card {
+  --background: var(--vaygo-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  border: 1px solid var(--vaygo-border);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--vaygo-shadow-medium);
+  }
+
+  ion-card-header {
+    background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+    padding: 20px;
+
+    .volo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+
+      .volo-id {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--vaygo-white);
+        font-weight: 600;
+
+        ion-icon {
+          font-size: 20px;
+        }
+
+        span {
+          font-size: 16px;
+        }
+      }
+
+      .volo-status {
+        ion-badge {
+          --background: var(--vaygo-accent);
+          --color: var(--vaygo-white);
+          font-weight: 600;
+          padding: 6px 12px;
+          border-radius: 12px;
+        }
+      }
+    }
+
+    ion-card-title {
+      margin: 0;
+      color: var(--vaygo-white);
+
+      .flight-route {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 700;
+
+        .departure, .arrival {
+          font-weight: 700;
+        }
+
+        .arrow {
+          opacity: 0.8;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  ion-card-content {
+    padding: 24px;
+  }
+}
+
+// Dettagli del volo
+.volo-details {
+  .detail-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--vaygo-background);
+    border-radius: 12px;
+    border: 1px solid var(--vaygo-border);
+
+    &.price-item {
+      background: var(--vaygo-blue-light);
+      border-color: var(--vaygo-primary);
+    }
+
+    ion-icon {
+      font-size: 20px;
+      color: var(--vaygo-text-secondary);
+      flex-shrink: 0;
+    }
+
+    .detail-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      .detail-label {
+        font-size: 12px;
+        color: var(--vaygo-text-secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .detail-value {
+        font-size: 14px;
+        color: var(--vaygo-text-primary);
+        font-weight: 600;
+
+        &.price {
+          color: var(--vaygo-primary);
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  .volo-actions {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: var(--vaygo-background);
+    border-radius: 12px;
+    margin-top: 16px;
+    justify-content: space-between;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action-button {
+      flex: 1;
+      height: 40px;
+      font-weight: 600;
+      --border-radius: 8px;
+
+      &.primary {
+        --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+        --color: var(--vaygo-white);
+
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+        }
+      }
+
+      &.secondary {
+        --background: transparent;
+        --color: var(--vaygo-primary);
+        --border-color: var(--vaygo-primary);
+        --border-width: 1px;
+
+        &:hover {
+          --background: var(--vaygo-blue-light);
+        }
+      }
+
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// Empty state
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+
+  .empty-icon {
+    margin-bottom: 24px;
+
+    ion-icon {
+      font-size: 64px;
+      color: var(--vaygo-text-secondary);
+      opacity: 0.5;
+    }
+  }
+
+  h3 {
+    margin: 0 0 12px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--vaygo-text-primary);
+  }
+
+  p {
+    margin: 0 0 24px 0;
+    color: var(--vaygo-text-secondary);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .create-flight-button {
+    --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+    --color: var(--vaygo-white);
+    --border-radius: 12px;
+    font-weight: 600;
+    height: 48px;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(46, 139, 87, 0.3);
+    }
+
+    ion-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+// Animazioni
+.vaygo-fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .gestione-voli-container {
+    padding: 16px;
+  }
+
+  .voli-container {
+    padding: 20px;
+
+    .section-header {
+      h2 {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .volo-card {
+    ion-card-header {
+      padding: 16px;
+
+      .volo-header {
+        margin-bottom: 12px;
+
+        .volo-id {
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+
+      ion-card-title .flight-route {
+        font-size: 16px;
+      }
+    }
+
+    ion-card-content {
+      padding: 20px;
+    }
+  }
+}
+
+// Supporto tema scuro
+@media (prefers-color-scheme: dark) {
+  .custom-header {
+    --background: var(--vaygo-white);
+
+    ion-toolbar {
+      --background: var(--vaygo-white);
     }
   }
 }

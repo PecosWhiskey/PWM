@@ -15,9 +15,9 @@ import { BigliettiService } from '../services/biglietti.service';
 })
 export class CreaBigliettoPage implements OnInit {
 
-  constructor(private sessionStorage: SessionStorageService,
-    private bigliettiService: BigliettiService) {}
+  constructor(private sessionStorage: SessionStorageService, private bigliettiService: BigliettiService) {}
 
+  //Dati richiesti in fase di acquisto del biglietto
   idVolo = '';
   idPasseggero = '';
   nome = '';
@@ -30,20 +30,23 @@ export class CreaBigliettoPage implements OnInit {
   prezzoFinale = 0.0;
   dataAcquisto = '';
 
+  //Variabili il cui valore cambia in base alle risposte del server alle richieste inviate
   creazioneEsito = '';
   bigliettoCreato = false;
   modificaEsito = '';
   passeggeroCreato = false;
-  numBigliettiCreati = 0;
+  numBigliettiCreati = 0; //Tiene traccia del numero di biglietti creati
 
-  numPasseggeri = 0;
-  numeroPasseggeri : number[] = []; //array di lunghezza pari al numero di passeggeri
+  numPasseggeri = 0; //numero di passeggeri selezionato dall'utente in fase di ricerca dei voli
+  numeroPasseggeri : number[] = []; //array di lunghezza pari al numero di passeggeri, che viene utilizzato per il primo ciclo for presente nell'html
   passeggeri: any[] = []; //array che conterrà i dati dei passeggeri per cui verrà creato il biglietto
 
-
+  //Dati ottenuti dal SessionStorage
   bigliettoAndata! : Volo;
   bigliettoRitorno! : Volo;
   sceltaUtente=  ''; 
+
+  //Array che memorizza ogni biglietto che viene inserito nel database
   bigliettiCreati: any[] = [];
 
   ngOnInit() {
@@ -61,7 +64,6 @@ export class CreaBigliettoPage implements OnInit {
     const passeggeri = this.sessionStorage.getItem('numero passeggeri');
     if(passeggeri != 0){
       this.numPasseggeri = passeggeri;
-      //Array numerico di lunghezza pari al numero di passeggeri, che viene utilizzato per il primo ciclo for presente nell'html
       this.numeroPasseggeri = Array.from({ length: passeggeri }, (_, i) => i + 1);
       //Richiamo alla funzione che inizializza l'array di oggetti, con i dati dei passeggeri, con valori nulli
       this.inizializzaPasseggeri();
@@ -72,7 +74,6 @@ export class CreaBigliettoPage implements OnInit {
       this.sceltaUtente = scelta;
     }
 
-    //Vaiabile che tiene traccia del numero di biglietti creati
     this.bigliettiService.getnumBigliettiCreati().subscribe(numero => {
       this.numBigliettiCreati = numero;
     });

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonSelectOption, IonInput,
-  IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, IonLabel, IonChip, IonAlert, IonModal } from '@ionic/angular/standalone';
+  IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, 
+  IonLabel, IonChip, IonAlert, IonModal } from '@ionic/angular/standalone';
 import { BigliettiService } from '../services/biglietti.service';
 import { Biglietto } from '../models/biglietto.models';
 
@@ -21,8 +22,9 @@ export class CheckInPage implements OnInit {
   idPasseggero = '';
   idBiglietto = 0;
 
+  //Variabili il cui valore dipende dalle risposte alle richieste inviate al server
   bigliettoTrovato!: Biglietto;
-  found = false;
+  found = false; //Permette la prosecuzione del check-in se il biglietto è stato trovato
   numPosti = 10;
   postiDisponibili = Array.from({ length: this.numPosti}, (_, i) => i + 1);
   postiLettere = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -30,7 +32,7 @@ export class CheckInPage implements OnInit {
   postiOccupati: any[] = [];
   idVolo = '';
   bigliettoModificato: any;
-  occupied = false;
+  occupied = false; //Non permette di proseguire con il completamento del check-in se il posto scelto è già occupato
 
   //Dati necessari per il check-in
   sceltaPosto = '';
@@ -104,6 +106,7 @@ export class CheckInPage implements OnInit {
     })
   }
 
+  //Funzione che gestisce il completamento del check-in
   CheckIn(){
     //Inizializzo la variabile a false prima di iniziare il ciclo per sovrascrivere il valore precedente 
     this.occupied = false;
@@ -158,5 +161,4 @@ export class CheckInPage implements OnInit {
        }
     })
   }
-
 }

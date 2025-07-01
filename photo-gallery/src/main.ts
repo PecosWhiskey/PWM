@@ -4,12 +4,6 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 
 import { provideHttpClient } from '@angular/common/http';
 
-// import { importProvidersFrom } from '@angular/core';
-// import { IonicStorageModule } from '@ionic/storage-angular';
-// import CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
-// import { Drivers, Storage } from '@ionic/storage';
-// import { provideIonicStorage } from '@ionic/storage-angular';
-
 import { authInterceptor } from './app/interceptors/auth.interceptor';
 import { withInterceptors } from '@angular/common/http';
 
@@ -21,11 +15,6 @@ bootstrapApplication(AppComponent, {
     { provide:RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
-    provideHttpClient( withInterceptors([authInterceptor]) ), //in questo modo in tutte le richieste se presente verrà inserito il token
-    // importProvidersFrom(IonicStorageModule.forRoot()),
+    provideHttpClient( withInterceptors([authInterceptor]) ), //in questo modo in tutte le richieste verrà inserito il token, se presente
   ],
 });
-
-// {
-//       driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
-//      }

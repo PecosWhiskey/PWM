@@ -9,13 +9,13 @@ export const authGuard: CanActivateFn = (route, state) => {
   const tokenService = inject(TokenService); 
   const router = inject(Router);
 
-  try { // Controlla se l'utente è loggato 
-    //    const isLogged = await tokenService.isLogged();  PRIMA DI (ROUTE,STATE) C'ERA ASYNC
+  try { 
+    // Controlla se l'utente è loggato 
     const isLogged = tokenService.isLogged(); 
     
     if (isLogged) { 
       console.log('Accesso consentito'); 
-       // Permette l'accesso 
+      // Permette l'accesso 
       return true;
     } else { 
       // Reindirizza al login bloccandone l'accesso 

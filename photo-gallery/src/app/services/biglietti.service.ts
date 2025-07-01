@@ -19,30 +19,37 @@ export class BigliettiService {
 
   constructor(private http: HttpClient) {}
 
+  //Richiesta HTTP per la creazione di un nuovo biglietto, effettuata durante l'acquisto
   CreaBiglietto(credentials: Biglietto): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/creazione-biglietto`, credentials);
   }
 
+  //Richiesta HTTP per l'inserimento nel database dei dati del passeggero che sta acquistando un biglietto
   CreaPasseggero(credentials: Passeggero): Observable<any>{
     return this.http.post(`${this.baseUrl}/api/auth/inserimento-passeggero`, credentials);
   }
 
+  //Richiesta HTTP per il decremento dei posti disponibili del volo per cui è stato acquistato un biglietto
   ModificaVolo(credentials: {idVolo: string, posti: number}): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/decremento-posti`, credentials);
   }
 
+  //Richiesta HTTP per la ricerca di un biglietto eseguita prima di procedere con il check-in
   CercaBiglietto(credentials: {idPasseggero:string, idBiglietto: number}): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/cerca-biglietto`, credentials);
   }
 
+  //Richiesta HTTP per l'inserimento dei nuovi dati in un biglietto già esistente dopo aver completato il check-in
   ModificaBiglietto(credentials: {idBiglietto: number, tariffa:string, posto: string, prezzoFinale: number}): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/modifica-biglietto`, credentials);
   }
 
+  //Richiesta HTTP per ricavare i posti già prenotati da altri utenti per un determinato volo
   OttieniPostiOccupati(credentials: {idVolo: string}): Observable<any>{
     return this.http.post(`${this.baseUrl}/api/auth/posti-occupati`, credentials);
   }
 
+  //Funzioni che memorizzano e ricavano il numero di biglietti creati
   setnumBigliettiCreati(numero: number) {
     this.numBigliettiCreati.next(numero);
   }
@@ -51,6 +58,7 @@ export class BigliettiService {
     return this.numBigliettiCreati.asObservable();
   }
 
+  //Funzioni che memorizzano e ricavano il biglietto modificato del cliente dopo il check-in
   setBigliettoModificato(numero: number) {
     this.bigliettoModificato.next(numero);
   }

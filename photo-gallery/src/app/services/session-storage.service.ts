@@ -7,6 +7,7 @@ export class SessionStorageService {
 
   constructor() { }
 
+  //Funzioni che memorizzano, ricavano e cancellano dati nel SessionStorage
   setItem(key: string, value: any){
     //Prima di memorizzare il value, viene convertito in una stringa
     sessionStorage.setItem(key, JSON.stringify(value));

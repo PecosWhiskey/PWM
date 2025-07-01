@@ -12,21 +12,26 @@ import { BehaviorSubject } from 'rxjs';
 export class Tab1Service {
 
   private baseUrl = 'http://localhost:3000';
-  private ricercaInfo = new BehaviorSubject<RicercaInfo>({partenza:'', destinazione: '', dataPartenza: '', dataRitorno: ''}) // private voliTrovatiAndata = false; //indica se sono stati trovati i voli cercati dall'utente
+  //Dati inseriti dall'utente per la ricerca dei voli
+  private ricercaInfo = new BehaviorSubject<RicercaInfo>({partenza:'', destinazione: '', dataPartenza: '', dataRitorno: ''});
+  //Voli di andata e ritorno trovati nel database corrispondenti ai criteri di ricerca
   private bigliettiAndata = new BehaviorSubject<Volo[]>([]);
   private bigliettiRitorno = new BehaviorSubject<Volo[]>([]);
+  //Variabili che tengono traccia dello stato della ricerca, ovvero del riscontro positivo o negativo da parte del server
   private voliTrovatiAndata = new BehaviorSubject<boolean>(false);
   private voliTrovatiRitorno = new BehaviorSubject<boolean>(false);
-  private sceltaUtente = new BehaviorSubject<string>('nessun selezionato'); //cambia valore in base all'opzione scelta dall'utente
-  //tra andate e ritorno, solo andata o nessun selezionato (in questo caso assume il valore di default)
+  //Scelta dell'utente tra A/R oppure SOLO ANDATA oppure nessuna scelta
+  private sceltaUtente = new BehaviorSubject<string>('nessun selezionato'); 
 
   constructor(private http: HttpClient) {}
 
+  //Richiesta HTTP per la ricerca dei voli corrispondenti ai criteri di ricerca dell'utente
   CercaVolo(credentials: { partenza: string, destinazione: string, oraPartenza: string}): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/auth/ricerca-volo`, credentials);
 
   }
 
+  //Funzioni che memorizzano e ricavano le informazioni sulla ricerca dell'utente e i risultati inviati dal server
   setRicercaInfo(info: RicercaInfo) {
     this.ricercaInfo.next(info);
   }

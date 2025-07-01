@@ -15,29 +15,22 @@ import { Biglietto } from '../models/biglietto.models';
 })
 export class BigliettiAcquistatiPage implements OnInit {
 
-  isLogged = false;
+  //Informazioni del cliente che accede alla pagina memorizzate nel LocalStorage
   idCliente = '';
   clientInfo!: any;
+  //Array dei biglietti acquistati dal cliente
   biglietti: Biglietto[] = [];
 
   constructor(private clientiService: ClientiService, private tokenService: TokenService) { }
 
-  // async ngOnInit(){
-  //   this.isLogged = await this.tokenService.isLogged();
-  //   if(this.isLogged){
-  //     await this.caricaBiglietti();
-  //   }
-  //   }
   ngOnInit(){
-   this.isLogged = this.tokenService.isLogged();
-   if(this.isLogged){
-     this.caricaBiglietti();
-    }
+    //Caricamento dei biglietti acquistati
+    this.caricaBiglietti();
   }
-  
-  caricaBiglietti(){ //PRIMA C'ERA ASYNC
 
-  //  this.clientInfo = await this.tokenService.getClientInfo();
+  //Funzione che permette di ottenere i biglietti acquistati direttamente dal database 
+  caricaBiglietti(){
+    //Ottengo l'idCliente che serve per inviare la richiesta al servers
     this.clientInfo = this.tokenService.getClientInfo();
     this.idCliente = this.clientInfo.idCliente;
 

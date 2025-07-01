@@ -25,10 +25,10 @@ export class Tab1Page {
   dataInseritaR = ''; //recupera la data di destinazione inserita dall'utente con fuso e ora
   dataPartenza = ''; //data di partenza senza fuso e ora
   dataRitorno = ''; //data di ritorno senza fuso e ora
-  numPasseggeri = 1;
+  numPasseggeri = 1; //numero di passeggeri selezionato
   cercaVoloEsito = ''; //esito della ricerca sei voli
 
-  trovati = false;//serve per visualizzare i biglietti trovati
+  trovati = false; //serve per visualizzare i biglietti trovati
   bigliettiAndata: Volo[] = []; //array dei biglietti di partenza trovati
   bigliettiRitorno: Volo[] = []; //array dei biglietti di ritorno trovati
 
@@ -86,7 +86,7 @@ export class Tab1Page {
       dataPartenza : this.dataPartenza,
       dataRitorno : this.dataRitorno
     }
-    //Memorizza le informazioni sulla ricerca dell'utente nel session storage e nel service del tab1
+    //Memorizza le informazioni sulla ricerca dell'utente nel SessionStorage e nel service del tab1
     this.sessionStorageService.setItem('ricercaInfo', ricercaInfo);
     this.sessionStorageService.setItem('numero passeggeri', this.numPasseggeri);
     this.tab1Service.setRicercaInfo(ricercaInfo);
@@ -96,12 +96,12 @@ export class Tab1Page {
         console.log('Search success:', response);
         this.cercaVoloEsito= response.message;
         this.trovati = true;
-        //Memorizza il risultato della ricerca true o false in base che i voli siano stati trovato o no
+        //Memorizza il risultato della ricerca
         this.tab1Service.setVoliTrovatiAndata(this.trovati);
-        //Memorizza temporaneamente il risultato della ricerca dei voli di andata
+        //Memorizza temporaneamente il risultato della ricerca dei voli di andata nel SessionStorage
         this.sessionStorageService.setItem('voliAndataTrovati', this.trovati);
-        this.bigliettiAndata = response.data;
         //Memorizza i biglietti trovati nel service a cui accederà l'altro tab per mostrarli
+        this.bigliettiAndata = response.data;
         this.tab1Service.setBigliettiAndata(this.bigliettiAndata);
         //Memorizza temporaneamente i biglietti di andata trovati nel Session Storage
         this.sessionStorageService.setItem('bigliettiAndata', this.bigliettiAndata);
@@ -123,14 +123,14 @@ export class Tab1Page {
             console.log('Search success:', response);
             this.cercaVoloEsito= response.message;
             this.trovati = true;
-            //Memorizza il risultato della ricerca true o false in base che i voli siano stati trovato o no
+            //Memorizza il risultato della ricerca
             this.tab1Service.setVoliTrovatiRitorno(this.trovati);
-            //Memorizza temporaneamente il risultato della ricerca dei voli di ritorno
+            //Memorizza temporaneamente il risultato della ricerca dei voli di ritorno nel SessionStorage
             this.sessionStorageService.setItem('voliRitornoTrovati', this.trovati);
+             //Memorizza i biglietti trovati nel service a cui accederà l'altro tab per mostrarli
             this.bigliettiRitorno = response.data;
-            //Memorizza i biglietti trovati nel service a cui accederà l'altro tab per mostrarli
             this.tab1Service.setBigliettiRitorno(this.bigliettiRitorno);
-            //Memorizza temporaneamente i biglietti di ritorno trovati nel Session Storage
+            //Memorizza temporaneamente i biglietti di ritorno trovati nel SessionStorage
             this.sessionStorageService.setItem('bigliettiRitorno', this.bigliettiRitorno);
           },
           error: (err) => {

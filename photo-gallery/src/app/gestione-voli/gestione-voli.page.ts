@@ -107,10 +107,10 @@ import { RouterModule, RouterLink } from '@angular/router';
 export class GestioneVoliPage {
 
   constructor(private gestioneVoliService: GestioneVoliService) {
-    // Registra le icone che usi nel template
     addIcons({ createOutline, listOutline, addCircleOutline, personOutline });
   }
 
+  //Dati richiesti in fase di creazione/modifica di un volo
   idVolo = '';
   partenza = '';
   destinazione = '';
@@ -135,6 +135,7 @@ export class GestioneVoliPage {
   }
 
 
+  //Funzione che formatta la data ottenuta dal tag "ion-datetime"
   formattaData(dataRicevuta: string, ora: string) {
     console.log("Data: ", dataRicevuta);
     const dataStringa = dataRicevuta.split('T')[0];
@@ -144,6 +145,7 @@ export class GestioneVoliPage {
     return dataFormattata;
   }
 
+  //Funzione che gestisce la creazione di un volo
   CreaVolo() {
     const oraP = this.formattaData(this.data, this.oraPartenza);
     const oraA = this.formattaData(this.data, this.oraArrivo);
@@ -161,7 +163,7 @@ export class GestioneVoliPage {
         console.log('Creation success:', response);
         this.creaVoloEsito = response.message;
 
-        //Permette al pop up di apparire
+        //Apertura del pop up
         this.setOpenCreated(true);
       },
       error: (err) => {
@@ -171,6 +173,7 @@ export class GestioneVoliPage {
     });
   }
 
+  //Funzione che gestisce la modifica di un volo
   ModificaVolo() {
     const oraP = this.formattaData(this.data, this.oraPartenza);
     const oraA = this.formattaData(this.data, this.oraArrivo);
@@ -188,7 +191,7 @@ export class GestioneVoliPage {
         console.log('Modification success:', response);
         this.creaVoloEsito = response.message;
 
-        //Permette al pop up di apparire
+        //Apertura del pop up
         this.setOpenModified(true);
       },
       error: (err) => {

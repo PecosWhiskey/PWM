@@ -22,7 +22,7 @@ export class Tab2Page implements OnInit {
   constructor(private tab1Service: Tab1Service, private sessionStorageService: SessionStorageService,
     private router: Router) {}
 
-  //Valori che cambiano in base ai risultati della ricerca effettuata nel tab1
+  //Valori che cambiano in base all'esito della ricerca effettuata nel tab1
   voliTrovatiAndata = false; 
   voliTrovatiRitorno = false;
 
@@ -36,16 +36,17 @@ export class Tab2Page implements OnInit {
   //Scelta dell'utente sui tipi di volo da cercare: andata e ritorno, solo andata, nessun selzionato
   sceltaUtente = 'nessun selezionato';
 
-  // Filtri per la ricerca avanzata
-  filtroPrezzo = 'tutti'; // tutti, economici, medi, premium
+  //Filtro per la visualizzazione dei biglietti il cui prezzo è compreso in un certo intervallo
+  filtroPrezzo = 'tutti'; //VALORI CHE PUò ASSUMERE: tutti, economici, medi, premium
 
-  //Copia dei biglietti di andata e ritorno trovati per usare questi per filtrare i biglietti e mostrarli all'utente
+  //Copia dei biglietti di andata e ritorno trovati utilizzati per filtrare i biglietti e mostrarli all'utente
   bigliettiAndataOriginari: Volo[] = this.bigliettiAndata; 
   bigliettiRitornoOriginari: Volo[] = this.bigliettiRitorno;
 
 
   ngOnInit() {
     //Inizializzazione dei dati che vengono mostrati all'utente all'apertura della pagina
+    //Recupero dal Tab1Service per ogni nuova ricerca effettuata
     this.tab1Service.getRicercaInfo().subscribe(info => {
       this.ricercaInfo = info;
     });
@@ -71,7 +72,7 @@ export class Tab2Page implements OnInit {
     this.tab1Service.getSceltaUtente().subscribe(scelta => {
       this.sceltaUtente = scelta;
     })
-//RECUPERA I DATI DAL SESSION STORAGE QUANDO LA PAGINA DEL TAB1 VIENE RICARICATA PER MANTENERE I RISULTATI VISIBILI
+    //Recupero dal SessionStorageService per ogni volta che viene ricaricata la pagina del Tab1
     const ricerca = this.sessionStorageService.getItem('ricercaInfo');
     if(ricerca != null){
       this.ricercaInfo = ricerca;
@@ -106,7 +107,6 @@ export class Tab2Page implements OnInit {
   };
 
   //Funzioni che gestiscono la selezione o la deselezione dei biglietti di andata e ritorno
-
   selezionaAndata(biglietto: Volo){
     this.sessionStorageService.setItem('biglietto di andata scelto', biglietto);
     console.log("Biglietto andata selezionato: ", this.sessionStorageService.getItem('biglietto di andata scelto'));

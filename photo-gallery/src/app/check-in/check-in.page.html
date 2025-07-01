@@ -242,11 +242,13 @@
           </ion-content>
         }
 
-      <ion-modal [isOpen]="isModalOpen">
+      <!-- <ion-modal [isOpen]="isModalOpen">
         <ng-template>
           <ion-card class="results-card">
             <ion-card-header>
               <ion-card-title>{{bigliettoModificato.partenza}}    {{bigliettoModificato.destinazione}}</ion-card-title>
+              <ion-card-subtitle>{{bigliettoModificato.aeroportoPartenza.idAeroporto}} {{bigliettoModificato.aeroportoPartenza.nome}} </ion-card-subtitle>
+              <ion-card-subtitle>{{bigliettoModificato.aeroportoDestinazione.idAeroporto}} {{bigliettoModificato.aeroportoDestinazione.nome}} </ion-card-subtitle>
               <ion-card-subtitle>{{bigliettoModificato.dataPartenza.split(' ')[0]}}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
@@ -257,6 +259,30 @@
               <p>Prezzo complessivo: {{bigliettoModificato.prezzoFinale}} €</p>
             </ion-card-content>
           </ion-card>
+        </ng-template>
+      </ion-modal> -->
+      <ion-modal [isOpen]="isModalOpen">
+        <ng-template>
+          <div class="ticket-modified">
+            <div class="ticket-title">
+              <h1>{{bigliettoModificato.partenza}}</h1>
+              <h1>{{bigliettoModificato.destinazione}}</h1>
+            </div>
+            <div class="ticket-subtitle">  
+              <h3>{{bigliettoModificato.aeroportoPartenza.idAeroporto}} --> {{bigliettoModificato.aeroportoPartenza.nome}} </h3>
+              <h3>{{bigliettoModificato.aeroportoDestinazione.idAeroporto}} --> {{bigliettoModificato.aeroportoDestinazione.nome}} </h3>
+            </div>
+            <div class="ticket-date">
+              <!--La data viene mostrare non nella forma YYYY-MM-GG ma invertita, quindi nella forma GG-MM-YYYY-->
+              <h4>{{bigliettoModificato.dataPartenza.split(' ')[0].split("-").reverse().join("-")}}    {{bigliettoModificato.dataPartenza.split(' ')[1]}}</h4>
+              <h4>{{bigliettoModificato.dataPartenza.split(' ')[0].split("-").reverse().join("-")}}    {{bigliettoModificato.dataPartenza.split(' ')[2]}}</h4>
+            </div> 
+            <div class="ticket-info">
+              <p>Tariffa: {{bigliettoModificato.tariffa}}</p>
+              <p>Posto: {{bigliettoModificato.posto}}</p>
+              <p>Prezzo complessivo: {{bigliettoModificato.prezzoFinale}} €</p>
+            </div>  
+          </div>
         </ng-template>
       </ion-modal>
         

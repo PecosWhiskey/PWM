@@ -238,7 +238,7 @@ async function visualizzaPasseggeri(){
 // inserisciPosizione("AMSTERDAM", "Paesi Bassi", "52°18′29″N", "4°45′51″E");
 // inserisciPosizione("PALERMO", "Italia", "38°10′55″N", "13°05′58″E");
 
-inserisciAeroporto("PMO", "Punta Raisi", 15);
+// inserisciAeroporto("PMO", "Punta Raisi", 15);
 // inserisciAeroporto("AMS", "Schiphol", 14);
 // inserisciAeroporto("BCN","Barcellona-El Prat", 13);
 // inserisciAeroporto("SEN", " Southend", 12);

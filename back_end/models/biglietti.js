@@ -124,6 +124,32 @@ class Biglietti {
         });
     }
 
+    static async trovaAeroportoPartenza(idVolo){
+        return new Promise((resolve,reject)=>{
+            db.get(`SELECT idAeroporto, nome FROM Aeroporto WHERE idAeroporto IN(
+                SELECT partenza FROM Volo WHERE idVolo=?)`, [idVolo], (err,row)=>{
+                    if(err){
+                        reject(err);
+                        return;
+                    }
+                    resolve(row);
+                });
+        });
+    }
+
+    static async trovaAeroportoDestinazione(idVolo){
+        return new Promise((resolve,reject)=>{
+            db.get(`SELECT idAeroporto, nome FROM Aeroporto WHERE idAeroporto IN(
+                SELECT destinazione FROM Volo WHERE idVolo=?)`, [idVolo], (err,row)=>{
+                    if(err){
+                        reject(err);
+                        return;
+                    }
+                    resolve(row);
+                });
+        });
+    }
+
     // static async findByIdAeroportoPartenza(idAeroporto){
     //     console.log('findByIdAeroportoPartenza: ', idAeroporto);
     //     return new Promise((resolve,reject)=>{

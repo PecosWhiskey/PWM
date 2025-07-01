@@ -124,12 +124,16 @@ class AuthServiceBiglietti {
 
             const partenza = await biglietti.trovaCittàPartenza(biglietto.idVolo);
             const destinazione = await biglietti.trovaCittàDestinazione(biglietto.idVolo);
+            const aeroportoPartenza = await biglietti.trovaAeroportoPartenza(biglietto.idVolo);
+            const aeroportoDestinazione = await biglietti.trovaAeroportoDestinazione(biglietto.idVolo);
 
             const risultato = {
                 idBiglietto: modificato.idBiglietto, 
                 idVolo: biglietto.idVolo, 
                 partenza: partenza.citta,
                 destinazione: destinazione.citta,
+                aeroportoPartenza: aeroportoPartenza,
+                aeroportoDestinazione : aeroportoDestinazione,
                 tariffa: modificato.tariffa,
                 posto: modificato.posto,
                 dataPartenza: biglietto.dataPartenza,

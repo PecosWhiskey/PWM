@@ -75,14 +75,14 @@ export class Tab1Page {
     this.dataRitorno = this.dataInseritaR.split('T')[0];
     //Oggetto con i dati che devono essere inviati al server per la ricerca dei voli
     const datiVoloPartenza = {
-      partenza: this.partenza,                 
-      destinazione : this.destinazione,
+      partenza: this.partenza.toUpperCase(),                 
+      destinazione : this.destinazione.toUpperCase(),
       oraPartenza : this.dataPartenza
     }
     //Oggetto con le informazioni sulla ricerca da mostrare nel tab2
     const ricercaInfo = {
-      partenza : this.partenza,
-      destinazione : this.destinazione,
+      partenza : this.partenza.toUpperCase(),
+      destinazione : this.destinazione.toUpperCase(),
       dataPartenza : this.dataPartenza,
       dataRitorno : this.dataRitorno
     }
@@ -114,8 +114,8 @@ export class Tab1Page {
       //Se la scelta è stata andata e ritorno oppure nessuna scelta allora vengono cercati anche i voli di ritorno
       if(this.scelta == 'roundtrip' || this.scelta == 'nessun selezionato'){
         const datiVoloRitorno = {
-          partenza: this.destinazione,
-          destinazione : this.partenza,
+          partenza: this.destinazione.toUpperCase(),
+          destinazione : this.partenza.toUpperCase(),
           oraPartenza : this.dataRitorno
         }
         this.tab1Service.CercaVolo(datiVoloRitorno).subscribe({ 

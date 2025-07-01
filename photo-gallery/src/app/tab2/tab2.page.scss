@@ -4,22 +4,22 @@
   --vaygo-primary: #2E8B57;
   --vaygo-secondary: #4A90E2;
   --vaygo-accent: #34D399;
-  
+
   // Colori di sfondo chiari
   --vaygo-blue-light: #E0F2FE;
   --vaygo-green-light: #ECFDF5;
   --vaygo-background: #FAFAFA;
   --vaygo-white: #FFFFFF;
-  
+
   // Colori del testo chiari
   --vaygo-text-primary: #1F2937;
   --vaygo-text-secondary: #6B7280;
-  
+
   // Effetti e bordi chiari
   --vaygo-shadow: rgba(0, 0, 0, 0.04);
   --vaygo-shadow-medium: rgba(0, 0, 0, 0.08);
   --vaygo-border: rgba(0, 0, 0, 0.06);
-  
+
   // Colori di stato
   --vaygo-success: #10B981;
   --vaygo-warning: #F59E0B;
@@ -32,22 +32,22 @@
     --vaygo-primary: #34D399;
     --vaygo-secondary: #60A5FA;
     --vaygo-accent: #2E8B57;
-    
+
     // Colori di sfondo scuri
     --vaygo-blue-light: #1E3A8A;
     --vaygo-green-light: #064E3B;
     --vaygo-background: #111827;
     --vaygo-white: #1F2937;
-    
+
     // Colori del testo scuri
     --vaygo-text-primary: #F9FAFB;
     --vaygo-text-secondary: #D1D5DB;
-    
+
     // Effetti e bordi scuri
     --vaygo-shadow: rgba(0, 0, 0, 0.3);
     --vaygo-shadow-medium: rgba(0, 0, 0, 0.5);
     --vaygo-border: rgba(255, 255, 255, 0.1);
-    
+
     // Colori di stato per tema scuro
     --vaygo-success: #34D399;
     --vaygo-warning: #FBBF24;
@@ -189,6 +189,57 @@ ion-header {
   box-shadow: 0 4px 20px var(--vaygo-shadow);
   border: 1px solid var(--vaygo-border);
   margin-bottom: 24px;
+  transition: all 0.3s ease;
+
+  // Stile per la card selezionata
+  &.selected {
+    border: 3px solid var(--vaygo-primary);
+    box-shadow: 0 0 20px rgba(46, 139, 87, 0.4), 0 4px 20px var(--vaygo-shadow);
+    transform: translateY(-2px);
+
+    @media (prefers-color-scheme: dark) {
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.5), 0 4px 20px var(--vaygo-shadow);
+      border-color: var(--vaygo-accent);
+    }
+
+    // Bollino di conferma
+    ion-card-header {
+      position: relative;
+
+      &::after {
+        content: "✓";
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: var(--vaygo-primary);
+        color: var(--vaygo-white);
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 2px 8px rgba(46, 139, 87, 0.3);
+
+        @media (prefers-color-scheme: dark) {
+          background: var(--vaygo-accent);
+        }
+      }
+
+      // Riduci la larghezza del titolo quando è selezionato per fare spazio al bollino
+      ion-card-title {
+        .flight-route {
+          margin-right: 40px; // Spazio per il bollino
+
+          .arrival {
+            margin-right: 8px; // Spazio aggiuntivo per sicurezza
+          }
+        }
+      }
+    }
+  }
 
   ion-card-header {
     background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
@@ -201,39 +252,120 @@ ion-header {
       margin: 0;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+      width: 100%;
 
-      &:before {
-        content: "✨";
-        font-size: 18px;
-      }
-    }
-    
-    ion-button {
-      --background: linear-gradient(135deg, var(--vaygo-primary) 0%, var(--vaygo-secondary) 100%);
-      --color: var(--vaygo-white);
-      --border-radius: 16px;
-      height: 56px;
-      font-weight: 600;
-      font-size: 16px;
-      margin-top: 8px;
-      box-shadow: 0 4px 20px rgba(46, 139, 87, 0.3);
+      .flight-route {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 16px;
+        transition: margin-right 0.3s ease; // Transizione fluida
 
-      &:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 25px rgba(46, 139, 87, 0.4);
+        .departure {
+          font-weight: 700;
+          text-align: left;
+          flex: 1; // Prende lo spazio disponibile
+        }
+
+        .arrow {
+          color: var(--vaygo-white);
+          font-size: 18px;
+          opacity: 0.8;
+          flex-shrink: 0; // Non si riduce
+
+          &::before {
+            content: "✈️";
+          }
+        }
+
+        .arrival {
+          font-weight: 700;
+          text-align: right;
+          flex: 1; // Prende lo spazio disponibile
+          margin-right: 0; // Reset del margine di default
+          transition: margin-right 0.3s ease; // Transizione fluida
+        }
       }
     }
   }
 
   ion-card-content {
-    padding: 24px;
+    padding: 20px 24px;
+    color: var(--vaygo-text-primary);
 
-    .no-results {
-      text-align: center;
-      padding: 40px 20px;
+    // Contenitore per gli orari con layout flex
+    .flight-times {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0 12px 0;
+      font-size: 16px;
+      font-weight: 600;
       color: var(--vaygo-text-secondary);
-      font-style: italic;
+
+      .departure-time {
+        text-align: left;
+      }
+
+      .arrival-time {
+        text-align: right;
+      }
+
+      // Separatore centrale opzionale
+      .time-separator {
+        color: var(--vaygo-text-secondary);
+        opacity: 0.6;
+        font-size: 14px;
+      }
+    }
+
+    // Prezzo con margine aggiustato
+    .price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--vaygo-primary);
+      margin: 12px 0;
+      text-align: center; // Centrato per bilanciare il layout
+    }
+
+    // Stili esistenti per i paragrafi (per retrocompatibilità)
+    p {
+      margin: 8px 0;
+      font-size: 16px;
+
+      &:first-child {
+        font-weight: 600;
+        color: var(--vaygo-text-secondary);
+      }
+
+      &:last-of-type {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--vaygo-primary);
+        margin: 12px 0;
+      }
+    }
+
+    ion-button {
+      margin: 8px 8px 8px 0;
+      --border-radius: 12px;
+      font-weight: 600;
+
+      &:not([fill]) {
+        --background: var(--vaygo-primary);
+        --color: var(--vaygo-white);
+      }
+    }
+  }
+
+  // Aggiustamenti per card selezionate
+  &.selected {
+    ion-card-content {
+      .flight-times {
+        margin-right: 0; // Non serve margine extra qui perché il bollino è nell'header
+      }
     }
   }
 }
@@ -285,7 +417,7 @@ ion-header {
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        
+
         // Fallback per tema scuro quando background-clip non funziona bene
         @media (prefers-color-scheme: dark) {
           -webkit-text-fill-color: var(--vaygo-primary);
@@ -565,5 +697,52 @@ ion-list {
   @keyframes loading {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
+  }
+}
+
+// Responsive per schermi piccoli
+@media (max-width: 480px) {
+  .results-card {
+    &.selected {
+      ion-card-header {
+        &::after {
+          width: 24px;
+          height: 24px;
+          font-size: 12px;
+          right: 12px;
+          top: 14px;
+        }
+
+        ion-card-title {
+          .flight-route {
+            margin-right: 32px; // Meno spazio su schermi piccoli
+
+            .arrival {
+              margin-right: 4px;
+            }
+          }
+        }
+      }
+    }
+
+    ion-card-header {
+      padding: 16px 20px 12px;
+
+      ion-card-title {
+        font-size: 18px;
+
+        .flight-route {
+          gap: 12px;
+
+          .departure, .arrival {
+            font-size: 16px;
+          }
+
+          .arrow {
+            font-size: 14px;
+          }
+        }
+      }
+    }
   }
 }

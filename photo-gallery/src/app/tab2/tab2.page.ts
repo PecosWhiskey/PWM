@@ -23,14 +23,14 @@ export class Tab2Page implements OnInit {
     private router: Router) {}
 
   //Valori che cambiano in base all'esito della ricerca effettuata nel tab1
-  voliTrovatiAndata = false; 
+  voliTrovatiAndata = false;
   voliTrovatiRitorno = false;
 
   //Biglietti trovati dalla ricerca nel tab1
   bigliettiAndata: Volo[] = [];
   bigliettiRitorno: Volo[] = [];
 
-  //Informazioni sulla ricerca dell'utente   
+  //Informazioni sulla ricerca dell'utente
   ricercaInfo = { partenza: '', destinazione: '', dataPartenza: '', dataRitorno: '' };
 
   //Scelta dell'utente sui tipi di volo da cercare: andata e ritorno, solo andata, nessun selzionato
@@ -40,8 +40,12 @@ export class Tab2Page implements OnInit {
   filtroPrezzo = 'tutti'; //VALORI CHE PUò ASSUMERE: tutti, economici, medi, premium
 
   //Copia dei biglietti di andata e ritorno trovati utilizzati per filtrare i biglietti e mostrarli all'utente
-  bigliettiAndataOriginari: Volo[] = this.bigliettiAndata; 
+  bigliettiAndataOriginari: Volo[] = this.bigliettiAndata;
   bigliettiRitornoOriginari: Volo[] = this.bigliettiRitorno;
+
+  // Aggiungi queste proprietà per tracciare le selezioni
+  bigliettoAndataSelezionato: Volo | null = null;
+  bigliettoRitornoSelezionato: Volo | null = null;
 
 
   ngOnInit() {
@@ -67,7 +71,7 @@ export class Tab2Page implements OnInit {
     this.tab1Service.getBigliettiRitorno().subscribe(biglietti=> {
       this.bigliettiRitorno = biglietti;
       this.bigliettiRitornoOriginari = biglietti;
-    })                      
+    })
 
     this.tab1Service.getSceltaUtente().subscribe(scelta => {
       this.sceltaUtente = scelta;
@@ -108,23 +112,36 @@ export class Tab2Page implements OnInit {
 
   //Funzioni che gestiscono la selezione o la deselezione dei biglietti di andata e ritorno
   selezionaAndata(biglietto: Volo){
+    this.bigliettoAndataSelezionato = biglietto;
     this.sessionStorageService.setItem('biglietto di andata scelto', biglietto);
     console.log("Biglietto andata selezionato: ", this.sessionStorageService.getItem('biglietto di andata scelto'));
   }
 
   deselezionaAndata(){
+    this.bigliettoAndataSelezionato = null;
     this.sessionStorageService.removeItem('biglietto di andata scelto');
     console.log("Biglietto andata deselezionato: ", this.sessionStorageService.getItem('biglietto di andata scelto'));
   }
 
   selezionaRitorno(biglietto: Volo){
+    this.bigliettoRitornoSelezionato = biglietto;
     this.sessionStorageService.setItem('biglietto di ritorno scelto', biglietto);
     console.log("Biglietto ritorno selezionato: ", this.sessionStorageService.getItem('biglietto di ritorno scelto'));
   }
 
   deselezionaRitorno(){
+    this.bigliettoRitornoSelezionato = null;
     this.sessionStorageService.removeItem('biglietto di ritorno scelto');
     console.log("Biglietto ritorno deselezionato: ", this.sessionStorageService.getItem('biglietto di ritorno scelto'));
+  }
+
+  // Funzioni helper per verificare se un biglietto è selezionato
+  isBigliettoAndataSelezionato(biglietto: Volo): boolean {
+    return this.bigliettoAndataSelezionato === biglietto;
+  }
+
+  isBigliettoRitornoSelezionato(biglietto: Volo): boolean {
+    return this.bigliettoRitornoSelezionato === biglietto;
   }
 
   //Funzione che mostra i biglietti il cui prezzo rientrano in un certo intervallo, in base alla scelta dell'utente
@@ -149,7 +166,7 @@ export class Tab2Page implements OnInit {
         this.bigliettiAndata = this.bigliettiAndataOriginari.filter(volo=> volo.prezzo > 300);
         this.bigliettiRitorno = this.bigliettiRitornoOriginari.filter(volo=> volo.prezzo > 300);
         break;
-      
+
       default:
         this.bigliettiAndata = this.bigliettiAndataOriginari;
         this.bigliettiRitorno = this.bigliettiRitornoOriginari;

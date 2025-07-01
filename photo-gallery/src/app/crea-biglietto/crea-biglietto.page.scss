@@ -1,69 +1,71 @@
-// Stili per la pagina crea-biglietto
+// Stili per la pagina crea-biglietto con tema VayGo
 ion-content {
   --padding-start: 20px;
   --padding-end: 20px;
-  --padding-top: 24px;
-  --background: var(--ion-background-color);
+  --padding-top: 24px; // Aggiungi padding top per compensare l'header
+  --background: var(--vaygo-background);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--vaygo-text-primary);
 }
 
-// Stili per il form
+// Stili per il form con tema VayGo
 form {
-  background: var(--ion-card-background);
+  background: var(--vaygo-white);
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 20px;
-  box-shadow: 0 8px 32px var(--ion-color-step-100);
-  border: 1px solid var(--ion-color-step-150);
-  
+  box-shadow: 0 8px 32px var(--vaygo-shadow-medium);
+  border: 1px solid var(--vaygo-border);
+
   ion-item {
     margin-bottom: 16px;
     border-radius: 12px;
-    --background: var(--ion-item-background);
-    --border-color: var(--ion-color-step-200);
+    --background: var(--vaygo-white);
+    --border-color: var(--vaygo-border);
     --border-width: 1px;
     --border-style: solid;
-    --color: var(--ion-text-color);
-    box-shadow: 0 2px 8px var(--ion-color-step-50);
+    --color: var(--vaygo-text-primary);
+    box-shadow: 0 2px 8px var(--vaygo-shadow);
     transition: all 0.3s ease;
-    
+
     &:hover {
-      --background: var(--ion-color-step-50);
-      box-shadow: 0 4px 16px var(--ion-color-step-150);
+      --background: var(--vaygo-background);
+      box-shadow: 0 4px 16px var(--vaygo-shadow-medium);
       transform: translateY(-2px);
     }
-    
+
     &:focus-within {
-      --border-color: var(--ion-color-primary);
+      --border-color: var(--vaygo-secondary);
       --border-width: 2px;
-      box-shadow: 0 0 0 3px var(--ion-color-primary-tint);
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
     }
-    
+
     &:last-of-type {
       margin-bottom: 24px;
     }
-    
+
     ion-input {
-      --color: var(--ion-text-color);
-      --placeholder-color: var(--ion-color-step-600);
+      --color: var(--vaygo-text-primary);
+      --placeholder-color: var(--vaygo-text-secondary);
       font-size: 16px;
       font-weight: 400;
       transition: color 0.2s ease;
-      
+
       &:focus {
-        --color: var(--ion-color-primary);
+        --color: var(--vaygo-primary);
       }
     }
-    
+
     ion-label {
       font-weight: 600;
-      color: var(--ion-color-primary);
+      color: var(--vaygo-primary);
       font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
   }
-  
-  // Stile per il bottone
+
+  // Stile per il bottone con tema VayGo
   ion-button {
     margin-top: 32px;
     margin-bottom: 20px;
@@ -74,20 +76,94 @@ form {
     text-transform: uppercase;
     letter-spacing: 1px;
     --border-radius: 16px;
-    --background: var(--ion-color-primary);
-    --color: var(--ion-color-primary-contrast);
-    --box-shadow: 0 8px 24px var(--ion-color-primary-tint);
+    --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+    --color: var(--vaygo-white);
+    --box-shadow: 0 8px 24px rgba(46, 139, 87, 0.3);
     transition: all 0.3s ease;
-    
+
     &:hover {
-      --background: var(--ion-color-primary-shade);
-      --box-shadow: 0 12px 32px var(--ion-color-primary-tint);
       transform: translateY(-3px);
+      --box-shadow: 0 12px 32px rgba(46, 139, 87, 0.4);
     }
-    
+
     &:active {
       transform: translateY(-1px);
-      --box-shadow: 0 4px 16px var(--ion-color-primary-tint);
+      --box-shadow: 0 4px 16px rgba(46, 139, 87, 0.3);
+    }
+
+    &[disabled] {
+      --background: var(--vaygo-text-secondary);
+      --color: var(--vaygo-white);
+      opacity: 0.6;
+      transform: none;
+      --box-shadow: none;
+    }
+  }
+}
+
+// Stili per i titoli
+h1 {
+  color: var(--vaygo-primary);
+  font-weight: 700;
+  margin: 24px 0 16px 0;
+  font-size: 28px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  color: var(--vaygo-text-secondary);
+  font-weight: 600;
+  margin: 16px 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+// Stili per le card dei risultati (riepilogo biglietti)
+.results-card {
+  --background: var(--vaygo-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  border: 1px solid var(--vaygo-border);
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--vaygo-shadow-medium);
+  }
+
+  ion-card-header {
+    background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+    padding: 20px 24px 16px;
+
+    ion-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--vaygo-white);
+      margin: 0;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  ion-card-content {
+    padding: 24px;
+    color: var(--vaygo-text-primary);
+
+    p {
+      margin: 8px 0;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--vaygo-text-secondary);
+
+      &:last-of-type {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--vaygo-primary);
+        margin: 16px 0 0 0;
+        text-align: center;
+      }
     }
   }
 }
@@ -98,17 +174,16 @@ ion-input {
   --padding-end: 16px;
   --padding-top: 12px;
   --padding-bottom: 12px;
-  --color: var(--ion-text-color);
-  
+  --color: var(--vaygo-text-primary);
+
   &[type="date"] {
     --padding-top: 14px;
-    
-    // Personalizza l'icona del calendario per tema chiaro/scuro
+
     &::-webkit-calendar-picker-indicator {
-      filter: var(--ion-color-step-400);
+      filter: brightness(0) saturate(100%) invert(38%) sepia(87%) saturate(492%) hue-rotate(118deg) brightness(92%) contrast(88%);
       opacity: 0.8;
       cursor: pointer;
-      
+
       &:hover {
         opacity: 1;
         transform: scale(1.1);
@@ -119,14 +194,15 @@ ion-input {
 
 // Stile per gli item con data
 ion-item[lines="full"] {
-  background: var(--ion-color-step-50);
-  
+  background: var(--vaygo-background);
+  border-radius: 12px;
+
   ion-label[position="stacked"] {
     margin-bottom: 12px;
     font-size: 13px;
     position: relative;
-    color: var(--ion-color-primary);
-    
+    color: var(--vaygo-primary);
+
     &::after {
       content: '';
       position: absolute;
@@ -134,19 +210,9 @@ ion-item[lines="full"] {
       left: 0;
       width: 30px;
       height: 2px;
-      background: var(--ion-color-primary);
+      background: var(--vaygo-primary);
       border-radius: 1px;
     }
-  }
-}
-
-// Effetti di loading per migliorare l'UX
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
   }
 }
 
@@ -164,11 +230,11 @@ ion-item[lines="full"] {
 
 form {
   animation: slideInUp 0.8s ease-out;
-  
+
   ion-item {
     animation: slideInUp 0.6s ease-out;
     animation-fill-mode: both;
-    
+
     @for $i from 1 through 10 {
       &:nth-child(#{$i}) {
         animation-delay: #{$i * 0.1}s;
@@ -183,52 +249,72 @@ form {
     --padding-start: 16px;
     --padding-end: 16px;
   }
-  
+
   form {
     padding: 20px;
     margin: 10px 0;
   }
+
+  h1 {
+    font-size: 24px;
+  }
 }
 
-// Stili specifici per tema scuro
+// Supporto per il tema scuro migliorato
 @media (prefers-color-scheme: dark) {
-  form {
-    border: 1px solid var(--ion-color-step-200);
-  }
-  
-  ion-item {
-    &:hover {
-      --background: var(--ion-color-step-100);
-    }
-  }
-  
   ion-input[type="date"] {
     &::-webkit-calendar-picker-indicator {
-      filter: invert(1);
+      filter: brightness(0) saturate(100%) invert(64%) sepia(91%) saturate(2976%) hue-rotate(115deg) brightness(101%) contrast(89%);
     }
   }
 }
 
-// Supporto per il tema scuro di Ionic
-.ios.dark,
-.md.dark {
-  ion-content {
-    --background: var(--ion-background-color);
+// Accessibilità
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-  
-  form {
-    background: var(--ion-card-background);
-    border-color: var(--ion-color-step-200);
-  }
-  
-  ion-item {
-    --background: var(--ion-item-background);
-    --color: var(--ion-text-color);
-  }
-  
-  ion-input[type="date"] {
-    &::-webkit-calendar-picker-indicator {
-      filter: invert(0.8);
+}
+
+// Stili per l'header personalizzato - CORRETTO
+.custom-header {
+  --background: var(--vaygo-white);
+  box-shadow: 0 2px 8px var(--vaygo-shadow);
+  border-bottom: 1px solid var(--vaygo-border);
+  // Rimuovi la trasparenza
+  --opacity: 1;
+
+  ion-toolbar {
+    --background: var(--vaygo-white); // Cambiato da transparent
+    --color: var(--vaygo-text-primary);
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --min-height: 56px; // Altezza fissa dell'header
+
+    ion-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--vaygo-primary);
+      text-align: center;
+    }
+
+    ion-back-button {
+      --color: var(--vaygo-primary);
+      --icon-font-size: 20px;
+      font-weight: 600;
+      --padding-start: 0;
+      --padding-end: 8px;
+
+      &::part(text) {
+        margin-left: 8px;
+        font-size: 16px;
+      }
+
+      &::part(icon) {
+        font-size: 20px;
+      }
     }
   }
 }

@@ -23,6 +23,7 @@
 
   // Reset e base
   .main-content {
+    --padding-top: 0; // Rimuovi padding top per evitare sovrapposizioni
     --background: var(--vaygo-background);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -30,13 +31,19 @@
   //Stile per l'header
   .custom-header {
     --background: var(--vaygo-white);
-    --border-color: var(--vaygo-border);
-    box-shadow: 0 1px 3px var(--vaygo-shadow);
+    background: var(--vaygo-white) !important; // Force non-transparency
+    box-shadow: 0 2px 8px var(--vaygo-shadow);
+    border-bottom: 1px solid var(--vaygo-border);
+    position: relative;
+    z-index: 1000;
 
     ion-toolbar {
-      --background: transparent;
+      --background: var(--vaygo-white);
+      background: var(--vaygo-white) !important; // Force non-transparency
       --color: var(--vaygo-text-primary);
-      padding: 0 20px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+      --min-height: 56px;
     }
   }
 
@@ -77,17 +84,24 @@
       width: 40px;
       height: 40px;
       --border-radius: 12px;
+
+      &:hover {
+        --color: var(--vaygo-primary);
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+      }
     }
   }
 
   // Hero Section
   .hero-section {
-    padding: 40px 20px 60px;
-    min-height: 500px; // Aumenta l'altezza della sezione
+    padding: 20px 20px 60px; // Ridotto il padding top
+    min-height: 500px;
     background: url('../assets/Wallpaper_Background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    margin-top: 0; // Rimuovi qualsiasi margine top
   }
   .hero-content {
     max-width: 1200px;
@@ -162,19 +176,21 @@
   }
 
   .search-card {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
     --background: var(--vaygo-white);
-    border-radius: 20px;
+    background: var(--vaygo-white) !important; // Forza lo sfondo opaco
+    border-radius: 20px; // Mantiene i bordi arrotondati esistenti
     box-shadow: 0 10px 40px var(--vaygo-shadow-medium);
     border: 1px solid var(--vaygo-border);
 
     ion-card-content {
       padding: 32px;
+      background: transparent; // Il contenuto rimane trasparente se la card è opaca
     }
   }
 
- // Search Header corretto - SOSTITUISCE la sezione esistente
+ // Search Header
 .search-header {
   display: flex;
   justify-content: flex-start; // Cambiato da space-between a flex-start
@@ -188,12 +204,22 @@
     margin: 0;
     font-size: clamp(32px, 4vw, 42px); // Ingrandito e responsivo
     font-weight: 800; // Più bold per maggiore impatto
-    color: var(--vaygo-primary); // Colore SOLIDO - non trasparente
-    letter-spacing: -0.8px; // Spacing più stretto per un look moderno
+    color: var(--vaygo-primary);
+    letter-spacing: -0.8px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Sottile ombra per profondità
     position: relative;
 
+    strong {
+      background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
 
+      @media (prefers-color-scheme: dark) {
+        -webkit-text-fill-color: var(--vaygo-primary);
+        background: none;
+      }
+    }
 
     // Animazione hover per interattività
     transition: all 0.3s ease;
@@ -579,7 +605,8 @@
   // Animazioni responsive
   @media (max-width: 768px) {
     .hero-section {
-      padding: 30px 20px 40px;
+      padding: 16px 16px 40px;
+      min-height: 400px;
     }
 
     .search-card ion-card-content {
@@ -607,3 +634,280 @@
       50% { transform: rotate(5deg) translateY(-10px); }
     }
   }
+
+  // Supporto per tema scuro
+@media (prefers-color-scheme: dark) {
+  .custom-header {
+    --background: var(--vaygo-white);
+    background: var(--vaygo-white) !important;
+
+    ion-toolbar {
+      --background: var(--vaygo-white);
+      background: var(--vaygo-white) !important;
+    }
+  }
+}
+
+// Accessibilità
+@media (prefers-reduced-motion: reduce) {
+  .header-actions ion-button,
+  .search-header h3 {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Stili personalizzati per il selettore di date
+ion-popover {
+  --background: var(--vaygo-white);
+  --border-radius: 20px;
+  --box-shadow: 0 10px 40px var(--vaygo-shadow-medium);
+  --backdrop-opacity: 0.3;
+  border: 1px solid var(--vaygo-border);
+
+  ion-datetime {
+    --background: var(--vaygo-white);
+    --background-rgb: 255, 255, 255;
+
+    // Header del calendario
+    .datetime-header {
+      background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+      color: var(--vaygo-white);
+      border-radius: 16px 16px 0 0;
+      padding: 16px;
+    }
+
+    // Bottoni di navigazione mese/anno
+    .calendar-next-prev ion-button,
+    .datetime-buttons ion-button {
+      --color: var(--vaygo-primary);
+      --background-hover: var(--vaygo-blue-light);
+      --border-radius: 12px;
+      font-weight: 600;
+    }
+
+    // Giorni della settimana
+    .calendar-weekdays {
+      .calendar-weekday {
+        color: var(--vaygo-text-secondary);
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    // Giorni del mese
+    .calendar-days {
+      .calendar-day {
+        color: var(--vaygo-text-primary);
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+
+        &:not(.calendar-day-disabled):hover {
+          background: var(--vaygo-blue-light);
+          color: var(--vaygo-primary);
+        }
+
+        // Giorno selezionato
+        &.calendar-day-active {
+          background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+          color: var(--vaygo-white);
+          font-weight: 700;
+          box-shadow: 0 2px 8px rgba(46, 139, 87, 0.3);
+        }
+
+        // Giorno di oggi
+        &.calendar-day-today {
+          border: 2px solid var(--vaygo-accent);
+          color: var(--vaygo-primary);
+          font-weight: 600;
+        }
+
+        // Giorni disabilitati
+        &.calendar-day-disabled {
+          color: var(--vaygo-text-secondary);
+          opacity: 0.4;
+        }
+      }
+    }
+
+    // Bottoni Fatto/Chiudi
+    .datetime-buttons {
+      padding: 16px;
+      border-top: 1px solid var(--vaygo-border);
+      background: var(--vaygo-background);
+
+      ion-button {
+        --border-radius: 12px;
+        font-weight: 600;
+        height: 44px;
+
+        // Bottone "Fatto"
+        &.datetime-button-confirm {
+          --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+          --color: var(--vaygo-white);
+          box-shadow: 0 2px 8px rgba(46, 139, 87, 0.3);
+
+          &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(46, 139, 87, 0.4);
+          }
+        }
+
+        // Bottone "Chiudi"
+        &.datetime-button-cancel {
+          --background: transparent;
+          --color: var(--vaygo-text-secondary);
+          --border-width: 1px;
+          --border-color: var(--vaygo-border);
+
+          &:hover {
+            --background: var(--vaygo-background);
+            --color: var(--vaygo-text-primary);
+          }
+        }
+      }
+    }
+
+    // Selettore mese/anno
+    .datetime-year,
+    .datetime-month {
+      color: var(--vaygo-text-primary);
+      font-weight: 600;
+
+      &:hover {
+        background: var(--vaygo-blue-light);
+        color: var(--vaygo-primary);
+      }
+    }
+  }
+}
+
+// Stili per l'item che contiene il trigger del popover
+.custom-item {
+  --background: var(--vaygo-background);
+  --border-color: var(--vaygo-border);
+  --border-radius: 16px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --min-height: 64px;
+  border: 1px solid var(--vaygo-border);
+  margin: 4px 0;
+  transition: all 0.2s ease;
+
+  &:focus-within {
+    --border-color: var(--vaygo-secondary);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  }
+
+  // Quando il popover è aperto
+  &.item-has-focus {
+    --border-color: var(--vaygo-primary);
+    box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+    transform: translateY(-1px);
+  }
+
+  ion-icon {
+    color: var(--vaygo-text-secondary);
+    margin-right: 12px;
+    font-size: 20px;
+  }
+
+  ion-input {
+    --color: var(--vaygo-text-primary);
+    --placeholder-color: var(--vaygo-text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+
+    // Input readonly per il trigger
+    &[readonly] {
+      cursor: pointer;
+      pointer-events: all;
+    }
+  }
+
+  // Etichetta stacked
+  ion-label[position="stacked"] {
+    color: var(--vaygo-primary);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+}
+
+// Animazioni per il popover
+ion-popover.date-popover {
+  --backdrop-opacity: 0.4;
+
+  &.popover-entering {
+    ion-datetime {
+      animation: slideInUp 0.3s ease-out;
+    }
+  }
+
+  &.popover-leaving {
+    ion-datetime {
+      animation: slideOutDown 0.2s ease-in;
+    }
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+// Supporto per tema scuro
+@media (prefers-color-scheme: dark) {
+  ion-popover {
+    --background: var(--vaygo-white);
+
+    ion-datetime {
+      --background: var(--vaygo-white);
+
+      .datetime-buttons {
+        background: var(--vaygo-background);
+      }
+    }
+  }
+}
+
+// Responsive per schermi piccoli
+@media (max-width: 768px) {
+  ion-popover {
+    --width: 95%;
+    --max-width: 350px;
+
+    ion-datetime {
+      .datetime-buttons {
+        padding: 12px;
+
+        ion-button {
+          height: 40px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

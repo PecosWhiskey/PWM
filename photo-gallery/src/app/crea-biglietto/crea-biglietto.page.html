@@ -1,9 +1,18 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1" text="Indietro"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crea Biglietto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
 
     @for(numero of numeroPasseggeri; track $index; let i=$index){
       <h1>Inserire i dati del passeggero {{i+1}}</h1>
       <form #userForm="ngForm">
-      
+
       <ion-item>
         <ion-input type="text" name="idPasseggero" [(ngModel)]="passeggeri[i].idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
       </ion-item>
@@ -25,10 +34,10 @@
         <ion-input type="text" name="documentoID" [(ngModel)]="passeggeri[i].documentoID" placeholder="Documento" ngDefaultControl  required></ion-input>
       </ion-item>
 
-      <ion-button (click)="Acquista(passeggeri[i])" [disabled]="!userForm.valid">Conferma</ion-button>  
+      <ion-button (click)="Acquista(passeggeri[i])" [disabled]="!userForm.valid">Conferma</ion-button>
 
-      </form>  
-    }   
+      </form>
+    }
 
 
  @if((numBigliettiCreatiAndata == numPasseggeri) && (numBigliettiCreatiRitorno== numPasseggeri)){
@@ -49,6 +58,6 @@
       </ion-card-content>
   </ion-card>
   }
-} 
+}
 
-</ion-content> 
+</ion-content>

@@ -1,7 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonLabel, IonButton, IonItem, IonContent} from '@ionic/angular/standalone';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonButton,
+  IonItem,
+  IonInput,
+  IonLabel,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent
+} from '@ionic/angular/standalone';
 import { Volo } from '../models/volo.models';
 import { SessionStorageService } from '../services/session-storage.service';
 import { BigliettiService } from '../services/biglietti.service';
@@ -11,11 +28,33 @@ import { BigliettiService } from '../services/biglietti.service';
   templateUrl: './crea-biglietto.page.html',
   styleUrls: ['./crea-biglietto.page.scss'],
   standalone: true,
-  imports: [IonCardTitle, IonCardHeader, IonCard, IonCardContent, IonLabel, IonButton, IonItem, IonContent, CommonModule, FormsModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonButton,
+    IonItem,
+    IonInput,
+    IonLabel,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent
+  ]
 })
 export class CreaBigliettoPage implements OnInit {
 
-  constructor(private sessionStorage: SessionStorageService, private bigliettiService: BigliettiService) {}
+  constructor(
+    private router: Router,
+    private location: Location,
+    private sessionStorage: SessionStorageService,
+    private bigliettiService: BigliettiService
+  ) {}
 
   //Dati richiesti in fase di acquisto del biglietto
   idVolo = '';
@@ -45,7 +84,7 @@ export class CreaBigliettoPage implements OnInit {
   //Dati ottenuti dal SessionStorage
   bigliettoAndata! : Volo;
   bigliettoRitorno! : Volo;
-  sceltaUtente=  ''; 
+  sceltaUtente=  '';
 
   //Array che memorizza ogni biglietto che viene inserito nel database
   bigliettiCreati: any[] = [];
@@ -90,7 +129,7 @@ export class CreaBigliettoPage implements OnInit {
   inizializzaPasseggeri() {
     // Svuota l'array prima di inizializzare
     this.passeggeri = [];
-  
+
     for (let i = 0; i < this.numPasseggeri; i++) {
       this.passeggeri.push({
         idPasseggero: '',
@@ -100,8 +139,8 @@ export class CreaBigliettoPage implements OnInit {
         documentoID: '',
       });
     }
-  }  
-  
+  }
+
   //Funzione che permette di creare il biglietto, ricevendo in input i dati del passeggero di cui viene confermata la creazione del biglietto
   Acquista(passeggero: any){
     console.log(passeggero);
@@ -112,10 +151,10 @@ export class CreaBigliettoPage implements OnInit {
         this.creazioneEsito = response.message;
         this.passeggeroCreato= true;
         this.idPasseggero = response.data.idPasseggero;
-        
+
         //Creato il passeggero procedo a creare il biglietto
         //Ottengo la data corrente
-        const data = new Date(); 
+        const data = new Date();
         this.dataAcquisto = data.toISOString().split('T')[0]; //la traformo in formato ISO e ricavo solo la prima parte (YYYY-MM-DD)
         //Creazione del biglietto di andata
         const datiAndata = {
@@ -138,7 +177,7 @@ export class CreaBigliettoPage implements OnInit {
             this.bigliettiCreati.push(response.data);
             console.log(this.bigliettiCreati);
             this.bigliettoCreato = true;
-            
+
 
             //Creato il biglietto decremento dei posti disponibili per i voli di cui è stato acquistato un biglietto
             //Decremento per il volo di andata
@@ -217,5 +256,10 @@ export class CreaBigliettoPage implements OnInit {
         this.passeggeroCreato = false;
        },
     });
+  }
+
+  // Metodo per tornare indietro
+  goBack() {
+    this.location.back();
   }
 }

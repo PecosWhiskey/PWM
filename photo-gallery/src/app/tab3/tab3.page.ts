@@ -114,6 +114,8 @@ import { Router } from '@angular/router';
             console.log('Token salvato: ', token);
             console.log('Client info salvate: ', clientInfo);
 
+            this.role = clientInfo.role;
+
             //Verifica che il cliente sia autenticato
             this.isLogged = this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
@@ -173,6 +175,8 @@ import { Router } from '@angular/router';
             const clientInfo = this.tokenService.getClientInfo();
             console.log('Token salvato: ', token);
             console.log('Client info salvate: ', clientInfo);
+
+            this.role = clientInfo.role;
 
             //Verifica che il cliente sia autenticato
             this.isLogged = this.tokenService.isLogged();
@@ -249,6 +253,8 @@ import { Router } from '@angular/router';
     this.isLogged = this.tokenService.isLogged();
     //imposta il valore di 'role' uguale ad una stringa vuota 
     this.role = '';
+    //Imposta il valore di form a Login
+    this.form = 'Login';
     console.log(this.isLogged);
   }
 

@@ -233,7 +233,16 @@ async function visualizzaPasseggeri(){
 // inserisciPosizione("PARIGI", "Francia", "49°00′35″N", "2°32′52″E");
 // inserisciPosizione("PARIGI", "Francia", "48°43′24″N", "2°22′46″E");
 // inserisciPosizione("PARIGI", "Francia", "49°27′16″N", "2°06′46″E");
+// inserisciPosizione("LONDRA", "Regno Unito", "51°08′53″N", "0°11′25″W");
+// inserisciPosizione("BARCELLONA", "Spagna", "41°17′49″N", "2°04′42″E");
+// inserisciPosizione("AMSTERDAM", "Paesi Bassi", "52°18′29″N", "4°45′51″E");
+// inserisciPosizione("PALERMO", "Italia", "38°10′55″N", "13°05′58″E");
 
+inserisciAeroporto("PMO", "Punta Raisi", 15);
+// inserisciAeroporto("AMS", "Schiphol", 14);
+// inserisciAeroporto("BCN","Barcellona-El Prat", 13);
+// inserisciAeroporto("SEN", " Southend", 12);
+// inserisciAeroporto("LGW", "Londra-Gatwick", 10);
 // inserisciAeroporto("BVA", 'Beauvais', 9 );
 // inserisciAeroporto("ORY", "Orly", 8);
 // inserisciAeroporto("CDG", "Charles de Gaulle", 7);

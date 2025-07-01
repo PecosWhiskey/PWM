@@ -40,5 +40,5 @@ async function visualizzaAdmin(){
   }
 }  
 
-// inserisciAdmin("susan@gmail.com", "susina");
-visualizzaAdmin();
+inserisciAdmin("susan@gmail.com", "susina");
+// visualizzaAdmin();

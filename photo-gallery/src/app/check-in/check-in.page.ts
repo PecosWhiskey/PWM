@@ -137,7 +137,7 @@ export class CheckInPage implements OnInit {
         console.log('Search error: ', err);
         this.richiestaEsito = err.error.message;
         this.found = false;
-        if(this.richiestaEsito= "Check-in già fatto!"){
+        if(this.richiestaEsito =="Check-in già fatto!"){
           this.setOpen(true);
         }else if(this.richiestaEsito != "Non ci sono biglietti acquistati!"){
           this.richiestaEsito = "ERRORE: Dati non validi!";

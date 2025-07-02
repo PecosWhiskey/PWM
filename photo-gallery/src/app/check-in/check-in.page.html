@@ -105,6 +105,13 @@
                 <ion-icon name="search-outline" slot="start"></ion-icon>
                 Cerca Biglietto
               </ion-button>
+
+              <ion-alert
+                [isOpen]="isAlertOpen"
+                header="Hai già fatto il check-in di questo biglietto!"
+                [buttons]="alertButtons"
+                (didDismiss)="setOpen(false)">
+              </ion-alert>
             </div>
           </form>
 
@@ -181,6 +188,14 @@
               <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
               Completa Check-in
             </ion-button>
+
+              <ion-alert
+                [isOpen]="isAlertOpen"
+                header="Oops! Il posto che hai scelto è già occupato"
+                message="Ti preghiamo di scegliere un altro posto, grazie"
+                [buttons]="alertButtons"
+                (didDismiss)="setOpen(false)">
+              </ion-alert>
           </form>
 
           @if(richiestaEsito != '') {
@@ -193,24 +208,6 @@
       }
     </div>
   </div>
-
-  <!-- Alert per check-in già fatto -->
-  <ion-alert
-    [isOpen]="isAlertOpen"
-    header="Check-in già completato!"
-    message="Hai già fatto il check-in di questo biglietto."
-    [buttons]="alertButtons"
-    (didDismiss)="setOpen(false)">
-  </ion-alert>
-
-  <!-- Alert per posto non disponibile -->
-  <ion-alert
-    [isOpen]="isAlertOpen"
-    header="Posto non disponibile!"
-    message="Il posto selezionato è già occupato. Scegli un altro posto."
-    [buttons]="alertButtons"
-    (didDismiss)="setOpen(false)">
-  </ion-alert>
 
   <!-- Modal per biglietto modificato -->
   <ion-modal [isOpen]="isModalOpen">

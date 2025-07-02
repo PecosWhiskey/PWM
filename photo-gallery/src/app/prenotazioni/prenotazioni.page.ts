@@ -18,7 +18,7 @@ import { Biglietto } from '../models/biglietto.models';
 import { RouterModule, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
-  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline } from 'ionicons/icons';
+  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline, informationCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-prenotazioni',
@@ -46,9 +46,11 @@ export class PrenotazioniPage implements OnInit {
 
   biglietti: Biglietto[] = [];
 
+  richiestaEsito = '';
+
   constructor(private gestioneVoliService: GestioneVoliService) {
     addIcons({ createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
-      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, pricetagOutline, calendar});
+      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, pricetagOutline, calendar, informationCircleOutline});
   }
 
   ngOnInit(): void {
@@ -65,6 +67,10 @@ export class PrenotazioniPage implements OnInit {
       },
         error: (err) => {
           console.log("Search error: ", err);
+          this.richiestaEsito = err.error.message;
+          if(this.richiestaEsito != "Non ci sono biglietti acquistati!"){
+            this.richiestaEsito = "ERRORE: Non è possibile visualizzare le prenotazioni ricevute!";
+          }
        }
     })
   }

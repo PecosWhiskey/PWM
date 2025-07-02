@@ -256,7 +256,7 @@
         </div>
 
         <!-- Messaggi di Feedback -->
-        @if(creaVoloEsito) {
+        @if(creaVoloEsito != '') {
           <div class="feedback-info">
             <ion-icon name="information-circle-outline"></ion-icon>
             <span>{{ creaVoloEsito }}</span>
@@ -269,7 +269,7 @@
       <ion-alert
         [isOpen]="isAlertOpenCreated"
         header="Creazione avvenuta con successo!"
-        message="È possibile visualizzare il volo appena creato nella pagina 'Visualizza Voli'"
+        message='"È possibile visualizzare il volo appena creato nella pagina "Visualizza Voli"'
         [buttons]="alertButtons"
         (didDismiss)="setOpenCreated(false)">
       </ion-alert>
@@ -277,7 +277,7 @@
       <ion-alert
         [isOpen]="isAlertOpenModified"
         header="Modifica avvenuta con successo!"
-        message="È possibile visualizzare il volo appena modificato nella pagina 'Visualizza Voli'"
+        message='È possibile visualizzare il volo appena modificato nella pagina "Visualizza Voli"'
         [buttons]="alertButtons"
         (didDismiss)="setOpenModified(false)">
       </ion-alert>

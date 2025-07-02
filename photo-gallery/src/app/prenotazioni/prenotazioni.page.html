@@ -162,6 +162,13 @@
           <p>Non sono ancora state effettuate prenotazioni</p>
         </div>
       }
+
+      @if(richiestaEsito != '') {
+        <div class="feedback-info">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ richiestaEsito }}</span>
+        </div>
+      }
     </div>
   </div>
 </ion-content>

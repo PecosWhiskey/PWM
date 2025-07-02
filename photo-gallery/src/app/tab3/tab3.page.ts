@@ -6,7 +6,7 @@ import {IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, Io
   IonSelect, IonAlert } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket, star,personCircle, notifications, 
-  settings, helpCircle, chevronForward} from 'ionicons/icons';
+  settings, helpCircle, chevronForward, informationCircleOutline} from 'ionicons/icons';
 import { TokenService } from '../services/token.service';
 import { AutenticazioneService } from '../services/autenticazione.service';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +28,7 @@ import { Router } from '@angular/router';
     private tokenService: TokenService, private router: Router){
     addIcons({
       person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket,
-       star, personCircle, notifications, settings, helpCircle, chevronForward
+       star, personCircle, notifications, settings, helpCircle, chevronForward, informationCircleOutline
      });
   }
 
@@ -51,6 +51,8 @@ import { Router } from '@angular/router';
   disabile = 0;
   email = '';
   password= '';
+
+  richiestaEsito= '';
 
   isLogged = false; //Mantiene memeorizzato lo stato di autenticazione dell'utente
   isAdmin = false; //Variabile impostata a true solo se "role" = admin
@@ -130,6 +132,10 @@ import { Router } from '@angular/router';
       },
        error: (err) => {
         console.log('Login error:', err);
+        this.richiestaEsito = err.error.message;
+        if(this.richiestaEsito != "Credenziali non valide!"){
+          this.richiestaEsito = "ERRORE: Dati inseriti per il login non validi!"
+        }
         this.isLogged = false;
        },
     });
@@ -192,6 +198,10 @@ import { Router } from '@angular/router';
       },
        error: (err) => {
         console.log('Registration error:', err);
+        this.richiestaEsito = err.error.message;
+        if(this.richiestaEsito != "Email già in uso!"){
+          this.richiestaEsito = "ERRORE: Dati inseriti per la registrazione non validi!"
+        }
         this.isLogged = false;
        },
     })
@@ -237,6 +247,10 @@ import { Router } from '@angular/router';
       },
        error: (err) => {
         console.log('Login error:', err);
+        this.richiestaEsito = err.error.message;
+        if(this.richiestaEsito != "Credenziali non valide!"){
+          this.richiestaEsito = "ERRORE: Dati inseriti per il login non validi!"
+        }
         this.isLogged = false;
        },
     });

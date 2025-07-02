@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,IonIcon,IonLabel,IonButton,IonCard,IonCardContent,
-  IonCardHeader,IonCardTitle,IonList,IonItem,IonSelect,IonSelectOption,IonChip,IonBadge,} from '@ionic/angular/standalone';
+  IonCardHeader,IonCardTitle,IonList,IonItem,IonSelect,IonSelectOption,IonChip,IonBadge} from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Volo } from '../models/volo.models';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Service } from '../tab1/tab1.service';
 import { SessionStorageService } from '../services/session-storage.service';
 import { RouterModule, RouterLink, Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { informationCircleOutline } from 'ionicons/icons';
 import { BigliettiService } from '../services/biglietti.service';
 
 @Component({
@@ -21,7 +23,9 @@ import { BigliettiService } from '../services/biglietti.service';
 export class Tab2Page implements OnInit {
 
   constructor(private tab1Service: Tab1Service, private sessionStorageService: SessionStorageService,
-    private bigliettiService: BigliettiService) {}
+    private bigliettiService: BigliettiService) {
+      addIcons({informationCircleOutline});
+    }
 
   //Valori che cambiano in base all'esito della ricerca effettuata nel tab1
   voliTrovatiAndata = false;

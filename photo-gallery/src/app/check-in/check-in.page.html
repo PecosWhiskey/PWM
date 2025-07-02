@@ -212,6 +212,13 @@
             [buttons]="alertButtons"
             (didDismiss)="setOpen(false)">
           </ion-alert>
+
+          @if(richiestaEsito != '' && richiestaEsito != "Check-in già fatto!") {
+            <div class="feedback-info">
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span>{{ richiestaEsito }}</span>
+            </div>
+          }
         </form>
       
         @if(found){
@@ -238,6 +245,13 @@
                 [buttons]="alertButtons"
                 (didDismiss)="setOpen(false)">
               </ion-alert>
+
+              @if(richiestaEsito != '') {
+                <div class="feedback-info">
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <span>{{ richiestaEsito }}</span>
+                </div>
+              }
             </form>
           </ion-content>
         }

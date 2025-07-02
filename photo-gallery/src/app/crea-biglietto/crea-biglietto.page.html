@@ -13,28 +13,35 @@
       <h1>Inserire i dati del passeggero {{i+1}}</h1>
       <form #userForm="ngForm">
 
-      <ion-item>
-        <ion-input type="text" name="idPasseggero" [(ngModel)]="passeggeri[i].idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input type="text" name="idPasseggero" [(ngModel)]="passeggeri[i].idPasseggero" placeholder="Codice fiscale del passeggero" ngDefaultControl  required></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-input type="text" name="nome" [(ngModel)]="passeggeri[i].nome" placeholder="Nome del passeggero" ngDefaultControl  required></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input type="text" name="nome" [(ngModel)]="passeggeri[i].nome" placeholder="Nome del passeggero" ngDefaultControl  required></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-input type="text" name="cognome" [(ngModel)]="passeggeri[i].cognome" placeholder="Cognome del passeggero" ngDefaultControl  required></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input type="text" name="cognome" [(ngModel)]="passeggeri[i].cognome" placeholder="Cognome del passeggero" ngDefaultControl  required></ion-input>
+        </ion-item>
 
-      <ion-item lines="full">
-        <ion-label position="stacked">Data di nascita</ion-label>
-        <ion-input type="date" name="data" [(ngModel)]="passeggeri[i].dataNascita" required ngDefaultControl></ion-input>
-      </ion-item>
+        <ion-item lines="full">
+          <ion-label position="stacked">Data di nascita</ion-label>
+          <ion-input type="date" name="data" [(ngModel)]="passeggeri[i].dataNascita" required ngDefaultControl></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-input type="text" name="documentoID" [(ngModel)]="passeggeri[i].documentoID" placeholder="Documento" ngDefaultControl  required></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input type="text" name="documentoID" [(ngModel)]="passeggeri[i].documentoID" placeholder="Documento" ngDefaultControl  required></ion-input>
+        </ion-item>
 
-      <ion-button (click)="Acquista(passeggeri[i])" [disabled]="!userForm.valid">Conferma</ion-button>
+        <ion-button (click)="Acquista(passeggeri[i])" [disabled]="!userForm.valid">Conferma</ion-button>
+
+        @if(richiestaEsito != '') {
+          <div class="feedback-info">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ richiestaEsito }}</span>
+          </div>
+        }
 
       </form>
     }

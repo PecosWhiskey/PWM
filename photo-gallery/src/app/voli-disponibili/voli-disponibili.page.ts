@@ -20,7 +20,7 @@ import { RouterModule, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
   calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, 
-  searchOutline} from 'ionicons/icons';
+  searchOutline, informationCircleOutline} from 'ionicons/icons';
 
 @Component({
   selector: 'app-voli-disponibili',
@@ -49,9 +49,11 @@ export class VoliDisponibiliPage implements OnInit {
 
   voli: Volo[] = [];
 
+  richiestaEsito = '';
+
   constructor(private gestioneVoliService: GestioneVoliService) { 
     addIcons({ createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
-      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, searchOutline});
+      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, searchOutline, informationCircleOutline});
   }
 
   ngOnInit() {
@@ -77,7 +79,11 @@ export class VoliDisponibiliPage implements OnInit {
       },
        error: (err)=>{
         console.log("Search error: ", err);
-       }
+        this.richiestaEsito = err.error.message;
+        if(this.richiestaEsito != 'Non ci sono voli disponibili'){
+          this.richiestaEsito = 'ERRORE: Non è possibile visualizzare i voli disponibili!';
+        }
+      } 
     })
   }
 

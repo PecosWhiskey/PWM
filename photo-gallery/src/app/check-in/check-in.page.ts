@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonSelectOption, IonInput,
   IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, 
   IonLabel, IonChip, IonAlert, IonModal } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';  
+import { informationCircleOutline } from 'ionicons/icons';
 import { BigliettiService } from '../services/biglietti.service';
 import { Biglietto } from '../models/biglietto.models';
 
@@ -12,11 +14,15 @@ import { Biglietto } from '../models/biglietto.models';
   templateUrl: './check-in.page.html',
   styleUrls: ['./check-in.page.scss'],
   standalone: true,
-  imports: [IonModal, IonAlert, IonChip, IonLabel, IonRadio, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonModal, IonAlert, IonChip, IonLabel, IonRadio, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, 
+    IonIcon, IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, 
+    FormsModule]
 })
 export class CheckInPage implements OnInit {
 
-  constructor(private bigliettiService: BigliettiService) { }
+  constructor(private bigliettiService: BigliettiService) {
+    addIcons({informationCircleOutline});
+  }
 
   //Dati necessari per la ricerca del biglietto di cui l'utente desisera fare il check-in
   idPasseggero = '';
@@ -24,6 +30,7 @@ export class CheckInPage implements OnInit {
 
   //Variabili il cui valore dipende dalle risposte alle richieste inviate al server
   bigliettoTrovato!: Biglietto;
+  richiestaEsito = '';
   found = false; //Permette la prosecuzione del check-in se il biglietto è stato trovato
   numPosti = 10;
   postiDisponibili = Array.from({ length: this.numPosti}, (_, i) => i + 1);
@@ -93,14 +100,18 @@ export class CheckInPage implements OnInit {
             this.postiOccupati = response.data;
           },error: (err)=>{
             console.log("Search error: ", err);
-          }
+            this.richiestaEsito = err.error.message;     
+           }   
         })
       },
        error: (err)=> {
         console.log('Search error: ', err);
+        this.richiestaEsito = err.error.message;
         this.found = false;
-        if(err.error.message= "Check-in già fatto!"){
+        if(this.richiestaEsito= "Check-in già fatto!"){
           this.setOpen(true);
+        }else if(this.richiestaEsito != "Non ci sono biglietti acquistati!"){
+          this.richiestaEsito = "ERRORE: Dati non validi!";
         }
        }
     })
@@ -158,6 +169,10 @@ export class CheckInPage implements OnInit {
       },
        error: (err) => {
         console.log("Modification error: ", err);
+        this.richiestaEsito = err.error.message;
+        if(this.richiestaEsito != 'Nessun biglietto da modificare trovato' && this.richiestaEsito != 'Errore nella modifica del biglietto'){
+          this.richiestaEsito = "ERRORE: Dati non validi!";
+        }
        }
     })
   }

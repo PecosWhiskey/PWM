@@ -128,6 +128,7 @@ export class GestioneVoliPage implements OnInit{
   volo!: Volo;
 
   ngOnInit(): void {
+    //Inizializzazione dei dati del volo da modificare selezionato nella pagina "voli-disponibili"
     this.gestioneVoliService.getDatiVolo().subscribe(volo => {
       if(volo){
         this.idVolo = volo.idVolo;
@@ -142,10 +143,11 @@ export class GestioneVoliPage implements OnInit{
     });
   }
 
-  //Variabili e funzioni che gestiscono la comparsa del pop up al click su "Crea Volo" o "Modifica Volo"
+  //Variabili e funzioni che gestiscono la comparsa dell'alert al click su "Crea Volo" o "Modifica Volo" in caso di successo
   isAlertOpenCreated = false;
   isAlertOpenModified = false;
-  alertButtons = ['Chiudi'];
+  alertButtons = ['OK'];
+  message = '';
 
   setOpenCreated(isOpen: boolean) {
     this.isAlertOpenCreated = isOpen;
@@ -182,14 +184,17 @@ export class GestioneVoliPage implements OnInit{
     this.gestioneVoliService.Crea(datiVolo).subscribe({
       next: (response) => {
         console.log('Creation success:', response);
-        this.creaVoloEsito = response.message;
+        this.creaVoloEsito = "Volo creato con successo!";
 
-        //Apertura del pop up
+        //Apertura dell'alert
         this.setOpenCreated(true);
       },
       error: (err) => {
         console.log('Creation error:', err);
         this.creaVoloEsito = err.error.message;
+        if(this.creaVoloEsito != 'Volo già presente!'){
+          this.creaVoloEsito = "ERRORE: dati non validi!";
+        }
       },
     });
   }
@@ -210,15 +215,18 @@ export class GestioneVoliPage implements OnInit{
     this.gestioneVoliService.Modifica(datiVolo).subscribe({
       next: (response) => {
         console.log('Modification success:', response);
-        this.creaVoloEsito = response.message;
+        this.creaVoloEsito = "Volo modificato con successo!";
 
-        //Apertura del pop up
+        //Apertura dell'alert
         this.setOpenModified(true);
       },
       error: (err) => {
         console.log('Modification error:', err);
         console.log('Impossibile modificare il volo, perché assente nel database!');
         this.creaVoloEsito = err.error.message;
+        if(this.creaVoloEsito != 'Volo per la modifica non presente nel database!'){
+          this.creaVoloEsito = "ERRORE: dati non validi!";
+        }
       },
     });
   }

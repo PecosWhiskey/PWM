@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { informationCircleOutline } from 'ionicons/icons';
 import {
   IonContent,
   IonHeader,
@@ -17,7 +19,8 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent
+  IonCardContent,
+  IonIcon
 } from '@ionic/angular/standalone';
 import { Volo } from '../models/volo.models';
 import { SessionStorageService } from '../services/session-storage.service';
@@ -44,7 +47,8 @@ import { BigliettiService } from '../services/biglietti.service';
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent
+    IonCardContent,
+    IonIcon
   ]
 })
 export class CreaBigliettoPage implements OnInit {
@@ -54,7 +58,9 @@ export class CreaBigliettoPage implements OnInit {
     private location: Location,
     private sessionStorage: SessionStorageService,
     private bigliettiService: BigliettiService
-  ) {}
+  ) {
+    addIcons({informationCircleOutline});
+  }
 
   //Dati richiesti in fase di acquisto del biglietto
   idVolo = '';
@@ -70,7 +76,7 @@ export class CreaBigliettoPage implements OnInit {
   dataAcquisto = '';
 
   //Variabili il cui valore cambia in base alle risposte del server alle richieste inviate
-  creazioneEsito = '';
+  richiestaEsito = '';
   bigliettoCreato = false;
   modificaEsito = '';
   passeggeroCreato = false;
@@ -121,12 +127,6 @@ export class CreaBigliettoPage implements OnInit {
         console.log(this.bigliettoRitorno);
       }  
     });
-
-    // const ritorno = this.sessionStorage.getItem('biglietto di ritorno scelto');
-    // if(ritorno != null){
-    //   this.bigliettoRitorno = ritorno;
-    //   console.log(this.bigliettoRitorno);
-    // }
 
     const passeggeri = this.sessionStorage.getItem('numero passeggeri');
     if(passeggeri != 0){
@@ -180,7 +180,6 @@ export class CreaBigliettoPage implements OnInit {
     this.bigliettiService.CreaPasseggero(passeggero).subscribe({
       next: (response) => {
         console.log('Creation success:', response);
-        this.creazioneEsito = response.message;
         this.passeggeroCreato= true;
         this.idPasseggero = response.data.idPasseggero;
 
@@ -202,7 +201,6 @@ export class CreaBigliettoPage implements OnInit {
         this.bigliettiService.CreaBiglietto(datiAndata).subscribe({
           next: (response) => {
             console.log('Creation success:', response);
-            this.creazioneEsito = response.message;
             //Memorizza il numero di biglietti creati nel BigliettiService
             this.numBigliettiCreatiAndata++;
             this.bigliettiService.setnumBigliettiCreatiAndata(this.numBigliettiCreatiAndata);
@@ -222,17 +220,20 @@ export class CreaBigliettoPage implements OnInit {
             this.bigliettiService.ModificaVolo(datiVolo).subscribe({
               next: (response) => {
                 console.log('Modification success:', response);
-                this.creazioneEsito = response.message;
               },
                error: (err) => {
                 console.log('Modification error:', err);
-                this.creazioneEsito = err.error.message;
+                this.richiestaEsito = err.error.message;
                },
             });
           },
            error: (err) => {
             console.log('Creation error:', err);
-            this.creazioneEsito = err.error.message;
+            if(this.richiestaEsito == "Biglietto per questo passeggero e per questo volo già acquistato!"){
+              this.richiestaEsito = "Biglietto di andata per questo passeggero e per questo volo già acquistato!";
+            }else{
+              this.richiestaEsito = "ERRORE: Dati per il biglietto di andata non validi!";
+            }
            },
         });
 
@@ -251,8 +252,7 @@ export class CreaBigliettoPage implements OnInit {
 
           this.bigliettiService.CreaBiglietto(datiRitorno).subscribe({
             next: (response) => {
-              console.log('Creation success:', response);
-              this.creazioneEsito = response.message;
+              console.log('Creation success:', response);      
               //Memorizza il numero di biglietti creati nel BigliettiService
               this.numBigliettiCreatiRitorno++;
               this.bigliettiService.setnumBigliettiCreatiRitorno(this.numBigliettiCreatiRitorno);
@@ -279,15 +279,21 @@ export class CreaBigliettoPage implements OnInit {
             },
              error: (err) => {
               console.log('Creation error:', err);
-              this.creazioneEsito = err.error.message;
+              this.richiestaEsito = err.error.message;
+              if(this.richiestaEsito == "Biglietto per questo passeggero e per questo volo già acquistato!"){
+                this.richiestaEsito = "Biglietto di ritorno per questo passeggero e per questo volo già acquistato!";
+              }else{
+                this.richiestaEsito = "ERRORE: Dati per il biglietto di ritorno non validi!";
+              }
             },
           });
         }
       },
        error: (err) => {
         console.log('Creation error:', err);
-        this.creazioneEsito = err.error.message;
+        this.richiestaEsito = "ERRORE: Dati del passeggero non validi!";
         this.passeggeroCreato = false;
+
        },
     });
   }

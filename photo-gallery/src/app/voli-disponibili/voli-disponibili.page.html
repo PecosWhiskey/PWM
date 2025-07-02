@@ -137,11 +137,11 @@
                       size="small"
                       class="action-button primary"
                       [routerLink]="'/gestione-voli'"
-                      [queryParams]="{edit: volo.idVolo}">
+                      (click)="Modifica(volo)">
                       <ion-icon name="create-outline" slot="start"></ion-icon>
                       Modifica
                     </ion-button>
-                    <ion-button
+                    <!-- <ion-button
                       fill="outline"
                       size="small"
                       class="action-button secondary"
@@ -149,7 +149,7 @@
                       [queryParams]="{from: volo.partenza, to: volo.destinazione}">
                       <ion-icon name="search-outline" slot="start"></ion-icon>
                       Prenota
-                    </ion-button>
+                    </ion-button> -->
                   </div>
                 </div>
               </ion-card-content>
@@ -170,6 +170,13 @@
             <ion-icon name="add-circle-outline" slot="start"></ion-icon>
             Crea Nuovo Volo
           </ion-button>
+        </div>
+      }
+
+      @if(richiestaEsito != '') {
+        <div class="feedback-info">
+           <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ richiestaEsito }}</span>
         </div>
       }
     </div>

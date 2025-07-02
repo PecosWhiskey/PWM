@@ -176,6 +176,13 @@
               <ion-icon name="log-in" slot="start"></ion-icon>
               Accedi come amministratore
             </ion-button> 
+
+            @if(richiestaEsito != '') {
+              <div class="feedback-info">
+                <ion-icon name="information-circle-outline"></ion-icon>
+                <span>{{ richiestaEsito }}</span>
+              </div>
+            }
        
             <!-- Footer del form -->
             <div class="form-footer">
@@ -285,6 +292,13 @@
                 <ion-icon name="person-add" slot="start"></ion-icon>
                 Registrati
               </ion-button>
+
+              @if(richiestaEsito != '') {
+                <div class="feedback-info">
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <span>{{ richiestaEsito }}</span>
+                </div>
+              }
             </div>
 
             <!-- Footer del form -->

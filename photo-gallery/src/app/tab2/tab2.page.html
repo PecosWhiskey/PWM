@@ -59,7 +59,7 @@
                   <span class="arrival">{{ricercaInfo.destinazione}} ({{biglietto.destinazione}})</span>
                 </div>
               </ion-card-title>
-              <span *ngIf="biglietto.postiDisponibili <= 5" >Ultimi posti disponibili</span>
+              <span *ngIf="biglietto.postiDisponibili <= 5" >Ultimi {{biglietto.postiDisponibili}} posti disponibili</span>
             </ion-card-header>
             <ion-card-content>
               <div class="flight-times">

@@ -209,6 +209,32 @@ async function visualizzaBiglietti(){
     }
 }
 
+async function modificaPasseggero({idPasseggeroCorrente, idPasseggeroModificato, nome, cognome, dataNascita, documentoID}){
+            return new Promise((resolve,reject)=>{
+                db.run('UPDATE Passeggero SET idPasseggero=?, nome=?, cognome=?, dataNascita=?, documentoID=? WHERE idPasseggero = ?', 
+                    [idPasseggeroModificato, nome, cognome, dataNascita, documentoID, idPasseggeroCorrente], function(err){
+                        if(err){
+                            reject(err);
+                            return;
+                        }
+                        resolve({idPasseggero, nome, cognome, dataNascita, documentoID});
+                    });
+            });
+    }
+
+async function modificaBigliettoID({idBiglietto, idPasseggeroModificato}){
+            return new Promise((resolve,reject)=>{
+                db.run('UPDATE Biglietto SET idPasseggero=? WHERE idBiglietto = ?', 
+                    [idPasseggeroModificato, idBiglietto], function(err){
+                        if(err){
+                            reject(err);
+                            return;
+                        }
+                        resolve({idPasseggeroModificato, idBiglietto});
+                    });
+            });
+    }    
+
 async function visualizzaPasseggeri(){
     try{
         return new Promise((resolve,reject)=>{
@@ -251,4 +277,29 @@ async function visualizzaPasseggeri(){
 // inserisciAeroporto("MXP", "Malpensa", 3);
 // inserisciAeroporto("LIN", "Linate", 4);
 
+// visualizzaPasseggeri();
+// {
+//     idBiglietto: 6,
+//     idVolo: 'VG2345',
+//     idPasseggero: 'codice1',
+//     tariffa: '',
+//     posto: '',
+//     dataPartenza: '2025-07-10 14:35 15:50',
+//     prezzoFinale: 57.12,
+//     dataAcquisto: '2025-07-01'
+// },
+
+// modificaPasseggero({
+//     idPasseggeroCorrente: "codice19", 
+//     idPasseggeroModificato:"MTAGRI90H78C678F", 
+//     nome: "Mattia", 
+//     cognome:"Grigi", 
+//     dataNascita: "1990-02-17", 
+//     documentoID:"documento di Mattia"
+// });
+
+// modificaBigliettoID({
+//     idBiglietto: 50,
+//     idPasseggeroModificato: "MTAGRI90H78C678F"
+// });
 // visualizzaBiglietti();

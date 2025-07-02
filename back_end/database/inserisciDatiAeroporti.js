@@ -209,6 +209,23 @@ async function visualizzaBiglietti(){
     }
 }
 
+async function visualizzaBigliettiID(idPasseggero){
+    try{
+        return new Promise((resolve,reject)=>{
+            db.all('SELECT * FROM Biglietto WHERE idPasseggero=?', [idPasseggero], (err,rows)=>{
+                if(err){
+                    reject(err);
+                    return;
+                }
+                resolve(rows);
+                console.log(rows);
+            })
+        })
+    }catch(err){
+        console.log("Errore: ", err.message);
+    }
+}
+
 async function modificaPasseggero({idPasseggeroCorrente, idPasseggeroModificato, nome, cognome, dataNascita, documentoID}){
             return new Promise((resolve,reject)=>{
                 db.run('UPDATE Passeggero SET idPasseggero=?, nome=?, cognome=?, dataNascita=?, documentoID=? WHERE idPasseggero = ?', 
@@ -222,10 +239,10 @@ async function modificaPasseggero({idPasseggeroCorrente, idPasseggeroModificato,
             });
     }
 
-async function modificaBigliettoID({idBiglietto, idPasseggeroModificato}){
+async function modificaBigliettoPosto({idBiglietto, posto}){
             return new Promise((resolve,reject)=>{
-                db.run('UPDATE Biglietto SET idPasseggero=? WHERE idBiglietto = ?', 
-                    [idPasseggeroModificato, idBiglietto], function(err){
+                db.run('UPDATE Biglietto SET posto=? WHERE idBiglietto = ?', 
+                    [posto, idBiglietto], function(err){
                         if(err){
                             reject(err);
                             return;
@@ -277,29 +294,4 @@ async function visualizzaPasseggeri(){
 // inserisciAeroporto("MXP", "Malpensa", 3);
 // inserisciAeroporto("LIN", "Linate", 4);
 
-// visualizzaPasseggeri();
-// {
-//     idBiglietto: 6,
-//     idVolo: 'VG2345',
-//     idPasseggero: 'codice1',
-//     tariffa: '',
-//     posto: '',
-//     dataPartenza: '2025-07-10 14:35 15:50',
-//     prezzoFinale: 57.12,
-//     dataAcquisto: '2025-07-01'
-// },
-
-// modificaPasseggero({
-//     idPasseggeroCorrente: "codice19", 
-//     idPasseggeroModificato:"MTAGRI90H78C678F", 
-//     nome: "Mattia", 
-//     cognome:"Grigi", 
-//     dataNascita: "1990-02-17", 
-//     documentoID:"documento di Mattia"
-// });
-
-// modificaBigliettoID({
-//     idBiglietto: 50,
-//     idPasseggeroModificato: "MTAGRI90H78C678F"
-// });
-// visualizzaBiglietti();
+visualizzaBigliettiID("GPPVDI64H89D543S");

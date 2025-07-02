@@ -13,8 +13,8 @@ import { SessionStorageService } from '../services/session-storage.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonAlert, RouterLink, RouterModule, IonHeader,IonToolbar,IonTitle,IonContent,
-    IonIcon,IonLabel,IonButton,IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, FormsModule, IonDatetime, IonPopover, IonCardHeader, IonCardTitle],
+  imports: [IonAlert, RouterLink, RouterModule, IonHeader,IonToolbar,IonContent,
+    IonIcon,IonLabel,IonButton,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, FormsModule, IonDatetime, IonPopover],
 })
 export class Tab1Page {
   constructor(private tab1Service: Tab1Service, private sessionStorageService: SessionStorageService){}
@@ -75,7 +75,7 @@ export class Tab1Page {
     this.dataRitorno = this.dataInseritaR.split('T')[0];
     //Oggetto con i dati che devono essere inviati al server per la ricerca dei voli
     const datiVoloPartenza = {
-      partenza: this.partenza.toUpperCase(),                 
+      partenza: this.partenza.toUpperCase(),
       destinazione : this.destinazione.toUpperCase(),
       oraPartenza : this.dataPartenza
     }
@@ -91,7 +91,7 @@ export class Tab1Page {
     this.sessionStorageService.setItem('numero passeggeri', this.numPasseggeri);
     this.tab1Service.setRicercaInfo(ricercaInfo);
     //Ricerca dei voli per la data di partenza
-    this.tab1Service.CercaVolo(datiVoloPartenza).subscribe({ 
+    this.tab1Service.CercaVolo(datiVoloPartenza).subscribe({
         next: (response) => {
         console.log('Search success:', response);
         this.cercaVoloEsito= response.message;
@@ -113,7 +113,7 @@ export class Tab1Page {
         console.log('Search error:', err);
         this.cercaVoloEsito = err.error.message;
        },
-      }); 
+      });
       //Se la scelta è stata andata e ritorno oppure nessuna scelta allora vengono cercati anche i voli di ritorno
       if(this.scelta == 'roundtrip' || this.scelta == 'nessun selezionato'){
         const datiVoloRitorno = {
@@ -121,7 +121,7 @@ export class Tab1Page {
           destinazione : this.partenza.toUpperCase(),
           oraPartenza : this.dataRitorno
         }
-        this.tab1Service.CercaVolo(datiVoloRitorno).subscribe({ 
+        this.tab1Service.CercaVolo(datiVoloRitorno).subscribe({
           next: (response) => {
             console.log('Search success:', response);
             this.cercaVoloEsito= response.message;
@@ -140,8 +140,15 @@ export class Tab1Page {
             console.log('Search error:', err);
             this.cercaVoloEsito = err.error.message;
           },
-        }); 
-      } 
+        });
+      }
+  }
+
+  //Swap function to exchange departure and destination cities
+  swapDestinations(){
+    const temp = this.partenza;
+    this.partenza = this.destinazione;
+    this.destinazione = temp;
   }
 
   onClick(){

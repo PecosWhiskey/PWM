@@ -85,16 +85,19 @@ export class GestioneVoliPage{
   }
 }
 */
-
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton, IonItem, IonDatetime, IonInput,IonIcon, IonAlert, IonToolbar,
   IonHeader} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { createOutline, listOutline, addCircleOutline, personOutline } from 'ionicons/icons';
+import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, barcodeOutline, 
+  informationCircleOutline} from 'ionicons/icons';
 import { GestioneVoliService } from './gestione-voli.service';
 import { RouterModule, RouterLink } from '@angular/router';
+import { Volo } from '../models/volo.models';
 
 @Component({
   selector: 'app-gestione-voli',
@@ -104,10 +107,11 @@ import { RouterModule, RouterLink } from '@angular/router';
   imports: [IonAlert, IonInput, IonDatetime, IonButton, IonItem, IonContent, IonIcon, IonToolbar, IonHeader,
     CommonModule, FormsModule, RouterModule, RouterLink]
 })
-export class GestioneVoliPage {
+export class GestioneVoliPage implements OnInit{
 
   constructor(private gestioneVoliService: GestioneVoliService) {
-    addIcons({ createOutline, listOutline, addCircleOutline, personOutline });
+    addIcons({ createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, barcodeOutline, informationCircleOutline });
   }
 
   //Dati richiesti in fase di creazione/modifica di un volo
@@ -120,6 +124,23 @@ export class GestioneVoliPage {
   prezzo = 0.0;
   postiDisponibili = 0;
   creaVoloEsito = '';
+
+  volo!: Volo;
+
+  ngOnInit(): void {
+    this.gestioneVoliService.getDatiVolo().subscribe(volo => {
+      if(volo){
+        this.idVolo = volo.idVolo;
+        this.partenza = volo.partenza;
+        this.destinazione = volo.destinazione;
+        this.data = volo.oraPartenza.split(' ')[0];
+        this.oraPartenza = volo.oraPartenza.split(' ')[1];
+        this.oraArrivo = volo.oraArrivo.split(' ')[1];
+        this.prezzo = volo.prezzo;
+        this.postiDisponibili = volo.postiDisponibili;
+      }
+    });
+  }
 
   //Variabili e funzioni che gestiscono la comparsa del pop up al click su "Crea Volo" o "Modifica Volo"
   isAlertOpenCreated = false;

@@ -106,6 +106,7 @@ export class CreaBigliettoPage implements OnInit {
     const passeggeri = this.sessionStorage.getItem('numero passeggeri');
     if(passeggeri != 0){
       this.numPasseggeri = passeggeri;
+      console.log("Numero di passeggeri: ", this.numPasseggeri);
       this.numeroPasseggeri = Array.from({ length: passeggeri }, (_, i) => i + 1);
       //Richiamo alla funzione che inizializza l'array di oggetti, con i dati dei passeggeri, con valori nulli
       this.inizializzaPasseggeri();

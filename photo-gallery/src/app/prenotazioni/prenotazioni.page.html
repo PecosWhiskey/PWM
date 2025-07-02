@@ -84,18 +84,31 @@
                     <div class="detail-item">
                       <ion-icon name="calendar-outline"></ion-icon>
                       <div class="detail-info">
-                        <span class="detail-label">Data Partenza</span>
-                        <span class="detail-value">{{biglietto.dataPartenza.split(' ')[0].split("-").reverse().join("-")}}</span>
+                        <span class="detail-label">Partenza</span>
+                        <span class="detail-value">{{biglietto.dataPartenza.split(' ')[1]}}</span>
                       </div>
                     </div>
                     <div class="detail-item">
                       <ion-icon name="time-outline"></ion-icon>
                       <div class="detail-info">
-                        <span class="detail-label">Orario</span>
-                        <span class="detail-value">{{biglietto.dataPartenza.split(' ')[1]}}</span>
+                        <span class="detail-label">Arrivo</span>
+                        <span class="detail-value">{{biglietto.dataPartenza.split(' ')[2]}}</span>
                       </div>
                     </div>
                   </div>
+
+                  
+                  <div class="detail-row">
+                    <div class="detail-item">
+                      <ion-icon name="calendar-outline"></ion-icon>
+                      <div class="detail-info">
+                        <span class="detail-label">Data</span>
+                        <span class="detail-value">{{biglietto.dataPartenza.split(' ')[0].split("-").reverse().join("-")}}</span>
+                      </div>
+                    </div>
+                  </div>
+
+
 
                   <div class="detail-row">
                     <div class="detail-item">

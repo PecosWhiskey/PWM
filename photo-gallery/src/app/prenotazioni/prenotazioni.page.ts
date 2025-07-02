@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import {
   IonContent,
   IonHeader,
-  IonTitle,
   IonToolbar,
   IonCardContent,
   IonCardHeader,
@@ -17,6 +16,9 @@ import {
 import { GestioneVoliService } from '../gestione-voli/gestione-voli.service';
 import { Biglietto } from '../models/biglietto.models';
 import { RouterModule, RouterLink } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-prenotazioni',
@@ -33,7 +35,6 @@ import { RouterModule, RouterLink } from '@angular/router';
     IonCardContent,
     IonContent,
     IonHeader,
-    IonTitle,
     IonToolbar,
     CommonModule,
     FormsModule,
@@ -45,7 +46,10 @@ export class PrenotazioniPage implements OnInit {
 
   biglietti: Biglietto[] = [];
 
-  constructor(private gestioneVoliService: GestioneVoliService) {}
+  constructor(private gestioneVoliService: GestioneVoliService) {
+    addIcons({ createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, pricetagOutline, calendar});
+  }
 
   ngOnInit(): void {
     //Caricamento dei biglietti

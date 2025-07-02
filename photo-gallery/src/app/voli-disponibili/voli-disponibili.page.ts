@@ -17,6 +17,10 @@ import {
 import { GestioneVoliService } from '../gestione-voli/gestione-voli.service';
 import { Volo } from '../models/volo.models';
 import { RouterModule, RouterLink } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, 
+  searchOutline} from 'ionicons/icons';
 
 @Component({
   selector: 'app-voli-disponibili',
@@ -45,11 +49,23 @@ export class VoliDisponibiliPage implements OnInit {
 
   voli: Volo[] = [];
 
-  constructor(private gestioneVoliService: GestioneVoliService) { }
+  constructor(private gestioneVoliService: GestioneVoliService) { 
+    addIcons({ createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, searchOutline});
+  }
 
   ngOnInit() {
     //Caricamento dei voli disponibili
     this.caricaVoli();
+  }
+
+  //Rende inattivi tutti gli elementi quando si esce dalla pagina
+  ionViewWillLeave() {
+    //Rimuove il focus da qualsiasi elemento attivo
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
   }
 
   //Funzione che permette di ottenere i voli disponibili direttamente dal database
@@ -63,6 +79,10 @@ export class VoliDisponibiliPage implements OnInit {
         console.log("Search error: ", err);
        }
     })
+  }
+
+  Modifica(volo: Volo){
+    this.gestioneVoliService.setDatiVolo(volo);
   }
 
 }

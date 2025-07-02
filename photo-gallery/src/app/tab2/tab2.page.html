@@ -54,9 +54,9 @@
             <ion-card-header>
               <ion-card-title>
                 <div class="flight-route">
-                  <span class="departure">{{ricercaInfo.partenza}}</span>
+                  <span class="departure">{{ricercaInfo.partenza}} ({{biglietto.partenza}})</span>
                   <span class="arrow"></span>
-                  <span class="arrival">{{ricercaInfo.destinazione}}</span>
+                  <span class="arrival">{{ricercaInfo.destinazione}} ({{biglietto.destinazione}})</span>
                 </div>
               </ion-card-title>
               <span *ngIf="biglietto.postiDisponibili <= 5" >Ultimi posti disponibili</span>
@@ -87,9 +87,9 @@
               <ion-card-header>
                 <ion-card-title>
                   <div class="flight-route">
-                    <span class="departure">{{ricercaInfo.partenza}}</span>
+                    <span class="departure">{{ricercaInfo.partenza}} ({{biglietto.partenza}})</span>
                     <span class="arrow"></span>
-                    <span class="arrival">{{ricercaInfo.destinazione}}</span>
+                    <span class="arrival">{{ricercaInfo.destinazione}} ({{biglietto.destinazione}})</span>
                   </div>
                 </ion-card-title>
                 <span *ngIf="biglietto.postiDisponibili <= 5" >Ultimi posti disponibili</span>
@@ -115,9 +115,9 @@
               <ion-card-header>
                 <ion-card-title>
                   <div class="flight-route">
-                    <span class="departure">{{ricercaInfo.destinazione}}</span>
+                    <span class="departure">{{ricercaInfo.destinazione}} ({{biglietto.partenza}})</span>
                     <span class="arrow"></span>
-                    <span class="arrival">{{ricercaInfo.partenza}}</span>
+                    <span class="arrival">{{ricercaInfo.partenza}} ({{biglietto.destinazione}})</span>
                   </div>
                 </ion-card-title>
                 <span *ngIf="biglietto.postiDisponibili <= 5" >Ultimi posti disponibili</span>

@@ -105,6 +105,9 @@ export class Tab1Page {
         this.tab1Service.setBigliettiAndata(this.bigliettiAndata);
         //Memorizza temporaneamente i biglietti di andata trovati nel Session Storage
         this.sessionStorageService.setItem('bigliettiAndata', this.bigliettiAndata);
+        //Memorizza la scelta dell'utente
+        this.tab1Service.setSceltaUtente(this.scelta);
+        this.sessionStorageService.setItem('sceltaUtente', this.scelta);
        },
        error: (err) => {
         console.log('Search error:', err);

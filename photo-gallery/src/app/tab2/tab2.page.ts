@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Service } from '../tab1/tab1.service';
 import { SessionStorageService } from '../services/session-storage.service';
 import { RouterModule, RouterLink, Router } from '@angular/router';
+import { BigliettiService } from '../services/biglietti.service';
 
 @Component({
   selector: 'app-tab2',
@@ -20,7 +21,7 @@ import { RouterModule, RouterLink, Router } from '@angular/router';
 export class Tab2Page implements OnInit {
 
   constructor(private tab1Service: Tab1Service, private sessionStorageService: SessionStorageService,
-    private router: Router) {}
+    private bigliettiService: BigliettiService) {}
 
   //Valori che cambiano in base all'esito della ricerca effettuata nel tab1
   voliTrovatiAndata = false;
@@ -113,29 +114,32 @@ export class Tab2Page implements OnInit {
   //Funzioni che gestiscono la selezione o la deselezione dei biglietti di andata e ritorno
   selezionaAndata(biglietto: Volo){
     this.bigliettoAndataSelezionato = biglietto;
+    this.bigliettiService.setBigliettoAndata(this.bigliettoAndataSelezionato);
     this.sessionStorageService.setItem('biglietto di andata scelto', biglietto);
-    console.log("Biglietto andata selezionato: ", this.sessionStorageService.getItem('biglietto di andata scelto'));
+    console.log("Biglietto andata selezionato: ", this.bigliettiService.getBigliettoAndata());
   }
 
   deselezionaAndata(){
     this.bigliettoAndataSelezionato = null;
-    this.sessionStorageService.removeItem('biglietto di andata scelto');
-    console.log("Biglietto andata deselezionato: ", this.sessionStorageService.getItem('biglietto di andata scelto'));
+    this.bigliettiService.removeBigliettoAndata();
+    console.log("Biglietto andata deselezionato: ", this.bigliettiService.getBigliettoAndata());
   }
 
   selezionaRitorno(biglietto: Volo){
     this.bigliettoRitornoSelezionato = biglietto;
+    this.bigliettiService.setBigliettoRitorno(this.bigliettoRitornoSelezionato);
     this.sessionStorageService.setItem('biglietto di ritorno scelto', biglietto);
-    console.log("Biglietto ritorno selezionato: ", this.sessionStorageService.getItem('biglietto di ritorno scelto'));
+    console.log("Biglietto ritorno selezionato: ", this.bigliettiService.getBigliettoRitorno());
   }
 
   deselezionaRitorno(){
     this.bigliettoRitornoSelezionato = null;
     this.sessionStorageService.removeItem('biglietto di ritorno scelto');
-    console.log("Biglietto ritorno deselezionato: ", this.sessionStorageService.getItem('biglietto di ritorno scelto'));
+    this.bigliettiService.removeBigliettoRitorno();
+    console.log("Biglietto ritorno deselezionato: ", this.bigliettiService.getBigliettoRitorno());
   }
 
-  // Funzioni helper per verificare se un biglietto è selezionato
+  //Funzioni helper per verificare se un biglietto è selezionato
   isBigliettoAndataSelezionato(biglietto: Volo): boolean {
     return this.bigliettoAndataSelezionato === biglietto;
   }

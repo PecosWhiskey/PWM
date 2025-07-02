@@ -6,6 +6,7 @@ import { Biglietto } from '../models/biglietto.models';
 import { Passeggero } from '../models/passeggero.models';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+import { Volo } from '../models/volo.models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,24 @@ export class BigliettiService {
   private numBigliettiCreatiAndata = new BehaviorSubject<number>(0);
   private numBigliettiCreatiRitorno = new BehaviorSubject<number>(0);
   private bigliettoModificato = new BehaviorSubject<any>(null);
+  private bigliettoAndata = new BehaviorSubject<Volo>({
+    idVolo: '', 
+    partenza: '',
+    destinazione: '',
+    oraPartenza: '',
+    oraArrivo: '',
+    prezzo: 0.0,
+    postiDisponibili: 0
+  });
+  private bigliettoRitorno = new BehaviorSubject<Volo>({
+    idVolo: '', 
+    partenza: '',
+    destinazione: '',
+    oraPartenza: '',
+    oraArrivo: '',
+    prezzo: 0.0,
+    postiDisponibili: 0
+  });
 
   constructor(private http: HttpClient) {}
 
@@ -74,5 +93,46 @@ export class BigliettiService {
   
   getBigliettoModificato(): Observable<number>{
     return this.bigliettoModificato.asObservable();
+  }
+
+  //Funzioni che memorizzano e ricavano il biglietti selzeionati nel Tab2 sia di andata che di ritorno
+  setBigliettoAndata(biglietto: Volo) {
+    this.bigliettoAndata.next(biglietto);
+  }
+  
+  getBigliettoAndata(): Observable<Volo>{
+    return this.bigliettoAndata.asObservable();
+  }
+
+  removeBigliettoAndata(){
+    this.setBigliettoAndata({
+      idVolo: '', 
+      partenza: '',
+      destinazione: '',
+      oraPartenza: '',
+      oraArrivo: '',
+      prezzo: 0.0,
+      postiDisponibili: 0
+    });
+  }
+
+  setBigliettoRitorno(biglietto: Volo) {
+    this.bigliettoRitorno.next(biglietto);
+  }
+  
+  getBigliettoRitorno(): Observable<Volo>{
+    return this.bigliettoRitorno.asObservable();
+  }
+
+  removeBigliettoRitorno(){
+    this.setBigliettoRitorno({
+      idVolo: '', 
+      partenza: '',
+      destinazione: '',
+      oraPartenza: '',
+      oraArrivo: '',
+      prezzo: 0.0,
+      postiDisponibili: 0
+    });
   }
 }

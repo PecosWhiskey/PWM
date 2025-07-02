@@ -81,27 +81,52 @@ export class CreaBigliettoPage implements OnInit {
   numeroPasseggeri : number[] = []; //array di lunghezza pari al numero di passeggeri, che viene utilizzato per il primo ciclo for presente nell'html
   passeggeri: any[] = []; //array che conterrà i dati dei passeggeri per cui verrà creato il biglietto
 
-  //Dati ottenuti dal SessionStorage
-  bigliettoAndata! : Volo;
-  bigliettoRitorno! : Volo;
+  //Dati ottenuti dai service
+  bigliettoAndata : Volo = {
+    idVolo: '', 
+      partenza: '',
+      destinazione: '',
+      oraPartenza: '',
+      oraArrivo: '',
+      prezzo: 0.0,
+      postiDisponibili: 0
+  };
+
+  bigliettoRitorno : Volo= {
+    idVolo: '', 
+      partenza: '',
+      destinazione: '',
+      oraPartenza: '',
+      oraArrivo: '',
+      prezzo: 0.0,
+      postiDisponibili: 0
+  };
   sceltaUtente=  '';
 
   //Array che memorizza ogni biglietto che viene inserito nel database
   bigliettiCreati: any[] = [];
 
   ngOnInit() {
-    //Recupera i dati dei biglietti scelti dal session storage
-    const andata = this.sessionStorage.getItem('biglietto di andata scelto');
-    if(andata != null){
-      this.bigliettoAndata = andata;
-      console.log(this.bigliettoAndata);
-    }
+    //Recupera i dati dei biglietti scelti dal service Biglietti
+    this.bigliettiService.getBigliettoAndata().subscribe(biglietto => {
+      if(this.valutaBiglietto(biglietto)){
+        this.bigliettoAndata = biglietto;
+        console.log(this.bigliettoAndata);
+      }  
+    });
 
-    const ritorno = this.sessionStorage.getItem('biglietto di ritorno scelto');
-    if(ritorno != null){
-      this.bigliettoRitorno = ritorno;
-      console.log(this.bigliettoRitorno);
-    }
+    this.bigliettiService.getBigliettoRitorno().subscribe(biglietto => {
+      if(this.valutaBiglietto(biglietto)){
+        this.bigliettoRitorno = biglietto;
+        console.log(this.bigliettoRitorno);
+      }  
+    });
+
+    // const ritorno = this.sessionStorage.getItem('biglietto di ritorno scelto');
+    // if(ritorno != null){
+    //   this.bigliettoRitorno = ritorno;
+    //   console.log(this.bigliettoRitorno);
+    // }
 
     const passeggeri = this.sessionStorage.getItem('numero passeggeri');
     if(passeggeri != 0){
@@ -124,6 +149,12 @@ export class CreaBigliettoPage implements OnInit {
     this.bigliettiService.getnumBigliettiCreatiRitorno().subscribe(numero => {
       this.numBigliettiCreatiRitorno = numero;
     });
+  }
+
+  //Funzione che verifica che i campi del biglietto non siano uguali a valori nulli
+  valutaBiglietto(biglietto: Volo){
+    return biglietto.idVolo != '' && biglietto.partenza != '' && biglietto.destinazione != '' && biglietto.oraPartenza != '' &&
+    biglietto.oraArrivo != '' && biglietto.prezzo != 0.0 && biglietto.postiDisponibili != 0
   }
 
   //Funzione che inizializza un array di lunghezza pari al numero di passeggeri con i dati da inserire nel form a valori nulli
@@ -175,6 +206,7 @@ export class CreaBigliettoPage implements OnInit {
             //Memorizza il numero di biglietti creati nel BigliettiService
             this.numBigliettiCreatiAndata++;
             this.bigliettiService.setnumBigliettiCreatiAndata(this.numBigliettiCreatiAndata);
+            console.log("Biglietti creati andata: ", this.bigliettiService.getnumBigliettiCreatiAndata());
             this.bigliettiCreati.push(response.data);
             console.log(this.bigliettiCreati);
             this.bigliettoCreato = true;
@@ -205,7 +237,7 @@ export class CreaBigliettoPage implements OnInit {
         });
 
         //Se il cliente ha anche acquistato il biglietto di ritorno
-        if((this.sceltaUtente == 'roundtrip' || this.sceltaUtente == 'nessun selezionato') && this.bigliettoRitorno){
+        if(this.valutaBiglietto(this.bigliettoRitorno)){
         //Creazione biglietto di ritorno
           const datiRitorno = {
             idVolo: this.bigliettoRitorno.idVolo,
@@ -224,6 +256,7 @@ export class CreaBigliettoPage implements OnInit {
               //Memorizza il numero di biglietti creati nel BigliettiService
               this.numBigliettiCreatiRitorno++;
               this.bigliettiService.setnumBigliettiCreatiRitorno(this.numBigliettiCreatiRitorno);
+              console.log("biglietti creati ritorno: ", this.bigliettiService.getnumBigliettiCreatiRitorno());
               this.bigliettiCreati.push(response.data);
               this.bigliettoCreato = true;
 

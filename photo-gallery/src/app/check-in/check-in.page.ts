@@ -176,4 +176,9 @@ export class CheckInPage implements OnInit {
        }
     })
   }
+
+  //Funzione che approssima il prezzo finale del biglietto modificato mostrato
+  Approssima(prezzo: number): number {
+    return Math.round(prezzo * Math.pow(10, 2)) / Math.pow(10, 2);
+  }
 }

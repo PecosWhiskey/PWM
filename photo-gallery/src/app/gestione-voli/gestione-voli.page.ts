@@ -184,7 +184,6 @@ export class GestioneVoliPage implements OnInit{
     this.gestioneVoliService.Crea(datiVolo).subscribe({
       next: (response) => {
         console.log('Creation success:', response);
-        this.creaVoloEsito = "Volo creato con successo!";
 
         //Apertura dell'alert
         this.setOpenCreated(true);
@@ -215,7 +214,6 @@ export class GestioneVoliPage implements OnInit{
     this.gestioneVoliService.Modifica(datiVolo).subscribe({
       next: (response) => {
         console.log('Modification success:', response);
-        this.creaVoloEsito = "Volo modificato con successo!";
 
         //Apertura dell'alert
         this.setOpenModified(true);

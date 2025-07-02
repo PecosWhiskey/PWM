@@ -1,140 +1,555 @@
-//Questo stile è fatto per ricreare il biglietto modificato nella modale
-.ticket-modified{
+// ===========================================
+// VayGo Airlines - Check-in Page SCSS
+// ===========================================
+
+// Header personalizzato
+.custom-header {
+  --background: var(--vaygo-white);
+  --border-color: var(--vaygo-border);
+  box-shadow: 0 2px 8px var(--vaygo-shadow);
+  border-bottom: 1px solid var(--vaygo-border);
+
+  ion-toolbar {
+    --background: var(--vaygo-white);
+    --color: var(--vaygo-text-primary);
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --min-height: 56px;
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--vaygo-primary);
+    letter-spacing: -0.5px;
+  }
+
+  .logo-subtitle {
+    font-size: 14px;
+    color: var(--vaygo-text-secondary);
+    font-weight: 500;
+  }
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+
+  ion-button {
+    --color: var(--vaygo-text-secondary);
+    --background-hover: var(--vaygo-blue-light);
+    width: 40px;
+    height: 40px;
+    --border-radius: 12px;
+  }
+}
+
+// Container principale
+.gestione-voli-container {
+  min-height: 100vh;
+  background: var(--vaygo-background);
+  padding: 20px;
+}
+
+// Menu di Navigazione
+.voli-navigation-menu {
+  background: var(--vaygo-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+
+  .menu-header {
+    background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
     padding: 20px;
-}
-
-.ticket-title {
-    display: flex;
-    height: 60px;
-    align-items: center;
-    justify-content: center;
-}
-
-//Seleziona tutti i figli diretti
-.ticket-title > * {
-    //ciascun elemento occupa metà dello spazio disponibile e si posiziona al suo centro
-    flex: 1;
+    color: var(--vaygo-white);
     text-align: center;
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  .menu-buttons {
+    display: flex;
+    background: var(--vaygo-white);
+
+    .menu-button {
+      flex: 1;
+      --background: transparent;
+      --color: var(--vaygo-text-secondary);
+      --border-radius: 0;
+      height: 56px;
+      margin: 0;
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0.3px;
+      transition: all 0.3s ease;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: transparent;
+        transition: all 0.3s ease;
+      }
+
+      &.active {
+        --background: var(--vaygo-blue-light);
+        --color: var(--vaygo-primary);
+
+        &::before {
+          background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+        }
+      }
+
+      &:hover:not(.active) {
+        --background: var(--vaygo-background);
+        --color: var(--vaygo-text-primary);
+      }
+
+      ion-icon {
+        margin-right: 8px;
+        font-size: 20px;
+      }
+    }
+  }
 }
 
-.ticket-subtitle {
+// Container check-in
+.prenotazioni-container {
+  background: var(--vaygo-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--vaygo-shadow);
+  border: 1px solid var(--vaygo-border);
+  padding: 24px;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 32px;
+
+    h2 {
+      margin: 0 0 8px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--vaygo-primary);
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--vaygo-text-secondary);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Form di ricerca
+.checkin-search {
+  max-width: 600px;
+  margin: 0 auto;
+
+  .search-form {
+    .form-section {
+      margin-bottom: 24px;
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--vaygo-text-primary);
+
+        ion-icon {
+          font-size: 24px;
+          color: var(--vaygo-primary);
+        }
+      }
+
+      .input-group {
+        margin-bottom: 16px;
+
+        .custom-item {
+          --background: var(--vaygo-background);
+          --border-radius: 12px;
+          --border-color: var(--vaygo-border);
+          --inner-padding-end: 16px;
+          --inner-padding-start: 16px;
+          --padding-start: 0;
+          border: 1px solid var(--vaygo-border);
+          border-radius: 12px;
+          margin: 0;
+
+          &.item-has-value {
+            --border-color: var(--vaygo-primary);
+            border-color: var(--vaygo-primary);
+          }
+
+          ion-icon {
+            color: var(--vaygo-text-secondary);
+            margin-right: 12px;
+          }
+
+          ion-input {
+            --color: var(--vaygo-text-primary);
+            --placeholder-color: var(--vaygo-text-secondary);
+          }
+        }
+      }
+
+      .search-button {
+        --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+        --color: var(--vaygo-white);
+        --border-radius: 12px;
+        height: 48px;
+        font-weight: 600;
+        margin-top: 20px;
+
+        &:hover:not([disabled]) {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(46, 139, 87, 0.3);
+        }
+
+        &[disabled] {
+          --background: var(--vaygo-text-secondary);
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}
+
+// Form di check-in
+.checkin-form {
+  max-width: 600px;
+  margin: 0 auto;
+
+  .success-message {
     display: flex;
     align-items: center;
+    gap: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+    background: var(--vaygo-green-light);
+    border: 1px solid var(--vaygo-success);
+    border-radius: 12px;
+    color: var(--vaygo-success);
+    font-weight: 600;
+
+    ion-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+  }
+
+  .checkin-form-content {
+    .form-section {
+      margin-bottom: 24px;
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--vaygo-text-primary);
+
+        ion-icon {
+          font-size: 24px;
+          color: var(--vaygo-primary);
+        }
+      }
+
+      .input-group {
+        margin-bottom: 16px;
+
+        .custom-item {
+          --background: var(--vaygo-background);
+          --border-radius: 12px;
+          --border-color: var(--vaygo-border);
+          --inner-padding-end: 16px;
+          --inner-padding-start: 16px;
+          --padding-start: 0;
+          border: 1px solid var(--vaygo-border);
+          border-radius: 12px;
+          margin: 0;
+
+          &.item-has-value {
+            --border-color: var(--vaygo-primary);
+            border-color: var(--vaygo-primary);
+          }
+
+          ion-icon {
+            color: var(--vaygo-text-secondary);
+            margin-right: 12px;
+          }
+
+          ion-input, ion-select {
+            --color: var(--vaygo-text-primary);
+            --placeholder-color: var(--vaygo-text-secondary);
+          }
+        }
+      }
+    }
+
+    .checkin-button {
+      --background: linear-gradient(135deg, var(--vaygo-success), var(--vaygo-accent));
+      --color: var(--vaygo-white);
+      --border-radius: 12px;
+      height: 48px;
+      font-weight: 600;
+      margin-top: 20px;
+
+      &:hover:not([disabled]) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(52, 211, 153, 0.3);
+      }
+
+      &[disabled] {
+        --background: var(--vaygo-text-secondary);
+        opacity: 0.6;
+      }
+    }
+  }
 }
 
-.ticket-subtitle > * {
-    flex: 1;
-    text-align: center;
+// Feedback info
+.feedback-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  margin-top: 24px;
+  background: var(--vaygo-orange-light);
+  border: 1px solid var(--vaygo-orange);
+  border-radius: 12px;
+  color: var(--vaygo-text-primary);
+
+  ion-icon {
+    font-size: 20px;
+    color: var(--vaygo-orange);
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
 }
 
-.ticket-date {
+// Modal content
+.modal-content {
+  padding: 24px;
+  background: var(--vaygo-white);
+  min-height: 100%;
+
+  .modal-header {
     display: flex;
-    height: 60px;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--vaygo-border);
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--vaygo-primary);
+    }
+
+    ion-button {
+      --color: var(--vaygo-text-secondary);
+      --background: transparent;
+    }
+  }
+
+  .ticket-card {
+    background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+    border-radius: 16px;
+    padding: 24px;
+    color: var(--vaygo-white);
+
+    .ticket-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      text-align: center;
+
+      ion-icon {
+        font-size: 32px;
+        flex-shrink: 0;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+      }
+    }
+
+    .ticket-details {
+      .detail-section {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+        &:last-child {
+          border-bottom: none;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+
+        .detail-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          margin-bottom: 12px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          ion-icon {
+            font-size: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            opacity: 0.8;
+          }
+
+          div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .label {
+              font-size: 12px;
+              opacity: 0.8;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              font-weight: 600;
+            }
+
+            .value {
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .price-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+
+        .price-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .price-label {
+            font-size: 16px;
+            font-weight: 600;
+            opacity: 0.9;
+          }
+
+          .price-value {
+            font-size: 20px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
 }
 
-.ticket-date > * {
-    flex: 1;
-    text-align: center;
+// Animazioni
+.vaygo-fade-in {
+  animation: fadeInUp 0.6s ease-out;
 }
 
-// :root {
-//     --vaygo-primary: #2E8B57;
-//     --vaygo-secondary: #4A90E2;
-//     --vaygo-accent: #34D399;
-//     --vaygo-tertiary: #8B5CF6;
-//     --vaygo-blue-light: #E0F2FE;
-//     --vaygo-green-light: #ECFDF5;
-//     --vaygo-purple-light: #F3E8FF;
-//     --vaygo-text-primary: #1F2937;
-//     --vaygo-text-secondary: #6B7280;
-//     --vaygo-text-muted: #9CA3AF;
-//     --vaygo-background: #FAFAFA;
-//     --vaygo-white: #FFFFFF;
-//     --vaygo-surface: #F9FAFB;
-//     --vaygo-shadow: rgba(0, 0, 0, 0.04);
-//     --vaygo-shadow-medium: rgba(0, 0, 0, 0.08);
-//     --vaygo-shadow-strong: rgba(0, 0, 0, 0.12);
-//     --vaygo-border: rgba(0, 0, 0, 0.06);
-//     --vaygo-border-medium: rgba(0, 0, 0, 0.12);
-//     --vaygo-success: #10B981;
-//     --vaygo-warning: #F59E0B;
-//     --vaygo-error: #EF4444;
-//     --vaygo-info: #3B82F6;
-//     --vaygo-gradient-primary: linear-gradient(135deg, var(--vaygo-primary) 0%, var(--vaygo-secondary) 100%);
-//     --vaygo-gradient-accent: linear-gradient(135deg, var(--vaygo-accent) 0%, var(--vaygo-tertiary) 100%);
-//     --vaygo-gradient-surface: linear-gradient(135deg, var(--vaygo-blue-light) 0%, var(--vaygo-green-light) 100%);
-//     --vaygo-spacing-xs: 4px;
-//     --vaygo-spacing-sm: 8px;
-//     --vaygo-spacing-md: 16px;
-//     --vaygo-spacing-lg: 24px;
-//     --vaygo-spacing-xl: 32px;
-//     --vaygo-spacing-2xl: 48px;
-//     --vaygo-radius-sm: 8px;
-//     --vaygo-radius-md: 12px;
-//     --vaygo-radius-lg: 16px;
-//     --vaygo-radius-xl: 20px;
-//     --vaygo-radius-2xl: 24px;
-//     --vaygo-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-//     --vaygo-font-size-xs: 12px;
-//     --vaygo-font-size-sm: 14px;
-//     --vaygo-font-size-base: 16px;
-//     --vaygo-font-size-lg: 18px;
-//     --vaygo-font-size-xl: 20px;
-//     --vaygo-font-size-2xl: 24px;
-//     --vaygo-font-size-3xl: 32px;
-//     --vaygo-transition-fast: 0.15s ease;
-//     --vaygo-transition-base: 0.3s ease;
-//     --vaygo-transition-slow: 0.5s ease;
-// }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-// ion-content {
-//     padding: var(--vaygo-spacing-lg);
-  
-//     form {
-//       display: flex;
-//       flex-direction: column;
-//       gap: var(--vaygo-spacing-md);
-//       padding: var(--vaygo-spacing-md);
-//       background: var(--vaygo-white);
-//       border-radius: var(--vaygo-radius-lg);
-//       box-shadow: 0 4px 16px var(--vaygo-shadow-medium);
-//       animation: vaygoFadeIn 0.5s ease-out;
-  
-//       ion-item {
-//         @extend .vaygo-input;
-//       }
-  
-//       ion-button {
-//         @extend .vaygo-btn-primary;
-//         margin-top: var(--vaygo-spacing-md);
-//         align-self: flex-start;
-//       }
-//     }
-  
-//     ion-content {
-//       margin-top: var(--vaygo-spacing-lg);
-  
-//       form {
-//         background: var(--vaygo-blue-light);
-//         border-radius: var(--vaygo-radius-md);
-//         padding: var(--vaygo-spacing-md);
-//         box-shadow: 0 2px 12px var(--vaygo-shadow);
-  
-//         ion-item {
-//           @extend .vaygo-input;
-//         }
-  
-//         ion-select,
-//         ion-input {
-//           font-weight: 500;
-//           --placeholder-color: var(--vaygo-text-secondary);
-//         }
-  
-//         ion-button {
-//           @extend .vaygo-btn-secondary;
-//           margin-top: var(--vaygo-spacing-md);
-//         }
-//       }
-//     }
-//   }
+// Responsive
+@media (max-width: 768px) {
+  .gestione-voli-container {
+    padding: 16px;
+  }
+
+  .prenotazioni-container {
+    padding: 20px;
+
+    .section-header {
+      h2 {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .checkin-search, .checkin-form {
+    max-width: 100%;
+  }
+
+  .modal-content {
+    padding: 20px;
+
+    .ticket-card {
+      padding: 20px;
+
+      .ticket-header {
+        h3 {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+// Supporto tema scuro
+@media (prefers-color-scheme: dark) {
+  .custom-header {
+    --background: var(--vaygo-white);
+
+    ion-toolbar {
+      --background: var(--vaygo-white);
+    }
+  }
+}

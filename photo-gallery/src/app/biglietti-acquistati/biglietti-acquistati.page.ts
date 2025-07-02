@@ -1,19 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonCardContent,
+  IonCardHeader,
+  IonCard,
+  IonCardTitle,
+  IonButton,
+  IonIcon,
+  IonBadge
+} from '@ionic/angular/standalone';
 import { ClientiService } from '../services/clienti.service';
 import { TokenService } from '../services/token.service';
 import { Biglietto } from '../models/biglietto.models';
+import { RouterModule, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { informationCircleOutline } from 'ionicons/icons';
+import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline, informationCircleOutline, searchOutline, checkmarkCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-biglietti-acquistati',
   templateUrl: './biglietti-acquistati.page.html',
   styleUrls: ['./biglietti-acquistati.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonIcon, CommonModule, FormsModule]
+  imports: [
+    IonBadge,
+    IonIcon,
+    IonButton,
+    IonCardTitle,
+    IonCard,
+    IonCardHeader,
+    IonCardContent,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    RouterLink
+  ]
 })
 export class BigliettiAcquistatiPage implements OnInit {
 
@@ -26,7 +54,8 @@ export class BigliettiAcquistatiPage implements OnInit {
   richiestaEsito = '';
 
   constructor(private clientiService: ClientiService, private tokenService: TokenService) {
-    addIcons({informationCircleOutline});
+    addIcons({informationCircleOutline, createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline, searchOutline, checkmarkCircleOutline});
   }
 
   ngOnInit(){
@@ -34,7 +63,7 @@ export class BigliettiAcquistatiPage implements OnInit {
     this.caricaBiglietti();
   }
 
-  //Funzione che permette di ottenere i biglietti acquistati direttamente dal database 
+  //Funzione che permette di ottenere i biglietti acquistati direttamente dal database
   caricaBiglietti(){
     //Ottengo l'idCliente che serve per inviare la richiesta al servers
     this.clientInfo = this.tokenService.getClientInfo();

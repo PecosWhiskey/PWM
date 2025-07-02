@@ -1,11 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonSelectOption, IonInput,
-  IonSelect, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRadio, 
-  IonLabel, IonChip, IonAlert, IonModal } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';  
-import { informationCircleOutline } from 'ionicons/icons';
+import {
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonButton,
+  IonIcon,
+  IonItem,
+  IonInput,
+  IonSelect,
+  IonSelectOption,
+  IonAlert,
+  IonModal
+} from '@ionic/angular/standalone';
+import { RouterModule, RouterLink } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline,
+  informationCircleOutline, searchOutline, checkmarkCircleOutline, checkmarkDoneOutline, close } from 'ionicons/icons';
 import { BigliettiService } from '../services/biglietti.service';
 import { Biglietto } from '../models/biglietto.models';
 
@@ -14,14 +27,30 @@ import { Biglietto } from '../models/biglietto.models';
   templateUrl: './check-in.page.html',
   styleUrls: ['./check-in.page.scss'],
   standalone: true,
-  imports: [IonModal, IonAlert, IonChip, IonLabel, IonRadio, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, 
-    IonIcon, IonInput, IonSelect, IonSelectOption, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, 
-    FormsModule]
+  imports: [
+    IonIcon,
+    IonButton,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonItem,
+    IonInput,
+    IonSelect,
+    IonSelectOption,
+    IonAlert,
+    IonModal,
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    RouterLink
+  ]
 })
 export class CheckInPage implements OnInit {
 
   constructor(private bigliettiService: BigliettiService) {
-    addIcons({informationCircleOutline});
+    addIcons({informationCircleOutline, createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
+      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline, searchOutline,
+      checkmarkCircleOutline, checkmarkDoneOutline, close});
   }
 
   //Dati necessari per la ricerca del biglietto di cui l'utente desisera fare il check-in
@@ -90,7 +119,7 @@ export class CheckInPage implements OnInit {
         console.log('Search success: ', response);
         this.found = true;
         this.bigliettoTrovato = response.data;
-       
+
         //Ricerca dei posti già prenotati per il volo per cui è stato acquistato il biglietto
         this.idVolo = this.bigliettoTrovato.idVolo;
         console.log("ID VOLO: ", this.idVolo);
@@ -100,8 +129,8 @@ export class CheckInPage implements OnInit {
             this.postiOccupati = response.data;
           },error: (err)=>{
             console.log("Search error: ", err);
-            this.richiestaEsito = err.error.message;     
-           }   
+            this.richiestaEsito = err.error.message;
+           }
         })
       },
        error: (err)=> {
@@ -119,7 +148,7 @@ export class CheckInPage implements OnInit {
 
   //Funzione che gestisce il completamento del check-in
   CheckIn(){
-    //Inizializzo la variabile a false prima di iniziare il ciclo per sovrascrivere il valore precedente 
+    //Inizializzo la variabile a false prima di iniziare il ciclo per sovrascrivere il valore precedente
     this.occupied = false;
     //Verifica che il posto non sia già stato prenotato
     for(let i=0; i<this.postiOccupati.length; i++){
@@ -146,10 +175,10 @@ export class CheckInPage implements OnInit {
         break;
       case 'plus':
         this.prezzo = this.bigliettoTrovato.prezzoFinale * 2;
-        break;  
+        break;
       default:
         this.prezzo = this.bigliettoTrovato.prezzoFinale;
-        break;  
+        break;
     }
     //Creo l'oggetto per inviare i dati al back-end
     const data = {
@@ -180,5 +209,10 @@ export class CheckInPage implements OnInit {
   //Funzione che approssima il prezzo finale del biglietto modificato mostrato
   Approssima(prezzo: number): number {
     return Math.round(prezzo * Math.pow(10, 2)) / Math.pow(10, 2);
+  }
+
+  //Funzione per chiudere la modale
+  closeModal() {
+    this.setModalOpen(false);
   }
 }

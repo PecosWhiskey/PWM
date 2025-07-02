@@ -203,6 +203,15 @@
     (didDismiss)="setOpen(false)">
   </ion-alert>
 
+  <!-- Alert per posto non disponibile -->
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    header="Posto non disponibile!"
+    message="Il posto selezionato è già occupato. Scegli un altro posto."
+    [buttons]="alertButtons"
+    (didDismiss)="setOpen(false)">
+  </ion-alert>
+
   <!-- Modal per biglietto modificato -->
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>

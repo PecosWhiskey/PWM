@@ -12,13 +12,16 @@ import {
   IonSelect,
   IonSelectOption,
   IonAlert,
-  IonModal
+  IonModal,
+  IonTitle,
+  IonButtons
 } from '@ionic/angular/standalone';
 import { RouterModule, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
   calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline,
-  informationCircleOutline, searchOutline, checkmarkCircleOutline, checkmarkDoneOutline, close } from 'ionicons/icons';
+  informationCircleOutline, searchOutline, checkmarkCircleOutline, checkmarkDoneOutline, close, mapOutline,
+  arrowDownOutline, checkmarkCircle, closeCircle, airplane } from 'ionicons/icons';
 import { BigliettiService } from '../services/biglietti.service';
 import { Biglietto } from '../models/biglietto.models';
 
@@ -39,6 +42,8 @@ import { Biglietto } from '../models/biglietto.models';
     IonSelectOption,
     IonAlert,
     IonModal,
+    IonTitle,
+    IonButtons,
     CommonModule,
     FormsModule,
     RouterModule,
@@ -50,7 +55,7 @@ export class CheckInPage implements OnInit {
   constructor(private bigliettiService: BigliettiService) {
     addIcons({informationCircleOutline, createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
       calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline, searchOutline,
-      checkmarkCircleOutline, checkmarkDoneOutline, close});
+      checkmarkCircleOutline, checkmarkDoneOutline, close, mapOutline, arrowDownOutline, checkmarkCircle, closeCircle, airplane});
   }
 
   //Dati necessari per la ricerca del biglietto di cui l'utente desisera fare il check-in
@@ -61,8 +66,9 @@ export class CheckInPage implements OnInit {
   bigliettoTrovato!: Biglietto;
   richiestaEsito = '';
   found = false; //Permette la prosecuzione del check-in se il biglietto è stato trovato
-  numPosti = 10;
-  postiDisponibili = Array.from({ length: this.numPosti}, (_, i) => i + 1);
+
+  // Capienza fissa di tutti i voli: 132 posti
+  readonly CAPIENZA_AEREO = 132;
   postiLettere = ['A', 'B', 'C', 'D', 'E', 'F'];
   postiTotali: string[] = [];
   postiOccupati: any[] = [];
@@ -79,8 +85,33 @@ export class CheckInPage implements OnInit {
   //Variabili che gestiscono l'apertura della modale per mostrare il biglietto modificato
   isModalOpen = false;
 
+  //Variabili che gestiscono l'apertura del modal per la mappa dei posti
+  isSeatMapOpen = false;
+
   setModalOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
+  }
+
+  //Funzioni per gestire il modal della mappa dei posti
+  openSeatMap() {
+    this.isSeatMapOpen = true;
+  }
+
+  closeSeatMap() {
+    this.isSeatMapOpen = false;
+  }
+
+  //Funzione per calcolare il numero di posti disponibili
+  getPostiDisponibili(): number {
+    return this.CAPIENZA_AEREO - this.postiOccupati.length;
+  }
+
+  //Funzione per ottenere la lista dei posti occupati come stringa
+  getPostiOccupatiList(): string {
+    if (this.postiOccupati.length === 0) {
+      return "Nessun posto occupato";
+    }
+    return this.postiOccupati.map(posto => posto.posto).join(', ');
   }
 
   ngOnInit() {
@@ -90,13 +121,16 @@ export class CheckInPage implements OnInit {
       console.log("BIGLIETTO MODIFICATO NGONINIT: ", this.bigliettoModificato);
     });
 
-    for(let i=0; i<this.postiDisponibili.length; i++){
-      const lettera = this.postiLettere[i % this.postiLettere.length]; //'%' permette di ciclare le lettere quando finiscono
-      this.postiTotali.push(lettera + (i+1));
+    // Generiamo tutti i 132 posti dell'aereo
+    for(let i = 1; i <= this.CAPIENZA_AEREO; i++) {
+      const riga = Math.ceil(i / this.postiLettere.length);
+      const letteraIndex = (i - 1) % this.postiLettere.length;
+      const lettera = this.postiLettere[letteraIndex];
+      this.postiTotali.push(riga + lettera);
     }
 
-    console.log("Posti disponibili: ", this.postiDisponibili);
-    console.log("Posti Totali: ", this.postiTotali);
+    console.log(`Aereo con capienza: ${this.CAPIENZA_AEREO} posti`);
+    console.log("Posti Totali generati: ", this.postiTotali.length);
   }
 
   //Variabili e funzione che gestiscono la comparsa dell'alert se il posto scelto dal cliente è già occupato

@@ -163,6 +163,14 @@
                 Seleziona Posto
               </h3>
 
+              <!-- Link per visualizzare la mappa dei posti -->
+              <div class="seat-map-link">
+                <ion-button fill="outline" size="small" (click)="openSeatMap()">
+                  <ion-icon name="map-outline" slot="start"></ion-icon>
+                  Visualizza Mappa Posti
+                </ion-button>
+              </div>
+
               <div class="input-group">
                 <ion-item class="custom-item" [class.item-has-value]="sceltaPosto">
                   <ion-icon name="location-outline" slot="start"></ion-icon>
@@ -292,4 +300,87 @@
       </div>
     </ng-template>
   </ion-modal>
+
+  <!-- Modal per la mappa dei posti -->
+  <ion-modal [isOpen]="isSeatMapOpen" (didDismiss)="closeSeatMap()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Mappa Posti Aereo</ion-title>
+          <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="closeSeatMap()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="seat-map-modal">
+        <div class="seat-map-container">
+          <div class="seat-map-header">
+            <h3>Disposizione Posti Aeromobile</h3>
+            <p>Seleziona il posto che preferisci per il tuo viaggio</p>
+            <div class="scroll-hint">
+              <ion-icon name="arrow-down-outline"></ion-icon>
+              <span>Scorri per vedere tutti i posti</span>
+            </div>
+          </div>
+
+          <div class="seat-map-display">
+            <img src="assets/seat_map.png" alt="Mappa disposizione posti aereo" />
+          </div>
+
+          <div class="seat-legend">
+            <div class="flight-info">
+              <h4>Codice Biglietto: {{idBiglietto}}</h4>
+            </div>
+
+            <div class="seat-stats">
+              <div class="stat-item available-stat">
+                <div class="stat-icon available">
+                  <ion-icon name="checkmark-circle"></ion-icon>
+                </div>
+                <div class="stat-content">
+                  <span class="stat-number">{{getPostiDisponibili()}}</span>
+                  <span class="stat-label">Posti Disponibili</span>
+                </div>
+              </div>
+
+              <div class="stat-item occupied-stat">
+                <div class="stat-icon occupied">
+                  <ion-icon name="close-circle"></ion-icon>
+                </div>
+                <div class="stat-content">
+                  <span class="stat-number">{{postiOccupati.length}}</span>
+                  <span class="stat-label">Posti Occupati</span>
+                </div>
+              </div>
+
+              <div class="stat-item total-stat">
+                <div class="stat-icon total">
+                  <ion-icon name="airplane"></ion-icon>
+                </div>
+                <div class="stat-content">
+                  <span class="stat-number">{{CAPIENZA_AEREO}}</span>
+                  <span class="stat-label">Posti Totali</span>
+                </div>
+              </div>
+            </div>
+
+            @if(postiOccupati.length > 0) {
+              <div class="occupied-seats">
+                <h5>Posti Occupati:</h5>
+                <div class="occupied-list">
+                  @for(posto of postiOccupati; track posto.posto) {
+                    <span class="occupied-seat">{{posto.posto}}</span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>

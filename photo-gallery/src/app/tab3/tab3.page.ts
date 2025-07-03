@@ -68,6 +68,13 @@ import { Router } from '@angular/router';
       //In questo modo verrà visualizzata la sezione "speciale" per l'amministratore
       this.role = adminInfo.role;
     }
+    //Recupero delle informazioni del cliente
+    const clientInfo = this.tokenService.getClientInfo();
+    //Se presenti vuol dire che sta accedendo un cliente
+    if(clientInfo){
+      //In questo modo compariranno solo le sezioni dedicate al cliente
+      this.role = clientInfo.role;
+    }
   }
  
   //Variabili e funzione che gestiscono la comparsa del pop up al click su "Notifiche"

@@ -268,7 +268,7 @@
         <ion-item class="email-input">
           <ion-input placeholder="La tua email" type="email" [(ngModel)]="email"></ion-input>
         </ion-item>
-        <ion-button class="subscribe-btn" [disabled]="isEmailValid()" (click)="setOpen(true)">
+        <ion-button class="subscribe-btn" [disabled]="!isEmailValid()" (click)="setOpen(true)">
           Iscriviti
         </ion-button>
 

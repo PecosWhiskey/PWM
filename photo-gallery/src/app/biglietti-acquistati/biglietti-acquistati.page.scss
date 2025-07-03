@@ -325,7 +325,7 @@
     // Usa rgba per compatibilità
     background: rgba(224, 242, 254, 0.6) !important; // Tema chiaro
 
-    // Override per tema scuro con media query specifica
+    // Override per tema scuro con media query specifica (quando ogni tanto il dark theme fallisce)
     @media (prefers-color-scheme: dark) {
       background: rgba(30, 58, 138, 0.6) !important; // Tema scuro
     }

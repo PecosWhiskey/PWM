@@ -17,8 +17,8 @@ import { BigliettiService } from '../services/biglietti.service';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [RouterModule, RouterLink, CommonModule,FormsModule,IonHeader,IonToolbar,IonTitle,IonContent,ExploreContainerComponent,IonTabs,IonTabBar,IonTabButton,
-    IonIcon,IonLabel,IonButton,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonList,IonItem,IonSelect,IonSelectOption,IonChip,IonBadge,],
+  imports: [RouterModule, RouterLink, CommonModule, FormsModule, IonHeader, IonContent, IonIcon, IonLabel, IonButton, IonCard, IonCardHeader, IonCardTitle,
+     IonCardContent, IonItem,IonSelect,IonSelectOption],
 })
 export class Tab2Page implements OnInit {
 

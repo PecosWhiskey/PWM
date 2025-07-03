@@ -12,7 +12,7 @@ class AuthControllerAdmin{
         const token = jwt.sign(
           {idAdmin: admin.id, email: admin.email, role: 'admin'},
           process.env.JWT_SECRET,
-          { expiresIn: '2h' }
+          { expiresIn: '3h' }
         )
 
         res.status(201).json({

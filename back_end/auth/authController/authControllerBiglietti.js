@@ -74,7 +74,7 @@ class AuthControllerBiglietti {
             const token = jwt.sign( 
                 { idCliente: cliente.idCliente, email: cliente.email, role: 'cliente' },
                 process.env.JWT_SECRET,
-                { expiresIn: '2h' } //Imposta la durata del token a 24 ore
+                { expiresIn: '3h' } //Imposta la durata del token a 3 ore
             );
 
             res.status(200).json({
@@ -99,7 +99,7 @@ class AuthControllerBiglietti {
             const token = jwt.sign( 
                 { idCliente: cliente.idCliente, email: cliente.email, role:'cliente' },
                 process.env.JWT_SECRET,
-                { expiresIn: '2h' } 
+                { expiresIn: '3h' } 
             );
 
             res.status(201).json({

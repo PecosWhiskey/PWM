@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonItem, IonButton, IonInput, IonDatetime, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonPopover, 
+import { IonContent, IonItem, IonButton, IonInput, IonDatetime, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonPopover,
   IonHeader, IonLabel, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 //import { CercaBigliettoService } from './home-service.service';
 import { HomeService } from './home.service';
@@ -14,8 +14,7 @@ import { GestioneVoliService } from '../gestione-voli/gestione-voli.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [RouterLink, RouterModule, IonHeader, RouterModule, IonPopover, IonCardContent, IonCardTitle, IonCardHeader, IonCard, 
-    IonDatetime, IonInput, IonButton, IonItem, IonContent, CommonModule, FormsModule, IonLabel, IonSelect, IonSelectOption, IonTitle, IonToolbar]
+  imports: [RouterModule, RouterModule, IonCardContent, IonCardTitle, IonCardHeader, IonCard, CommonModule, FormsModule]
 })
 export class HomePage {
 

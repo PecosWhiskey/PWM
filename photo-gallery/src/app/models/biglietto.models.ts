@@ -1,4 +1,5 @@
 export class Biglietto{
+    idBiglietto?: number;
     idVolo: string;
     idPasseggero : string;
     tariffa: string;

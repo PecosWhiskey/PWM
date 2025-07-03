@@ -19,7 +19,7 @@ import { Volo } from '../models/volo.models';
 import { RouterModule, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
-  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, 
+  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline,
   searchOutline, informationCircleOutline} from 'ionicons/icons';
 
 @Component({
@@ -28,22 +28,8 @@ import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutl
   styleUrls: ['./voli-disponibili.page.scss'],
   standalone: true,
   imports: [
-    IonBadge,
-    IonIcon,
-    IonButton,
-    IonCardTitle,
-    IonCard,
-    IonCardHeader,
-    IonCardContent,
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    RouterLink
-  ]
+    IonBadge, IonIcon, IonButton, IonCardTitle, IonCard, IonCardHeader, IonCardContent, IonContent, IonHeader, IonToolbar, CommonModule,
+    FormsModule, RouterModule, RouterLink]
 })
 export class VoliDisponibiliPage implements OnInit {
 
@@ -51,7 +37,7 @@ export class VoliDisponibiliPage implements OnInit {
 
   richiestaEsito = '';
 
-  constructor(private gestioneVoliService: GestioneVoliService) { 
+  constructor(private gestioneVoliService: GestioneVoliService) {
     addIcons({ createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
       calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, searchOutline, informationCircleOutline});
   }
@@ -83,7 +69,7 @@ export class VoliDisponibiliPage implements OnInit {
         if(this.richiestaEsito != 'Non ci sono voli disponibili'){
           this.richiestaEsito = 'ERRORE: Non è possibile visualizzare i voli disponibili!';
         }
-      } 
+      }
     })
   }
 

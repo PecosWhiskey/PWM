@@ -20,7 +20,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       console.log("Richiesta di registrazione o login...");
 
       return next(req).pipe(
+        //Se la richiesta viene inoltrata correttamente viene restituto il messaggio corrispondente
         tap(response => console.log("Richiesta effettuata con successo!")),
+        //Se si verifica un errore, questo viene lanciato e propagato al livello superiore
         catchError((httpError: HttpErrorResponse) => {
           console.log("Errore nella richiesta di registrazione o login:", httpError);
           return throwError(() => httpError);

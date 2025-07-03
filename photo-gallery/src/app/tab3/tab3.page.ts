@@ -76,6 +76,15 @@ import { Router } from '@angular/router';
       this.role = clientInfo.role;
     }
   }
+
+  //Rende inattivi tutti gli elementi quando si esce dalla pagina
+  ionViewWillLeave() {
+    //Rimuove il focus da qualsiasi elemento attivo
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
+  }
  
   //Variabili e funzione che gestiscono la comparsa del pop up al click su "Notifiche"
   isAlertOpen = false;

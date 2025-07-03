@@ -85,14 +85,14 @@ export class CheckInPage implements OnInit {
   //Variabili che gestiscono l'apertura della modale per mostrare il biglietto modificato
   isModalOpen = false;
 
-  //Variabili che gestiscono l'apertura del modal per la mappa dei posti
+  //Variabili che gestiscono l'apertura della modale per la mappa dei posti
   isSeatMapOpen = false;
 
   setModalOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
 
-  //Funzioni per gestire il modal della mappa dei posti
+  //Funzioni per gestire l'apertura della modale per la mappa dei posti
   openSeatMap() {
     this.isSeatMapOpen = true;
   }
@@ -106,13 +106,13 @@ export class CheckInPage implements OnInit {
     return this.CAPIENZA_AEREO - this.postiOccupati.length;
   }
 
-  //Funzione per ottenere la lista dei posti occupati come stringa
-  getPostiOccupatiList(): string {
-    if (this.postiOccupati.length === 0) {
-      return "Nessun posto occupato";
-    }
-    return this.postiOccupati.map(posto => posto.posto).join(', ');
-  }
+  // //Funzione per ottenere la lista dei posti occupati come stringa
+  // getPostiOccupatiList(): string {
+  //   if (this.postiOccupati.length === 0) {
+  //     return "Nessun posto occupato";
+  //   }
+  //   return this.postiOccupati.map(posto => posto.posto).join(', ');
+  // }
 
   ngOnInit() {
     //Recupero del biglietto modificato dopo il check-in per mostrarlo all'utente
@@ -121,7 +121,7 @@ export class CheckInPage implements OnInit {
       console.log("BIGLIETTO MODIFICATO NGONINIT: ", this.bigliettoModificato);
     });
 
-    // Generiamo tutti i 132 posti dell'aereo
+    //Generiamo tutti i 132 posti dell'aereo
     for(let i = 1; i <= this.CAPIENZA_AEREO; i++) {
       const riga = Math.ceil(i / this.postiLettere.length);
       const letteraIndex = (i - 1) % this.postiLettere.length;
@@ -130,7 +130,7 @@ export class CheckInPage implements OnInit {
     }
 
     console.log(`Aereo con capienza: ${this.CAPIENZA_AEREO} posti`);
-    console.log("Posti Totali generati: ", this.postiTotali.length);
+    console.log("Posti Totali generati: ", this.postiTotali);
   }
 
   //Variabili e funzione che gestiscono la comparsa dell'alert se il posto scelto dal cliente è già occupato

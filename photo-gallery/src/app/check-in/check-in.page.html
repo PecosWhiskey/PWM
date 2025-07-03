@@ -217,7 +217,7 @@
     </div>
   </div>
 
-  <!-- Modal per biglietto modificato -->
+  <!-- Modale per biglietto modificato -->
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <div class="modal-content">
@@ -301,7 +301,7 @@
     </ng-template>
   </ion-modal>
 
-  <!-- Modal per la mappa dei posti -->
+  <!-- Modale per la mappa dei posti -->
   <ion-modal [isOpen]="isSeatMapOpen" (didDismiss)="closeSeatMap()">
     <ng-template>
       <ion-header>
@@ -371,7 +371,7 @@
               <div class="occupied-seats">
                 <h5>Posti Occupati:</h5>
                 <div class="occupied-list">
-                  @for(posto of postiOccupati; track posto.posto) {
+                  @for(posto of postiOccupati; track $index) {
                     <span class="occupied-seat">{{posto.posto}}</span>
                   }
                 </div>

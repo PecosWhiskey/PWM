@@ -23,7 +23,7 @@
 
   // Reset e base
   .main-content {
-    --padding-top: 0; // Rimuovi padding top per evitare sovrapposizioni
+    --padding-top: 0; // Rimuove padding top per evitare sovrapposizioni
     --background: var(--vaygo-background);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -39,7 +39,7 @@
 
     ion-toolbar {
       --background: var(--vaygo-white);
-      background: var(--vaygo-white) !important; // Force non-transparency
+      background: var(--vaygo-white) !important; 
       --color: var(--vaygo-text-primary);
       --padding-start: 16px;
       --padding-end: 16px;
@@ -95,13 +95,13 @@
 
   // Hero Section
   .hero-section {
-    padding: 20px 20px 60px; // Ridotto il padding top
+    padding: 20px 20px 60px;
     min-height: 500px;
     background: url('../assets/Wallpaper_Background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    margin-top: 0; // Rimuovi qualsiasi margine top
+    margin-top: 0;
   }
   .hero-content {
     max-width: 1200px;
@@ -118,7 +118,7 @@
 
   .hero-text {
     .hero-title {
-      font-size: clamp(28px, 5vw, 48px);
+      font-size: clamp(28px, 5vw, 48px); //valore minimo, 5% della larghezza dello schermo, valore massimo
       font-weight: 800;
       line-height: 1.1;
       color: var(--vaygo-text-primary);
@@ -127,7 +127,7 @@
     }
     .claim {
       color: var(--ion-color-step-950);
-      font-size: 1.2rem;
+      font-size: 1.2rem;  //definisce una grandezza del font di circa il 20% più grande rispetto al normale (ovvero rispetto al font della root, che di default è 16px)
       text-align: center;
       padding: 1rem;
       line-height: 1.5;
@@ -210,12 +210,14 @@
     position: relative;
 
     strong {
+      //Per la modalità chiara il testo è colorato seguendo il gradiente
       background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
 
       @media (prefers-color-scheme: dark) {
+        //Per la modalità scura il testo è colorato di un colore uniforme
         -webkit-text-fill-color: var(--vaygo-primary);
         background: none;
       }
@@ -228,10 +230,10 @@
     &:hover {
       transform: translateX(4px);
       letter-spacing: -0.5px;
-      color: var(--vaygo-secondary); // Cambia colore al hover
+      color: var(--vaygo-secondary);
     }
 
-    // Elemento decorativo opzionale
+    // Elemento decorativo
     &::after {
       content: '';
       position: absolute;
@@ -438,10 +440,10 @@
     gap: 20px;
     overflow-x: auto;
     padding: 0 20px 20px 0;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory; //scorrimento orizzontale che si ferma su un determinato snap
 
     &::-webkit-scrollbar {
-      display: none;
+      display: none; //rende invisibile la barra di scroll
     }
   }
 
@@ -451,7 +453,7 @@
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 20px var(--vaygo-shadow);
-    scroll-snap-align: start;
+    scroll-snap-align: start; //ogni card rappresenta uno snap
     transition: transform 0.3s ease;
     cursor: pointer;
 
@@ -565,7 +567,7 @@
   .newsletter-form {
     display: flex;
     gap: 12px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; //se non c'è più spazio gli elementi vanno a capo automaticamente senza comprimersi in un'unica riga
 
     .email-input {
       flex: 1;
@@ -584,7 +586,7 @@
       --background: rgba(255, 255, 255, 0.2);
       --color: var(--vaygo-white);
       --border-radius: 12px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); //sfoca di 10px tutti gli elementi che stanno dietro
       font-weight: 600;
       min-width: 120px;
 
@@ -705,6 +707,7 @@ ion-popover {
         border-radius: 8px;
         transition: all 0.2s ease;
 
+        //stile applicato solo agli elementi che non hanno la classe ".calendar-day-disabled" e solo sull'hover
         &:not(.calendar-day-disabled):hover {
           background: var(--vaygo-blue-light);
           color: var(--vaygo-primary);

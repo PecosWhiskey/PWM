@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  IonContent,
-  IonHeader,
-  IonToolbar,
-  IonCardContent,
-  IonCardHeader,
-  IonCard,
-  IonCardTitle,
-  IonButton,
-  IonIcon,
-  IonBadge
-} from '@ionic/angular/standalone';
+import {IonContent, IonBadge, IonIcon,IonButton, IonCardTitle, IonCard, IonCardHeader, IonCardContent, IonHeader, IonToolbar } from '@ionic/angular/standalone';
 import { ClientiService } from '../services/clienti.service';
 import { TokenService } from '../services/token.service';
 import { Biglietto } from '../models/biglietto.models';
@@ -79,5 +68,10 @@ export class BigliettiAcquistatiPage implements OnInit {
         this.richiestaEsito = "Non è possibile visualizzare i biglietti acquistati!";
        }
     })
+  }
+
+  //Funzione che approssima il prezzo finale del biglietto modificato mostrato
+  Approssima(prezzo: number): number {
+    return Math.round(prezzo * Math.pow(10, 2)) / Math.pow(10, 2);
   }
 }

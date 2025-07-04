@@ -10,7 +10,7 @@ function verifyToken(req, res, next){
   //Verifica se il token è valido, confrontandolo con la chiave con cui è stato firmato
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
-      return res.status(403).json({ message: 'Token non valido o scaduto' });
+      return res.status(403).json({ message: 'Token non valido' });
     }
     //aggiunge un nuovo campo alla richiesta "req.user" che contiene il payload del token ovvero idCliente ed email,
     req.user = decoded;

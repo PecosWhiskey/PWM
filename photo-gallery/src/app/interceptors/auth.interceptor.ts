@@ -59,7 +59,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           //cattura eventuali errori
           catchError((httpError: HttpErrorResponse) => {
             if (httpError.status === 401 || httpError.status === 403) {
-              console.log('Token scaduto o non valido! Reindirizzamento al login...');
+              console.log('Token non valido! Reindirizzamento al login...');
               logout(tokenService, router);
             }  
             console.log("Errore nella richiesta http", httpError);

@@ -1,5 +1,3 @@
-// Tab3 - Profile Page Styles con supporto della modalità chiara/scura
-
 // Variabili per la modalità giorno(default)
 :root {
   // Profile specific colors - Light Mode
@@ -11,17 +9,17 @@
   --tab3-border: var(--vaygo-border);
   --tab3-shadow: var(--vaygo-shadow);
   --tab3-shadow-medium: var(--vaygo-shadow-medium);
-  
+
   // Profile header gradient - Light Mode
   --tab3-header-gradient: linear-gradient(135deg, var(--vaygo-primary) 0%, var(--vaygo-secondary) 100%);
   --tab3-avatar-bg: var(--vaygo-white);
   --tab3-avatar-shadow: rgba(0, 0, 0, 0.1);
-  
+
   // Menu and cards - Light Mode
   --tab3-card-bg: var(--vaygo-white);
   --tab3-card-hover: rgba(102, 126, 234, 0.05);
   --tab3-divider: var(--vaygo-border);
-  
+
   // Status colors
   --tab3-success: var(--vaygo-success);
   --tab3-warning: var(--vaygo-warning);
@@ -87,7 +85,7 @@
   --padding-bottom: 0;
   --background: var(--tab3-bg);
   //cambio graduale del colore dello sfondo dell'elemento
-  transition: background-color var(--vaygo-transition-base); 
+  transition: background-color var(--vaygo-transition-base);
 }
 
 // Main Containers
@@ -453,7 +451,7 @@
   max-width: 280px;
   display: block;
   transition: all var(--vaygo-transition-base);
-  
+
   &:disabled {
     opacity: 0.6;
   }
@@ -470,7 +468,7 @@
   text-align: center;
   display: block;
   margin: 0 auto;
-  
+
   &:hover {
     --background: linear-gradient(135deg, #059669 0%, #1D4ED8 100%);
     transform: translateY(-1px);
@@ -513,7 +511,7 @@
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  
+
   .form-group {
     width: 100%;
     margin-bottom: var(--vaygo-spacing-md);
@@ -590,7 +588,7 @@
 
   .form-footer {
     margin-top: var(--vaygo-spacing-md);
-    
+
     p {
       font-size: var(--vaygo-font-size-xs);
       line-height: 1.3;
@@ -690,7 +688,7 @@
   font-weight: 600;
   height: 56px;
   transition: all var(--vaygo-transition-base);
-  
+
   &:disabled {
     opacity: 0.6;
   }
@@ -704,7 +702,7 @@
   font-weight: 600;
   text-transform: none;
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
-  
+
   &:hover {
     --background: linear-gradient(135deg, #059669 0%, #1D4ED8 100%);
     transform: translateY(-1px);
@@ -742,21 +740,21 @@
   .logged-out-container {
     padding: var(--vaygo-spacing-md);
   }
-  
+
   .profile-stats {
     grid-template-columns: 1fr;
     gap: var(--vaygo-spacing-sm);
   }
-  
+
   .profile-header {
     padding: var(--vaygo-spacing-lg);
     margin-bottom: var(--vaygo-spacing-md);
   }
-  
+
   .profile-avatar {
     width: 100px;
     height: 100px;
-    
+
     .avatar-icon {
       font-size: 40px;
     }
@@ -815,7 +813,7 @@
 @media (min-width: 769px) {
   .menu-item {
     transition: all var(--vaygo-transition-base);
-    
+
     &:hover {
       --background: var(--tab3-card-hover);
       transform: translateX(4px);
@@ -824,7 +822,7 @@
 
   .stat-card {
     transition: all var(--vaygo-transition-base);
-    
+
     &:hover {
       transform: translateY(-4px);
       box-shadow: 0 8px 32px var(--tab3-shadow-medium);

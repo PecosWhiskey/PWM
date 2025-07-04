@@ -80,11 +80,18 @@ class AuthServiceBiglietti {
     static async loginCliente(credenziali){
         try{
             const cliente = await biglietti.findByEmail(credenziali.email);
-            console.log("Risultato di findbyemail: ", cliente);
-            const pass = await biglietti.comparePassword(credenziali.password, cliente.password);
-            if(!cliente || !pass){
+            
+            //Se il cliente non viene trovato le credenziali non sono sicuramente valide e non è neccessario proseguire oltre
+            if(!cliente){
                 throw new Error('Credenziali non valide!');
             }
+
+            const pass = await biglietti.comparePassword(credenziali.password, cliente.password);
+
+            if(!pass){
+                throw new Error('Credenziali non valide!');
+            }
+
             return cliente;
         }catch(err){
             console.log("ERRORE SERVICE BIGLIETTI: ", err.message);

@@ -25,6 +25,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     } 
   } catch (error) { 
     console.error('Errore controllo autenticazione:', error);
-    router.navigate(['/tabs/tab3']); return false; 
+    router.navigate(['/tabs/tab3']); 
+    return false; 
   }
 };

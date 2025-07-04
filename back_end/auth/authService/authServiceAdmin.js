@@ -6,10 +6,14 @@ class AuthServiceAdmin {
       console.log("loginAdmin service: ", email, password)  
       try{
             const user = await admin.findByEmail(email);  
-            console.log("Risultato findbyEmail: ",user);
+           
+            if(!user){
+                throw new Error("Credenziali non valide!");
+            }
+
             const pass = await admin.comparePassword(password, user.password);
 
-            if(!user || !pass ){
+            if(!pass ){
                 throw new Error("Credenziali non valide!");
             }
 

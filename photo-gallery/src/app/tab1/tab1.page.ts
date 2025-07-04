@@ -145,7 +145,7 @@ export class Tab1Page {
   }
 
   //Funzione che inverte la città di partenza con quella di destinazione
-  invertiCittà(){
+  invertiCitta(){
     const temp = this.partenza;
     this.partenza = this.destinazione;
     this.destinazione = temp;

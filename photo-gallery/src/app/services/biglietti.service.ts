@@ -135,4 +135,10 @@ export class BigliettiService {
       postiDisponibili: 0
     });
   }
+
+  //Funzione che resetta il numero di biglietti creati quando si esce dalla pagina "crea-biglietto"
+  resetBigliettiCreati() {
+    this.numBigliettiCreatiAndata.next(0);
+    this.numBigliettiCreatiRitorno.next(0);
+  }
 }

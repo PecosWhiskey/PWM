@@ -1,3 +1,4 @@
+const { modificaBiglietto } = require('../models/biglietti');
 const db = require('./dbBiglietti');
 
 async function inserisciPosizione(citta, stato, latitudine, longitudine){
@@ -239,15 +240,15 @@ async function modificaPasseggero({idPasseggeroCorrente, idPasseggeroModificato,
             });
     }
 
-async function modificaBigliettoPosto({idBiglietto, posto}){
+async function modificaBigliettoPosto({idVolo, idPasseggero, posto}){
             return new Promise((resolve,reject)=>{
-                db.run('UPDATE Biglietto SET posto=? WHERE idBiglietto = ?', 
-                    [posto, idBiglietto], function(err){
+                db.run('UPDATE Biglietto SET posto=? WHERE idVolo = ? AND idPasseggero=?', 
+                    [posto, idVolo, idPasseggero], function(err){
                         if(err){
                             reject(err);
                             return;
                         }
-                        resolve({idPasseggeroModificato, idBiglietto});
+                        resolve({idVolo, idPasseggero, posto});
                     });
             });
     }    
@@ -294,4 +295,4 @@ async function visualizzaPasseggeri(){
 // inserisciAeroporto("MXP", "Malpensa", 3);
 // inserisciAeroporto("LIN", "Linate", 4);
 
-visualizzaBigliettiID("GPPVDI64H89D543S");
+visualizzaPasseggeri();

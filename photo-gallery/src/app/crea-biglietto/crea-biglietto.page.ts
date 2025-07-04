@@ -149,6 +149,14 @@ export class CreaBigliettoPage implements OnInit {
     this.bigliettiService.getnumBigliettiCreatiRitorno().subscribe(numero => {
       this.numBigliettiCreatiRitorno = numero;
     });
+
+    console.log("Biglietto andata: ", this.bigliettoAndata);
+    console.log("Biglietto ritorno: ", this.bigliettoRitorno);
+  }
+
+  //Quando si esce dalla pagina il numero di biglietti creati viene resettato
+  ionViewWillLeave(){
+    this.bigliettiService.resetBigliettiCreati();
   }
 
   //Funzione che verifica che i campi del biglietto non siano uguali a valori nulli
@@ -197,6 +205,9 @@ export class CreaBigliettoPage implements OnInit {
           prezzoFinale: this.bigliettoAndata.prezzo,
           dataAcquisto: this.dataAcquisto
         }
+
+        console.log("id volo biglietto andata: ", this.bigliettoAndata);
+        console.log("ID VOLO: ", datiAndata.idVolo);
 
         this.bigliettiService.CreaBiglietto(datiAndata).subscribe({
           next: (response) => {

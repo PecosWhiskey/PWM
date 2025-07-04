@@ -4,14 +4,14 @@ const authControllerAdmin = require('../authController/authControllerAdmin');
 const authControllerBiglietti = require('../authController/authControllerBiglietti');
 const verifyToken = require('../../middlewares/verifyToken'); //Middleware per verificare il token JWT
 const onlyAdmin = require('../../middlewares/onlyAdmin');
-const { loginValidatorAdmin, loginValidatorClient, registerValidatorClient, datiVoloValidator, idVoloValidator, 
+const { loginValidator, registerValidatorClient, datiVoloValidator, idVoloValidator, 
     creationTicketsValidator, createPassengerValidator, idClienteValidator, idTicketValidator, validate } = require('../authValidators/authValidators');
 
 // Login Admin
-router.post('/login-admin', loginValidatorAdmin, validate, authControllerAdmin.login);
+router.post('/login-admin', loginValidator, validate, authControllerAdmin.login);
 
 //Creazione di un nuovo volo
-router.post('/creazione-volo', datiVoloValidator, validate, verifyToken, onlyAdmin, authControllerBiglietti.voloCreation);
+router.post('/creazione-volo', idVoloValidator, datiVoloValidator, validate, verifyToken, onlyAdmin, authControllerBiglietti.voloCreation);
 
 //Modifica di un volo
 router.post('/modifica-volo', idVoloValidator, datiVoloValidator, validate, verifyToken, onlyAdmin, authControllerBiglietti.voloModification);
@@ -29,19 +29,16 @@ router.post('/decremento-posti', idVoloValidator, authControllerBiglietti.decres
 router.post('/ricerca-volo', authControllerBiglietti.voloSearch);
 
 //Login del cliente
-router.post('/login-cliente', loginValidatorClient, validate, authControllerBiglietti.loginClient);
+router.post('/login-cliente', loginValidator, validate, authControllerBiglietti.loginClient);
 
 //Registrazione del cliente
-router.post('/registrazione-cliente', registerValidatorClient, validate, authControllerBiglietti.registerClient);
+router.post('/registrazione-cliente', idClienteValidator, registerValidatorClient, validate, authControllerBiglietti.registerClient);
 
 //Creazione del biglietto
 router.post('/creazione-biglietto', creationTicketsValidator, validate, authControllerBiglietti.createTicket);
 
 //Ricerca dei posti già occupati sull'aereo
 router.post('/posti-occupati', idVoloValidator, validate, authControllerBiglietti.getPosti);
-
-//Ricerca del biglietto per effettuare il check-in
-// router.post('/ricerca-biglietto', idTicketValidator, validate, authControllerBiglietti.findTicket);
 
 //Ricerca del biglietto per effettuare il check-in
 router.post('/cerca-biglietto', idTicketValidator, validate, authControllerBiglietti.returnForCheckIn);

@@ -104,6 +104,8 @@ import { Router } from '@angular/router';
   //Funzione che gestisce la visualizzazione di un form rispetto ad un altro in base alla scelta dell'utente
   changeForm(){
     this.form = 'Registrazione';
+    this.email = '';
+    this.password = '';
   } 
 
   //Funzione che reindirizza alla pagina di visualizzazione dei biglietti acquistati dal cliente
@@ -127,9 +129,9 @@ import { Router } from '@angular/router';
           
             //SI PUO' TOGLIERE PRIMA DI CONSEGNARE IL PROGETTO
             //Recupero dei dati appena salvati per verificare che siano stati salvati correttamente
-            const token = this.tokenService.getToken();
+            // const token = this.tokenService.getToken();
             const clientInfo = this.tokenService.getClientInfo();
-            console.log('Token salvato: ', token);
+            // console.log('Token salvato: ', token);
             console.log('Client info salvate: ', clientInfo);
 
             this.role = clientInfo.role;
@@ -193,9 +195,9 @@ import { Router } from '@angular/router';
 
             //SI PUO' TOGLIERE PRIMA DI CONSEGNARE IL PROGETTO
             //Recupero dei dati appena salvati per verificare che siano stati salvati correttamente
-            const token = this.tokenService.getToken();
+            // const token = this.tokenService.getToken();
             const clientInfo = this.tokenService.getClientInfo();
-            console.log('Token salvato: ', token);
+            // console.log('Token salvato: ', token);
             console.log('Client info salvate: ', clientInfo);
 
             this.role = clientInfo.role;
@@ -239,12 +241,12 @@ import { Router } from '@angular/router';
           
             //SI PUO' TOGLIERE PRIMA DI CONSEGNARE IL PROGETTO
             //Recupero dei dati appena salvati per verificare che siano stati salvati correttamente
-            const token = this.tokenService.getToken();
+            // const token = this.tokenService.getToken();
             const adminInfo = this.tokenService.getAdminInfo();
             //Ricava il ruolo dalle informazioni ottenute dal payload del token, che sarà admin
             this.role = adminInfo.role;
 
-            console.log("Token e dati dell'amministratore  salvati con successo", token);
+            // console.log("Token e dati dell'amministratore  salvati con successo", token);
             console.log('Admin info: ', adminInfo);
 
             //Verifica che l'amministratores sia autenticato

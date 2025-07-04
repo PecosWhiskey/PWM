@@ -144,8 +144,8 @@ export class Tab1Page {
       }
   }
 
-  //Swap function to exchange departure and destination cities
-  swapDestinations(){
+  //Funzione che inverte la città di partenza con quella di destinazione
+  invertiCittà(){
     const temp = this.partenza;
     this.partenza = this.destinazione;
     this.destinazione = temp;

@@ -309,7 +309,7 @@ export class CreaBigliettoPage implements OnInit {
     });
   }
 
-  // Metodo per tornare indietro
+  //Funzione per tornare alla pagina precedente
   goBack() {
     this.location.back();
   }

@@ -1,5 +1,4 @@
-
-// Header personalizzato
+//Stile per l'header
 .custom-header {
   --background: var(--vaygo-white);
   --border-color: var(--vaygo-border);
@@ -52,17 +51,24 @@
     width: 40px;
     height: 40px;
     --border-radius: 12px;
+
+    //Ingrandimento e modifica del colore per il bottone e quindi l'icona
+    &:hover {
+      --color: var(--vaygo-primary);
+      transform: scale(1.05);
+      transition: all 0.3s ease;
+    }
   }
 }
 
-// Container principale
+//Container principale
 .gestione-voli-container {
   min-height: 100vh;
   background: var(--vaygo-background);
   padding: 20px;
 }
 
-// Menu di Navigazione
+//Menu di Navigazione
 .voli-navigation-menu {
   background: var(--vaygo-white);
   border-radius: 16px;
@@ -101,24 +107,24 @@
       transition: all 0.3s ease;
       position: relative;
 
-      &::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: transparent;
-        transition: all 0.3s ease;
-      }
+      // &::before {
+      //   content: '';
+      //   position: absolute;
+      //   bottom: 0;
+      //   left: 0;
+      //   right: 0;
+      //   height: 3px;
+      //   background: transparent;
+      //   transition: all 0.3s ease;
+      // }
 
       &.active {
         --background: var(--vaygo-blue-light);
         --color: var(--vaygo-primary);
 
-        &::before {
-          background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-        }
+        // &::before {
+        //   background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+        // }
       }
 
       &:hover:not(.active) {
@@ -134,7 +140,7 @@
   }
 }
 
-// Container prenotazioni
+//Container prenotazioni
 .prenotazioni-container {
   background: var(--vaygo-white);
   border-radius: 16px;
@@ -163,7 +169,7 @@
   }
 }
 
-// Grid delle prenotazioni
+//Grid delle prenotazioni
 .biglietti-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -175,7 +181,7 @@
   }
 }
 
-// Card delle prenotazioni
+//Card delle prenotazioni
 .prenotazione-card {
   --background: var(--vaygo-white);
   border-radius: 16px;
@@ -319,27 +325,26 @@
     border: 1px solid var(--vaygo-border);
     position: relative;
 
-    // Usa rgba per compatibilità
     background: rgba(224, 242, 254, 0.6) !important; // Tema chiaro
 
-    // Override per tema scuro con media query specifica (quando ogni tanto il dark theme fallisce)
+    // Override per tema scuro con media query specifica
     @media (prefers-color-scheme: dark) {
       background: rgba(30, 58, 138, 0.6) !important; // Tema scuro
     }
 
     // Fallback con ::before se necessario
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--vaygo-blue-light);
-      border-radius: 12px;
-      z-index: -1;
-      opacity: 0.8;
-    }
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   right: 0;
+    //   bottom: 0;
+    //   background: var(--vaygo-blue-light);
+    //   border-radius: 12px;
+    //   z-index: -1;
+    //   opacity: 0.8;
+    // }
 
     ion-icon {
       font-size: 16px;
@@ -360,7 +365,7 @@
   }
 }
 
-// Empty state
+//Stile empty state
 .empty-state {
   text-align: center;
   padding: 60px 20px;
@@ -431,7 +436,7 @@
   }
 }
 
-// Responsive
+//Gestione schermi più piccoli
 @media (max-width: 768px) {
   .gestione-voli-container {
     padding: 16px;
@@ -472,7 +477,7 @@
   }
 }
 
-// Supporto tema scuro
+//Stile tema scuro
 @media (prefers-color-scheme: dark) {
   .custom-header {
     --background: var(--vaygo-white);

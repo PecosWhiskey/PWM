@@ -1,14 +1,13 @@
-// Stili per la pagina crea-biglietto con tema VayGo
 ion-content {
   --padding-start: 20px;
   --padding-end: 20px;
-  --padding-top: 24px; // Aggiungi padding top per compensare l'header
+  --padding-top: 24px; 
   --background: var(--vaygo-background);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--vaygo-text-primary);
 }
 
-// Stili per il form con tema VayGo
+//Stile per il form
 form {
   background: var(--vaygo-white);
   border-radius: 16px;
@@ -40,9 +39,9 @@ form {
       box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
     }
 
-    &:last-of-type {
-      margin-bottom: 24px;
-    }
+    // &:last-of-type {
+    //   margin-bottom: 24px;
+    // }
 
     ion-input {
       --color: var(--vaygo-text-primary);
@@ -65,7 +64,7 @@ form {
     }
   }
 
-  // Stile per il bottone con tema VayGo
+  //Stile per il bottone
   ion-button {
     margin-top: 32px;
     margin-bottom: 20px;
@@ -95,13 +94,13 @@ form {
       --background: var(--vaygo-text-secondary);
       --color: var(--vaygo-white);
       opacity: 0.6;
-      transform: none;
+      transform: none; //rimozione delle trasformazioni quando il bottone è disabilitato
       --box-shadow: none;
     }
   }
 }
 
-// Stili per i titoli
+//Stile per i titoli
 h1 {
   color: var(--vaygo-primary);
   font-weight: 700;
@@ -119,7 +118,7 @@ h3 {
   line-height: 1.5;
 }
 
-// Stili per le card dei risultati (riepilogo biglietti)
+//Stile per le card dei risultati (riepilogo biglietti)
 .results-card {
   --background: var(--vaygo-white);
   border-radius: 16px;
@@ -168,7 +167,7 @@ h3 {
   }
 }
 
-// Stili specifici per gli input
+//Stile specifico per gli input
 ion-input {
   --padding-start: 16px;
   --padding-end: 16px;
@@ -176,33 +175,39 @@ ion-input {
   --padding-bottom: 12px;
   --color: var(--vaygo-text-primary);
 
+  //Stile per input di tipo "date"
   &[type="date"] {
     --padding-top: 14px;
 
-    &::-webkit-calendar-picker-indicator {
-      filter: brightness(0) saturate(100%) invert(38%) sepia(87%) saturate(492%) hue-rotate(118deg) brightness(92%) contrast(88%);
-      opacity: 0.8;
-      cursor: pointer;
+    //Indica l'icona del calendario
+    // &::-webkit-calendar-picker-indicator {
+    //   filter: brightness(0) saturate(100%) invert(38%) sepia(87%) saturate(492%) hue-rotate(118deg) brightness(92%) contrast(88%);
+    //   opacity: 0.8;
+    //   cursor: pointer;
 
-      &:hover {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-    }
+    //   &:hover {
+    //     opacity: 1;
+    //     transform: scale(1.1);
+    //   }
+    // }
   }
 }
 
-// Stile per gli item con data
+//Stile per l' item con data
+
+//Item con proprietà "lines"
 ion-item[lines="full"] {
   background: var(--vaygo-background);
   border-radius: 12px;
 
+  //Label con proprietà "stacked"
   ion-label[position="stacked"] {
     margin-bottom: 12px;
     font-size: 13px;
     position: relative;
     color: var(--vaygo-primary);
 
+    //Definisce la linea visibile sotto la parola "Data"
     &::after {
       content: '';
       position: absolute;
@@ -216,7 +221,7 @@ ion-item[lines="full"] {
   }
 }
 
-// Animazioni per l'ingresso del form
+//Animazioni per l'ingresso del form. Gli elementi appaiono dal basso verso l'lato
 @keyframes slideInUp {
   from {
     opacity: 0;
@@ -235,15 +240,18 @@ form {
     animation: slideInUp 0.6s ease-out;
     animation-fill-mode: both;
 
+    //Crea un ritardo per ciascun ion-item, così da apparire uno dopo l'altro e non contemporaneamente
     @for $i from 1 through 10 {
+      //Indica l'ennesimo elemento "ion-item"
       &:nth-child(#{$i}) {
+        //Applica il ritardo di 0.1 secondi nella comparsa dell'ennesimo item
         animation-delay: #{$i * 0.1}s;
       }
     }
   }
 }
 
-// Stili responsivi
+//Gestione schermi più piccoli
 @media (max-width: 768px) {
   ion-content {
     --padding-start: 16px;
@@ -260,16 +268,16 @@ form {
   }
 }
 
-// Supporto per il tema scuro migliorato
+//Stile tema scuro
 @media (prefers-color-scheme: dark) {
   ion-input[type="date"] {
-    &::-webkit-calendar-picker-indicator {
-      filter: brightness(0) saturate(100%) invert(64%) sepia(91%) saturate(2976%) hue-rotate(115deg) brightness(101%) contrast(89%);
-    }
+    // &::-webkit-calendar-picker-indicator {
+    //   filter: brightness(0) saturate(100%) invert(64%) sepia(91%) saturate(2976%) hue-rotate(115deg) brightness(101%) contrast(89%);
+    // }
   }
 }
 
-// Accessibilità
+//Riduzione delle animazioni per l'utente che ha impostato questa opzione nel suo sistema
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -278,16 +286,15 @@ form {
   }
 }
 
-// Stili per l'header personalizzato
+//Stile per l'header
 .custom-header {
   --background: var(--vaygo-white);
   box-shadow: 0 2px 8px var(--vaygo-shadow);
   border-bottom: 1px solid var(--vaygo-border);
-  // Rimuovi la trasparenza
   --opacity: 1;
 
   ion-toolbar {
-    --background: var(--vaygo-white); // Cambiato da transparent
+    --background: var(--vaygo-white); 
     --color: var(--vaygo-text-primary);
     --padding-start: 16px;
     --padding-end: 16px;

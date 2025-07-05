@@ -54,7 +54,7 @@
   }
 }
 
-// Reset e configurazione base
+//Configurazione base
 ion-content {
   --background: var(--vaygo-background);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -62,20 +62,20 @@ ion-content {
 }
 
 // Header personalizzato
-ion-header {
-  & // Header personalizzato
-  .custom-header {
-    --background: var(--vaygo-white);
-    --border-color: var(--vaygo-border);
-    box-shadow: 0 1px 3px var(--vaygo-shadow);
+// ion-header {
+//   & // Header personalizzato
+//   .custom-header {
+//     --background: var(--vaygo-white);
+//     --border-color: var(--vaygo-border);
+//     box-shadow: 0 1px 3px var(--vaygo-shadow);
 
-    ion-toolbar {
-      --background: transparent;
-      --color: var(--vaygo-text-primary);
-      padding: 0 20px;
-    }
-  }
-}
+//     ion-toolbar {
+//       --background: transparent;
+//       --color: var(--vaygo-text-primary);
+//       padding: 0 20px;
+//     }
+//   }
+// }
 
 // Contenuto principale
 .results-content {
@@ -174,6 +174,7 @@ ion-header {
         --color: var(--vaygo-text-secondary);
         font-weight: 500;
 
+        //Colora il testo del componente ion-select
         &::part(text) {
           color: var(--vaygo-secondary);
         }
@@ -197,6 +198,7 @@ ion-header {
     box-shadow: 0 0 20px rgba(46, 139, 87, 0.4), 0 4px 20px var(--vaygo-shadow);
     transform: translateY(-2px);
 
+    //Stile per tema scuro
     @media (prefers-color-scheme: dark) {
       box-shadow: 0 0 25px rgba(52, 211, 153, 0.5), 0 4px 20px var(--vaygo-shadow);
       border-color: var(--vaygo-accent);
@@ -228,7 +230,7 @@ ion-header {
         }
       }
 
-      // Riduci la larghezza del titolo quando è selezionato per fare spazio al bollino
+      //Riduce la larghezza del titolo quando è selezionato per fare spazio al bollino
       ion-card-title {
         .flight-route {
           margin-right: 40px; // Spazio per il bollino
@@ -253,7 +255,7 @@ ion-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
+      width: 100%; //occupa tutta la grandezza dell'elemento genitore
 
       .flight-route {
         display: flex;
@@ -295,7 +297,7 @@ ion-header {
     padding: 20px 24px;
     color: var(--vaygo-text-primary);
 
-    // Contenitore per gli orari con layout flex
+    //Stile per il contenitore degli orari
     .flight-times {
       display: flex;
       justify-content: space-between;
@@ -313,7 +315,7 @@ ion-header {
         text-align: right;
       }
 
-      // Separatore centrale opzionale
+      //Separatore centrale
       .time-separator {
         color: var(--vaygo-text-secondary);
         opacity: 0.6;
@@ -321,38 +323,39 @@ ion-header {
       }
     }
 
-    // Prezzo con margine aggiustato
+    //Stile per il div che contiene il prezzo
     .price {
       font-size: 20px;
       font-weight: 700;
       color: var(--vaygo-primary);
       margin: 12px 0;
-      text-align: center; // Centrato per bilanciare il layout
+      text-align: center; 
     }
 
     // Stili esistenti per i paragrafi (per retrocompatibilità)
-    p {
-      margin: 8px 0;
-      font-size: 16px;
+    // p { //?????????????????????????????????????????????????????????????????????????'
+    //   margin: 8px 0;
+    //   font-size: 16px;
 
-      &:first-child {
-        font-weight: 600;
-        color: var(--vaygo-text-secondary);
-      }
+    //   &:first-child {
+    //     font-weight: 600;
+    //     color: var(--vaygo-text-secondary);
+    //   }
 
-      &:last-of-type {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--vaygo-primary);
-        margin: 12px 0;
-      }
-    }
+    //   &:last-of-type {
+    //     font-size: 20px;
+    //     font-weight: 700;
+    //     color: var(--vaygo-primary);
+    //     margin: 12px 0;
+    //   }
+    // }
 
     ion-button {
       margin: 8px 8px 8px 0;
       --border-radius: 12px;
       font-weight: 600;
 
+      //Per i bottoni che non hanno l'attributo fill
       &:not([fill]) {
         --background: var(--vaygo-primary);
         --color: var(--vaygo-white);
@@ -360,7 +363,7 @@ ion-header {
     }
   }
 
-  // Aggiustamenti per card selezionate
+  //Aggiustamenti per card selezionate
   &.selected {
     ion-card-content {
       .flight-times {
@@ -371,161 +374,161 @@ ion-header {
 }
 
 // Singola combinazione di volo
-.combo-card {
-  --background: var(--vaygo-white);
-  border-radius: 16px;
-  border: 2px solid var(--vaygo-border);
-  margin-bottom: 20px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px var(--vaygo-shadow);
+// .combo-card {
+//   --background: var(--vaygo-white);
+//   border-radius: 16px;
+//   border: 2px solid var(--vaygo-border);
+//   margin-bottom: 20px;
+//   overflow: hidden;
+//   transition: all 0.3s ease;
+//   box-shadow: 0 4px 12px var(--vaygo-shadow);
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px var(--vaygo-shadow-medium);
-    border-color: var(--vaygo-secondary);
-  }
+//   &:hover {
+//     transform: translateY(-2px);
+//     box-shadow: 0 8px 25px var(--vaygo-shadow-medium);
+//     border-color: var(--vaygo-secondary);
+//   }
 
-  ion-card-header {
-    background: linear-gradient(135deg, var(--vaygo-green-light), var(--vaygo-blue-light));
-    padding: 20px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
+//   ion-card-header {
+//     background: linear-gradient(135deg, var(--vaygo-green-light), var(--vaygo-blue-light));
+//     padding: 20px 24px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     gap: 12px;
 
-    ion-badge {
-      --background: var(--vaygo-success);
-      --color: var(--vaygo-white);
-      font-weight: 600;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+//     ion-badge {
+//       --background: var(--vaygo-success);
+//       --color: var(--vaygo-white);
+//       font-weight: 600;
+//       padding: 8px 12px;
+//       border-radius: 8px;
+//       font-size: 12px;
+//       text-transform: uppercase;
+//       letter-spacing: 0.5px;
+//     }
 
-    h2 {
-      margin: 0;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--vaygo-primary);
+//     h2 {
+//       margin: 0;
+//       font-size: 24px;
+//       font-weight: 700;
+//       color: var(--vaygo-primary);
 
-      strong {
-        background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+//       strong {
+//         background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+//         background-clip: text;
+//         -webkit-background-clip: text;
+//         -webkit-text-fill-color: transparent;
 
-        // Fallback per tema scuro quando background-clip non funziona bene
-        @media (prefers-color-scheme: dark) {
-          -webkit-text-fill-color: var(--vaygo-primary);
-          background: none;
-        }
-      }
-    }
-  }
+//         // Fallback per tema scuro quando background-clip non funziona bene
+//         @media (prefers-color-scheme: dark) {
+//           -webkit-text-fill-color: var(--vaygo-primary);
+//           background: none;
+//         }
+//       }
+//     }
+//   }
 
-  ion-card-content {
-    padding: 24px;
-  }
-}
+//   ion-card-content {
+//     padding: 24px;
+//   }
+// }
 
 // Informazioni volo
-.flight-info {
-  background: var(--vaygo-background);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 16px;
-  border-left: 4px solid var(--vaygo-secondary);
-  position: relative;
+// .flight-info {
+//   background: var(--vaygo-background);
+//   border-radius: 12px;
+//   padding: 20px;
+//   margin-bottom: 16px;
+//   border-left: 4px solid var(--vaygo-secondary);
+//   position: relative;
 
-  &:last-of-type {
-    border-left-color: var(--vaygo-primary);
-  }
+//   &:last-of-type {
+//     border-left-color: var(--vaygo-primary);
+//   }
 
-  h3 {
-    margin: 0 0 12px 0;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--vaygo-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+//   h3 {
+//     margin: 0 0 12px 0;
+//     font-size: 14px;
+//     font-weight: 700;
+//     color: var(--vaygo-text-secondary);
+//     text-transform: uppercase;
+//     letter-spacing: 1px;
+//     display: flex;
+//     align-items: center;
+//     gap: 8px;
 
-    &:before {
-      content: "✈️";
-      font-size: 16px;
-    }
-  }
+//     &:before {
+//       content: "✈️";
+//       font-size: 16px;
+//     }
+//   }
 
-  p {
-    margin: 0 0 8px 0;
-    color: var(--vaygo-text-primary);
-    font-size: 15px;
-    line-height: 1.4;
+//   p {
+//     margin: 0 0 8px 0;
+//     color: var(--vaygo-text-primary);
+//     font-size: 15px;
+//     line-height: 1.4;
 
-    &:last-child {
-      margin-bottom: 0;
-      font-weight: 600;
-      color: var(--vaygo-primary);
-      font-size: 16px;
-    }
-  }
+//     &:last-child {
+//       margin-bottom: 0;
+//       font-weight: 600;
+//       color: var(--vaygo-primary);
+//       font-size: 16px;
+//     }
+//   }
 
-  // Icona decorativa per andata/ritorno
-  &:first-of-type:after {
-    content: "🛫";
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 20px;
-    opacity: 0.7;
-  }
+//   // Icona decorativa per andata/ritorno
+//   &:first-of-type:after {
+//     content: "🛫";
+//     position: absolute;
+//     top: 16px;
+//     right: 16px;
+//     font-size: 20px;
+//     opacity: 0.7;
+//   }
 
-  &:last-of-type:after {
-    content: "🛬";
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 20px;
-    opacity: 0.7;
-  }
-}
+//   &:last-of-type:after {
+//     content: "🛬";
+//     position: absolute;
+//     top: 16px;
+//     right: 16px;
+//     font-size: 20px;
+//     opacity: 0.7;
+//   }
+// }
 
 // Pulsante selezione offerta
-.select-offer-btn {
-  --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-  --color: var(--vaygo-white);
-  --border-radius: 12px;
-  height: 48px;
-  font-weight: 600;
-  font-size: 16px;
-  margin-top: 16px;
-  box-shadow: 0 4px 16px rgba(46, 139, 87, 0.3);
-  transition: all 0.3s ease;
+// .select-offer-btn {
+//   --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+//   --color: var(--vaygo-white);
+//   --border-radius: 12px;
+//   height: 48px;
+//   font-weight: 600;
+//   font-size: 16px;
+//   margin-top: 16px;
+//   box-shadow: 0 4px 16px rgba(46, 139, 87, 0.3);
+//   transition: all 0.3s ease;
 
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
-  }
+//   &:hover {
+//     transform: translateY(-1px);
+//     box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+//   }
 
-  &:active {
-    transform: translateY(0);
-  }
+//   &:active {
+//     transform: translateY(0);
+//   }
 
-  // Adattamento per tema scuro
-  @media (prefers-color-scheme: dark) {
-    box-shadow: 0 4px 16px rgba(52, 211, 153, 0.3);
+//   // Adattamento per tema scuro
+//   @media (prefers-color-scheme: dark) {
+//     box-shadow: 0 4px 16px rgba(52, 211, 153, 0.3);
 
-    &:hover {
-      box-shadow: 0 6px 20px rgba(52, 211, 153, 0.4);
-    }
-  }
-}
+//     &:hover {
+//       box-shadow: 0 6px 20px rgba(52, 211, 153, 0.4);
+//     }
+//   }
+// }
 
 // State vuoto
 .empty-state {
@@ -577,19 +580,19 @@ ion-header {
 }
 
 // Lista risultati
-ion-list {
-  background: transparent;
-  padding: 0;
+// ion-list {
+//   background: transparent;
+//   padding: 0;
 
-  ion-item {
-    --background: transparent;
-    --color: var(--vaygo-text-primary);
-    --padding-start: 0;
-    --padding-end: 0;
-    --border-color: transparent;
-    margin-bottom: 0;
-  }
-}
+//   ion-item {
+//     --background: transparent;
+//     --color: var(--vaygo-text-primary);
+//     --padding-start: 0;
+//     --padding-end: 0;
+//     --border-color: transparent;
+//     margin-bottom: 0;
+//   }
+// }
 
 // Responsive design
 @media (max-width: 768px) {
@@ -597,29 +600,29 @@ ion-list {
     padding: 16px;
   }
 
-  .combo-card {
-    ion-card-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
+  // .combo-card {
+  //   ion-card-header {
+  //     flex-direction: column;
+  //     align-items: flex-start;
+  //     gap: 16px;
 
-      h2 {
-        font-size: 20px;
-      }
-    }
+  //     h2 {
+  //       font-size: 20px;
+  //     }
+  //   }
 
-    ion-card-content {
-      padding: 20px;
-    }
-  }
+  //   ion-card-content {
+  //     padding: 20px;
+  //   }
+  // }
 
-  .flight-info {
-    padding: 16px;
+  // .flight-info {
+  //   padding: 16px;
 
-    &:after {
-      display: none;
-    }
-  }
+  //   &:after {
+  //     display: none;
+  //   }
+  // }
 
   .search-info-card,
   .filters-card,
@@ -631,74 +634,74 @@ ion-list {
 }
 
 @media (max-width: 480px) {
-  .combo-card {
-    ion-card-header {
-      padding: 16px 20px;
+  // .combo-card {
+  //   ion-card-header {
+  //     padding: 16px 20px;
 
-      h2 {
-        font-size: 18px;
-      }
-    }
+  //     h2 {
+  //       font-size: 18px;
+  //     }
+  //   }
 
-    ion-card-content {
-      padding: 16px;
-    }
-  }
+  //   ion-card-content {
+  //     padding: 16px;
+  //   }
+  // }
 
-  .flight-info {
-    padding: 12px;
+  // .flight-info {
+  //   padding: 12px;
 
-    h3 {
-      font-size: 12px;
-    }
+  //   h3 {
+  //     font-size: 12px;
+  //   }
 
-    p {
-      font-size: 14px;
-    }
-  }
+  //   p {
+  //     font-size: 14px;
+  //   }
+  // }
 }
 
-// Animazioni
+//Animazioni
 @media (prefers-reduced-motion: no-preference) {
-  .combo-card {
-    animation: slideIn 0.5s ease-out;
-  }
+  // .combo-card {
+  //   animation: slideIn 0.5s ease-out;
+  // }
 
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  // @keyframes slideIn {
+  //   from {
+  //     opacity: 0;
+  //     transform: translateY(20px);
+  //   }
+  //   to {
+  //     opacity: 1;
+  //     transform: translateY(0);
+  //   }
+  // }
 
-  // Animazione staggered per le cards
-  .combo-card:nth-child(1) { animation-delay: 0.1s; }
-  .combo-card:nth-child(2) { animation-delay: 0.2s; }
-  .combo-card:nth-child(3) { animation-delay: 0.3s; }
-  .combo-card:nth-child(4) { animation-delay: 0.4s; }
-  .combo-card:nth-child(5) { animation-delay: 0.5s; }
+  // // Animazione staggered per le cards
+  // .combo-card:nth-child(1) { animation-delay: 0.1s; }
+  // .combo-card:nth-child(2) { animation-delay: 0.2s; }
+  // .combo-card:nth-child(3) { animation-delay: 0.3s; }
+  // .combo-card:nth-child(4) { animation-delay: 0.4s; }
+  // .combo-card:nth-child(5) { animation-delay: 0.5s; }
 }
 
 // Utilità per il loading state
-.loading-skeleton {
-  background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.5) 50%, var(--vaygo-background) 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
+// .loading-skeleton {
+//   background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.5) 50%, var(--vaygo-background) 75%);
+//   background-size: 200% 100%;
+//   animation: loading 1.5s infinite;
 
-  // Adattamento per tema scuro
-  @media (prefers-color-scheme: dark) {
-    background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.1) 50%, var(--vaygo-background) 75%);
-  }
+//   // Adattamento per tema scuro
+//   @media (prefers-color-scheme: dark) {
+//     background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.1) 50%, var(--vaygo-background) 75%);
+//   }
 
-  @keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-}
+//   @keyframes loading {
+//     0% { background-position: 200% 0; }
+//     100% { background-position: -200% 0; }
+//   }
+// }
 
 // Responsive per schermi piccoli
 @media (max-width: 480px) {

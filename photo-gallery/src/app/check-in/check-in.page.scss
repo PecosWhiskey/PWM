@@ -1,5 +1,4 @@
-
-// Header personalizzato
+//Stile per l'header
 .custom-header {
   --background: var(--vaygo-white);
   --border-color: var(--vaygo-border);
@@ -52,17 +51,24 @@
     width: 40px;
     height: 40px;
     --border-radius: 12px;
+
+    //Ingrandimento e modifica del colore per il bottone e quindi l'icona
+    &:hover {
+      --color: var(--vaygo-primary);
+      transform: scale(1.05);
+      transition: all 0.3s ease;
+    }
   }
 }
 
-// Container principale
+//Container principale
 .gestione-voli-container {
   min-height: 100vh;
   background: var(--vaygo-background);
   padding: 20px;
 }
 
-// Menu di Navigazione
+//Menu di Navigazione
 .voli-navigation-menu {
   background: var(--vaygo-white);
   border-radius: 16px;
@@ -101,24 +107,24 @@
       transition: all 0.3s ease;
       position: relative;
 
-      &::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: transparent;
-        transition: all 0.3s ease;
-      }
+      // &::before {
+      //   content: '';
+      //   position: absolute;
+      //   bottom: 0;
+      //   left: 0;
+      //   right: 0;
+      //   height: 3px;
+      //   background: transparent;
+      //   transition: all 0.3s ease;
+      // }
 
       &.active {
         --background: var(--vaygo-blue-light);
         --color: var(--vaygo-primary);
 
-        &::before {
-          background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-        }
+        // &::before {
+        //   background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+        // }
       }
 
       &:hover:not(.active) {
@@ -134,7 +140,7 @@
   }
 }
 
-// Container check-in
+//Container check-in
 .prenotazioni-container {
   background: var(--vaygo-white);
   border-radius: 16px;
@@ -163,7 +169,7 @@
   }
 }
 
-// Form di ricerca
+//Form di ricerca
 .checkin-search {
   max-width: 600px;
   margin: 0 auto;
@@ -202,7 +208,7 @@
           margin: 0;
 
           &.item-has-value {
-            --border-color: var(--vaygo-primary);
+            --border-color: var(--vaygo-primary); 
             border-color: var(--vaygo-primary);
           }
 
@@ -297,8 +303,8 @@
           margin: 0;
 
           &.item-has-value {
-            --border-color: var(--vaygo-primary);
-            border-color: var(--vaygo-primary);
+            --border-color: var(--vaygo-primary); //colore del bordo inferiore dello ion-item
+            border-color: var(--vaygo-primary); //colore del bordo esterno
           }
 
           ion-icon {
@@ -322,11 +328,13 @@
       font-weight: 600;
       margin-top: 20px;
 
+      //Bottone in hover e abilitato
       &:hover:not([disabled]) {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(52, 211, 153, 0.3);
       }
 
+      //Bottone disabilitato
       &[disabled] {
         --background: var(--vaygo-text-secondary);
         opacity: 0.6;
@@ -335,7 +343,7 @@
   }
 }
 
-// Feedback info
+//Feedback info
 .feedback-info {
   display: flex;
   align-items: center;
@@ -365,6 +373,7 @@
   padding: 24px;
   background: var(--vaygo-white);
   min-height: 100%;
+  overflow-y: auto;
 
   .modal-header {
     display: flex;
@@ -418,11 +427,11 @@
         padding-bottom: 20px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
-        &:last-child {
-          border-bottom: none;
-          margin-bottom: 0;
-          padding-bottom: 0;
-        }
+        // &:last-child {
+        //   border-bottom: none;
+        //   margin-bottom: 0;
+        //   padding-bottom: 0;
+        // }
 
         .detail-item {
           display: flex;
@@ -489,7 +498,7 @@
   }
 }
 
-// Stili per la mappa dei posti
+//Stile per la mappa dei posti
 .seat-map-link {
   text-align: center;
   margin-bottom: 16px;
@@ -505,30 +514,30 @@
   }
 }
 
-  // Modal della mappa posti - Stile elegante
-  .seat-map-modal {
-    --background: var(--vaygo-background);
+//Modale della mappa posti
+.seat-map-modal {
+  --background: var(--vaygo-background);
 
-    ion-header {
-      ion-toolbar {
-        --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-        --color: var(--vaygo-white);
-        --border-color: transparent;
+  // ion-header {
+  //   ion-toolbar {
+  //     --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+  //     --color: var(--vaygo-white);
+  //     --border-color: transparent;
 
-        ion-title {
-          font-weight: 700;
-          font-size: 20px;
-          letter-spacing: -0.5px;
-        }
+  //     ion-title {
+  //       font-weight: 700;
+  //       font-size: 20px;
+  //       letter-spacing: -0.5px;
+  //     }
 
-        ion-button {
-          --color: var(--vaygo-white);
-          --background-hover: rgba(255, 255, 255, 0.1);
-          --border-radius: 12px;
-          font-weight: 600;
-        }
-      }
-    }
+  //     ion-button {
+  //       --color: var(--vaygo-white);
+  //       --background-hover: rgba(255, 255, 255, 0.1);        
+  //       --border-radius: 12px;
+  //       font-weight: 600;
+  //     }
+  //   }
+  // }
 
     .seat-map-container {
       padding: 24px;
@@ -575,17 +584,22 @@
 
           ion-icon {
             font-size: 18px;
-            animation: bounce 2s infinite;
+            animation: bounce 2s infinite; 
           }
 
+          //Crea l'animazione della freccetta che rimbalza
           @keyframes bounce {
+            //Ogni percentuale definisce le varie fasi dell'animazione
             0%, 20%, 50%, 80%, 100% {
+              //Per queste fasi la posizione è quella originale
               transform: translateY(0);
             }
             40% {
+              //In questa fase la frecetta raggiunge il picco massimo
               transform: translateY(-4px);
             }
             60% {
+              //In quest'ultima fase esegue un piccolo rimbalzo
               transform: translateY(-2px);
             }
           }
@@ -600,30 +614,31 @@
         border: 1px solid var(--vaygo-border);
         margin-bottom: 32px;
         text-align: center;
-        height: 450px;
-        overflow-y: auto;
-        overflow-x: hidden;
+        height: 450px; //altezza fissa del container
+        overflow-y: auto; //Crea la scrollbar verticale
+        overflow-x: hidden; //Nasconde la scrollbar orizzontale
         position: relative;
 
-        &:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-          border-radius: 20px 20px 0 0;
-        }
+        // &:before {
+        //   content: '';
+        //   position: absolute;
+        //   top: 0;
+        //   left: 0;
+        //   right: 0;
+        //   height: 4px;
+        //   background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
+        //   border-radius: 20px 20px 0 0;
+        // }
 
         img {
-          width: 150%;
-          height: auto;
-          min-height: 600px;
+          //La larghezza e l'altezza minima dell'immagine fanno si che sia necessaria la presenza della scrollbar
+          width: 150%; //l'immagine è più grande della larghezza del contenitore
+          height: auto; //mantiene le proporzioni dell'immagine originaria
+          min-height: 600px; //altezza minima maggiore dell'altezza fissa del contenitore
           border-radius: 16px;
           box-shadow: 0 4px 24px var(--vaygo-shadow);
-          object-fit: cover;
-          object-position: center top;
+          object-fit: cover; //l'immagine viene ingrandite fino a riempire interamente il contenitore mantenendo le proporzioni
+          object-position: center top; //mostra la parte superiore centrale dell'immagine
           transition: transform 0.3s ease;
 
           &:hover {
@@ -687,19 +702,19 @@
               box-shadow: 0 8px 24px var(--vaygo-shadow);
             }
 
-            // Gradiente verde per posti disponibili
+            //Gradiente verde per posti disponibili
             &.available-stat {
               background: linear-gradient(135deg, var(--vaygo-green-light), rgba(52, 211, 153, 0.15)) !important;
               border-color: var(--vaygo-success);
             }
 
-            // Gradiente rosso per posti occupati
+            //Gradiente rosso per posti occupati
             &.occupied-stat {
               background: linear-gradient(135deg, #ffcdd2, rgba(244, 67, 54, 0.25)) !important;
               border-color: var(--vaygo-danger);
             }
 
-            // Gradiente blu per posti totali
+            //Gradiente blu per posti totali
             &.total-stat {
               background: linear-gradient(135deg, var(--vaygo-blue-light), rgba(59, 130, 246, 0.15)) !important;
               border-color: var(--vaygo-primary);
@@ -791,7 +806,7 @@
     }
   }
 
-// Animazioni
+//Animazioni
 .vaygo-fade-in {
   animation: fadeInUp 0.6s ease-out;
 }
@@ -807,7 +822,7 @@
   }
 }
 
-// Responsive
+//Gestione schermi più piccoli
 @media (max-width: 768px) {
   .gestione-voli-container {
     padding: 16px;
@@ -841,7 +856,6 @@
     }
   }
 
-  // Responsive per mobile
   .seat-map-modal {
     .seat-map-container {
       padding: 16px;
@@ -865,74 +879,74 @@
   }
 
   // Stili responsive per le statistiche posti - versione elegante
-  .seat-map-modal {
-    .seat-map-container {
-      .seat-map-header {
-        padding: 20px;
+  // .seat-map-modal {
+  //   .seat-map-container {
+  //     .seat-map-header {
+  //       padding: 20px;
 
-        h3 {
-          font-size: 24px;
-        }
+  //       h3 {
+  //         font-size: 24px;
+  //       }
 
-        .scroll-hint {
-          padding: 10px 16px;
-          font-size: 13px;
+  //       .scroll-hint {
+  //         padding: 10px 16px;
+  //         font-size: 13px;
 
-          ion-icon {
-            font-size: 16px;
-          }
-        }
-      }
+  //         ion-icon {
+  //           font-size: 16px;
+  //         }
+  //       }
+  //     }
 
-      .seat-legend {
-        padding: 20px;
+  //     .seat-legend {
+  //       padding: 20px;
 
-        .flight-info {
-          h4 {
-            font-size: 18px;
-          }
-        }
+  //       .flight-info {
+  //         h4 {
+  //           font-size: 18px;
+  //         }
+  //       }
 
-        .seat-stats {
-          grid-template-columns: 1fr;
-          gap: 12px;
+  //       .seat-stats {
+  //         grid-template-columns: 1fr;
+  //         gap: 12px;
 
-          .stat-item {
-            padding: 14px;
+  //         .stat-item {
+  //           padding: 14px;
 
-            .stat-icon {
-              width: 42px;
-              height: 42px;
+  //           .stat-icon {
+  //             width: 42px;
+  //             height: 42px;
 
-              ion-icon {
-                font-size: 22px;
-              }
-            }
+  //             ion-icon {
+  //               font-size: 22px;
+  //             }
+  //           }
 
-            .stat-content {
-              .stat-number {
-                font-size: 24px;
-              }
+  //           .stat-content {
+  //             .stat-number {
+  //               font-size: 24px;
+  //             }
 
-              .stat-label {
-                font-size: 11px;
-              }
-            }
-          }
-        }
+  //             .stat-label {
+  //               font-size: 11px;
+  //             }
+  //           }
+  //         }
+  //       }
 
-        .occupied-list {
-          .occupied-seat {
-            font-size: 12px;
-            padding: 6px 10px;
-          }
-        }
-      }
-    }
-  }
+  //       .occupied-list {
+  //         .occupied-seat {
+  //           font-size: 12px;
+  //           padding: 6px 10px;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
 
-// Supporto tema scuro
+//Stile tema scuro
 @media (prefers-color-scheme: dark) {
   .custom-header {
     --background: var(--vaygo-white);

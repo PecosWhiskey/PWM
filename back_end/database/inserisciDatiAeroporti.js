@@ -281,7 +281,13 @@ async function visualizzaPasseggeri(){
 // inserisciPosizione("BARCELLONA", "Spagna", "41°17′49″N", "2°04′42″E");
 // inserisciPosizione("AMSTERDAM", "Paesi Bassi", "52°18′29″N", "4°45′51″E");
 // inserisciPosizione("PALERMO", "Italia", "38°10′55″N", "13°05′58″E");
+// inserisciPosizione("BARI", "Italia", "41°08′19.88″N", "16°45′38.14″E");
+// inserisciPosizione("ATENE", "Grecia", "37°56′11″N", "23°56′35″E");
+// inserisciPosizione("VIENNA", "Austria", "48°06′37″N", "16°34′11″E");
 
+// inserisciAeroporto("VIE", "Vienna-Schwechat", 18);
+//inserisciAeroporto("ATH", " Atene-Eleftherios Venizelos", 17);
+// inserisciAeroporto("BRI", "Bari-Palese", 16);
 // inserisciAeroporto("PMO", "Punta Raisi", 15);
 // inserisciAeroporto("AMS", "Schiphol", 14);
 // inserisciAeroporto("BCN","Barcellona-El Prat", 13);
@@ -295,4 +301,4 @@ async function visualizzaPasseggeri(){
 // inserisciAeroporto("MXP", "Malpensa", 3);
 // inserisciAeroporto("LIN", "Linate", 4);
 
-visualizzaPasseggeri();
+// visualizzaPasseggeri();

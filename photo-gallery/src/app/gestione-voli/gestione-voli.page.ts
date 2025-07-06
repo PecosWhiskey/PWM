@@ -143,6 +143,10 @@ export class GestioneVoliPage implements OnInit{
     });
   }
 
+  ionViewWillLeave(){
+    this.creaVoloEsito = '';
+  }
+
   //Variabili e funzioni che gestiscono la comparsa dell'alert al click su "Crea Volo" o "Modifica Volo" in caso di successo
   isAlertOpenCreated = false;
   isAlertOpenModified = false;
@@ -174,8 +178,8 @@ export class GestioneVoliPage implements OnInit{
     const oraA = this.formattaData(this.data, this.oraArrivo);
     const datiVolo = {
       idVolo: this.idVolo,
-      partenza: this.partenza,
-      destinazione: this.destinazione,
+      partenza: this.partenza.toUpperCase(),
+      destinazione: this.destinazione.toUpperCase(),
       oraPartenza: oraP,
       oraArrivo: oraA,
       prezzo: this.prezzo,
@@ -184,6 +188,8 @@ export class GestioneVoliPage implements OnInit{
     this.gestioneVoliService.Crea(datiVolo).subscribe({
       next: (response) => {
         console.log('Creation success:', response);
+        //Sovrascrive eventuale valore precedente
+        this.creaVoloEsito = '';
 
         //Apertura dell'alert
         this.setOpenCreated(true);
@@ -214,6 +220,8 @@ export class GestioneVoliPage implements OnInit{
     this.gestioneVoliService.Modifica(datiVolo).subscribe({
       next: (response) => {
         console.log('Modification success:', response);
+        //Sovrascrive eventuale valore precedente
+        this.creaVoloEsito = '';
 
         //Apertura dell'alert
         this.setOpenModified(true);

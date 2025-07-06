@@ -143,6 +143,7 @@ export class GestioneVoliPage implements OnInit{
     });
   }
 
+  //Uscendo dalla pagina qualsiasi messaggio di errore mostrato viene cancellato
   ionViewWillLeave(){
     this.creaVoloEsito = '';
   }
@@ -188,7 +189,7 @@ export class GestioneVoliPage implements OnInit{
     this.gestioneVoliService.Crea(datiVolo).subscribe({
       next: (response) => {
         console.log('Creation success:', response);
-        //Sovrascrive eventuale valore precedente
+        //Sovrascrive eventuale messaggio di errore precedente
         this.creaVoloEsito = '';
 
         //Apertura dell'alert
@@ -220,7 +221,7 @@ export class GestioneVoliPage implements OnInit{
     this.gestioneVoliService.Modifica(datiVolo).subscribe({
       next: (response) => {
         console.log('Modification success:', response);
-        //Sovrascrive eventuale valore precedente
+        //Sovrascrive eventuale messaggio di errore precedente
         this.creaVoloEsito = '';
 
         //Apertura dell'alert

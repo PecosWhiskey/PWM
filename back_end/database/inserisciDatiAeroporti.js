@@ -301,4 +301,4 @@ async function visualizzaPasseggeri(){
 // inserisciAeroporto("MXP", "Malpensa", 3);
 // inserisciAeroporto("LIN", "Linate", 4);
 
-// visualizzaPasseggeri();
+visualizzaAeroporto();

@@ -1,6 +1,6 @@
-// Variabili per la modalità giorno(default)
+// Variabili per la modalità chiara (default)
 :root {
-  // Profile specific colors - Light Mode
+  // Profile specific colors 
   --tab3-bg: var(--vaygo-background);
   --tab3-surface: var(--vaygo-white);
   --tab3-text-primary: var(--vaygo-text-primary);
@@ -10,12 +10,12 @@
   --tab3-shadow: var(--vaygo-shadow);
   --tab3-shadow-medium: var(--vaygo-shadow-medium);
 
-  // Profile header gradient - Light Mode
+  // Profile header gradient
   --tab3-header-gradient: linear-gradient(135deg, var(--vaygo-primary) 0%, var(--vaygo-secondary) 100%);
   --tab3-avatar-bg: var(--vaygo-white);
   --tab3-avatar-shadow: rgba(0, 0, 0, 0.1);
 
-  // Menu and cards - Light Mode
+  // Menu and cards
   --tab3-card-bg: var(--vaygo-white);
   --tab3-card-hover: rgba(102, 126, 234, 0.05);
   --tab3-divider: var(--vaygo-border);
@@ -27,33 +27,32 @@
 }
 
 // Dark Mode Variables
-:root {
-  // Light mode (default)
-  --tab3-bg: #ffffff;
-  --tab3-surface: #f9fafb;
-  --tab3-text-primary: #1f2937;
-  --tab3-text-secondary: #4b5563;
-  --tab3-text-muted: #9ca3af;
-  --tab3-border: rgba(0, 0, 0, 0.06);
-  --tab3-shadow: rgba(0, 0, 0, 0.04);
-  --tab3-shadow-medium: rgba(0, 0, 0, 0.08);
-  --tab3-header-gradient: linear-gradient(135deg, #4A90E2 0%, #3eb772 100%);
-  --tab3-avatar-bg: #e5e7eb;
-  --tab3-avatar-shadow: rgba(0, 0, 0, 0.1);
-  --tab3-card-bg: #ffffff;
-  --tab3-card-hover: rgba(59, 130, 246, 0.04);
-  --tab3-divider: rgba(0, 0, 0, 0.05);
+// :root {
+//   // Light mode (default)
+//   --tab3-bg: #ffffff;
+//   --tab3-surface: #f9fafb;
+//   --tab3-text-primary: #1f2937;
+//   --tab3-text-secondary: #4b5563;
+//   --tab3-text-muted: #9ca3af;
+//   --tab3-border: rgba(0, 0, 0, 0.06);
+//   --tab3-shadow: rgba(0, 0, 0, 0.04);
+//   --tab3-shadow-medium: rgba(0, 0, 0, 0.08);
+//   --tab3-header-gradient: linear-gradient(135deg, #4A90E2 0%, #3eb772 100%);
+//   --tab3-avatar-bg: #e5e7eb;
+//   --tab3-avatar-shadow: rgba(0, 0, 0, 0.1);
+//   --tab3-card-bg: #ffffff;
+//   --tab3-card-hover: rgba(59, 130, 246, 0.04);
+//   --tab3-divider: rgba(0, 0, 0, 0.05);
 
-  // VayGo brand colors
-  --vaygo-primary: #3eb772;
-  --vaygo-secondary: #4A90E2;
-  --vaygo-accent: #34D399;
-}
+//   // VayGo brand colors
+//   --vaygo-primary: #3eb772;
+//   --vaygo-secondary: #4A90E2;
+//   --vaygo-accent: #34D399;
+// }
 
 //Stile che si adatta quando l'utente imposta la modalità scura
 @media (prefers-color-scheme: dark) {
   :root {
-    // Colori per la modalità scura
     --tab3-bg: #0F172A;
     --tab3-surface: #1E293B;
     --tab3-text-primary: #F1F5F9;

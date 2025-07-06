@@ -378,21 +378,21 @@
 }
 
 // Animazioni
-.vaygo-fade-in {
-  animation: fadeInUp 0.6s ease-out;
-}
+// .vaygo-fade-in {
+//   animation: fadeInUp 0.6s ease-out;
+// }
 
-//Quando si accede alla pagina il contenitore compare partendo dal basso fino ad arrivare alla posizione di base
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+// //Quando si accede alla pagina il contenitore compare partendo dal basso fino ad arrivare alla posizione di base
+// @keyframes fadeInUp {
+//   from {
+//     opacity: 0;
+//     transform: translateY(20px);
+//   }
+//   to {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// }
 
 //Gestione schermi più piccoli
 @media (max-width: 768px) {

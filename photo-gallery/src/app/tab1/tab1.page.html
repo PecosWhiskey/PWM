@@ -36,7 +36,7 @@
               <div class="input-group">
                 <ion-item class="custom-item">
                   <ion-icon name="location-outline" slot="start"></ion-icon>
-                  <ion-input placeholder="Da dove parti?" label="Partenza" label-placement="stacked" [(ngModel)]="partenza" required></ion-input>
+                  <ion-input name="partenza" placeholder="Da dove parti?" label="Partenza" label-placement="stacked" [(ngModel)]="partenza" required></ion-input>
                 </ion-item>
               </div>
 
@@ -49,7 +49,7 @@
               <div class="input-group">
                 <ion-item class="custom-item">
                   <ion-icon name="location" slot="start"></ion-icon>
-                  <ion-input placeholder="Dove vuoi andare?" label="Destinazione" label-placement="stacked" [(ngModel)]="destinazione" required></ion-input>
+                  <ion-input name="destinazione" placeholder="Dove vuoi andare?" label="Destinazione" label-placement="stacked" [(ngModel)]="destinazione" required></ion-input>
                 </ion-item>
               </div>
             </div>
@@ -59,6 +59,7 @@
                 <ion-item class="custom-item" id="click-trigger-partenza">
                   <ion-icon name="calendar-outline" slot="start"></ion-icon>
                   <ion-input
+                  name="dataPartenza"
                     [value]="dataInseritaP.split('T')[0]"
                     readonly
                     placeholder="Seleziona data"
@@ -74,6 +75,7 @@
                   class="date-popover">
                   <ng-template>
                     <ion-datetime
+                    name="dataP"
                       class="data"
                       [showDefaultButtons]="true"
                       doneText="Fatto"
@@ -92,6 +94,7 @@
                   <ion-item class="custom-item" id="click-trigger-ritorno">
                     <ion-icon name="calendar" slot="start"></ion-icon>
                     <ion-input
+                      name="dataArrivo"
                       [value]="dataInseritaR.split('T')[0]"
                       readonly
                       placeholder="Seleziona data"
@@ -107,6 +110,7 @@
                     class="date-popover">
                     <ng-template>
                       <ion-datetime
+                      name="dataA"
                         class="data"
                         [showDefaultButtons]="true"
                         doneText="Fatto"

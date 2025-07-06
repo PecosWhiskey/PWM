@@ -129,6 +129,7 @@ class AuthServiceBiglietti {
                 throw new Error('Errore nella modifica del biglietto');
             }
 
+            const passeggero = await biglietti.trovaPasseggeroForCheckIn({idBiglietto: biglietto.idBiglietto, idPasseggero:biglietto.idPasseggero});
             const partenza = await biglietti.trovaCittàPartenza(biglietto.idVolo);
             const destinazione = await biglietti.trovaCittàDestinazione(biglietto.idVolo);
             const aeroportoPartenza = await biglietti.trovaAeroportoPartenza(biglietto.idVolo);
@@ -137,6 +138,8 @@ class AuthServiceBiglietti {
             const risultato = {
                 idBiglietto: modificato.idBiglietto, 
                 idVolo: biglietto.idVolo, 
+                nomePasseggero: passeggero.nome,
+                cognomePasseggero: passeggero.cognome,
                 partenza: partenza.citta,
                 destinazione: destinazione.citta,
                 aeroportoPartenza: aeroportoPartenza,

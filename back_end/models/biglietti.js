@@ -410,6 +410,19 @@ class Biglietti {
         })
     }
 
+    static async trovaPasseggeroForCheckIn({idBiglietto, idPasseggero}){
+        return new Promise((resolve,reject)=>{
+            db.get(`SELECT nome, cognome FROM Passeggero WHERE idPasseggero IN(
+                SELECT idPasseggero FROM Biglietto WHERE idBiglietto=? AND idPasseggero=?)`, [idBiglietto, idPasseggero], (err,row)=>{
+                    if(err){
+                        reject(err);
+                        return;
+                    }
+                    resolve(row);
+                })
+        })
+    }
+
    //Funzione per inserire un nuovo Cliente
    static async creaCliente({idCliente, nome, cognome, dataNascita, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, numCivico, email, password}){
         console.log('creaCliente: ',idCliente, nome, cognome, dataNascita, documentoID, sesso, nazionalita, stato, citta, CAP, indirizzo, numCivico, email, password);

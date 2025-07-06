@@ -120,16 +120,16 @@
   // Global Reset & Base Styles
   // ===========================================
   * {
-    box-sizing: border-box;
-  }
+    box-sizing: border-box; //riguarda il calcolo della dimesione di tutti gli elementi html
+  }                         //il valore di width comprenderà anche padding che border
 
   body {
     font-family: var(--vaygo-font-family);
     background-color: var(--vaygo-background);
     color: var(--vaygo-text-primary);
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased; //font più sottile (per Safari e Chrome)
+    -moz-osx-font-smoothing: grayscale;  //font meno colorato ai bordi (Firefox mcOs)
   }
 
   // Ionic Component Overrides
@@ -149,8 +149,8 @@
 
     ion-tab-button {
       --color: var(--vaygo-text-secondary);
-      --color-selected: var(--vaygo-primary);
-      --ripple-color: rgba(46, 139, 87, 0.1);
+      --color-selected: var(--vaygo-primary); //colore per elemento selezionato e attivo
+      --ripple-color: rgba(46, 139, 87, 0.1); //colore per l'effetto ripple
 
       ion-icon {
         font-size: 24px;
@@ -385,7 +385,6 @@
   .shadow-lg { box-shadow: 0 8px 32px var(--vaygo-shadow-strong) !important; }
 
   // Animation & Interaction
-  // ===========================================
   .vaygo-hover-lift {
     transition: transform var(--vaygo-transition-base);
 
@@ -395,9 +394,10 @@
   }
 
   .vaygo-fade-in {
-    animation: vaygoFadeIn 0.5s ease-out;
+    animation: vaygoFadeIn 0.6s ease-out;
   }
 
+  //Quando si accede alla pagina il contenitore compare partendo dal basso fino ad arrivare alla posizione di base
   @keyframes vaygoFadeIn {
     from {
       opacity: 0;
@@ -457,7 +457,7 @@
     }
   }
 
-  // Dark Mode Support (opzionale per future implementazioni)
+  // Dark Mode Style
   // ===========================================
   @media (prefers-color-scheme: dark) {
     :root {

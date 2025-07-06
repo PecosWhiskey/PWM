@@ -21,7 +21,7 @@ import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
   calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline,
   informationCircleOutline, searchOutline, checkmarkCircleOutline, checkmarkDoneOutline, close, mapOutline,
-  arrowDownOutline, checkmarkCircle, closeCircle, airplane } from 'ionicons/icons';
+  arrowDownOutline, checkmarkCircle, closeCircle, airplane, location } from 'ionicons/icons';
 import { BigliettiService } from '../services/biglietti.service';
 import { Biglietto } from '../models/biglietto.models';
 
@@ -55,7 +55,7 @@ export class CheckInPage implements OnInit {
   constructor(private bigliettiService: BigliettiService) {
     addIcons({informationCircleOutline, createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
       calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, calendar, pricetagOutline, searchOutline,
-      checkmarkCircleOutline, checkmarkDoneOutline, close, mapOutline, arrowDownOutline, checkmarkCircle, closeCircle, airplane});
+      checkmarkCircleOutline, checkmarkDoneOutline, close, mapOutline, arrowDownOutline, checkmarkCircle, closeCircle, airplane, location});
   }
 
   //Dati necessari per la ricerca del biglietto di cui l'utente desisera fare il check-in

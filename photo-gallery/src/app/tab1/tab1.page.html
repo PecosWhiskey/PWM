@@ -131,7 +131,7 @@
               Numero di Passeggeri
             </h4>
             <div class="counter__section">
-              <ion-button class="search-button" (click)="decrement()">-</ion-button>
+              <ion-button class="search-button" [disabled]="numPasseggeri <= 0" (click)="decrement()">-</ion-button>
               <p>{{numPasseggeri}}</p>
               <ion-button class="search-button" (click)="increment()">+</ion-button>
             </div>
@@ -150,7 +150,9 @@
   <section class="quick-actions">
     <div class="actions-grid">
       <div class="action-card">
+        <ion-button fill="clear" size="small" href="/check-in">
         <ion-icon name="checkmark-circle-outline" class="action-icon"></ion-icon>
+        </ion-button>
         <h4 [routerLink]="'/check-in'">Check-in Online</h4>
         <p>Veloce e conveniente</p>
       </div>
@@ -163,7 +165,7 @@
         <ion-button fill="clear" size="small" href="/biglietti-acquistati">
           <ion-icon name="card-outline" class="action-icon"></ion-icon>
         </ion-button>
-        <h4>Le Mie Prenotazioni</h4>
+        <h4 [routerLink]="'/biglietti-acquistati'">Le Mie Prenotazioni</h4>
         <p>Gestisci i tuoi viaggi</p>
       </div>
     </div>

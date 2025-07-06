@@ -72,7 +72,11 @@ class AuthControllerBiglietti {
 
             // Creazione del token JWT
             const token = jwt.sign( 
-                { idCliente: cliente.idCliente, email: cliente.email, role: 'cliente' },
+                { idCliente: cliente.idCliente,
+                  nome: cliente.nome, 
+                  cognome: cliente.cognome,  
+                  email: cliente.email, 
+                  role: 'cliente' },
                 process.env.JWT_SECRET,
                 { expiresIn: '3h' } //Imposta la durata del token a 3 ore
             );
@@ -97,7 +101,11 @@ class AuthControllerBiglietti {
 
             //Creazione del token
             const token = jwt.sign( 
-                { idCliente: cliente.idCliente, email: cliente.email, role:'cliente' },
+                { idCliente: cliente.idCliente, 
+                  nome: cliente.nome, 
+                  cognome: cliente.cognome, 
+                  email: cliente.email, 
+                  role:'cliente' },
                 process.env.JWT_SECRET,
                 { expiresIn: '3h' } 
             );

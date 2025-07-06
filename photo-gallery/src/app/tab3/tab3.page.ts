@@ -67,6 +67,7 @@ import { Router } from '@angular/router';
     if(adminInfo){
       //In questo modo verrà visualizzata la sezione "speciale" per l'amministratore
       this.role = adminInfo.role;
+      this.email = adminInfo.email;
     }
     //Recupero delle informazioni del cliente
     const clientInfo = this.tokenService.getClientInfo();
@@ -74,17 +75,21 @@ import { Router } from '@angular/router';
     if(clientInfo){
       //In questo modo compariranno solo le sezioni dedicate al cliente
       this.role = clientInfo.role;
+      //Recupero delle informazioni che vengono mostrate nel profilo
+      this.nome = clientInfo.nome;
+      this.cognome = clientInfo.cognome;
+      this.email = clientInfo.email;
     }
   }
 
   //Rende inattivi tutti gli elementi quando si esce dalla pagina
-  ionViewWillLeave() {
-    //Rimuove il focus da qualsiasi elemento attivo
-    const activeElement = document.activeElement as HTMLElement;
-    if (activeElement) {
-      activeElement.blur();
-    }
-  }
+  // ionViewWillLeave() {
+  //   //Rimuove il focus da qualsiasi elemento attivo
+  //   const activeElement = document.activeElement as HTMLElement;
+  //   if (activeElement) {
+  //     activeElement.blur();
+  //   }
+  // }
  
   //Variabili e funzione che gestiscono la comparsa del pop up al click su "Notifiche"
   isAlertOpen = false;
@@ -104,6 +109,8 @@ import { Router } from '@angular/router';
   //Funzione che gestisce la visualizzazione di un form rispetto ad un altro in base alla scelta dell'utente
   changeForm(){
     this.form = 'Registrazione';
+    this.nome = '';
+    this.cognome = '';
     this.email = '';
     this.password = '';
   } 
@@ -118,6 +125,7 @@ import { Router } from '@angular/router';
     this.autenticazioneService.loginClient({email:this.email, password:this.password}).subscribe({ 
       next: (response) => {
         console.log('Login success:', response);
+        this.nome = response.data.nome;
         if(response.token){
           try{
             //Salva il token ricevuto
@@ -134,6 +142,12 @@ import { Router } from '@angular/router';
             // console.log('Token salvato: ', token);
             console.log('Client info salvate: ', clientInfo);
 
+            //Recupero delle informazioni che vengono mostrate nel profilo
+            this.nome = clientInfo.nome;
+            this.cognome = clientInfo.cognome;
+            this.email = clientInfo.email;
+
+            //Recupero del ruolo dell'utente per la visualizzazione delle sezioni da lui accessibili
             this.role = clientInfo.role;
 
             //Verifica che il cliente sia autenticato
@@ -200,6 +214,12 @@ import { Router } from '@angular/router';
             // console.log('Token salvato: ', token);
             console.log('Client info salvate: ', clientInfo);
 
+            //Recupero delle informazioni che vengono mostrate nel profilo
+            this.nome = clientInfo.nome;
+            this.cognome = clientInfo.cognome;
+            this.email = clientInfo.email;
+
+            //Recupero del ruolo dell'utente per la visualizzazione delle sezioni da lui accessibili
             this.role = clientInfo.role;
 
             //Verifica che il cliente sia autenticato
@@ -243,6 +263,10 @@ import { Router } from '@angular/router';
             //Recupero dei dati appena salvati per verificare che siano stati salvati correttamente
             // const token = this.tokenService.getToken();
             const adminInfo = this.tokenService.getAdminInfo();
+
+            //Ricavo dell'email che viene mostrata nel profilo
+            this.email = adminInfo.email;
+
             //Ricava il ruolo dalle informazioni ottenute dal payload del token, che sarà admin
             this.role = adminInfo.role;
 

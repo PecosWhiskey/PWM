@@ -110,24 +110,23 @@
   text-align: center;
   margin-bottom: var(--vaygo-spacing-lg);
   box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
-  color: white;
   position: relative;
   overflow: hidden;
   transition: all var(--vaygo-transition-base);
 
   //Motivo di sfondo leggero per dare profondità
-  &::before {
-    content: '';
-    position: absolute;
-    //Copre completamente l'elemento genitore
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
-    pointer-events: none;
-  }
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   //Copre completamente l'elemento genitore
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+  //               radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
+  //   pointer-events: none;
+  // }
 
   .profile-content {
     position: relative;
@@ -163,7 +162,6 @@
 }
 
 .profile-name {
-  color: white;
   font-size: var(--vaygo-font-size-2xl);
   font-weight: 700;
   margin-bottom: var(--vaygo-spacing-sm);
@@ -171,7 +169,6 @@
 }
 
 .profile-email {
-  color: rgba(255,255,255,0.9);
   font-size: var(--vaygo-font-size-base);
   margin: 0;
   font-weight: 500;

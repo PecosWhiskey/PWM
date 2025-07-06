@@ -96,7 +96,12 @@ export class TokenService {
     const decodedInfo = JSON.parse(decoded);
 
     //Crea l'oggetto che contine solo le informazioni sul cliente contenute nel payload
-    const clientInfo = {idCliente: decodedInfo.idCliente, email: decodedInfo.email, role: decodedInfo.role};
+    const clientInfo = {
+      idCliente: decodedInfo.idCliente, 
+      nome: decodedInfo.nome,
+      cognome: decodedInfo.cognome,
+      email: decodedInfo.email, 
+      role: decodedInfo.role};
     
     //Restituisce l'oggetto appena definito
     return clientInfo;

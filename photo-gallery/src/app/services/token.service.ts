@@ -7,7 +7,7 @@ export class TokenService {
 
   private TOKEN_KEY = "access token"; //chiave a cui viene associato il token
   private CLIENT_KEY = "client info"; //chiave a cui vengono associate le info del cliente presenti nel payload del token
-  private ADMIN_KEY = "admin info";
+  private ADMIN_KEY = "admin info"; //chiave a cui vengono associate le info dell'amministratore presenti nel payload del token
 
   constructor() {}
 

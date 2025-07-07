@@ -20,7 +20,7 @@ export class Tab1Service {
   //Variabili che tengono traccia dello stato della ricerca, ovvero del riscontro positivo o negativo da parte del server
   private voliTrovatiAndata = new BehaviorSubject<boolean>(false);
   private voliTrovatiRitorno = new BehaviorSubject<boolean>(false);
-  //Scelta dell'utente tra A/R oppure SOLO ANDATA oppure nessuna scelta
+  //Scelta dell'utente tra ANDATA E RITORNO oppure SOLO ANDATA oppure nessuna scelta
   private sceltaUtente = new BehaviorSubject<string>('nessun selezionato'); 
 
   constructor(private http: HttpClient) {}

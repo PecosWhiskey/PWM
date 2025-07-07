@@ -95,7 +95,7 @@ export class BigliettiService {
     return this.bigliettoModificato.asObservable();
   }
 
-  //Funzioni che memorizzano e ricavano il biglietti selzeionati nel Tab2 sia di andata che di ritorno
+  //Funzioni che memorizzano, ricavano e cancellano i biglietti selezionati nel Tab2 sia di andata che di ritorno
   setBigliettoAndata(biglietto: Volo) {
     this.bigliettoAndata.next(biglietto);
   }

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken'); //modulo necessario per la creazione del to
 
 class AuthControllerAdmin{
 
+     //LOGIN  
      static async login(req,res){
       try{
         const admin = await authServiceAdmin.loginAdmin(req.body);

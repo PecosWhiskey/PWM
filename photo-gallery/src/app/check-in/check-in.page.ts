@@ -69,12 +69,13 @@ export class CheckInPage implements OnInit {
 
   // Capienza fissa di tutti i voli: 132 posti
   readonly CAPIENZA_AEREO = 132;
-  postiLettere = ['A', 'B', 'C', 'D', 'E', 'F'];
+  postiLettere = ['A', 'B', 'C', 'D'];
   postiTotali: string[] = [];
   postiOccupati: any[] = [];
   idVolo = '';
   bigliettoModificato: any;
   occupied = false; //Non permette di proseguire con il completamento del check-in se il posto scelto è già occupato
+  founded = false; //Non permette di proseguire con il check-in se l'utente sceglie un posto non presente sull'aereo
 
   //Dati necessari per il check-in
   sceltaPosto = '';
@@ -121,24 +122,46 @@ export class CheckInPage implements OnInit {
       console.log("BIGLIETTO MODIFICATO NGONINIT: ", this.bigliettoModificato);
     });
 
-    //Generiamo tutti i 132 posti dell'aereo
-    for(let i = 1; i <= this.CAPIENZA_AEREO; i++) {
-      const riga = Math.ceil(i / this.postiLettere.length);
-      const letteraIndex = (i - 1) % this.postiLettere.length;
-      const lettera = this.postiLettere[letteraIndex];
-      this.postiTotali.push(riga + lettera);
+    //Recupero dei posti totali dal Local Storage
+    const posti = localStorage.getItem('posti totali');
+    console.log("POSTI: ", posti);
+    //Verifica se i dati sono presenti
+    if(posti != null){
+      //Se presenti viene eseguito il parsing dei dati per ottenere l'array originale
+      this.postiTotali = JSON.parse(posti);
+      console.log("POSTI TOTALI OTTENUTI DAL LOCAL STORAGE: ", this.postiTotali);
+    }else{
+      //Se non presente viene ricreato l'array
+      for(let i = 1; i <= this.CAPIENZA_AEREO; i++) {
+        //Calcolo il numero di riga del posto
+        const riga = Math.ceil(i / this.postiLettere.length);
+        //Calcolo l'indice della lettera
+        const letteraIndex = (i - 1) % this.postiLettere.length;
+        //Trovo la lettere corrispondente all'indice calcolato
+        const lettera = this.postiLettere[letteraIndex];
+        this.postiTotali.push(riga + lettera);
+      }
+      console.log("POSTI TOTALI GENERATI DOPO IL CICLO FOR: ", this.postiTotali);
+      //Memorizzo nuovamente i posti nel LocalStorage
+      localStorage.setItem("posti totali", JSON.stringify(this.postiTotali));
     }
 
     console.log(`Aereo con capienza: ${this.CAPIENZA_AEREO} posti`);
-    console.log("Posti Totali generati: ", this.postiTotali);
   }
 
-  //Variabili e funzione che gestiscono la comparsa dell'alert se il posto scelto dal cliente è già occupato
+  //Variabili e funzioni che gestiscono la comparsa dell'alert se il posto scelto dal cliente è già occupato
   isAlertOpen = false;
   alertButtons = ['Chiudi'];
 
   setOpen(isOpen: boolean) {
     this.isAlertOpen = isOpen;
+  }
+
+  isFoundedAlertOpen= false;
+  alertFoundedButtons = ['OK'];
+
+  setOpenNotFounded(isOpen: boolean){
+    this.isFoundedAlertOpen = isOpen;
   }
 
   //Funzione che ricerca il biglietto con idBiglietto e idPasseggero inseriti dall'utente
@@ -182,6 +205,22 @@ export class CheckInPage implements OnInit {
 
   //Funzione che gestisce il completamento del check-in
   CheckIn(){
+    //Inizializzo la variabile a false prima di iniziare il ciclo per sovrascrivere il valore precedente
+    this.founded = false;
+    //Verifica che il posto scelto dall'utente sia presente nell'aereo
+    for(let i=0; i<this.postiTotali.length; i++){
+      if(this.sceltaPosto == this.postiTotali[i]){
+        //Se presente non è necessario proseguire oltre nel ciclo
+        this.founded = true;
+        break;
+      }
+    }
+    //Se il posto non è presente mostra l'alert ed esce dalla funzione
+    if(!this.founded){
+      this.setOpenNotFounded(true);
+      return;
+    }
+
     //Inizializzo la variabile a false prima di iniziare il ciclo per sovrascrivere il valore precedente
     this.occupied = false;
     //Verifica che il posto non sia già stato prenotato

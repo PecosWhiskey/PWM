@@ -55,7 +55,7 @@ const idClienteValidator = [
   body('idCliente').notEmpty().withMessage('Codice fiscale del cliente obbligatorio'),
 ]
 
-
+//Middleware che verifica che i dati siano validi
 const validate = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

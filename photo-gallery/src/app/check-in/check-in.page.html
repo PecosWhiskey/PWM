@@ -198,6 +198,14 @@
             </ion-button>
 
               <ion-alert
+                [isOpen]="isFoundedAlertOpen"
+                header="Oops! Hai inserito un posto non valido!"
+                message="Ti preghiamo di scegliere un altro posto, grazie"
+                [buttons]="alertFoundedButtons"
+                (didDismiss)="setOpenNotFounded(false)">
+              </ion-alert>
+
+              <ion-alert
                 [isOpen]="isAlertOpen"
                 header="Oops! Il posto che hai scelto è già occupato"
                 message="Ti preghiamo di scegliere un altro posto, grazie"

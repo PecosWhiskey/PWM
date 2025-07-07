@@ -209,7 +209,7 @@ export class CheckInPage implements OnInit {
     this.founded = false;
     //Verifica che il posto scelto dall'utente sia presente nell'aereo
     for(let i=0; i<this.postiTotali.length; i++){
-      if(this.sceltaPosto == this.postiTotali[i]){
+      if(this.sceltaPosto.toUpperCase() == this.postiTotali[i]){
         //Se presente non è necessario proseguire oltre nel ciclo
         this.founded = true;
         break;
@@ -227,7 +227,7 @@ export class CheckInPage implements OnInit {
     for(let i=0; i<this.postiOccupati.length; i++){
       console.log("posto occupato: ", this.postiOccupati[i].posto);
       console.log("posto scelto: ", this.sceltaPosto);
-      if(this.sceltaPosto == this.postiOccupati[i].posto){
+      if(this.sceltaPosto.toUpperCase() == this.postiOccupati[i].posto){
         this.setOpen(true);
         //Essendo occupato il posto la variabile cambia il suo valore in true
         this.occupied = true;
@@ -257,7 +257,7 @@ export class CheckInPage implements OnInit {
     const data = {
       idBiglietto: this.idBiglietto,
       tariffa: this.tariffa,
-      posto: this.sceltaPosto,
+      posto: this.sceltaPosto.toUpperCase(),
       prezzoFinale: this.prezzo
     }
     //Modifica del biglietto con inserimento dei nuovi dati dopo il check-in

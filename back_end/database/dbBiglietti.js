@@ -1,4 +1,4 @@
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3').verbose(); //modulo necessario per la creazione del database
 
 const db = new sqlite3.Database("database\\dbBiglietti.sqlite", (err) => {
     if (err) {

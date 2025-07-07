@@ -307,8 +307,12 @@ import { Router } from '@angular/router';
   Logout(){
     this.tokenService.logout();
     this.isLogged = this.tokenService.isLogged();
-    //imposta il valore di 'role' uguale ad una stringa vuota 
+    //imposta il valore dei dati sull'utente precedentemente memorizzati uguali a stringhe vuote
     this.role = '';
+    this.nome = '';
+    this.cognome = '';
+    this.email = '';
+    this.password = '';
     //Imposta il valore di form a Login
     this.form = 'Login';
     console.log(this.isLogged);

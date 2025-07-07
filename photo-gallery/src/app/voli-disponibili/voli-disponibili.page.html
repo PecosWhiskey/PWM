@@ -66,7 +66,10 @@
                     <span>{{volo.idVolo}}</span>
                   </div>
                   <div class="volo-status">
-                    <ion-badge color="primary">Disponibile</ion-badge>
+                    <ion-badge *ngIf="volo.postiDisponibili > 0" color="primary">Disponibile</ion-badge>
+                  </div>
+                  <div class="volo-status">
+                    <ion-badge *ngIf="volo.postiDisponibili == 0" color="primary">Non disponibile</ion-badge>
                   </div>
                 </div>
                 <ion-card-title>

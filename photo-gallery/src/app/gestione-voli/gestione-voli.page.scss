@@ -51,6 +51,13 @@
     width: 40px;
     height: 40px;
     --border-radius: 12px;
+
+    //Ingrandimento e modifica del colore per il bottone e quindi l'icona
+    &:hover {
+      --color: var(--vaygo-primary);
+      transform: scale(1.05);
+      transition: all 0.3s ease;
+    }
   }
 }
 

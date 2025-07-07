@@ -1,6 +1,7 @@
 const db = require('./dbAdmin'); //importo il database degli Admin
-const bcrypt = require('bcryptjs'); //per eseguire l'hashing della password prima di essere salvata nel database
+const bcrypt = require('bcryptjs'); //modulo necessario per eseguire l'hashing della password prima di essere salvata nel database
 
+//Funzione che inserisce i dati di un nuovo amministratore nel database
 async function inserisciAdmin(email, password) {
   try{
     //genero un seme casuale per l'hashing della password
@@ -23,6 +24,7 @@ async function inserisciAdmin(email, password) {
     }
 }
 
+//Funzione che visualizza i dati di tutti gli amministratori presenti nel database
 async function visualizzaAdmin(){
   try{
     return new Promise((resolve,reject)=>{

@@ -1,5 +1,4 @@
-const sqlite3 = require('sqlite3').verbose(); //per creare il database
-const bcrypt = require('bcryptjs'); //per eseguire l'hashing della password prima di essere salvata nel database
+const sqlite3 = require('sqlite3').verbose(); //modulo necessario per creare il database
 
 const db = new sqlite3.Database("database\\dbAdmin.sqlite", (err) => {
     if (err) {

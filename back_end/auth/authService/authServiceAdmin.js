@@ -1,9 +1,9 @@
 const admin = require('../../models/admin.js');
 
 class AuthServiceAdmin {
-      
+    
+    //Funzione per il login dell'amministratore
     static async loginAdmin({email, password}){
-      console.log("loginAdmin service: ", email, password)  
       try{
             const user = await admin.findByEmail(email);  
            
@@ -20,22 +20,10 @@ class AuthServiceAdmin {
             return user;
 
         }catch (err) {
-            console.log("Errore da loginAdmin : ", err.message);
+            console.log("ERRORE AUTH SERVICE ADMIN: ", err.message);
             throw err;
         }
     }
-
-    // static async verifyAdmin(ID) {
-    //     try {
-    //       const adminID = await admin.findById(ID);
-    //       if (!adminID) {
-    //         throw new Error('Admin non trovato');
-    //       }
-    //       return adminID;
-    //     } catch (error) {
-    //       console.log("Errore da verifyAdmin: ", error.message);
-    //     }
-    // }
 }
 
 module.exports = AuthServiceAdmin;

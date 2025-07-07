@@ -229,7 +229,17 @@
           padding: 6px 12px;
           border-radius: 12px;
         }
-      }
+
+        .volo-status {
+          ion-badge {
+            --background: var(--vaygo-error);
+            --color: var(--vaygo-white);
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 12px;
+          }
+        }
+      }  
     }
 
     ion-card-title {

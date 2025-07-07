@@ -162,6 +162,7 @@
 }
 
 .profile-name {
+  color: var(--vaygo-primary);
   font-size: var(--vaygo-font-size-2xl);
   font-weight: 700;
   margin-bottom: var(--vaygo-spacing-sm);
@@ -169,6 +170,7 @@
 }
 
 .profile-email {
+  color: var(--vaygo-primary);
   font-size: var(--vaygo-font-size-base);
   margin: 0;
   font-weight: 500;

@@ -40,7 +40,7 @@
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 /* Import delle variabili VayGo */
-@import "./theme/variables.scss";
+// @import "./theme/variables.scss";
 
 // VayGo Airlines - Global Styles
 // ===========================================
@@ -349,49 +349,49 @@
   // ===========================================
 
   // Text Utilities
-  .text-primary { color: var(--vaygo-text-primary) !important; }
-  .text-secondary { color: var(--vaygo-text-secondary) !important; }
-  .text-muted { color: var(--vaygo-text-muted) !important; }
-  .text-brand { color: var(--vaygo-primary) !important; }
-  .text-accent { color: var(--vaygo-accent) !important; }
+  // .text-primary { color: var(--vaygo-text-primary) !important; }
+  // .text-secondary { color: var(--vaygo-text-secondary) !important; }
+  // .text-muted { color: var(--vaygo-text-muted) !important; }
+  // .text-brand { color: var(--vaygo-primary) !important; }
+  // .text-accent { color: var(--vaygo-accent) !important; }
 
-  // Background Utilities
-  .bg-primary { background: var(--vaygo-gradient-primary) !important; }
-  .bg-surface { background: var(--vaygo-gradient-surface) !important; }
-  .bg-white { background: var(--vaygo-white) !important; }
+  // // Background Utilities
+  // .bg-primary { background: var(--vaygo-gradient-primary) !important; }
+  // .bg-surface { background: var(--vaygo-gradient-surface) !important; }
+  // .bg-white { background: var(--vaygo-white) !important; }
 
-  // Spacing Utilities
-  .m-xs { margin: var(--vaygo-spacing-xs) !important; }
-  .m-sm { margin: var(--vaygo-spacing-sm) !important; }
-  .m-md { margin: var(--vaygo-spacing-md) !important; }
-  .m-lg { margin: var(--vaygo-spacing-lg) !important; }
-  .m-xl { margin: var(--vaygo-spacing-xl) !important; }
+  // // Spacing Utilities
+  // .m-xs { margin: var(--vaygo-spacing-xs) !important; }
+  // .m-sm { margin: var(--vaygo-spacing-sm) !important; }
+  // .m-md { margin: var(--vaygo-spacing-md) !important; }
+  // .m-lg { margin: var(--vaygo-spacing-lg) !important; }
+  // .m-xl { margin: var(--vaygo-spacing-xl) !important; }
 
-  .p-xs { padding: var(--vaygo-spacing-xs) !important; }
-  .p-sm { padding: var(--vaygo-spacing-sm) !important; }
-  .p-md { padding: var(--vaygo-spacing-md) !important; }
-  .p-lg { padding: var(--vaygo-spacing-lg) !important; }
-  .p-xl { padding: var(--vaygo-spacing-xl) !important; }
+  // .p-xs { padding: var(--vaygo-spacing-xs) !important; }
+  // .p-sm { padding: var(--vaygo-spacing-sm) !important; }
+  // .p-md { padding: var(--vaygo-spacing-md) !important; }
+  // .p-lg { padding: var(--vaygo-spacing-lg) !important; }
+  // .p-xl { padding: var(--vaygo-spacing-xl) !important; }
 
-  // Border Radius Utilities
-  .rounded-sm { border-radius: var(--vaygo-radius-sm) !important; }
-  .rounded-md { border-radius: var(--vaygo-radius-md) !important; }
-  .rounded-lg { border-radius: var(--vaygo-radius-lg) !important; }
-  .rounded-xl { border-radius: var(--vaygo-radius-xl) !important; }
+  // // Border Radius Utilities
+  // .rounded-sm { border-radius: var(--vaygo-radius-sm) !important; }
+  // .rounded-md { border-radius: var(--vaygo-radius-md) !important; }
+  // .rounded-lg { border-radius: var(--vaygo-radius-lg) !important; }
+  // .rounded-xl { border-radius: var(--vaygo-radius-xl) !important; }
 
-  // Shadow Utilities
-  .shadow-sm { box-shadow: 0 2px 8px var(--vaygo-shadow) !important; }
-  .shadow-md { box-shadow: 0 4px 16px var(--vaygo-shadow-medium) !important; }
-  .shadow-lg { box-shadow: 0 8px 32px var(--vaygo-shadow-strong) !important; }
+  // // Shadow Utilities
+  // .shadow-sm { box-shadow: 0 2px 8px var(--vaygo-shadow) !important; }
+  // .shadow-md { box-shadow: 0 4px 16px var(--vaygo-shadow-medium) !important; }
+  // .shadow-lg { box-shadow: 0 8px 32px var(--vaygo-shadow-strong) !important; }
 
   // Animation & Interaction
-  .vaygo-hover-lift {
-    transition: transform var(--vaygo-transition-base);
+  // .vaygo-hover-lift {
+  //   transition: transform var(--vaygo-transition-base);
 
-    &:hover {
-      transform: translateY(-2px);
-    }
-  }
+  //   &:hover {
+  //     transform: translateY(-2px);
+  //   }
+  // }
 
   .vaygo-fade-in {
     animation: vaygoFadeIn 0.6s ease-out;
@@ -410,17 +410,17 @@
   }
 
   // Loading States
-  .vaygo-skeleton {
-    background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.5) 50%, var(--vaygo-background) 75%);
-    background-size: 200% 100%;
-    animation: vaygoLoading 1.5s infinite;
-    border-radius: var(--vaygo-radius-sm);
-  }
+  // .vaygo-skeleton {
+  //   background: linear-gradient(90deg, var(--vaygo-background) 25%, rgba(255,255,255,0.5) 50%, var(--vaygo-background) 75%);
+  //   background-size: 200% 100%;
+  //   animation: vaygoLoading 1.5s infinite;
+  //   border-radius: var(--vaygo-radius-sm);
+  // }
 
-  @keyframes vaygoLoading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
+  // @keyframes vaygoLoading {
+  //   0% { background-position: 200% 0; }
+  //   100% { background-position: -200% 0; }
+  // }
 
   // Responsive Utilities
   // ===========================================

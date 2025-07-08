@@ -424,20 +424,20 @@
 
   // Responsive Utilities
   // ===========================================
-  @media (max-width: 768px) {
-    .mobile-only { display: block !important; }
-    .desktop-only { display: none !important; }
+  // @media (max-width: 768px) {
+  //   .mobile-only { display: block !important; }
+  //   .desktop-only { display: none !important; }
 
-    .mobile-stack {
-      flex-direction: column !important;
-      gap: var(--vaygo-spacing-md) !important;
-    }
-  }
+  //   .mobile-stack {
+  //     flex-direction: column !important;
+  //     gap: var(--vaygo-spacing-md) !important;
+  //   }
+  // }
 
-  @media (min-width: 769px) {
-    .mobile-only { display: none !important; }
-    .desktop-only { display: block !important; }
-  }
+  // @media (min-width: 769px) {
+  //   .mobile-only { display: none !important; }
+  //   .desktop-only { display: block !important; }
+  // }
 
   // Accessibility
   // ===========================================
@@ -450,12 +450,12 @@
   }
 
   // Focus States
-  .vaygo-focus-visible {
-    &:focus-visible {
-      outline: 2px solid var(--vaygo-secondary);
-      outline-offset: 2px;
-    }
-  }
+  // .vaygo-focus-visible {
+  //   &:focus-visible {
+  //     outline: 2px solid var(--vaygo-secondary);
+  //     outline-offset: 2px;
+  //   }
+  // }
 
   // Dark Mode Style
   // ===========================================

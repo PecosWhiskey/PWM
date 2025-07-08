@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode'; //libreria che serve per decodificare il token
 
+//Interfaccia che definisce le proprietà del payload del token ricevuto
 interface TokenPayload {
   idCliente: string;
   nome: string;
@@ -69,12 +70,10 @@ export class TokenService {
     if (!token) return true;
 
     try {
-      //Divide il token nelle sue tre parti: header, payload e signature e ricava solo il payload decodificandolo e ricreando
-      // const payload = JSON.parse(atob(token.split('.')[1])); //l'oggetto originale dove troviamo la data di scadenza
-      // console.log("Payload del tokan: ", payload);
+      //Decodifica il token
       const decoded = jwtDecode<TokenPayload>(token);
       console.log("Token decodificato isTokenExpired: ", decoded);
-
+      //Ottiene la data corrente
       const currentTime = Math.floor(Date.now() / 1000); //tempo attuale in secondi
 
       //Confronta il tempo attuale con la data di scadenza del token (restituisce true se il token è scaduto)
@@ -99,26 +98,11 @@ export class TokenService {
     if (tokenArray.length !== 3) {
       throw new Error('Formato del token non valido');
     }
-
+    //Decodifica il token
     const decodedInfo = jwtDecode<TokenPayload>(token);
     console.log("Token decodificato: ", decodedInfo);
-    //Ricava il payload
-    // const payload = tokenArray[1];
-    
-    //Decodifica da Base64 e ottiene una stringa
-    // const decoded = atob(payload);
-    
-    //Ricava l'oggetto originario
-    // const decodedInfo = JSON.parse(decoded);
 
     //Crea l'oggetto che contine solo le informazioni sul cliente contenute nel payload
-    // const clientInfo = {
-    //   idCliente: decodedInfo.idCliente, 
-    //   nome: decodedInfo.nome,
-    //   cognome: decodedInfo.cognome,
-    //   email: decodedInfo.email, 
-    //   role: decodedInfo.role};
-
     const clientInfo = {
       idCliente: decodedInfo.idCliente, 
       nome: decodedInfo.nome,
@@ -149,17 +133,9 @@ getAdminInfoFromToken(token: string): any {
       throw new Error('Formato del token non valido');
     }
 
+    //Decodifica il token
     const decodedInfo = jwtDecode<TokenPayload>(token);
     console.log("Token decodificato: ", decodedInfo);
-
-    //Ricava il payload
-    // const payload = tokenArray[1];
-    
-    // //Decodifica da Base64 e ottiene una stringa
-    // const decoded = atob(payload);
-    
-    // //Ricava l'oggetto originario
-    // const decodedInfo = JSON.parse(decoded);
 
     //Crea l'oggetto che contine solo le informazioni sull'amministratore contenute nel payload
     const adminInfo = {idCliente: decodedInfo.idCliente, email: decodedInfo.email, role: decodedInfo.role};

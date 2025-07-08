@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  IonContent,
-  IonHeader,
-  IonToolbar,
-  IonCardContent,
-  IonCardHeader,
-  IonCard,
-  IonCardTitle,
-  IonButton,
-  IonIcon,
-  IonBadge
-} from '@ionic/angular/standalone';
+import { IonContent,IonHeader,IonToolbar,IonCardContent,IonCardHeader,IonCard,IonCardTitle,IonButton,IonIcon,IonBadge} from '@ionic/angular/standalone';
 import { GestioneVoliService } from '../gestione-voli/gestione-voli.service';
 import { Biglietto } from '../models/biglietto.models';
 import { RouterModule, RouterLink } from '@angular/router';
@@ -25,22 +14,8 @@ import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutl
   templateUrl: './prenotazioni.page.html',
   styleUrls: ['./prenotazioni.page.scss'],
   standalone: true,
-  imports: [
-    IonBadge,
-    IonIcon,
-    IonButton,
-    IonCardTitle,
-    IonCard,
-    IonCardHeader,
-    IonCardContent,
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    RouterLink
-  ]
+  imports: [ IonBadge,IonIcon,IonButton,IonCardTitle,IonCard,IonCardHeader,IonCardContent,
+    IonContent,IonHeader,IonToolbar,CommonModule,FormsModule,RouterModule,RouterLink]
 })
 export class PrenotazioniPage implements OnInit {
 
@@ -68,6 +43,7 @@ export class PrenotazioniPage implements OnInit {
         error: (err) => {
           console.log("Search error: ", err);
           this.richiestaEsito = err.error.message;
+          //Messaggi visualizzati dall'amministratore
           if(this.richiestaEsito != "Non ci sono biglietti acquistati!"){
             this.richiestaEsito = "ERRORE: Non è possibile visualizzare le prenotazioni ricevute!";
           }

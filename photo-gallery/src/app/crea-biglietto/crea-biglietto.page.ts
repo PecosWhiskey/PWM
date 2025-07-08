@@ -5,23 +5,8 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { informationCircleOutline } from 'ionicons/icons';
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonButtons,
-  IonBackButton,
-  IonButton,
-  IonItem,
-  IonInput,
-  IonLabel,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonIcon
-} from '@ionic/angular/standalone';
+import {IonContent,IonHeader,IonTitle,IonToolbar,IonButtons,IonBackButton,IonButton,IonItem,IonInput,
+  IonLabel,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonIcon} from '@ionic/angular/standalone';
 import { Volo } from '../models/volo.models';
 import { SessionStorageService } from '../services/session-storage.service';
 import { BigliettiService } from '../services/biglietti.service';
@@ -31,30 +16,12 @@ import { BigliettiService } from '../services/biglietti.service';
   templateUrl: './crea-biglietto.page.html',
   styleUrls: ['./crea-biglietto.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    IonButtons,
-    IonBackButton,
-    IonButton,
-    IonItem,
-    IonInput,
-    IonLabel,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonIcon
-  ]
+  imports: [CommonModule,FormsModule,IonContent,IonHeader,IonTitle,IonToolbar,IonButtons,IonBackButton,
+    IonButton,IonItem,IonInput,IonLabel,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonIcon]
 })
 export class CreaBigliettoPage implements OnInit {
 
   constructor(
-    private router: Router,
     private location: Location,
     private sessionStorage: SessionStorageService,
     private bigliettiService: BigliettiService
@@ -107,6 +74,7 @@ export class CreaBigliettoPage implements OnInit {
       prezzo: 0.0,
       postiDisponibili: 0
   };
+
   sceltaUtente=  '';
 
   //Array che memorizza ogni biglietto che viene inserito nel database
@@ -127,7 +95,7 @@ export class CreaBigliettoPage implements OnInit {
         console.log(this.bigliettoRitorno);
       }  
     });
-
+    //Recupera il numero di passeggeri dal Session Storage
     const passeggeri = this.sessionStorage.getItem('numero passeggeri');
     if(passeggeri != 0){
       this.numPasseggeri = passeggeri;
@@ -136,12 +104,12 @@ export class CreaBigliettoPage implements OnInit {
       //Richiamo alla funzione che inizializza l'array di oggetti, con i dati dei passeggeri, con valori nulli
       this.inizializzaPasseggeri();
     }
-
+    //Recupera la scelta tra "Andata e ritorno" o "Solo Andata" dal Session Storage   
     const scelta = this.sessionStorage.getItem('sceltaUtente');
     if(scelta != null){
       this.sceltaUtente = scelta;
     }
-
+    //Recupera il numero di biglietti creati dal service Biglietti
     this.bigliettiService.getnumBigliettiCreatiAndata().subscribe(numero => {
       this.numBigliettiCreatiAndata = numero;
     });
@@ -165,9 +133,9 @@ export class CreaBigliettoPage implements OnInit {
     biglietto.oraArrivo != '' && biglietto.prezzo != 0.0 && biglietto.postiDisponibili != 0
   }
 
-  //Funzione che inizializza un array di lunghezza pari al numero di passeggeri con i dati da inserire nel form a valori nulli
+  //Funzione che inizializza un array di lunghezza pari al numero di passeggeri, con i dati da inserire nel form, a valori nulli
   inizializzaPasseggeri() {
-    // Svuota l'array prima di inizializzare
+    //Svuota l'array prima di inizializzare
     this.passeggeri = [];
 
     for (let i = 0; i < this.numPasseggeri; i++) {
@@ -192,8 +160,7 @@ export class CreaBigliettoPage implements OnInit {
         this.idPasseggero = response.data.idPasseggero;
 
         //Creato il passeggero procedo a creare il biglietto
-        //Ottengo la data corrente
-        const data = new Date();
+        const data = new Date(); //ottengo la data corrente
         this.dataAcquisto = data.toISOString().split('T')[0]; //la traformo in formato ISO e ricavo solo la prima parte (YYYY-MM-DD)
         //Creazione del biglietto di andata
         const datiAndata = {
@@ -208,11 +175,11 @@ export class CreaBigliettoPage implements OnInit {
 
         console.log("id volo biglietto andata: ", this.bigliettoAndata);
         console.log("ID VOLO: ", datiAndata.idVolo);
-
+        //Richiamo la funzione per inserire i dati del bgilietto nel database
         this.bigliettiService.CreaBiglietto(datiAndata).subscribe({
           next: (response) => {
             console.log('Creation success:', response);
-            //Memorizza il numero di biglietti creati nel BigliettiService
+            //Memorizzo il numero di biglietti creati nel BigliettiService
             this.numBigliettiCreatiAndata++;
             this.bigliettiService.setnumBigliettiCreatiAndata(this.numBigliettiCreatiAndata);
             console.log("Biglietti creati andata: ", this.bigliettiService.getnumBigliettiCreatiAndata());
@@ -240,7 +207,9 @@ export class CreaBigliettoPage implements OnInit {
           },
            error: (err) => {
             console.log('Creation error:', err);
+            //Messaggi di errore visualizzati dall'utente
             if(this.richiestaEsito == "Biglietto per questo passeggero e per questo volo già acquistato!"){
+              //Personalizzo il messaggio specificando che il biglietto già acquistato è quello di andata
               this.richiestaEsito = "Biglietto di andata per questo passeggero e per questo volo già acquistato!";
             }else{
               this.richiestaEsito = "ERRORE: Dati per il biglietto di andata non validi!";
@@ -250,7 +219,7 @@ export class CreaBigliettoPage implements OnInit {
 
         //Se il cliente ha anche acquistato il biglietto di ritorno
         if(this.valutaBiglietto(this.bigliettoRitorno)){
-        //Creazione biglietto di ritorno
+        //Creazione del biglietto di ritorno
           const datiRitorno = {
             idVolo: this.bigliettoRitorno.idVolo,
             idPasseggero : this.idPasseggero,
@@ -260,18 +229,18 @@ export class CreaBigliettoPage implements OnInit {
             prezzoFinale: this.bigliettoRitorno.prezzo,
             dataAcquisto: this.dataAcquisto
           }
-
+          //Richiamo la funzione per inserire i dati del biglietto nel database  
           this.bigliettiService.CreaBiglietto(datiRitorno).subscribe({
             next: (response) => {
               console.log('Creation success:', response);      
-              //Memorizza il numero di biglietti creati nel BigliettiService
+              //Memorizzo il numero di biglietti creati nel BigliettiService
               this.numBigliettiCreatiRitorno++;
               this.bigliettiService.setnumBigliettiCreatiRitorno(this.numBigliettiCreatiRitorno);
               console.log("biglietti creati ritorno: ", this.bigliettiService.getnumBigliettiCreatiRitorno());
               this.bigliettiCreati.push(response.data);
               this.bigliettoCreato = true;
 
-              //Decremento per il volo di ritorno
+              //Decremento del numero di posti disponibili per il volo di ritorno
               const postiNuoviR = this.bigliettoRitorno.postiDisponibili - this.numBigliettiCreatiRitorno;
               const datiVoloR = {
                 idVolo: this.bigliettoRitorno.idVolo,
@@ -291,7 +260,9 @@ export class CreaBigliettoPage implements OnInit {
              error: (err) => {
               console.log('Creation error:', err);
               this.richiestaEsito = err.error.message;
+              //Messaggi di errore visualizzati dall'utente
               if(this.richiestaEsito == "Biglietto per questo passeggero e per questo volo già acquistato!"){
+                //Personalizzo il messaggio specificando che il biglietto già acquistato è quello di ritorno
                 this.richiestaEsito = "Biglietto di ritorno per questo passeggero e per questo volo già acquistato!";
               }else{
                 this.richiestaEsito = "ERRORE: Dati per il biglietto di ritorno non validi!";

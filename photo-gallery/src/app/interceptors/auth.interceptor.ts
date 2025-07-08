@@ -20,8 +20,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       console.log("Richiesta di registrazione o login...");
 
       return next(req).pipe(
-        //Se la richiesta viene inoltrata correttamente viene restituto il messaggio corrispondente
-        // tap(response => console.log("Richiesta effettuata con successo!")),
         //Se si verifica un errore, questo viene lanciato e propagato al livello superiore
         catchError((httpError: HttpErrorResponse) => {
           console.log("Errore nella richiesta di registrazione o login:", httpError);
@@ -36,13 +34,13 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   if(token){
     if(isExpired){
+      //Se il token è scaduto l'utente viene reindirizzato al login
       console.log('Token scaduto! Reindirizzamento al login...');
       logout(tokenService, router);
       return throwError(() => new Error('Token scaduto'));
     }else{
       console.log("Effettuando la richiesta con token...");
       let clonedReq = req;
-      // console.log("Richiesta originaria: ", req.headers.keys);
 
       //Modifica della richiesta con inserimento del token
       clonedReq = req.clone({
@@ -50,12 +48,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           Authorization:`Bearer ${token}`,
         }
       })
-      // console.log("Headers nella richiesta clonata:", clonedReq.headers.keys().map(k => `${k}: ${clonedReq.headers.get(k)}`));
-      // console.log("Campo authorization clonedReq: ", clonedReq.headers.has('Authorization'));
-
       //Viene inviata al server la richiesta modificata, che include il token
       return next(clonedReq).pipe(
-        // tap(response => console.log("Richiesta effettuata con successo!")),
           //cattura eventuali errori
           catchError((httpError: HttpErrorResponse) => {
             if (httpError.status === 401 || httpError.status === 403) {
@@ -63,7 +57,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
               logout(tokenService, router);
             }  
             console.log("Errore nella richiesta http", httpError);
-            //Propaga l'errore
             return throwError(() => httpError);
           }
         )
@@ -73,7 +66,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     //Se il token non è presente la richiesta non viene modificata
     console.log("Effettuando la richiesta senza token...");
     return next(req).pipe(
-      // tap(response => console.log("Richiesta effettuata con successo!")),
       catchError((httpError:HttpErrorResponse) => {
         console.log("Errore nella richiesta http", httpError);
         return throwError(()=>httpError);

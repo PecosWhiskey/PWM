@@ -15,22 +15,8 @@ import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutl
   templateUrl: './biglietti-acquistati.page.html',
   styleUrls: ['./biglietti-acquistati.page.scss'],
   standalone: true,
-  imports: [
-    IonBadge,
-    IonIcon,
-    IonButton,
-    IonCardTitle,
-    IonCard,
-    IonCardHeader,
-    IonCardContent,
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    RouterLink
-  ]
+  imports: [IonBadge,IonIcon,IonButton,IonCardTitle,IonCard,IonCardHeader,IonCardContent,IonContent,
+    IonHeader,IonToolbar,CommonModule,FormsModule,RouterModule,RouterLink]
 })
 export class BigliettiAcquistatiPage implements OnInit {
 
@@ -54,7 +40,7 @@ export class BigliettiAcquistatiPage implements OnInit {
 
   //Funzione che permette di ottenere i biglietti acquistati direttamente dal database
   caricaBiglietti(){
-    //Ottengo l'idCliente che serve per inviare la richiesta al servers
+    //Ottengo l'idCliente che serve per inviare la richiesta al server
     this.clientInfo = this.tokenService.getClientInfo();
     this.idCliente = this.clientInfo.idCliente;
 
@@ -65,11 +51,13 @@ export class BigliettiAcquistatiPage implements OnInit {
       },
        error: (err) => {
         console.log("Search error: ", err);
+        //Messaggio visualizzato dal cliente in caso di errore
         this.richiestaEsito = "Non è possibile visualizzare i biglietti acquistati!";
        }
     })
   }
 
+  
   //Funzione che approssima il prezzo finale del biglietto modificato mostrato
   Approssima(prezzo: number): number {
     return Math.round(prezzo * Math.pow(10, 2)) / Math.pow(10, 2);

@@ -1,21 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  IonContent,
-  IonHeader,
-  IonToolbar,
-  IonButton,
-  IonIcon,
-  IonItem,
-  IonInput,
-  IonSelect,
-  IonSelectOption,
-  IonAlert,
-  IonModal,
-  IonTitle,
-  IonButtons
-} from '@ionic/angular/standalone';
+import {IonContent,IonHeader,IonToolbar,IonButton,IonIcon,IonItem,IonInput,
+  IonSelect,IonSelectOption,IonAlert,IonModal,IonTitle,IonButtons} from '@ionic/angular/standalone';
 import { RouterModule, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
@@ -30,26 +17,10 @@ import { Biglietto } from '../models/biglietto.models';
   templateUrl: './check-in.page.html',
   styleUrls: ['./check-in.page.scss'],
   standalone: true,
-  imports: [
-    IonIcon,
-    IonButton,
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    IonItem,
-    IonInput,
-    IonSelect,
-    IonSelectOption,
-    IonAlert,
-    IonModal,
-    IonTitle,
-    IonButtons,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    RouterLink
-  ]
+  imports: [IonIcon,IonButton,IonContent,IonHeader,IonToolbar,IonItem,IonInput,IonSelect,IonSelectOption,
+    IonAlert,IonModal,IonTitle,IonButtons,CommonModule,FormsModule,RouterModule,RouterLink]
 })
+
 export class CheckInPage implements OnInit {
 
   constructor(private bigliettiService: BigliettiService) {
@@ -67,15 +38,15 @@ export class CheckInPage implements OnInit {
   richiestaEsito = '';
   found = false; //Permette la prosecuzione del check-in se il biglietto è stato trovato
 
-  // Capienza fissa di tutti i voli: 132 posti
-  readonly CAPIENZA_AEREO = 132;
+  
+  readonly CAPIENZA_AEREO = 132; //Capienza fissa di tutti i voli: 132 posti
   postiLettere = ['A', 'B', 'C', 'D'];
   postiTotali: string[] = [];
   postiOccupati: any[] = [];
   idVolo = '';
   bigliettoModificato: any;
   occupied = false; //Non permette di proseguire con il completamento del check-in se il posto scelto è già occupato
-  founded = false; //Non permette di proseguire con il check-in se l'utente sceglie un posto non presente sull'aereo
+  founded = false; //Non permette di proseguire con il completamento del check-in se l'utente sceglie un posto non presente sull'aereo
 
   //Dati necessari per il check-in
   sceltaPosto = '';
@@ -83,48 +54,15 @@ export class CheckInPage implements OnInit {
   //Prezzo finale del biglietto calcolato in base alla tariffa scelta
   prezzo = 0.0;
 
-  //Variabili che gestiscono l'apertura della modale per mostrare il biglietto modificato
-  isModalOpen = false;
-
-  //Variabili che gestiscono l'apertura della modale per la mappa dei posti
-  isSeatMapOpen = false;
-
-  setModalOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
-
-  //Funzioni per gestire l'apertura della modale per la mappa dei posti
-  openSeatMap() {
-    this.isSeatMapOpen = true;
-  }
-
-  closeSeatMap() {
-    this.isSeatMapOpen = false;
-  }
-
-  //Funzione per calcolare il numero di posti disponibili
-  getPostiDisponibili(): number {
-    return this.CAPIENZA_AEREO - this.postiOccupati.length;
-  }
-
-  // //Funzione per ottenere la lista dei posti occupati come stringa
-  // getPostiOccupatiList(): string {
-  //   if (this.postiOccupati.length === 0) {
-  //     return "Nessun posto occupato";
-  //   }
-  //   return this.postiOccupati.map(posto => posto.posto).join(', ');
-  // }
-
   ngOnInit() {
     //Recupero del biglietto modificato dopo il check-in per mostrarlo all'utente
     this.bigliettiService.getBigliettoModificato().subscribe(biglietto => {
       this.bigliettoModificato = biglietto;
-      console.log("BIGLIETTO MODIFICATO NGONINIT: ", this.bigliettoModificato);
+      console.log("BIGLIETTO MODIFICATO ngOnInit: ", this.bigliettoModificato);
     });
 
     //Recupero dei posti totali dal Local Storage
     const posti = localStorage.getItem('posti totali');
-    console.log("POSTI: ", posti);
     //Verifica se i dati sono presenti
     if(posti != null){
       //Se presenti viene eseguito il parsing dei dati per ottenere l'array originale
@@ -139,14 +77,42 @@ export class CheckInPage implements OnInit {
         const letteraIndex = (i - 1) % this.postiLettere.length;
         //Trovo la lettere corrispondente all'indice calcolato
         const lettera = this.postiLettere[letteraIndex];
+        //Inserisco il posto nell'array
         this.postiTotali.push(riga + lettera);
       }
-      console.log("POSTI TOTALI GENERATI DOPO IL CICLO FOR: ", this.postiTotali);
+      console.log("POSTI TOTALI GENERATI: ", this.postiTotali);
       //Memorizzo nuovamente i posti nel LocalStorage
       localStorage.setItem("posti totali", JSON.stringify(this.postiTotali));
     }
 
     console.log(`Aereo con capienza: ${this.CAPIENZA_AEREO} posti`);
+  }
+
+  //Variabile e funzioni che gestiscono l'apertura e la chiusura della modale per mostrare il biglietto modificato
+  isModalOpen = false;
+
+  setModalOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  closeModal() {
+    this.setModalOpen(false);
+  }
+
+  //Variabile e funzioni che gestiscono l'apertura e la chiusura della modale per la mappa dei posti
+  isSeatMapOpen = false;
+
+  openSeatMap() {
+    this.isSeatMapOpen = true;
+  }
+
+  closeSeatMap() {
+    this.isSeatMapOpen = false;
+  }
+
+  //Funzione per calcolare il numero di posti disponibili
+  getPostiDisponibili(): number {
+    return this.CAPIENZA_AEREO - this.postiOccupati.length;
   }
 
   //Variabili e funzioni che gestiscono la comparsa dell'alert se il posto scelto dal cliente è già occupato
@@ -156,7 +122,8 @@ export class CheckInPage implements OnInit {
   setOpen(isOpen: boolean) {
     this.isAlertOpen = isOpen;
   }
-
+  
+  //Variabili e funzioni che gestiscono la comparsa dell'alert se il posto scelto dal cliente non è presente sull'aereo
   isFoundedAlertOpen= false;
   alertFoundedButtons = ['OK'];
 
@@ -166,14 +133,16 @@ export class CheckInPage implements OnInit {
 
   //Funzione che ricerca il biglietto con idBiglietto e idPasseggero inseriti dall'utente
   Cerca(){
+    //Creo l'oggeto con i dati necessari
     const dati = {
       idPasseggero: this.idPasseggero,
       idBiglietto: this.idBiglietto
     }
-
+    //Richiamo la funzione che esegue la richiesta al server    
     this.bigliettiService.CercaBiglietto(dati).subscribe({
       next: (response) => {
         console.log('Search success: ', response);
+        //Il cliente può proseguire con il check-in
         this.found = true;
         this.bigliettoTrovato = response.data;
 
@@ -193,10 +162,13 @@ export class CheckInPage implements OnInit {
        error: (err)=> {
         console.log('Search error: ', err);
         this.richiestaEsito = err.error.message;
+        //Il cliente non può continuare con il check-in
         this.found = false;
         if(this.richiestaEsito =="Check-in già fatto!"){
+          //Apertura dell'alert per check-in già fatto
           this.setOpen(true);
         }else if(this.richiestaEsito != "Non ci sono biglietti acquistati!"){
+          //Messaggio visualizzato dal cliente per qualsiasi altro messaggio di errore giunto dal server
           this.richiestaEsito = "ERRORE: Dati non validi!";
         }
        }
@@ -225,16 +197,15 @@ export class CheckInPage implements OnInit {
     this.occupied = false;
     //Verifica che il posto non sia già stato prenotato
     for(let i=0; i<this.postiOccupati.length; i++){
-      console.log("posto occupato: ", this.postiOccupati[i].posto);
-      console.log("posto scelto: ", this.sceltaPosto);
       if(this.sceltaPosto.toUpperCase() == this.postiOccupati[i].posto){
+        //Apertura dell'alert che avvisa l'utente
         this.setOpen(true);
-        //Essendo occupato il posto la variabile cambia il suo valore in true
+        //Trovato il posto occupato non è neccessario continuare con il ciclo
         this.occupied = true;
         break;
       }
     }
-    //Se il posto scelto è già occupato mostra l'alert ed esce dalla funzione per non continuare con la modifica del biglietto
+    //Se il posto scelto è già occupato esce dalla funzione per non continuare con la modifica del biglietto
     if(this.occupied){
       return;
     }
@@ -267,12 +238,14 @@ export class CheckInPage implements OnInit {
         this.bigliettoModificato = response.data;
         console.log("BIGLIETTO MODIFICATO: ", this.bigliettoModificato);
         this.bigliettiService.setBigliettoModificato(this.bigliettoModificato);
+        //Apertura della modale che mostra il biglietto finale
         this.setModalOpen(true);
       },
        error: (err) => {
         console.log("Modification error: ", err);
         this.richiestaEsito = err.error.message;
         if(this.richiestaEsito != 'Nessun biglietto da modificare trovato' && this.richiestaEsito != 'Errore nella modifica del biglietto'){
+          //Messaggio visualizzato dall'utente per messaggi di errore diversi da quelli definiti nella condizione if
           this.richiestaEsito = "ERRORE: Dati non validi!";
         }
        }
@@ -282,10 +255,5 @@ export class CheckInPage implements OnInit {
   //Funzione che approssima il prezzo finale del biglietto modificato mostrato
   Approssima(prezzo: number): number {
     return Math.round(prezzo * Math.pow(10, 2)) / Math.pow(10, 2);
-  }
-
-  //Funzione per chiudere la modale
-  closeModal() {
-    this.setModalOpen(false);
   }
 }

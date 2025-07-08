@@ -1,96 +1,8 @@
-/* import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton, IonItem, IonDatetime, IonInput } from '@ionic/angular/standalone';
-import { GestioneVoliService } from './gestione-voli.service';
-
-@Component({
-  selector: 'app-gestione-voli',
-  templateUrl: './gestione-voli.page.html',
-  styleUrls: ['./gestione-voli.page.scss'],
-  standalone: true,
-  imports: [IonInput, IonDatetime, IonButton, IonItem, IonButton, IonContent, CommonModule, FormsModule]
-})
-export class GestioneVoliPage{
-
-  constructor(private gestioneVoliService: GestioneVoliService){}
-
-  idVolo = '';
-  partenza = '';
-  destinazione = '';
-  data = '';
-  oraPartenza = '';
-  oraArrivo = '';
-  prezzo = 0.0;
-  postiDisponibili = 0;
-  creaVoloEsito = '';
-
-  formattaData(dataRicevuta:string, ora:string){
-    console.log("Data: ", dataRicevuta);
-    const dataStringa = dataRicevuta.split('T')[0]; //..[0] corrisponde alla data [1] al resto della stringa dopo T
-//    const ora = data.split('T')[1].split('.')[0]; //tolgo millisecondi ne fuso orario
-    console.log("Data Stringa: ", dataStringa);
-    const dataFormattata = dataStringa + ' ' + ora;
-    console.log("Data formattata: ", dataFormattata);
-    return dataFormattata;
-  }
-
-  CreaVolo(){
-    const oraP = this.formattaData(this.data, this.oraPartenza);
-    const oraA = this.formattaData(this.data, this.oraArrivo);
-    const datiVolo = {
-      idVolo: this.idVolo,
-      partenza: this.partenza,
-      destinazione: this.destinazione,
-      oraPartenza: oraP,
-      oraArrivo: oraA,
-      prezzo: this.prezzo,
-      postiDisponibili: this.postiDisponibili
-    }
-    this.gestioneVoliService.Crea(datiVolo).subscribe({
-        next: (response) => {
-        console.log('Creation success:', response);
-        this.creaVoloEsito= response.message;
-       },
-       error: (err) => {
-        console.log('Creation error:', err);
-        this.creaVoloEsito = err.error.message;
-       },
-      });
-  }
-
-  ModificaVolo(){
-    const oraP = this.formattaData(this.data, this.oraPartenza);
-    const oraA = this.formattaData(this.data, this.oraArrivo);
-    const datiVolo = {
-      idVolo: this.idVolo,
-      partenza: this.partenza,
-      destinazione: this.destinazione,
-      oraPartenza: oraP,
-      oraArrivo: oraA,
-      prezzo: this.prezzo,
-      postiDisponibili: this.postiDisponibili
-    }
-    this.gestioneVoliService.Modifica(datiVolo).subscribe({
-        next: (response) => {
-        console.log('Modification success:', response);
-        this.creaVoloEsito= response.message;
-       },
-       error: (err) => {
-        console.log('Modification error:', err);
-        console.log('Impossibile modificare il volo, perché assente nel database!');
-        this.creaVoloEsito = err.error.message;
-       },
-      });
-  }
-}
-*/
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton, IonItem, IonDatetime, IonInput,IonIcon, IonAlert, IonToolbar,
-  IonHeader} from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonItem, IonDatetime, IonInput,IonIcon, IonAlert, IonToolbar,IonHeader} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
   calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, barcodeOutline, 
@@ -104,14 +16,14 @@ import { Volo } from '../models/volo.models';
   templateUrl: './gestione-voli.page.html',
   styleUrls: ['./gestione-voli.page.scss'],
   standalone: true,
-  imports: [IonAlert, IonInput, IonDatetime, IonButton, IonItem, IonContent, IonIcon, IonToolbar, IonHeader,
-    CommonModule, FormsModule, RouterModule, RouterLink]
+  imports: [IonAlert, IonInput, IonDatetime, IonButton, IonItem, IonContent, IonIcon, 
+    IonToolbar, IonHeader,CommonModule, FormsModule, RouterModule, RouterLink]
 })
 export class GestioneVoliPage implements OnInit{
 
   constructor(private gestioneVoliService: GestioneVoliService) {
     addIcons({ createOutline, listOutline, addCircleOutline, personOutline, ticketOutline, airplaneOutline,
-  calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, barcodeOutline, informationCircleOutline });
+      calendarOutline, timeOutline, peopleOutline, cardOutline, locationOutline, barcodeOutline, informationCircleOutline });
   }
 
   //Dati richiesti in fase di creazione/modifica di un volo
@@ -175,6 +87,7 @@ export class GestioneVoliPage implements OnInit{
 
   //Funzione che gestisce la creazione di un volo
   CreaVolo() {
+    //Formatto le date
     const oraP = this.formattaData(this.data, this.oraPartenza);
     const oraA = this.formattaData(this.data, this.oraArrivo);
     const datiVolo = {
@@ -186,6 +99,7 @@ export class GestioneVoliPage implements OnInit{
       prezzo: this.prezzo,
       postiDisponibili: this.postiDisponibili
     }
+    //Richiamo la funzione che esegue la richiesta per inserire i dati nel database
     this.gestioneVoliService.Crea(datiVolo).subscribe({
       next: (response) => {
         console.log('Creation success:', response);
@@ -198,6 +112,7 @@ export class GestioneVoliPage implements OnInit{
       error: (err) => {
         console.log('Creation error:', err);
         this.creaVoloEsito = err.error.message;
+        //Messaggi di errore visualizzati dall'amministratore
         if(this.creaVoloEsito != 'Volo già presente!'){
           this.creaVoloEsito = "ERRORE: dati non validi!";
         }

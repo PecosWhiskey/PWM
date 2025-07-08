@@ -10,7 +10,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   try { 
-    // Controlla se l'utente è loggato 
+    // Controlla se l'utente è autenticato
     const isLogged = tokenService.isLogged(); 
     
     if (isLogged) { 

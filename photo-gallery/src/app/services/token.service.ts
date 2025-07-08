@@ -19,7 +19,7 @@ export class TokenService {
 
   private TOKEN_KEY = "access token"; //chiave a cui viene associato il token
   private CLIENT_KEY = "client info"; //chiave a cui vengono associate le info del cliente presenti nel payload del token
-  private ADMIN_KEY = "admin info"; //chiave a cui vengono associate le info dell'amministratore presenti nel payload del token
+  private ADMIN_KEY = "admin info";   //chiave a cui vengono associate le info dell'amministratore presenti nel payload del token
 
   constructor() {}
 
@@ -72,14 +72,14 @@ export class TokenService {
     try {
       //Decodifica il token
       const decoded = jwtDecode<TokenPayload>(token);
-      console.log("Token decodificato isTokenExpired: ", decoded);
+      console.log("Token decodificato in isTokenExpired: ", decoded);
       //Ottiene la data corrente
       const currentTime = Math.floor(Date.now() / 1000); //tempo attuale in secondi
 
       //Confronta il tempo attuale con la data di scadenza del token (restituisce true se il token è scaduto)
       return decoded.exp < currentTime;
     } catch (error) {
-      console.error('Errore nel parsing del token:', error);
+      console.error('Errore nella decodifica del token:', error);
       return true; //se si è verificato un errore di qualsiasi tipo il token non può essere valido
     }
   }
@@ -91,13 +91,6 @@ export class TokenService {
       throw new Error('Token non fornito');
     }
 
-    //Divide il token nelle sue parti (header.payload.signature)
-    const tokenArray = token.split('.');
-    
-    //Se l'array ottenuto ha meno di 3 elementi il token non è valido
-    if (tokenArray.length !== 3) {
-      throw new Error('Formato del token non valido');
-    }
     //Decodifica il token
     const decodedInfo = jwtDecode<TokenPayload>(token);
     console.log("Token decodificato: ", decodedInfo);
@@ -123,14 +116,6 @@ getAdminInfoFromToken(token: string): any {
   try {
     if (!token) {
       throw new Error('Token non fornito');
-    }
-
-    //Divide il token nelle sue parti (header.payload.signature)
-    const tokenArray = token.split('.');
-    
-    //Se l'array ottenuto ha meno di 3 elementi il token non è valido
-    if (tokenArray.length !== 3) {
-      throw new Error('Formato del token non valido');
     }
 
     //Decodifica il token

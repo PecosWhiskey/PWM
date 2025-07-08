@@ -175,7 +175,8 @@ export class CreaBigliettoPage implements OnInit {
 
         console.log("id volo biglietto andata: ", this.bigliettoAndata);
         console.log("ID VOLO: ", datiAndata.idVolo);
-        //Richiamo la funzione per inserire i dati del bgilietto nel database
+
+        //Richiamo la funzione per inserire i dati del biglietto nel database
         this.bigliettiService.CreaBiglietto(datiAndata).subscribe({
           next: (response) => {
             console.log('Creation success:', response);

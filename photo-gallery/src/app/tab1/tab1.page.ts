@@ -98,7 +98,7 @@ export class Tab1Page {
         this.trovati = true;
         //Memorizza il risultato della ricerca
         this.tab1Service.setVoliTrovatiAndata(this.trovati);
-        //Memorizza temporaneamente il risultato della ricerca dei voli di andata nel SessionStorage
+        //Memorizza temporaneamente il risultato della ricerca dei voli di andata nel Session Storage
         this.sessionStorageService.setItem('voliAndataTrovati', this.trovati);
         //Memorizza i biglietti trovati nel service a cui accederà l'altro tab per mostrarli
         this.bigliettiAndata = response.data;
@@ -114,7 +114,7 @@ export class Tab1Page {
         this.cercaVoloEsito = err.error.message;
        },
       });
-      //Se la scelta è stata andata e ritorno oppure nessuna scelta allora vengono cercati anche i voli di ritorno
+      //Se la scelta è stata "andata e ritorno" oppure "nessuna scelta" allora vengono cercati anche i voli di ritorno
       if(this.scelta == 'roundtrip' || this.scelta == 'nessun selezionato'){
         const datiVoloRitorno = {
           partenza: this.destinazione.toUpperCase(),
@@ -128,12 +128,12 @@ export class Tab1Page {
             this.trovati = true;
             //Memorizza il risultato della ricerca
             this.tab1Service.setVoliTrovatiRitorno(this.trovati);
-            //Memorizza temporaneamente il risultato della ricerca dei voli di ritorno nel SessionStorage
+            //Memorizza temporaneamente il risultato della ricerca dei voli di ritorno nel Session Storage
             this.sessionStorageService.setItem('voliRitornoTrovati', this.trovati);
              //Memorizza i biglietti trovati nel service a cui accederà l'altro tab per mostrarli
             this.bigliettiRitorno = response.data;
             this.tab1Service.setBigliettiRitorno(this.bigliettiRitorno);
-            //Memorizza temporaneamente i biglietti di ritorno trovati nel SessionStorage
+            //Memorizza temporaneamente i biglietti di ritorno trovati nel Session Storage
             this.sessionStorageService.setItem('bigliettiRitorno', this.bigliettiRitorno);
           },
           error: (err) => {

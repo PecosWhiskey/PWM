@@ -192,39 +192,35 @@ import { Router } from '@angular/router';
       email: this.email,
       password: this.password,
     }
-
+    //Richiamo la funzione del service che esegue la richiesta HTTP
     this.autenticazioneService.register(data).subscribe({ 
       next: (response) => {
         console.log('Registration success:', response);
-        console.log(response.data.email);
 
         if(response.token){
           try{
-            //Salva il token ricevuto
+            //Salvo il token ricevuto
             this.tokenService.setToken(response.token);
         
-            //Ricava e salva le informazioni del cliente contenute nel token
+            //Ricavo e salvo le informazioni del cliente contenute nel token
             const userInfo = this.tokenService.getClientInfoFromToken(response.token);
             this.tokenService.setClientInfo(userInfo);
 
-            //SI PUO' TOGLIERE PRIMA DI CONSEGNARE IL PROGETTO
-            //Recupero dei dati appena salvati per verificare che siano stati salvati correttamente
-            // const token = this.tokenService.getToken();
+            //Ricavo le informazioni del cliente appena salvate
             const clientInfo = this.tokenService.getClientInfo();
-            // console.log('Token salvato: ', token);
             console.log('Client info salvate: ', clientInfo);
 
-            //Recupero delle informazioni che vengono mostrate nel profilo
+            //Recupero le informazioni che vengono mostrate nel profilo
             this.nome = clientInfo.nome;
             this.cognome = clientInfo.cognome;
             this.email = clientInfo.email;
 
-            //Recupero del ruolo dell'utente per la visualizzazione delle sezioni da lui accessibili
+            //Recupero il ruolo dell'utente per la visualizzazione delle sezioni da lui accessibili
             this.role = clientInfo.role;
 
             //Verifica che il cliente sia autenticato
             this.isLogged = this.tokenService.isLogged();
-            console.log("Loggato: ", this.isLogged);
+            console.log("Autenticato: ", this.isLogged);
           }catch(err){
             console.log("Errore nel salvare i dati");
             this.isLogged = false;
@@ -237,6 +233,7 @@ import { Router } from '@angular/router';
        error: (err) => {
         console.log('Registration error:', err);
         this.richiestaEsito = err.error.message;
+        //Messaggi visualizzati dall'utente
         if(this.richiestaEsito != "Email già in uso!"){
           this.richiestaEsito = "ERRORE: Dati inseriti per la registrazione non validi!"
         }

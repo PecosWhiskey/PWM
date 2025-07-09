@@ -44,14 +44,7 @@
           <ion-label>Biglietti</ion-label>
           <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
         </ion-item>
-
-        <!-- <ion-item button class="menu-item">
-          <ion-icon name="star" slot="start" class="menu-icon"></ion-icon>
-          <ion-label>Programma fedeltà</ion-label>
-          <ion-icon name="chevron-forward" slot="end" class="chevron-icon"></ion-icon>
-        </ion-item> -->
         
-
         <ion-item button class="menu-item" (click)="setOpen(true)">
           <ion-icon name="notifications" slot="start" class="menu-icon"></ion-icon>
           <ion-label>Notifiche</ion-label>
@@ -147,7 +140,8 @@
                 placeholder="La tua email"
                 name="email"
                 [(ngModel)]="email"
-                required>
+                required
+                [autocomplete]="false">
               </ion-input>
             </ion-item>
 

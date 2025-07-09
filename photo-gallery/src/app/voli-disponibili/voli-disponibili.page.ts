@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonContent,IonHeader,IonTitle,IonToolbar,IonCardContent,IonCardHeader,
+import {IonContent,IonHeader,IonToolbar,IonCardContent,IonCardHeader,
   IonCard,IonCardTitle,IonButton,IonIcon,IonBadge} from '@ionic/angular/standalone';
 import { GestioneVoliService } from '../gestione-voli/gestione-voli.service';
 import { Volo } from '../models/volo.models';
@@ -35,20 +35,11 @@ export class VoliDisponibiliPage implements OnInit {
     this.caricaVoli();
   }
 
-  // //Rende inattivi tutti gli elementi quando si esce dalla pagina
-  // ionViewWillLeave() {
-  //   //Rimuove il focus da qualsiasi elemento attivo
-  //   const activeElement = document.activeElement as HTMLElement;
-  //   if (activeElement) {
-  //     activeElement.blur();
-  //   }
-  // }
-
   //Funzione che permette di ottenere i voli disponibili direttamente dal database
   caricaVoli(){
     this.gestioneVoliService.CercaVoliDisponibili().subscribe({
       next: (response) => {
-        console.log("Searche success: ", response);
+        console.log("Search success: ", response);
         this.voli = response.data;
       },
        error: (err)=>{

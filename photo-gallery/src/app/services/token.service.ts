@@ -86,52 +86,52 @@ export class TokenService {
 
   //Funzioni che estraggono le informazioni del cliente o dell'amministratore dal payload del token
   getClientInfoFromToken(token: string): any {
-  try {
-    if (!token) {
-      throw new Error('Token non fornito');
+    try {
+      if (!token) {
+        throw new Error('Token non fornito');
+      }
+
+      //Decodifica il token
+      const decodedInfo = jwtDecode<TokenPayload>(token);
+      console.log("Token decodificato: ", decodedInfo);
+
+      //Crea l'oggetto che contiene solo le informazioni sul cliente contenute nel payload
+      const clientInfo = {
+        idCliente: decodedInfo.idCliente, 
+        nome: decodedInfo.nome,
+        cognome: decodedInfo.cognome,
+        email: decodedInfo.email, 
+        role: decodedInfo.role
+      };
+    
+      //Restituisce l'oggetto appena definito
+      return clientInfo;
+    
+    } catch (error) {
+      console.error('Errore nella decodifica del token:', error);
+      throw new Error('Impossibile estrarre le informazioni del cliente dal token');
     }
-
-    //Decodifica il token
-    const decodedInfo = jwtDecode<TokenPayload>(token);
-    console.log("Token decodificato: ", decodedInfo);
-
-    //Crea l'oggetto che contine solo le informazioni sul cliente contenute nel payload
-    const clientInfo = {
-      idCliente: decodedInfo.idCliente, 
-      nome: decodedInfo.nome,
-      cognome: decodedInfo.cognome,
-      email: decodedInfo.email, 
-      role: decodedInfo.role};
-    
-    //Restituisce l'oggetto appena definito
-    return clientInfo;
-    
-  } catch (error) {
-    console.error('Errore nella decodifica del token:', error);
-    throw new Error('Impossibile estrarre le informazioni del cliente dal token');
   }
-}
 
-getAdminInfoFromToken(token: string): any {
-  try {
-    if (!token) {
-      throw new Error('Token non fornito');
+  getAdminInfoFromToken(token: string): any {
+    try {
+      if (!token) {
+        throw new Error('Token non fornito');
+      }
+
+      //Decodifica il token
+      const decodedInfo = jwtDecode<TokenPayload>(token);
+      console.log("Token decodificato: ", decodedInfo);
+
+      //Crea l'oggetto che contiene solo le informazioni sull'amministratore contenute nel payload
+      const adminInfo = {email: decodedInfo.email, role: decodedInfo.role};
+    
+      //Restituisce l'oggetto appena definito
+      return adminInfo;
+    
+    } catch (error) {
+      console.error('Errore nella decodifica del token:', error);
+      throw new Error("Impossibile estrarre le informazioni dell'admin dal token");
     }
-
-    //Decodifica il token
-    const decodedInfo = jwtDecode<TokenPayload>(token);
-    console.log("Token decodificato: ", decodedInfo);
-
-    //Crea l'oggetto che contine solo le informazioni sull'amministratore contenute nel payload
-    const adminInfo = {idCliente: decodedInfo.idCliente, email: decodedInfo.email, role: decodedInfo.role};
-    
-    //Restituisce l'oggetto appena definito
-    return adminInfo;
-    
-  } catch (error) {
-    console.error('Errore nella decodifica del token:', error);
-    throw new Error("Impossibile estrarre le informazioni dell'admin dal token");
   }
-}
-
 }

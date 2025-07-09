@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,IonIcon,IonLabel,IonButton,IonCard,IonCardContent,
-  IonCardHeader,IonCardTitle,IonList,IonItem,IonSelect,IonSelectOption,IonChip,IonBadge} from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import {IonHeader,IonContent,IonIcon,IonLabel,IonButton,IonCard,IonCardContent,
+  IonCardHeader,IonCardTitle,IonItem,IonSelect,IonSelectOption} from '@ionic/angular/standalone';
 import { Volo } from '../models/volo.models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Service } from '../tab1/tab1.service';
 import { SessionStorageService } from '../services/session-storage.service';
-import { RouterModule, RouterLink, Router } from '@angular/router';
+import { RouterModule, RouterLink} from '@angular/router';
 import { addIcons } from 'ionicons';
 import { informationCircleOutline } from 'ionicons/icons';
 import { BigliettiService } from '../services/biglietti.service';
@@ -38,7 +37,7 @@ export class Tab2Page implements OnInit {
   //Informazioni sulla ricerca dell'utente
   ricercaInfo = { partenza: '', destinazione: '', dataPartenza: '', dataRitorno: '' };
 
-  //Scelta dell'utente sui tipi di volo da cercare: andata e ritorno, solo andata, nessun selzionato
+  //Scelta dell'utente sui tipi di volo da cercare: andata e ritorno, solo andata, nessun selezionato
   sceltaUtente = 'nessun selezionato';
 
   //Filtro per la visualizzazione dei biglietti il cui prezzo è compreso in un certo intervallo

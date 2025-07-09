@@ -107,24 +107,9 @@
       transition: all 0.3s ease;
       position: relative;
 
-      // &::before {
-      //   content: '';
-      //   position: absolute;
-      //   bottom: 0;
-      //   left: 0;
-      //   right: 0;
-      //   height: 3px;
-      //   background: transparent;
-      //   transition: all 0.3s ease;
-      // }
-
       &.active {
         --background: var(--vaygo-blue-light);
         --color: var(--vaygo-primary);
-
-        // &::before {
-        //   background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-        // }
       }
 
       &:hover:not(.active) {
@@ -172,10 +157,6 @@
 //Sezioni del form
 .form-section {
   margin-bottom: 32px;
-
-  // &:last-child {
-  //   margin-bottom: 0;
-  // }
 
   .section-title {
     display: flex;
@@ -352,20 +333,6 @@
     background: rgba(30, 58, 138, 0.6) !important; //Tema scuro
   }
 
-  //Fallback con ::before se necessario
-  // &::before {
-  //   content: '';
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   background: var(--vaygo-blue-light);
-  //   border-radius: 12px;
-  //   z-index: -1;
-  //   opacity: 0.8;
-  // }
-
   ion-icon {
     font-size: 20px;
     color: var(--vaygo-primary);
@@ -383,23 +350,6 @@
     z-index: 1;
   }
 }
-
-// Animazioni
-// .vaygo-fade-in {
-//   animation: fadeInUp 0.6s ease-out;
-// }
-
-// //Quando si accede alla pagina il contenitore compare partendo dal basso fino ad arrivare alla posizione di base
-// @keyframes fadeInUp {
-//   from {
-//     opacity: 0;
-//     transform: translateY(20px);
-//   }
-//   to {
-//     opacity: 1;
-//     transform: translateY(0);
-//   }
-// }
 
 //Gestione schermi più piccoli
 @media (max-width: 768px) {

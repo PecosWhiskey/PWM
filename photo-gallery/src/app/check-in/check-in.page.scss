@@ -107,24 +107,9 @@
       transition: all 0.3s ease;
       position: relative;
 
-      // &::before {
-      //   content: '';
-      //   position: absolute;
-      //   bottom: 0;
-      //   left: 0;
-      //   right: 0;
-      //   height: 3px;
-      //   background: transparent;
-      //   transition: all 0.3s ease;
-      // }
-
       &.active {
         --background: var(--vaygo-blue-light);
         --color: var(--vaygo-primary);
-
-        // &::before {
-        //   background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-        // }
       }
 
       &:hover:not(.active) {
@@ -427,12 +412,6 @@
         padding-bottom: 20px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
-        // &:last-child {
-        //   border-bottom: none;
-        //   margin-bottom: 0;
-        //   padding-bottom: 0;
-        // }
-
         .detail-item {
           display: flex;
           align-items: flex-start;
@@ -518,27 +497,6 @@
 .seat-map-modal {
   --background: var(--vaygo-background);
 
-  // ion-header {
-  //   ion-toolbar {
-  //     --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-  //     --color: var(--vaygo-white);
-  //     --border-color: transparent;
-
-  //     ion-title {
-  //       font-weight: 700;
-  //       font-size: 20px;
-  //       letter-spacing: -0.5px;
-  //     }
-
-  //     ion-button {
-  //       --color: var(--vaygo-white);
-  //       --background-hover: rgba(255, 255, 255, 0.1);        
-  //       --border-radius: 12px;
-  //       font-weight: 600;
-  //     }
-  //   }
-  // }
-
     .seat-map-container {
       padding: 24px;
       max-width: 900px;
@@ -618,17 +576,6 @@
         overflow-y: auto; //Crea la scrollbar verticale
         overflow-x: hidden; //Nasconde la scrollbar orizzontale
         position: relative;
-
-        // &:before {
-        //   content: '';
-        //   position: absolute;
-        //   top: 0;
-        //   left: 0;
-        //   right: 0;
-        //   height: 4px;
-        //   background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-        //   border-radius: 20px 20px 0 0;
-        // }
 
         img {
           //La larghezza e l'altezza minima dell'immagine fanno si che sia necessaria la presenza della scrollbar
@@ -877,73 +824,6 @@
   .seat-map-link {
     margin-bottom: 12px;
   }
-
-  // Stili responsive per le statistiche posti - versione elegante
-  // .seat-map-modal {
-  //   .seat-map-container {
-  //     .seat-map-header {
-  //       padding: 20px;
-
-  //       h3 {
-  //         font-size: 24px;
-  //       }
-
-  //       .scroll-hint {
-  //         padding: 10px 16px;
-  //         font-size: 13px;
-
-  //         ion-icon {
-  //           font-size: 16px;
-  //         }
-  //       }
-  //     }
-
-  //     .seat-legend {
-  //       padding: 20px;
-
-  //       .flight-info {
-  //         h4 {
-  //           font-size: 18px;
-  //         }
-  //       }
-
-  //       .seat-stats {
-  //         grid-template-columns: 1fr;
-  //         gap: 12px;
-
-  //         .stat-item {
-  //           padding: 14px;
-
-  //           .stat-icon {
-  //             width: 42px;
-  //             height: 42px;
-
-  //             ion-icon {
-  //               font-size: 22px;
-  //             }
-  //           }
-
-  //           .stat-content {
-  //             .stat-number {
-  //               font-size: 24px;
-  //             }
-
-  //             .stat-label {
-  //               font-size: 11px;
-  //             }
-  //           }
-  //         }
-  //       }
-
-  //       .occupied-list {
-  //         .occupied-seat {
-  //           font-size: 12px;
-  //           padding: 6px 10px;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 //Stile tema scuro

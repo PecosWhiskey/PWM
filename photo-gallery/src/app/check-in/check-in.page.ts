@@ -133,7 +133,7 @@ export class CheckInPage implements OnInit {
 
   //Funzione che ricerca il biglietto con idBiglietto e idPasseggero inseriti dall'utente
   Cerca(){
-    //Creo l'oggeto con i dati necessari
+    //Creo l'oggetto con i dati necessari
     const dati = {
       idPasseggero: this.idPasseggero,
       idBiglietto: this.idBiglietto

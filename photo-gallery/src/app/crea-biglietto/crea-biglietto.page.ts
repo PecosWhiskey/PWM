@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { informationCircleOutline } from 'ionicons/icons';
 import {IonContent,IonHeader,IonTitle,IonToolbar,IonButtons,IonBackButton,IonButton,IonItem,IonInput,
@@ -85,14 +84,12 @@ export class CreaBigliettoPage implements OnInit {
     this.bigliettiService.getBigliettoAndata().subscribe(biglietto => {
       if(this.valutaBiglietto(biglietto)){
         this.bigliettoAndata = biglietto;
-        console.log(this.bigliettoAndata);
       }  
     });
 
     this.bigliettiService.getBigliettoRitorno().subscribe(biglietto => {
       if(this.valutaBiglietto(biglietto)){
         this.bigliettoRitorno = biglietto;
-        console.log(this.bigliettoRitorno);
       }  
     });
     //Recupera il numero di passeggeri dal Session Storage
@@ -161,6 +158,8 @@ export class CreaBigliettoPage implements OnInit {
 
         //Creato il passeggero procedo a creare il biglietto
         const data = new Date(); //ottengo la data corrente
+        console.log("Data corrente: ", data);
+        console.log("data in formato iso: ", data.toISOString());
         this.dataAcquisto = data.toISOString().split('T')[0]; //la traformo in formato ISO e ricavo solo la prima parte (YYYY-MM-DD)
         //Creazione del biglietto di andata
         const datiAndata = {

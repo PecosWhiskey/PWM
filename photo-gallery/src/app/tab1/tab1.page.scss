@@ -1,22 +1,5 @@
-// VayGo Airlines - Homepage Styles
-// Colori brand
-// :root {
-//     --vaygo-primary: #3eb772; // Verde SeaGreen minimale
-//     --vaygo-secondary: #4A90E2; // Blu soft
-//     --vaygo-accent: #34D399; // Verde accento
-//     --vaygo-blue-light: #E0F2FE; // Blu chiarissimo
-//     --vaygo-green-light: #ECFDF5; // Verde chiarissimo
-//     --vaygo-text-primary: #1F2937;
-//     --vaygo-text-secondary: #6B7280;
-//     --vaygo-background: #FAFAFA;
-//     --vaygo-white: #FFFFFF;
-//     --vaygo-shadow: rgba(0, 0, 0, 0.04);
-//     --vaygo-shadow-medium: rgba(0, 0, 0, 0.08);
-//     --vaygo-border: rgba(0, 0, 0, 0.06);
-//   }
-
-  //Stile per i due bottoni di incremento e decremento del numero di passeggeri
-  .counter__section {
+//Stile per i due bottoni di incremento e decremento del numero di passeggeri
+.counter__section {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -120,67 +103,6 @@
     }
   }
 
-  //???????????????????????????
-  // .hero-text {
-  //   .hero-title {
-  //     font-size: clamp(28px, 5vw, 48px); //valore minimo, 5% della larghezza dello schermo, valore massimo
-  //     font-weight: 800; //spessore della scritta
-  //     line-height: 1.1; //altezza della riga di testo
-  //     color: var(--vaygo-text-primary);
-  //     margin: 0 0 16px 0;
-  //     letter-spacing: -1px; //riduzione dello spazio tra le lettere
-  //   }
-  //   .claim {
-  //     color: var(--ion-color-step-950);
-  //     font-size: 1.2rem;  //definisce una grandezza del font di circa il 20% più grande rispetto al normale (ovvero rispetto al font della root, che di default è 16px)
-  //     text-align: center;
-  //     padding: 1rem;
-  //     line-height: 1.5;
-  //   }    //rivedere
-
-  //   .hero-subtitle {
-  //     font-size: 18px;
-  //     color: var(--vaygo-text-secondary);
-  //     line-height: 1.6;
-  //     margin: 0;
-  //     max-width: 400px;
-  //   }
-  // }
-
-  // //???????????????????????????
-  // .hero-visual {
-  //   display: flex;
-  //   justify-content: center;
-
-  //   .floating-card {
-  //     width: 120px;
-  //     height: 120px;
-  //     background: var(--vaygo-white);
-  //     border-radius: 24px;
-  //     display: flex;
-  //     align-items: center;
-  //     justify-content: center;
-  //     box-shadow: 0 20px 40px var(--vaygo-shadow-medium);
-  //     transform: rotate(5deg);
-  //     transition: transform 0.3s ease;
-
-  //     &:hover {
-  //       transform: rotate(0deg) scale(1.05);
-  //     }
-
-  //     .plane-icon {
-  //       font-size: 48px;
-  //       color: var(--vaygo-secondary);
-  //     }
-  //   }
-  // }
-
-  // Search Section
-  // .search-section {
-  //   padding: 0 20px 40px;
-  //   margin-top: -30px;
-  // }
-
   .search-card {
     max-width: 800px;
     margin: 0 auto;
@@ -211,7 +133,6 @@
     font-weight: 800; 
     color: var(--vaygo-primary);
     letter-spacing: -0.8px;
-    // text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Sottile ombra per profondità
     position: relative;
 
     strong {
@@ -596,7 +517,6 @@
     --background: rgba(255, 255, 255, 0.2);
     --color: var(--vaygo-white);
     --border-radius: 12px;
-    // backdrop-filter: blur(10px); //sfoca di 10px tutti gli elementi che stanno dietro
     font-weight: 600;
     min-width: 120px;
 
@@ -635,18 +555,6 @@
   }
 }
 
-//Animazioni per l'utente che non ha selezionato la riduzione delle animazioni nel sistema
-// @media (prefers-reduced-motion: no-preference) {
-//   .floating-card {
-//     animation: float 6s ease-in-out infinite;
-//   }
-
-//   @keyframes float {
-//     0%, 100% { transform: rotate(5deg) translateY(0px); }
-//     50% { transform: rotate(5deg) translateY(-10px); }
-//   }
-// }
-
 //Stile per tema scuro
 @media (prefers-color-scheme: dark) {
   .custom-header {
@@ -680,121 +588,6 @@ ion-popover {
   ion-datetime {
     --background: var(--vaygo-white);
     --background-rgb: 255, 255, 255;
-
-    // // Header del calendario
-    // .datetime-header {
-    //   background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-    //   color: var(--vaygo-white);
-    //   border-radius: 16px 16px 0 0;
-    //   padding: 16px;
-    // }
-
-    // Bottoni di navigazione mese/anno
-    // .calendar-next-prev ion-button,
-    // .datetime-buttons ion-button {
-    //   --color: var(--vaygo-primary);
-    //   --background-hover: var(--vaygo-blue-light);
-    //   --border-radius: 12px;
-    //   font-weight: 600;
-    // }
-
-    // // Giorni della settimana
-    // .calendar-weekdays {
-    //   .calendar-weekday {
-    //     color: var(--vaygo-text-secondary);
-    //     font-weight: 600;
-    //     font-size: 14px;
-    //     text-transform: uppercase;
-    //     letter-spacing: 0.5px;
-    //   }
-    // }
-
-    // // Giorni del mese
-    // .calendar-days {
-    //   .calendar-day {
-    //     color: var(--vaygo-text-primary);
-    //     font-weight: 500;
-    //     border-radius: 8px;
-    //     transition: all 0.2s ease;
-
-    //     //stile applicato solo agli elementi che non hanno la classe ".calendar-day-disabled" e solo sull'hover
-    //     &:not(.calendar-day-disabled):hover {
-    //       background: var(--vaygo-blue-light);
-    //       color: var(--vaygo-primary);
-    //     }
-
-    //     // Giorno selezionato
-    //     &.calendar-day-active {
-    //       background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-    //       color: var(--vaygo-white);
-    //       font-weight: 700;
-    //       box-shadow: 0 2px 8px rgba(46, 139, 87, 0.3);
-    //     }
-
-    //     // Giorno di oggi
-    //     &.calendar-day-today {
-    //       border: 2px solid var(--vaygo-accent);
-    //       color: var(--vaygo-primary);
-    //       font-weight: 600;
-    //     }
-
-    //     // Giorni disabilitati
-    //     &.calendar-day-disabled {
-    //       color: var(--vaygo-text-secondary);
-    //       opacity: 0.4;
-    //     }
-    //   }
-    // }
-
-    // // Bottoni Fatto/Chiudi
-    // .datetime-buttons {
-    //   padding: 16px;
-    //   border-top: 1px solid var(--vaygo-border);
-    //   background: var(--vaygo-background);
-
-    //   ion-button {
-    //     --border-radius: 12px;
-    //     font-weight: 600;
-    //     height: 44px;
-
-    //     // Bottone "Fatto"
-    //     &.datetime-button-confirm {
-    //       --background: linear-gradient(135deg, var(--vaygo-primary), var(--vaygo-secondary));
-    //       --color: var(--vaygo-white);
-    //       box-shadow: 0 2px 8px rgba(46, 139, 87, 0.3);
-
-    //       &:hover {
-    //         transform: translateY(-1px);
-    //         box-shadow: 0 4px 12px rgba(46, 139, 87, 0.4);
-    //       }
-    //     }
-
-    //     // Bottone "Chiudi"
-    //     &.datetime-button-cancel {
-    //       --background: transparent;
-    //       --color: var(--vaygo-text-secondary);
-    //       --border-width: 1px;
-    //       --border-color: var(--vaygo-border);
-
-    //       &:hover {
-    //         --background: var(--vaygo-background);
-    //         --color: var(--vaygo-text-primary);
-    //       }
-    //     }
-    //   }
-    // }
-
-    // // Selettore mese/anno
-    // .datetime-year,
-    // .datetime-month {
-    //   color: var(--vaygo-text-primary);
-    //   font-weight: 600;
-
-    //   &:hover {
-    //     background: var(--vaygo-blue-light);
-    //     color: var(--vaygo-primary);
-    //   }
-    // }
   }
 }
 
@@ -809,18 +602,6 @@ ion-popover {
   border: 1px solid var(--vaygo-border);
   margin: 4px 0;
   transition: all 0.2s ease;
-
-  // &:focus-within {
-  //   --border-color: var(--vaygo-secondary);
-  //   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-  // }
-
-  // // // Quando il popover è aperto
-  // &.item-has-focus {
-  //   --border-color: var(--vaygo-primary);
-  //   box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
-  //   transform: translateY(-1px);
-  // }
 
   ion-icon {
     color: var(--vaygo-text-secondary);
@@ -840,16 +621,6 @@ ion-popover {
       pointer-events: all; //vengono abilitati tutti gli eventi, come focus, hover, click, ecc.
     }
   }
-
-  // Etichetta stacked
-  // ion-label[position="stacked"] {
-  //   color: var(--vaygo-primary);
-  //   font-weight: 600;
-  //   font-size: 12px;
-  //   text-transform: uppercase;
-  //   letter-spacing: 0.5px;
-  //   margin-bottom: 8px;
-  // }
 }
 
 // Animazioni per il popover

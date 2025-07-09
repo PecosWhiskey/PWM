@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {IonHeader,IonToolbar,IonTitle,IonContent,IonTabs,IonTabBar,IonTabButton,IonIcon,IonLabel,IonButton,
-  IonCard,IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, IonPopover, IonDatetime, IonCardHeader, IonCardTitle, IonAlert } from '@ionic/angular/standalone';
-// import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import {IonHeader,IonToolbar,IonContent,IonIcon,IonLabel,IonButton,
+  IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, IonPopover, 
+  IonDatetime, IonCardHeader, IonAlert } from '@ionic/angular/standalone';
 import { Tab1Service } from './tab1.service';
 import { Volo } from '../models/volo.models';
 import { FormsModule } from '@angular/forms';

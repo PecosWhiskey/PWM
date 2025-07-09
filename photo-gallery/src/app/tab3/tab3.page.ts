@@ -61,7 +61,7 @@ import { Router } from '@angular/router';
   ngOnInit() {
     //Recupero dell' informazione circa lo stato di autenticazione dell'utente che accede al suo profilo
     this.isLogged = this.tokenService.isLogged();
-    //Recupero delle informazioni dell'amministratore
+    //Recupero delle informazioni dell'amministratore se presenti nel Local Storage
     const adminInfo = this.tokenService.getAdminInfo();
     //Se presenti vuol dire che sta accedendo al profilo un amministratore
     if(adminInfo){
@@ -69,7 +69,7 @@ import { Router } from '@angular/router';
       this.role = adminInfo.role;
       this.email = adminInfo.email;
     }
-    //Recupero delle informazioni del cliente
+    //Recupero delle informazioni del cliente se presenti nel Local Storage
     const clientInfo = this.tokenService.getClientInfo();
     //Se presenti vuol dire che sta accedendo un cliente
     if(clientInfo){
@@ -81,14 +81,11 @@ import { Router } from '@angular/router';
       this.email = clientInfo.email;
     }
   }
-
-  //Rende inattivi tutti gli elementi quando si esce dalla pagina
-  // ionViewWillLeave() {
-  //   //Rimuove il focus da qualsiasi elemento attivo
-  //   const activeElement = document.activeElement as HTMLElement;
-  //   if (activeElement) {
-  //     activeElement.blur();
-  //   }
+  
+  //Vengono eliminati eventuali valori rimasti memorizzati
+  // ionViewWillLeave(){
+  //   this.email = '';
+  //   this.password = '';
   // }
  
   //Variabili e funzione che gestiscono la comparsa del pop up al click su "Notifiche"

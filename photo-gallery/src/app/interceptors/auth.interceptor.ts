@@ -4,8 +4,8 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
-import { from, throwError } from 'rxjs';
-import { switchMap, catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
@@ -15,17 +15,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   //Se la richiesta nella sua URL include questi percorsi non viene modificata
   if (req.url.includes('/login-admin') || 
-    req.url.includes('/registrazione-cliente') || 
-    req.url.includes('/login-cliente')) {
-      console.log("Richiesta di registrazione o login...");
+      req.url.includes('/registrazione-cliente') || 
+      req.url.includes('/login-cliente')) {
 
-      return next(req).pipe(
-        //Se si verifica un errore, questo viene lanciato e propagato al livello superiore
-        catchError((httpError: HttpErrorResponse) => {
-          console.log("Errore nella richiesta di registrazione o login:", httpError);
-          return throwError(() => httpError);
-        })
-      );
+        console.log("Richiesta di registrazione o login...");
+
+        return next(req).pipe(
+          //Se si verifica un errore, questo viene lanciato e propagato al livello superiore
+          catchError((httpError: HttpErrorResponse) => {
+            console.log("Errore nella richiesta di registrazione o login:", httpError);
+            return throwError(() => httpError);
+          })
+        );
   }
 
   //Se la richiesta non include quei percorsi vengono ricavati il token e la sua validità
@@ -37,6 +38,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       //Se il token è scaduto l'utente viene reindirizzato al login
       console.log('Token scaduto! Reindirizzamento al login...');
       logout(tokenService, router);
+      //Viene quindi lanciato un errore
       return throwError(() => new Error('Token scaduto'));
     }else{
       console.log("Effettuando la richiesta con token...");

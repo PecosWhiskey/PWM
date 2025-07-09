@@ -39,10 +39,6 @@ form {
       box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
     }
 
-    // &:last-of-type {
-    //   margin-bottom: 24px;
-    // }
-
     ion-input {
       --color: var(--vaygo-text-primary);
       --placeholder-color: var(--vaygo-text-secondary);
@@ -178,18 +174,6 @@ ion-input {
   //Stile per input di tipo "date"
   &[type="date"] {
     --padding-top: 14px;
-
-    //Indica l'icona del calendario
-    // &::-webkit-calendar-picker-indicator {
-    //   filter: brightness(0) saturate(100%) invert(38%) sepia(87%) saturate(492%) hue-rotate(118deg) brightness(92%) contrast(88%);
-    //   opacity: 0.8;
-    //   cursor: pointer;
-
-    //   &:hover {
-    //     opacity: 1;
-    //     transform: scale(1.1);
-    //   }
-    // }
   }
 }
 
@@ -265,15 +249,6 @@ form {
 
   h1 {
     font-size: 24px;
-  }
-}
-
-//Stile tema scuro
-@media (prefers-color-scheme: dark) {
-  ion-input[type="date"] {
-    // &::-webkit-calendar-picker-indicator {
-    //   filter: brightness(0) saturate(100%) invert(64%) sepia(91%) saturate(2976%) hue-rotate(115deg) brightness(101%) contrast(89%);
-    // }
   }
 }
 

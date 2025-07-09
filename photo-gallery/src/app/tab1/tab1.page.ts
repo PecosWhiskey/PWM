@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {IonHeader,IonToolbar,IonContent,IonIcon,IonLabel,IonButton,
   IonCardContent,IonSegment,IonSegmentButton,IonItem,IonInput, IonPopover, 
-  IonDatetime, IonCardHeader, IonAlert } from '@ionic/angular/standalone';
+  IonDatetime, IonAlert } from '@ionic/angular/standalone';
 import { Tab1Service } from './tab1.service';
 import { Volo } from '../models/volo.models';
 import { FormsModule } from '@angular/forms';
@@ -31,8 +31,6 @@ export class Tab1Page {
   trovati = false; //serve per visualizzare i biglietti trovati
   bigliettiAndata: Volo[] = []; //array dei biglietti di partenza trovati
   bigliettiRitorno: Volo[] = []; //array dei biglietti di ritorno trovati
-
-  form= ''; //variabile che viene settata su 'Login' o 'Registrazione' per stabilire quale form mostrare
 
   scelta = 'nessun selezionato'; //assume il valore corrispondente alla scelta tra andata e ritorno o solo andata
 

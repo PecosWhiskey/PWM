@@ -3,7 +3,7 @@ const router = express.Router();
 const authControllerAdmin = require('../authController/authControllerAdmin');
 const authControllerBiglietti = require('../authController/authControllerBiglietti');
 const verifyToken = require('../../middlewares/verifyToken'); //middleware per verificare il token JWT
-const onlyAdmin = require('../../middlewares/onlyAdmin'); //middleware per verifica il ruolo dell'utente che effettua la richiesta
+const onlyAdmin = require('../../middlewares/onlyAdmin'); //middleware per verificare il ruolo dell'utente che effettua la richiesta
 const { loginValidator, registerValidatorClient, datiVoloValidator, idVoloValidator, 
     creationTicketsValidator, createPassengerValidator, idClienteValidator, idTicketValidator, validate } = require('../authValidators/authValidators');
 

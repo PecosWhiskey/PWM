@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import {IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader,IonCardTitle, IonCardSubtitle, 
   IonItem, IonInput, IonButton, IonIcon, IonLabel,IonList, IonModal, IonButtons, IonSelectOption, 
@@ -54,7 +53,7 @@ import { Router } from '@angular/router';
 
   richiestaEsito= '';
 
-  isLogged = false; //Mantiene memeorizzato lo stato di autenticazione dell'utente
+  isLogged = false; //Mantiene memorizzato lo stato di autenticazione dell'utente
   isAdmin = false; //Variabile impostata a true solo se "role" = admin
   role = ''; //Permette la visualizzazione di specifiche sezioni all'interno del profilo in base al suo valore
 
@@ -277,7 +276,7 @@ import { Router } from '@angular/router';
     });
   }
 
-  //Funzione che reinidirizza l'amministratore alla pagina di gestione dei voli
+  //Funzione che reindirizza l'amministratore alla pagina di gestione dei voli
   VaiAGestioneVoli(){
     this.router.navigate(['/gestione-voli']);
   }

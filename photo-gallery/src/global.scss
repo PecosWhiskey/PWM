@@ -118,8 +118,8 @@
   // Global Reset & Base Styles
   // ===========================================
   * {
-    box-sizing: border-box; //riguarda il calcolo della dimesione di tutti gli elementi html
-  }                         //il valore di width comprenderà anche padding che border
+    box-sizing: border-box;
+  }                         
 
   body {
     font-family: var(--vaygo-font-family);

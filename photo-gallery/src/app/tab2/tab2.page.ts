@@ -47,7 +47,7 @@ export class Tab2Page implements OnInit {
   bigliettiAndataOriginari: Volo[] = this.bigliettiAndata;
   bigliettiRitornoOriginari: Volo[] = this.bigliettiRitorno;
 
-  // Aggiungi queste proprietà per tracciare le selezioni
+  //Biglietti selezionati dall'utente
   bigliettoAndataSelezionato: Volo | null = null;
   bigliettoRitornoSelezionato: Volo | null = null;
 
@@ -142,7 +142,7 @@ export class Tab2Page implements OnInit {
     console.log("Biglietto ritorno deselezionato: ", this.bigliettiService.getBigliettoRitorno());
   }
 
-  //Funzioni helper per verificare se un biglietto è selezionato
+  //Funzioni per verificare se un biglietto è selezionato
   isBigliettoAndataSelezionato(biglietto: Volo): boolean {
     return this.bigliettoAndataSelezionato === biglietto;
   }

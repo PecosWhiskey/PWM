@@ -11,7 +11,7 @@ class AuthControllerAdmin{
         //Creazione del token JWT
         const token = jwt.sign(
           //informazioni sull'utente
-          {idAdmin: admin.id, email: admin.email, role: 'admin'},
+          {email: admin.email, role: 'admin'},
           //chiave segreta per la firma del token
           process.env.JWT_SECRET,
           //durata di validità

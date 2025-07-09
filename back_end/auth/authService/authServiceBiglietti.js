@@ -5,6 +5,8 @@ class AuthServiceBiglietti {
     //Creazione di un nuovo volo
     static async generaVolo(datiVolo){
         try{
+            console.log("Dati arrivati: ", datiVolo);
+
             const data = {
                 idAeroportoPartenza: datiVolo.partenza,
                 idAeroportoDestinazione: datiVolo.destinazione,
@@ -29,6 +31,7 @@ class AuthServiceBiglietti {
     //Modifica di un volo
     static async modificaVoli(datiVolo){
         try{
+            console.log("Dati arrivati: ", datiVolo);
             //Verifica se il volo è presente nel database
             const volo = await biglietti.findByIdVolo(datiVolo.idVolo);
 
@@ -47,6 +50,7 @@ class AuthServiceBiglietti {
     //Decremento posti disponibili in un volo
     static async decrementaPosti(dati){
         try{
+            console.log("Dati arrivati: ", dati);
             //Verifica se il volo è presente nel database
             const volo= await biglietti.findByIdVolo(dati.idVolo);
 
@@ -65,6 +69,7 @@ class AuthServiceBiglietti {
     //Ricerca di un volo
     static async cercaVolo(datiVolo){
         try{
+            console.log("Dati arrivati: ", datiVolo);
             //Ricerca del volo nel database
            const exist = await biglietti.ricercaVolo(datiVolo);
 
@@ -81,6 +86,7 @@ class AuthServiceBiglietti {
     //Registrazione di un cliente
     static async registrazioneCliente(datiCliente){
         try{
+            console.log("Dati arrivati: ", datiCliente);
             //Verifica che la stessa email non appartenga già ad un altro cliente registrato
             const exist= await biglietti.findByEmail(datiCliente.email);
 
@@ -99,6 +105,7 @@ class AuthServiceBiglietti {
     //Login di un cliente
     static async loginCliente(credenziali){
         try{
+            console.log("Dati arrivati: ", credenziali);
             //Verifica se il cliente è registrato usando la sua email per ricercarlo nel database, essendo univoca
             const cliente = await biglietti.findByEmail(credenziali.email);
             
@@ -124,6 +131,7 @@ class AuthServiceBiglietti {
     //Creazione biglietto
     static async createBiglietto(datiBiglietto){
         try{
+            console.log("Dati arrivati: ", datiBiglietto);
             //Verifica se il passeggero ha già acquistato un biglietto per un determinato volo
             const exist = await biglietti.trovaBiglietto(datiBiglietto.idPasseggero, datiBiglietto.idVolo);
 
@@ -142,6 +150,7 @@ class AuthServiceBiglietti {
     //Modifica di un biglietto
     static async modificaTicket(dati){
         try{
+            console.log("Dati arrivati: ", dati);
             //Verifica se il biglietto è presente nel database
             const biglietto = await biglietti.findTicketById(dati.idBiglietto);
 
@@ -187,6 +196,7 @@ class AuthServiceBiglietti {
     //Posti occupati
     static async getPostiOccupati(dati){
         try{
+            console.log("Dati arrivati: ", dati);
             //Conta il nuomero di biglietti acquistati per un determinato volo
             const numero = await biglietti.findTicketsByIdVolo(dati.idVolo);
 
@@ -205,6 +215,7 @@ class AuthServiceBiglietti {
     //Ricerca dei biglietti del cliente autenticato
     static async returnBiglietti(idCliente){
         try{
+            console.log("Dati arrivati: ", idCliente);
             //Ricerca dei biglietti del cliente che si è registrato
             const exist = await biglietti.restituisciBiglietti(idCliente);
 
@@ -256,6 +267,7 @@ class AuthServiceBiglietti {
     //Ricerca del biglietto acquistato da un passeggero per il check-in
     static async returnForCheckIn(dati){
         try{
+            console.log("Dati arrivati: ", dati);
             //Verifica che il biglietto è stato acquistato
             const exist = await biglietti.findForCheckIn(dati);
 
@@ -279,6 +291,7 @@ class AuthServiceBiglietti {
     //Creazione passeggero
     static async createPasseggero(datiPasseggero){
         try{
+            console.log("Dati arrivati: ", datiPasseggero);
             //Verifica se il passeggero è già presente nel database
             const exist = await biglietti.cercaPasseggero(datiPasseggero);
 

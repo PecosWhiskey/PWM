@@ -158,8 +158,6 @@ export class CreaBigliettoPage implements OnInit {
 
         //Creato il passeggero procedo a creare il biglietto
         const data = new Date(); //ottengo la data corrente
-        console.log("Data corrente: ", data);
-        console.log("data in formato iso: ", data.toISOString());
         this.dataAcquisto = data.toISOString().split('T')[0]; //la traformo in formato ISO e ricavo solo la prima parte (YYYY-MM-DD)
         //Creazione del biglietto di andata
         const datiAndata = {

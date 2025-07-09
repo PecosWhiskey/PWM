@@ -42,5 +42,6 @@ async function visualizzaAdmin(){
   }
 }  
 
-inserisciAdmin("susan@gmail.com", "susina");
-// visualizzaAdmin();
+// inserisciAdmin("susan@gmail.com", "susina");
+// inserisciAdmin("admin@vaygo.com", "VGIPproject");
+visualizzaAdmin();

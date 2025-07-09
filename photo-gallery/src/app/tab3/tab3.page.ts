@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import {IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader,IonCardTitle, IonCardSubtitle, 
-  IonItem, IonInput, IonButton, IonIcon, IonLabel,IonList, IonBadge, IonText, IonSpinner, IonModal, IonButtons, IonSelectOption, 
+  IonItem, IonInput, IonButton, IonIcon, IonLabel,IonList, IonModal, IonButtons, IonSelectOption, 
   IonSelect, IonAlert } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {person, mail, lockClosed, logIn, logOut, personAdd, airplane, ticket, star,personCircle, notifications, 
@@ -56,7 +56,7 @@ import { Router } from '@angular/router';
 
   isLogged = false; //Mantiene memeorizzato lo stato di autenticazione dell'utente
   isAdmin = false; //Variabile impostata a true solo se "role" = admin
-  role = ''; //Permette la visualizzazione della sezione "Gestione Voli" nel profilo dell'amministratore
+  role = ''; //Permette la visualizzazione di specifiche sezioni all'interno del profilo in base al suo valore
 
   ngOnInit() {
     //Recupero dell' informazione circa lo stato di autenticazione dell'utente che accede al suo profilo
@@ -81,12 +81,6 @@ import { Router } from '@angular/router';
       this.email = clientInfo.email;
     }
   }
-  
-  //Vengono eliminati eventuali valori rimasti memorizzati
-  // ionViewWillLeave(){
-  //   this.email = '';
-  //   this.password = '';
-  // }
  
   //Variabili e funzione che gestiscono la comparsa del pop up al click su "Notifiche"
   isAlertOpen = false;
@@ -132,11 +126,7 @@ import { Router } from '@angular/router';
             const userInfo = this.tokenService.getClientInfoFromToken(response.token);
             this.tokenService.setClientInfo(userInfo);
           
-            //SI PUO' TOGLIERE PRIMA DI CONSEGNARE IL PROGETTO
-            //Recupero dei dati appena salvati per verificare che siano stati salvati correttamente
-            // const token = this.tokenService.getToken();
             const clientInfo = this.tokenService.getClientInfo();
-            // console.log('Token salvato: ', token);
             console.log('Client info salvate: ', clientInfo);
 
             //Recupero delle informazioni che vengono mostrate nel profilo
@@ -253,25 +243,20 @@ import { Router } from '@angular/router';
             const userInfo = this.tokenService.getAdminInfoFromToken(response.token);
             this.tokenService.setAdminInfo(userInfo);
           
-            //SI PUO' TOGLIERE PRIMA DI CONSEGNARE IL PROGETTO
-            //Recupero dei dati appena salvati per verificare che siano stati salvati correttamente
-            // const token = this.tokenService.getToken();
             const adminInfo = this.tokenService.getAdminInfo();
 
             //Ricavo dell'email che viene mostrata nel profilo
             this.email = adminInfo.email;
 
-            //Ricava il ruolo dalle informazioni ottenute dal payload del token, che sarà admin
+            //Ricava il ruolo dalle informazioni ottenute dal payload del token
             this.role = adminInfo.role;
 
-            // console.log("Token e dati dell'amministratore  salvati con successo", token);
             console.log('Admin info: ', adminInfo);
 
-            //Verifica che l'amministratores sia autenticato
+            //Verifica che l'amministratore sia autenticato
             this.isLogged = this.tokenService.isLogged();
             console.log("Loggato: ", this.isLogged);
 
-            // this.router.navigate(['/gestione-voli']);
           }catch(err){
             console.log("Errore nel salvare i dati");
             this.isLogged = false;
@@ -292,7 +277,7 @@ import { Router } from '@angular/router';
     });
   }
 
-  //Funzione che reinidirizza l'amministratore alla oagina di gestione ei voli
+  //Funzione che reinidirizza l'amministratore alla pagina di gestione dei voli
   VaiAGestioneVoli(){
     this.router.navigate(['/gestione-voli']);
   }

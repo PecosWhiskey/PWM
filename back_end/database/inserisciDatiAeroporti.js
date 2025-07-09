@@ -181,32 +181,6 @@ async function visualizzaAeroporto(){
 //     }
 // }
 
-// async function modificaPasseggero({idPasseggeroCorrente, idPasseggeroModificato, nome, cognome, dataNascita, documentoID}){
-//             return new Promise((resolve,reject)=>{
-//                 db.run('UPDATE Passeggero SET idPasseggero=?, nome=?, cognome=?, dataNascita=?, documentoID=? WHERE idPasseggero = ?', 
-//                     [idPasseggeroModificato, nome, cognome, dataNascita, documentoID, idPasseggeroCorrente], function(err){
-//                         if(err){
-//                             reject(err);
-//                             return;
-//                         }
-//                         resolve({idPasseggero, nome, cognome, dataNascita, documentoID});
-//                     });
-//             });
-//     }
-
-// async function modificaBigliettoPosto({idVolo, idPasseggero, posto}){
-//             return new Promise((resolve,reject)=>{
-//                 db.run('UPDATE Biglietto SET posto=? WHERE idVolo = ? AND idPasseggero=?', 
-//                     [posto, idVolo, idPasseggero], function(err){
-//                         if(err){
-//                             reject(err);
-//                             return;
-//                         }
-//                         resolve({idVolo, idPasseggero, posto});
-//                     });
-//             });
-//     }    
-
 // async function visualizzaPasseggeri(){
 //     try{
 //         return new Promise((resolve,reject)=>{
@@ -223,3 +197,6 @@ async function visualizzaAeroporto(){
 //         console.log("Errore: ", err.message);
 //     }
 // }
+
+visualizzaAeroporto();
+visualizzaPosizione();

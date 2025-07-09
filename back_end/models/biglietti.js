@@ -365,19 +365,6 @@ class Biglietti {
       }); 
     }
 
-    //Funzione di ricerca del Cliente utilizzando il suo ID
-//     static async findByIdCliente(idCliente) {
-//     return new Promise((resolve, reject) => {
-//       db.get(`SELECT idCliente, nome, cognome, dataNascita, documentoID, sesso, nazionalita, 
-//                 stato, citta, CAP, indirizzo, numeroCivico, email FROM Cliente WHERE idCliente = ?`, [idCliente], (err, row) => {
-//         if (err){
-//           return reject(err);
-//         } 
-//         resolve(row);
-//       });
-//     });
-//   }
-
     //Funzione che verifica la correttezza della password inserita nel login
     static async comparePassword(candidatePassword, hash) {
         return bcrypt.compare(candidatePassword, hash);

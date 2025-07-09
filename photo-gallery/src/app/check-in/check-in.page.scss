@@ -584,7 +584,7 @@
           min-height: 600px; //altezza minima maggiore dell'altezza fissa del contenitore
           border-radius: 16px;
           box-shadow: 0 4px 24px var(--vaygo-shadow);
-          object-fit: cover; //l'immagine viene ingrandite fino a riempire interamente il contenitore mantenendo le proporzioni
+          object-fit: cover; //l'immagine viene ingrandita fino a riempire interamente il contenitore mantenendo le proporzioni
           object-position: center top; //mostra la parte superiore centrale dell'immagine
           transition: transform 0.3s ease;
 

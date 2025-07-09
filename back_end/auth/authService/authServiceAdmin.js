@@ -5,6 +5,8 @@ class AuthServiceAdmin {
     //Funzione per il login dell'amministratore
     static async loginAdmin({email, password}){
       try{
+            console.log("Dati arrivati: ", email, password);
+            
             const user = await admin.findByEmail(email);  
            
             if(!user){

@@ -47,7 +47,6 @@ import { Router } from '@angular/router';
   CAP = '';
   indirizzo = '';
   numCivico = 0;
-  disabile = 0;
   email = '';
   password= '';
 

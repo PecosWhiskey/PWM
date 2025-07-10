@@ -126,8 +126,6 @@
     background-color: var(--vaygo-background);
     color: var(--vaygo-text-primary);
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased; //font più sottile (per Safari e Chrome)
-    -moz-osx-font-smoothing: grayscale;  //font meno colorato ai bordi (Firefox mcOs)
   }
 
   // Ionic Component Overrides

@@ -151,7 +151,7 @@ export class Tab2Page implements OnInit {
     return this.bigliettoRitornoSelezionato === biglietto;
   }
 
-  //Funzione che mostra i biglietti il cui prezzo rientrano in un certo intervallo, in base alla scelta dell'utente
+  //Funzione che mostra i biglietti il cui prezzo rientra in un certo intervallo, in base alla scelta dell'utente
   applicaFiltri(){
     switch(this.filtroPrezzo){
       case 'tutti':

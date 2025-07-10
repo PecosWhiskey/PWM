@@ -15,6 +15,6 @@ bootstrapApplication(AppComponent, {
     { provide:RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
-    provideHttpClient( withInterceptors([authInterceptor]) ), //in questo modo in tutte le richieste verrà inserito il token, se presente
+    provideHttpClient( withInterceptors([authInterceptor]) ), //in questo modo in tutte le richieste verrà inserito il token (se presente)
   ],
 });

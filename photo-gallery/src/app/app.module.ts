@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-// Importa addIcons e le icone necessarie
 import { addIcons } from 'ionicons';
 import {
   homeOutline, home, searchOutline, search,
@@ -33,7 +32,6 @@ import { AppRoutingModule } from './app-routing.module';
 })
 export class AppModule {
   constructor() {
-    // Registra tutte le icone necessarie
     addIcons({
       'home': home,
       'home-outline': homeOutline,

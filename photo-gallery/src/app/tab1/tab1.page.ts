@@ -61,7 +61,7 @@ export class Tab1Page {
   //Abilita il bottone per la ricerca dei voli "Cerca" solo se tutti i campi sono stati riempiti.
   CampiValidi(){
     if(this.scelta == 'oneway'){
-      return this.partenza && this.destinazione && this.dataInseritaP
+      return this.partenza && this.destinazione && this.dataInseritaP && this.numPasseggeri!=0;
     }else{
       return this.partenza && this.destinazione && this.dataInseritaP && this.dataInseritaR &&this.numPasseggeri!=0;
     }

@@ -114,7 +114,6 @@
 
     ion-card-content {
       padding: 32px;
-      background: transparent; // Il contenuto rimane trasparente se la card è opaca
     }
   }
 
@@ -679,7 +678,7 @@ ion-popover.date-popover {
   }
 }
 
-//Gestione schermi più piccoli piccoli
+//Gestione schermi più piccoli 
 @media (max-width: 768px) {
   ion-popover {
     --width: 95%;

@@ -107,7 +107,7 @@
     max-width: 800px;
     margin: 0 auto;
     --background: var(--vaygo-white);
-    background: var(--vaygo-white) !important; // Forza lo sfondo opaco
+    background: var(--vaygo-white) !important; 
     border-radius: 20px; 
     box-shadow: 0 10px 40px var(--vaygo-shadow-medium);
     border: 1px solid var(--vaygo-border);
@@ -373,7 +373,7 @@
   scroll-snap-type: x mandatory; //scorrimento orizzontale che si ferma su un determinato snap
 
   &::-webkit-scrollbar {
-    display: none; //rende invisibile la scrollbar nei browser WebKit(Sfari, Chrome)
+    display: none; //rende invisibile la scrollbar nei browser WebKit(Safari, Chrome)
   }
 }
 

@@ -40,10 +40,8 @@
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 
-// VayGo Airlines - Global Styles
-// ===========================================
+//Stile globale da mantenere
 
-// CSS Variables - Brand Colors & Design System
 :root {
     // Primary Brand Colors
     --vaygo-primary: #2E8B57;           // Verde SeaGreen principale
@@ -115,8 +113,6 @@
     --vaygo-transition-slow: 0.5s ease;
   }
 
-  // Global Reset & Base Styles
-  // ===========================================
   * {
     box-sizing: border-box;
   }                         
@@ -127,9 +123,6 @@
     color: var(--vaygo-text-primary);
     line-height: 1.6;
   }
-
-  // Ionic Component Overrides
-  // ===========================================
 
   // Content Background
   ion-content {
@@ -357,8 +350,6 @@
     }
   }
 
-  // Accessibility
-  // ===========================================
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;
@@ -367,8 +358,8 @@
     }
   }
 
-  // Dark Mode Style
-  // ===========================================
+  //Dark mode
+  
   @media (prefers-color-scheme: dark) {
     :root {
       --vaygo-background: #111827;

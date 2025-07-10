@@ -74,10 +74,6 @@
   transition: all var(--vaygo-transition-base);
 }
 
-// ================================================================
-// LOGGED IN STATE - DARK/LIGHT MODE
-// ================================================================
-
 // Profile Header
 .profile-header {
   background: var(--tab3-header-gradient);
@@ -263,10 +259,6 @@
     box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
   }
 }
-
-// ================================================================
-// LOGGED OUT STATE - DARK/LIGHT MODE
-// ================================================================
 
 // Login & Register Cards
 .login-card,
@@ -507,9 +499,6 @@
   }
 }
 
-// ================================================================
-// RESPONSIVE DESIGN
-// ================================================================
 
 @media (max-width: 768px) {
   .logged-in-container,
@@ -559,9 +548,7 @@
   }
 }
 
-// ================================================================
-// ANIMATIONS & TRANSITIONS
-// ================================================================
+//Animazioni
 
 .logged-in-container,
 .logged-out-container {
@@ -609,10 +596,6 @@
     }
   }
 }
-
-// ================================================================
-// ACCESSIBILITY & REDUCED MOTION
-// ================================================================
 
 //Riduce le animazioni se l'utente ha impostato questa opzione sul suo sistema
 @media (prefers-reduced-motion: reduce) {
